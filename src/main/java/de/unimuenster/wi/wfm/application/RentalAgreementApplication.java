@@ -4,7 +4,7 @@ import org.camunda.bpm.application.ProcessApplication;
 import org.camunda.bpm.application.impl.ServletProcessApplication;
 
 
-@ProcessApplication("Loan Approval App")
+@ProcessApplication("Rental Agreement Application")
 public class RentalAgreementApplication extends ServletProcessApplication {
   // empty implementation
 }
