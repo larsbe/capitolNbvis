@@ -17,9 +17,11 @@
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
       <bpmn2:dataInputAssociation id="DataInputAssociation_1">
         <bpmn2:sourceRef>DataObjectReference_1</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataObjectReference_1</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
       <bpmn2:dataInputAssociation id="DataInputAssociation_2">
         <bpmn2:sourceRef>DataObjectReference_4</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataObjectReference_4</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
       <bpmn2:startEvent id="StartEvent_3">
         <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
@@ -51,6 +53,7 @@
       <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
       <bpmn2:dataInputAssociation id="DataInputAssociation_3">
         <bpmn2:sourceRef>DataObjectReference_4</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataObjectReference_4</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
       <bpmn2:startEvent id="StartEvent_4">
         <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
