@@ -47,10 +47,10 @@
       </bpmn2:exclusiveGateway>
       <bpmn2:sequenceFlow id="SequenceFlow_34" name="" sourceRef="ServiceTask_2" targetRef="ExclusiveGateway_4"/>
       <bpmn2:sequenceFlow id="SequenceFlow_35" name="Yes" sourceRef="ExclusiveGateway_4" targetRef="ServiceTask_4">
-        <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">$(hasImages == true)</bpmn2:conditionExpression>
+        <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${hasImages == true}</bpmn2:conditionExpression>
       </bpmn2:sequenceFlow>
       <bpmn2:sequenceFlow id="SequenceFlow_37" name="No" sourceRef="ExclusiveGateway_4" targetRef="UserTask_1">
-        <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">$(hasImages == false)</bpmn2:conditionExpression>
+        <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${hasImages == false}</bpmn2:conditionExpression>
       </bpmn2:sequenceFlow>
       <bpmn2:serviceTask id="ServiceTask_4" name="Add metadata to images">
         <bpmn2:incoming>SequenceFlow_35</bpmn2:incoming>
@@ -94,7 +94,7 @@
       <bpmn2:sequenceFlow id="SequenceFlow_49" name="" sourceRef="UserTask_4" targetRef="EndEvent_2"/>
     </bpmn2:subProcess>
     <bpmn2:sequenceFlow id="SequenceFlow_6" name="Yes" sourceRef="Analyze_Claim_Gateway" targetRef="SubProcess_2">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">$(claimIsEligible == true)</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${claimIsEligible == true}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:parallelGateway id="ParallelGateway_1">
       <bpmn2:incoming>SequenceFlow_44</bpmn2:incoming>
@@ -128,7 +128,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_31" name="" sourceRef="Task_2" targetRef="ServiceTask_3"/>
     <bpmn2:sequenceFlow id="SequenceFlow_32" name="" sourceRef="ServiceTask_3" targetRef="EndEvent_3"/>
     <bpmn2:sequenceFlow id="SequenceFlow_33" name="No" sourceRef="Analyze_Claim_Gateway" targetRef="Task_2">
-      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">$(claimIsEligible == false)</bpmn2:conditionExpression>
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${claimIsEligible == false}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:dataObjectReference id="DataObjectReference_1" name="Claim" dataObjectRef="DataObject_1"/>
     <bpmn2:dataObjectReference id="DataObjectReference_4" name="Agreement Conditions" dataObjectRef="DataObject_1"/>
