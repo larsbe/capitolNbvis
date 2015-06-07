@@ -17,7 +17,7 @@
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="_MessageEventDefinition_8"/>
     </bpmn2:startEvent>
-    <bpmn2:task id="Task_1" name="Check the claim's eligibility">
+    <bpmn2:task id="Task_1" name="test">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:task>
