@@ -131,12 +131,12 @@
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">$(claimIsEligible == false)</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:dataObjectReference id="DataObjectReference_1" name="Claim" dataObjectRef="DataObject_1"/>
-    <bpmn2:dataObjectReference id="DataObjectReference_4" name="Rental Contract" dataObjectRef="DataObject_1"/>
+    <bpmn2:dataObjectReference id="DataObjectReference_4" name="Agreement Conditions" dataObjectRef="DataObject_1"/>
     <bpmn2:serviceTask id="ServiceTask_6" name="Initiate payment">
       <bpmn2:incoming>SequenceFlow_39</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_42</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:userTask id="UserTask_2" camunda:candidateGroups="Contract_Handler" name="Check if adjustment of insurance is fee needed">
+    <bpmn2:userTask id="UserTask_2" camunda:candidateGroups="Contract_Handler" name="Check if adjustment of insurance fee is needed">
       <bpmn2:incoming>SequenceFlow_40</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_47</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -243,8 +243,7 @@
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="_BPMNShape_ExclusiveGateway_4" targetElement="_BPMNShape_SubProcess_4">
         <di:waypoint xsi:type="dc:Point" x="918.0" y="147.0"/>
         <di:waypoint xsi:type="dc:Point" x="971.0" y="147.0"/>
-        <di:waypoint xsi:type="dc:Point" x="971.0" y="156.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1008.0" y="156.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1008.0" y="148.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="17.0" width="24.0" x="921.0" y="127.0"/>
         </bpmndi:BPMNLabel>
