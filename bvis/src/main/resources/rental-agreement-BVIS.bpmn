@@ -140,7 +140,7 @@
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${individualSolutionRequested}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_43" name="" sourceRef="UserTask_1" targetRef="SubProcess_1"/>
-    <bpmn2:userTask id="UserTask_2" name="set up individual solution contract">
+    <bpmn2:userTask id="UserTask_2" camunda:candidateGroups="Contract handler" name="set up individual solution contract">
       <bpmn2:incoming>SequenceFlow_48</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_49</bpmn2:outgoing>
       <bpmn2:dataInputAssociation id="DataInputAssociation_4">
@@ -151,19 +151,19 @@
     <bpmn2:sequenceFlow id="SequenceFlow_49" name="" sourceRef="UserTask_2" targetRef="ExclusiveGateway_3"/>
     <bpmn2:dataObject id="DataObject_6" name="Data Object 6"/>
     <bpmn2:dataObjectReference id="DataObjectReference_7" name="rental contract" dataObjectRef="DataObject_6"/>
-    <bpmn2:userTask id="UserTask_3" name="propose contract to customer">
+    <bpmn2:userTask id="UserTask_3" camunda:candidateGroups="Contract handler" name="propose contract to customer">
       <bpmn2:incoming>SequenceFlow_53</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_57</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_53" name="" sourceRef="ExclusiveGateway_3" targetRef="UserTask_3"/>
-    <bpmn2:userTask id="UserTask_4" name="set up standard solution contract">
+    <bpmn2:userTask id="UserTask_4" camunda:candidateGroups="Contract handler" name="set up standard solution contract">
       <bpmn2:incoming>SequenceFlow_60</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_68</bpmn2:outgoing>
       <bpmn2:dataInputAssociation id="DataInputAssociation_6">
         <bpmn2:sourceRef>DataObjectReference_6</bpmn2:sourceRef>
       </bpmn2:dataInputAssociation>
     </bpmn2:userTask>
-    <bpmn2:userTask id="UserTask_5" name="check customer's answer">
+    <bpmn2:userTask id="UserTask_5" camunda:candidateGroups="Contract handler" name="check customer's answer">
       <bpmn2:incoming>SequenceFlow_57</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_58</bpmn2:outgoing>
     </bpmn2:userTask>

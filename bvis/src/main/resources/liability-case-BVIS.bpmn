@@ -15,7 +15,7 @@
       <bpmn2:outgoing>SequenceFlow_19</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="_MessageEventDefinition_8"/>
     </bpmn2:startEvent>
-    <bpmn2:userTask id="Task_1" name="check the claim's eligibility">
+    <bpmn2:userTask id="Task_1" camunda:candidateGroups="Claim handler" name="check the claim's eligibility">
       <bpmn2:incoming>SequenceFlow_14</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
       <bpmn2:dataInputAssociation id="DataInputAssociation_1">
@@ -46,7 +46,7 @@
       <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="Task_4" targetRef="EndEvent_2"/>
-    <bpmn2:userTask id="UserTask_1" name="create new claim">
+    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="Claim handler" name="create new claim">
       <bpmn2:incoming>SequenceFlow_19</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_14</bpmn2:outgoing>
       <bpmn2:dataOutputAssociation id="DataOutputAssociation_1">
