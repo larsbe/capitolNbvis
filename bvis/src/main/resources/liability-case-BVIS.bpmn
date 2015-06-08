@@ -9,6 +9,7 @@
     <bpmn2:messageFlow id="MessageFlow_4" name="" sourceRef="SendTask_1" targetRef="Participant_2"/>
     <bpmn2:messageFlow id="MessageFlow_7" name="" sourceRef="Task_4" targetRef="Participant_2"/>
     <bpmn2:messageFlow id="MessageFlow_8" name="" sourceRef="Participant_1" targetRef="ReceiveTask_1"/>
+    <bpmn2:messageFlow id="MessageFlow_5" name="" sourceRef="Participant_1" targetRef="ReceiveTask_1"/>
   </bpmn2:collaboration>
   <bpmn2:process id="Process_1" isExecutable="false">
     <bpmn2:startEvent id="StartEvent_1" name="information about &#xD;&#xA;liablity case via &#xD;&#xA;E-Mail received">
@@ -72,16 +73,22 @@
     <bpmn2:dataObjectReference id="DataObjectReference_1" name="Claim" dataObjectRef="DataObject_1"/>
     <bpmn2:sequenceFlow id="SequenceFlow_19" name="" sourceRef="StartEvent_1" targetRef="UserTask_1"/>
     <bpmn2:textAnnotation id="TextAnnotation_1">
-      <bpmn2:text><![CDATA[interface has the following parameters:
-- claim covered (boolean, required)
-- information about rejection (String, optional)
-- paymentment information (String, optional)]]></bpmn2:text>
+      <bpmn2:text><![CDATA[Parameters:
+- Claim covered (boolean, required)
+- Information about rejection (String, optional)]]></bpmn2:text>
     </bpmn2:textAnnotation>
     <bpmn2:textAnnotation id="TextAnnotation_2">
       <bpmn2:text>Maybe we need to add an additional Service Task for saving the Claim into the DB</bpmn2:text>
     </bpmn2:textAnnotation>
     <bpmn2:textAnnotation id="TextAnnotation_3">
       <bpmn2:text>claimhandling@BVIS.de</bpmn2:text>
+    </bpmn2:textAnnotation>
+    <bpmn2:textAnnotation id="TextAnnotation_4">
+      <bpmn2:text><![CDATA[Parameters
+- Customer Info (String, required)
+- Claim Details (String, required)
+- Images (optional)
+- Payment Information (String, optional)]]></bpmn2:text>
     </bpmn2:textAnnotation>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -237,14 +244,14 @@
       <bpmndi:BPMNEdge id="BPMNEdge_MessageFlow_8" bpmnElement="MessageFlow_8" sourceElement="_BPMNShape_Participant_5" targetElement="_BPMNShape_ReceiveTask_6">
         <di:waypoint xsi:type="dc:Point" x="894.0" y="124.0"/>
         <di:waypoint xsi:type="dc:Point" x="894.0" y="203.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1027.0" y="203.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1027.0" y="283.0"/>
+        <di:waypoint xsi:type="dc:Point" x="979.0" y="203.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1011.0" y="283.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="935.0" y="203.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_2" bpmnElement="TextAnnotation_1">
-        <dc:Bounds height="85.0" width="314.0" x="1032.0" y="123.0"/>
+        <dc:Bounds height="47.0" width="314.0" x="1047.0" y="153.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_3" bpmnElement="TextAnnotation_2">
         <dc:Bounds height="59.0" width="208.0" x="365.0" y="233.0"/>
@@ -263,6 +270,17 @@
       <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_4" bpmnElement="TextAnnotation_3">
         <dc:Bounds height="50.0" width="98.0" x="142.0" y="276.0"/>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_5" bpmnElement="TextAnnotation_4">
+        <dc:Bounds height="74.0" width="192.0" x="576.0" y="140.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_MessageFlow_5" bpmnElement="MessageFlow_5" sourceElement="_BPMNShape_Participant_5" targetElement="_BPMNShape_ReceiveTask_6">
+        <di:waypoint xsi:type="dc:Point" x="944.0" y="124.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1027.0" y="206.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1027.0" y="283.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="1024.0" y="236.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn2:definitions>
