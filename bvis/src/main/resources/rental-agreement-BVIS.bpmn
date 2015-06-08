@@ -12,8 +12,8 @@
     <bpmn2:messageFlow id="MessageFlow_7" name="" sourceRef="Participant_1" targetRef="StartEvent_1"/>
   </bpmn2:collaboration>
   <bpmn2:process id="Process_1" isExecutable="false">
-    <bpmn2:startEvent id="StartEvent_1" name="Request received &#xD;&#xA;via Web-Interface">
-      <bpmn2:outgoing>SequenceFlow_39</bpmn2:outgoing>
+    <bpmn2:startEvent id="StartEvent_1" name="Request received &#xD;&#xA;via telephone, E-Mail or face2face">
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="MessageEventDefinition_1"/>
     </bpmn2:startEvent>
     <bpmn2:subProcess id="SubProcess_1" name="specifies rental agreement">
@@ -123,11 +123,10 @@
     <bpmn2:sequenceFlow id="SequenceFlow_27" name="" sourceRef="SubProcess_1" targetRef="SubProcess_1"/>
     <bpmn2:sequenceFlow id="SequenceFlow_28" name="" sourceRef="SubProcess_1" targetRef="SubProcess_1"/>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_5" name="requested &#xD;&#xA;solution type">
-      <bpmn2:incoming>SequenceFlow_39</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_42</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_60</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:sequenceFlow id="SequenceFlow_39" name="" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_5"/>
     <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="Negotiator" name="negotiate agreement conditions with customer (via telephone or face2face) ">
       <bpmn2:incoming>SequenceFlow_42</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_59</bpmn2:incoming>
@@ -208,6 +207,12 @@
     <bpmn2:sequenceFlow id="SequenceFlow_67" name="" sourceRef="SendTask_3" targetRef="EndEvent_3"/>
     <bpmn2:sequenceFlow id="SequenceFlow_68" name="" sourceRef="UserTask_4" targetRef="ExclusiveGateway_3"/>
     <bpmn2:dataObjectReference id="DataObjectReference_6" name="rental contract" dataObjectRef="DataObject_5"/>
+    <bpmn2:userTask id="UserTask_8" name="Process request">
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="UserTask_8"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="UserTask_8" targetRef="ExclusiveGateway_5"/>
     <bpmn2:textAnnotation id="TextAnnotation_1">
       <bpmn2:text><![CDATA[Parameters:
 - contractSigned (boolean, required)]]></bpmn2:text>
@@ -228,7 +233,7 @@
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_4" bpmnElement="StartEvent_1">
         <dc:Bounds height="36.0" width="36.0" x="68.0" y="759.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="38.0" width="119.0" x="68.0" y="726.0"/>
+          <dc:Bounds height="28.0" width="164.0" x="36.0" y="828.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_SubProcess_3" bpmnElement="SubProcess_1" isExpanded="true">
@@ -401,15 +406,6 @@
           <dc:Bounds height="38.0" width="80.0" x="282.0" y="709.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_39" bpmnElement="SequenceFlow_39" sourceElement="_BPMNShape_StartEvent_4" targetElement="_BPMNShape_ExclusiveGateway_8">
-        <di:waypoint xsi:type="dc:Point" x="104.0" y="777.0"/>
-        <di:waypoint xsi:type="dc:Point" x="186.0" y="777.0"/>
-        <di:waypoint xsi:type="dc:Point" x="186.0" y="776.0"/>
-        <di:waypoint xsi:type="dc:Point" x="296.0" y="776.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="210.0" y="776.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_UserTask_7" bpmnElement="UserTask_1">
         <dc:Bounds height="86.0" width="133.0" x="480.0" y="734.0"/>
       </bpmndi:BPMNShape>
@@ -713,6 +709,19 @@
       <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_7" bpmnElement="TextAnnotation_2">
         <dc:Bounds height="67.0" width="217.0" x="1656.0" y="480.0"/>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_14" bpmnElement="UserTask_8">
+        <dc:Bounds height="80.0" width="100.0" x="168.0" y="737.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_StartEvent_4" targetElement="_BPMNShape_UserTask_14">
+        <di:waypoint xsi:type="dc:Point" x="104.0" y="777.0"/>
+        <di:waypoint xsi:type="dc:Point" x="168.0" y="777.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_UserTask_14" targetElement="_BPMNShape_ExclusiveGateway_8">
+        <di:waypoint xsi:type="dc:Point" x="268.0" y="777.0"/>
+        <di:waypoint xsi:type="dc:Point" x="282.0" y="777.0"/>
+        <di:waypoint xsi:type="dc:Point" x="282.0" y="776.0"/>
+        <di:waypoint xsi:type="dc:Point" x="296.0" y="776.0"/>
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn2:definitions>
