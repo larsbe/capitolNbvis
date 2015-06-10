@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_9ONAgP-oEeSPjpM61v9Qjw" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:collaboration id="_Collaboration_2">
-    <bpmn2:participant id="capitol" name="Capitol" processRef="Process_1"/>
+    <bpmn2:participant id="capitol" name="Capitol" processRef="liability-case_capitol"/>
     <bpmn2:participant id="bvis" name="BVIS"/>
     <bpmn2:messageFlow id="MessageFlow_1" name="" sourceRef="Task_2" targetRef="bvis"/>
     <bpmn2:messageFlow id="MessageFlow_2" name="" sourceRef="bvis" targetRef="StartEvent_2"/>
     <bpmn2:messageFlow id="MessageFlow_5" name="" sourceRef="SendTask_2" targetRef="bvis"/>
   </bpmn2:collaboration>
-  <bpmn2:process id="Process_1" isExecutable="false">
+  <bpmn2:process id="liability-case_capitol" isExecutable="true">
     <bpmn2:startEvent id="StartEvent_2">
       <bpmn2:outgoing>SequenceFlow_25</bpmn2:outgoing>
-      <bpmn2:messageEventDefinition id="_MessageEventDefinition_4"/>
+      <bpmn2:messageEventDefinition id="_MessageEventDefinition_4" messageRef="Message_1"/>
     </bpmn2:startEvent>
     <bpmn2:subProcess id="SubProcess_1" name="Analyse the given information on the claim (costs)">
       <bpmn2:incoming>SequenceFlow_26</bpmn2:incoming>
@@ -27,7 +27,7 @@
         <bpmn2:outgoing>SequenceFlow_28</bpmn2:outgoing>
       </bpmn2:startEvent>
       <bpmn2:sequenceFlow id="SequenceFlow_28" name="" sourceRef="StartEvent_3" targetRef="ServiceTask_2"/>
-      <bpmn2:serviceTask id="ServiceTask_2" name="Gather and prepare necessary contract/insurance information">
+      <bpmn2:serviceTask id="ServiceTask_2" camunda:class="de.unimuenster.wi.wfm.delegates.GatherAndPrepareContractDelegate" name="Gather and prepare necessary contract/insurance information">
         <bpmn2:incoming>SequenceFlow_28</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_34</bpmn2:outgoing>
       </bpmn2:serviceTask>
@@ -52,7 +52,7 @@
       <bpmn2:sequenceFlow id="SequenceFlow_37" name="No" sourceRef="ExclusiveGateway_4" targetRef="UserTask_1">
         <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${hasImages == false}</bpmn2:conditionExpression>
       </bpmn2:sequenceFlow>
-      <bpmn2:serviceTask id="ServiceTask_4" name="Add metadata to images">
+      <bpmn2:serviceTask id="ServiceTask_4" camunda:class="de.unimuenster.wi.wfm.delegates.AddMetaDataDelegate" name="Add metadata to images">
         <bpmn2:incoming>SequenceFlow_35</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_36</bpmn2:outgoing>
       </bpmn2:serviceTask>
@@ -64,7 +64,7 @@
       <bpmn2:outgoing>SequenceFlow_33</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="SubProcess_1" targetRef="Analyze_Claim_Gateway"/>
-    <bpmn2:sendTask id="Task_2" name="Inform BVIS about rejection">
+    <bpmn2:sendTask id="Task_2" camunda:class="de.unimuenster.wi.wfm.delegates.InformBvisAboutRejectionDelegate" name="Inform BVIS about rejection">
       <bpmn2:incoming>SequenceFlow_33</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_31</bpmn2:outgoing>
     </bpmn2:sendTask>
@@ -112,7 +112,7 @@
     </bpmn2:endEvent>
     <bpmn2:dataObject id="DataObject_1" name="Data Object 1"/>
     <bpmn2:dataObject id="DataObject_2" name="Data Object 2"/>
-    <bpmn2:serviceTask id="ServiceTask_1" name="Create new&#xA;Liability Case">
+    <bpmn2:serviceTask id="ServiceTask_1" camunda:class="de.unimuenster.wi.wfm.delegates.CreateNewLiabilityCaseDelegate" name="Create new&#xA;Liability Case">
       <bpmn2:incoming>SequenceFlow_25</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_26</bpmn2:outgoing>
       <bpmn2:dataOutputAssociation id="DataOutputAssociation_1">
@@ -121,7 +121,7 @@
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_25" name="" sourceRef="StartEvent_2" targetRef="ServiceTask_1"/>
     <bpmn2:sequenceFlow id="SequenceFlow_26" name="" sourceRef="ServiceTask_1" targetRef="SubProcess_1"/>
-    <bpmn2:serviceTask id="ServiceTask_3" name="Close claim">
+    <bpmn2:serviceTask id="ServiceTask_3" camunda:class="de.unimuenster.wi.wfm.delegates.CloseClaimDelegate" name="Close claim">
       <bpmn2:incoming>SequenceFlow_31</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_32</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -132,7 +132,7 @@
     </bpmn2:sequenceFlow>
     <bpmn2:dataObjectReference id="DataObjectReference_1" name="Claim" dataObjectRef="DataObject_1"/>
     <bpmn2:dataObjectReference id="DataObjectReference_4" name="Agreement Conditions" dataObjectRef="DataObject_1"/>
-    <bpmn2:serviceTask id="ServiceTask_6" name="Initiate payment">
+    <bpmn2:serviceTask id="ServiceTask_6" camunda:class="de.unimuenster.wi.wfm.delegates.InitiatePaymentDelegate" name="Initiate payment">
       <bpmn2:incoming>SequenceFlow_39</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_42</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -142,13 +142,13 @@
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_39" name="" sourceRef="ParallelGateway_1" targetRef="ServiceTask_6"/>
     <bpmn2:sequenceFlow id="SequenceFlow_40" name="" sourceRef="ParallelGateway_1" targetRef="UserTask_2"/>
-    <bpmn2:serviceTask id="ServiceTask_7" name="Close claim">
+    <bpmn2:serviceTask id="ServiceTask_7" camunda:class="de.unimuenster.wi.wfm.delegates.CloseClaimDelegate" name="Close claim">
       <bpmn2:incoming>SequenceFlow_42</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_41</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_41" name="" sourceRef="ServiceTask_7" targetRef="EndEvent_4"/>
     <bpmn2:sequenceFlow id="SequenceFlow_42" name="" sourceRef="ServiceTask_6" targetRef="ServiceTask_7"/>
-    <bpmn2:sendTask id="SendTask_2" name="Inform BVIS about insurance sum">
+    <bpmn2:sendTask id="SendTask_2" camunda:class="de.unimuenster.wi.wfm.delegates.InformBvisAboutInsuranceSumDelegate" name="Inform BVIS about insurance sum">
       <bpmn2:incoming>SequenceFlow_45</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_44</bpmn2:outgoing>
     </bpmn2:sendTask>
@@ -181,6 +181,7 @@
 - Payment Information (String, optional)]]></bpmn2:text>
     </bpmn2:textAnnotation>
   </bpmn2:process>
+  <bpmn2:message id="Message_1" name="newLiabilityCase"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="_Collaboration_2">
       <bpmndi:BPMNShape id="_BPMNShape_Participant_2" bpmnElement="capitol" isHorizontal="true">
