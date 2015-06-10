@@ -33,7 +33,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="Yes" sourceRef="ExclusiveGateway_2" targetRef="taskActivateContract">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${contractSigned == true}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="taskAddInsuranceBenefits" camunda:assignee="clerk" camunda:candidateGroups="Contract_Handler" name="Add insurance benefits">
+    <bpmn2:userTask id="taskAddInsuranceBenefits" camunda:assignee="clerk" camunda:candidateGroups="Contract_Handler" camunda:formKey="embedded:app:forms/insurance_benefits.html" name="Add insurance benefits">
       <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:userTask>
