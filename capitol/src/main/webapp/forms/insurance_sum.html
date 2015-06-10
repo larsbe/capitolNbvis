@@ -1,0 +1,41 @@
+<form name="insuranceSum">
+  <!-- Claim and Customer Data for reference -->
+  <div class="form-group">
+    <label for="claimId">Claim ID</label>
+    <div class="controls">
+    	<input class="form-control" cam-variable-type="long" cam-variable-name="claimId" name="claimId" readonly="true"/>
+    </div>
+  </div>
+  
+  <div class="form-group">
+  	<label for="customerInfo">Customer Info</label>
+  	<div class="controls">
+    	<textarea cam-variable-name="customerInfo" cam-variable-type="String" rows="4" readonly="true"></textarea>
+    </div>
+  </div>
+  
+  <div class="form-group">
+  	<label for="carValue">Car Value according to dat.de</label>
+  	<div class="controls">
+    	<input required
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="carValue"
+          name="carValue"
+          type="number"
+          readonly="true" />
+    </div>
+  </div>
+  
+  <div class="form-group">
+  	<label for="insuranceSum">Calculated Insurance Sum</label>
+  	<div class="controls">
+    	<input required
+          class="form-control"
+          cam-variable-type="Double"
+          cam-variable-name="insuranceSum"
+          name="insuranceSum"
+          type="number" />
+    </div>
+  </div>
+</form>
