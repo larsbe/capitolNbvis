@@ -112,7 +112,7 @@
     </bpmn2:endEvent>
     <bpmn2:dataObject id="DataObject_1" name="Data Object 1"/>
     <bpmn2:dataObject id="DataObject_2" name="Data Object 2"/>
-    <bpmn2:serviceTask id="ServiceTask_1" camunda:class="de.unimuenster.wi.wfm.delegates.CreateNewLiabilityCaseDelegate" name="Create new&#xA;Liability Case">
+    <bpmn2:serviceTask id="ServiceTask_1" camunda:delegateExpression="${createNewLiabilityCaseDelegate}" name="Create new&#xA;Liability Case">
       <bpmn2:incoming>SequenceFlow_25</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_26</bpmn2:outgoing>
       <bpmn2:dataOutputAssociation id="DataOutputAssociation_1">
