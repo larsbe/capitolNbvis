@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_QZQOMP-rEeS1Jb9DFFotRw" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:collaboration id="_Collaboration_3" name="persist contract data in system">
-    <bpmn2:participant id="_Participant_2" name="BVIS" processRef="Process_1"/>
+    <bpmn2:participant id="_Participant_2" name="BVIS" processRef="rental-agreement_bvis"/>
     <bpmn2:participant id="Participant_1" name="Customer"/>
     <bpmn2:participant id="Participant_2" name="Capitol"/>
     <bpmn2:messageFlow id="MessageFlow_1" name="" sourceRef="SendTask_1" targetRef="Participant_2"/>
@@ -11,10 +11,10 @@
     <bpmn2:messageFlow id="MessageFlow_5" name="" sourceRef="SendTask_3" targetRef="Participant_2"/>
     <bpmn2:messageFlow id="MessageFlow_7" name="" sourceRef="Participant_1" targetRef="StartEvent_1"/>
   </bpmn2:collaboration>
-  <bpmn2:process id="Process_1" isExecutable="false">
+  <bpmn2:process id="rental-agreement_bvis" isExecutable="true">
     <bpmn2:startEvent id="StartEvent_1" name="Request received &#xD;&#xA;via telephone, E-Mail or face2face">
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
-      <bpmn2:messageEventDefinition id="MessageEventDefinition_1"/>
+      <bpmn2:messageEventDefinition id="MessageEventDefinition_1" messageRef="Message_1"/>
     </bpmn2:startEvent>
     <bpmn2:subProcess id="SubProcess_1" name="specifies rental agreement">
       <bpmn2:incoming>SequenceFlow_14</bpmn2:incoming>
@@ -39,7 +39,7 @@
         <bpmn2:incoming>SequenceFlow_45</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_46</bpmn2:outgoing>
       </bpmn2:exclusiveGateway>
-      <bpmn2:sendTask id="Task_6" name="send approved agreement conditions to Capitol">
+      <bpmn2:sendTask id="Task_6" camunda:delegateExpression="${sendApprovedAgreementConditionsToCapitolDelegate}" name="send approved agreement conditions to Capitol">
         <bpmn2:incoming>SequenceFlow_15</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_16</bpmn2:outgoing>
       </bpmn2:sendTask>
@@ -49,18 +49,19 @@
       <bpmn2:sequenceFlow id="SequenceFlow_16" name="" sourceRef="Task_6" targetRef="EndEvent_1"/>
       <bpmn2:dataObject id="DataObject_1" name="Data Object 1"/>
       <bpmn2:dataObject id="DataObject_2" name="Data Object 2"/>
-      <bpmn2:sendTask id="SendTask_1" name="send agreement conditions to Capitol">
+      <bpmn2:sendTask id="SendTask_1" camunda:delegateExpression="${sendAgreementConditionsToCapitolDelegate}" name="send agreement conditions to Capitol">
         <bpmn2:incoming>SequenceFlow_44</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_45</bpmn2:outgoing>
         <bpmn2:dataInputAssociation id="DataInputAssociation_1">
           <bpmn2:sourceRef>DataObjectReference_2</bpmn2:sourceRef>
+          <bpmn2:targetRef>DataObjectReference_2</bpmn2:targetRef>
         </bpmn2:dataInputAssociation>
       </bpmn2:sendTask>
       <bpmn2:sequenceFlow id="SequenceFlow_44" name="" sourceRef="StartEvent_2" targetRef="SendTask_1"/>
       <bpmn2:sequenceFlow id="SequenceFlow_45" name="" sourceRef="SendTask_1" targetRef="ExclusiveGateway_1"/>
       <bpmn2:dataObjectReference id="DataObjectReference_2" name="agreement conditions" dataObjectRef="DataObject_2"/>
       <bpmn2:sequenceFlow id="SequenceFlow_46" name="" sourceRef="ExclusiveGateway_1" targetRef="ReceiveTask_1"/>
-      <bpmn2:receiveTask id="ReceiveTask_1" name="receive agreement conditions with insurance benefits from Capitol">
+      <bpmn2:receiveTask id="ReceiveTask_1" name="receive agreement conditions with insurance benefits from Capitol" messageRef="Message_2">
         <bpmn2:incoming>SequenceFlow_46</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_47</bpmn2:outgoing>
       </bpmn2:receiveTask>
@@ -70,6 +71,7 @@
         <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
         <bpmn2:dataInputAssociation id="DataInputAssociation_3">
           <bpmn2:sourceRef>DataObjectReference_3</bpmn2:sourceRef>
+          <bpmn2:targetRef>DataObjectReference_3</bpmn2:targetRef>
         </bpmn2:dataInputAssociation>
       </bpmn2:userTask>
       <bpmn2:sequenceFlow id="SequenceFlow_13" name="" sourceRef="Task_4" targetRef="ExclusiveGateway_2"/>
@@ -90,14 +92,16 @@
         <bpmn2:outgoing>SequenceFlow_52</bpmn2:outgoing>
         <bpmn2:dataInputAssociation id="DataInputAssociation_2">
           <bpmn2:sourceRef>DataObjectReference_1</bpmn2:sourceRef>
+          <bpmn2:targetRef>DataObjectReference_1</bpmn2:targetRef>
         </bpmn2:dataInputAssociation>
       </bpmn2:userTask>
       <bpmn2:sequenceFlow id="SequenceFlow_52" name="" sourceRef="Task_5" targetRef="SendTask_2"/>
-      <bpmn2:sendTask id="SendTask_2" name="send agreement conditions to Capitol">
+      <bpmn2:sendTask id="SendTask_2" camunda:delegateExpression="${sendAgreementConditionsToCapitolDelegate}" name="send agreement conditions to Capitol">
         <bpmn2:incoming>SequenceFlow_52</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
         <bpmn2:dataInputAssociation id="DataInputAssociation_5">
           <bpmn2:sourceRef>DataObjectReference_8</bpmn2:sourceRef>
+          <bpmn2:targetRef>DataObjectReference_8</bpmn2:targetRef>
         </bpmn2:dataInputAssociation>
       </bpmn2:sendTask>
       <bpmn2:sequenceFlow id="SequenceFlow_12" name="" sourceRef="SendTask_2" targetRef="ExclusiveGateway_1"/>
@@ -144,6 +148,7 @@
       <bpmn2:outgoing>SequenceFlow_49</bpmn2:outgoing>
       <bpmn2:dataInputAssociation id="DataInputAssociation_4">
         <bpmn2:sourceRef>DataObjectReference_7</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataObjectReference_7</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_48" name="" sourceRef="SubProcess_1" targetRef="UserTask_2"/>
@@ -160,6 +165,7 @@
       <bpmn2:outgoing>SequenceFlow_68</bpmn2:outgoing>
       <bpmn2:dataInputAssociation id="DataInputAssociation_6">
         <bpmn2:sourceRef>DataObjectReference_6</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataObjectReference_6</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
     </bpmn2:userTask>
     <bpmn2:userTask id="UserTask_5" camunda:candidateGroups="Contract handler" name="check customer's answer">
@@ -180,14 +186,14 @@
     <bpmn2:sequenceFlow id="SequenceFlow_60" name="standard solution &#xD;&#xA;requested" sourceRef="ExclusiveGateway_5" targetRef="UserTask_4">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!individualSolutionRequested}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:serviceTask id="UserTask_6" name="persist contract data in system">
+    <bpmn2:serviceTask id="UserTask_6" camunda:delegateExpression="${persistContractDataInSystemDelegate}" name="persist contract data in system">
       <bpmn2:incoming>SequenceFlow_61</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_65</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_61" name="contract signed" sourceRef="ExclusiveGateway_6" targetRef="UserTask_6">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[${contractStatus=="contractSigned"}]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sendTask id="SendTask_3" name="inform Capitol about contract status">
+    <bpmn2:sendTask id="SendTask_3" camunda:delegateExpression="${informCapitolAboutContractStatusDelegate}" name="inform Capitol about contract status">
       <bpmn2:incoming>SequenceFlow_66</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_67</bpmn2:outgoing>
     </bpmn2:sendTask>
@@ -207,7 +213,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_67" name="" sourceRef="SendTask_3" targetRef="EndEvent_3"/>
     <bpmn2:sequenceFlow id="SequenceFlow_68" name="" sourceRef="UserTask_4" targetRef="ExclusiveGateway_3"/>
     <bpmn2:dataObjectReference id="DataObjectReference_6" name="rental contract" dataObjectRef="DataObject_5"/>
-    <bpmn2:userTask id="UserTask_8" name="Process request">
+    <bpmn2:userTask id="UserTask_8" name="Create new Rental Agreement Request">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -225,6 +231,8 @@
 - conditionsApproved (boolean, required)]]></bpmn2:text>
     </bpmn2:textAnnotation>
   </bpmn2:process>
+  <bpmn2:message id="Message_1" name="NewRentalAgreementRequest"/>
+  <bpmn2:message id="Message_2" name="AgreementConditionsWithInsurance"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="_Collaboration_3">
       <bpmndi:BPMNShape id="_BPMNShape_Participant_4" bpmnElement="_Participant_2" isHorizontal="true">

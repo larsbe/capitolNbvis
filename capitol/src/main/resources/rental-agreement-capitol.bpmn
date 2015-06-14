@@ -4,10 +4,11 @@
     <bpmn2:participant id="pool_capitol" name="Capitol" processRef="rental-agreement_capitol"/>
     <bpmn2:participant id="bvis" name="BVIS"/>
     <bpmn2:messageFlow id="MessageFlow_1" name="" sourceRef="bvis" targetRef="StartEvent_1"/>
-    <bpmn2:messageFlow id="MessageFlow_5" name="" sourceRef="bvis" targetRef="ReceiveTask_1"/>
-    <bpmn2:messageFlow id="MessageFlow_9" name="" sourceRef="bvis" targetRef="ReceiveTask_3"/>
-    <bpmn2:messageFlow id="MessageFlow_2" name="" sourceRef="SendTask_1" targetRef="bvis"/>
+    <bpmn2:messageFlow id="MessageFlow_5" name="" sourceRef="bvis" targetRef="taskReceiveAgreementConditions"/>
+    <bpmn2:messageFlow id="MessageFlow_9" name="" sourceRef="bvis" targetRef="taskReceiveContractStatus"/>
+    <bpmn2:messageFlow id="MessageFlow_2" name="" sourceRef="taskSendAgreementConditions" targetRef="bvis"/>
   </bpmn2:collaboration>
+  <bpmn2:message id="agreementConditions" name="newAgreementConditions"/>
   <bpmn2:process id="rental-agreement_capitol" isExecutable="true">
     <bpmn2:startEvent id="StartEvent_1" name="Agreement conditions received">
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
@@ -29,62 +30,62 @@
     <bpmn2:endEvent id="EndEvent_3">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_11" name="Yes" sourceRef="ExclusiveGateway_2" targetRef="UserTask_2">
+    <bpmn2:sequenceFlow id="SequenceFlow_11" name="Yes" sourceRef="ExclusiveGateway_2" targetRef="taskActivateContract">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${contractSigned == true}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="UserTask_1" camunda:assignee="clerk" camunda:candidateGroups="Contract_Handler" name="Add insurance benefits">
+    <bpmn2:userTask id="taskAddInsuranceBenefits" camunda:assignee="clerk" camunda:candidateGroups="Contract_Handler" camunda:formKey="embedded:app:forms/insurance_benefits.html" name="Add insurance benefits">
       <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="ExclusiveGateway_1" targetRef="UserTask_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="ExclusiveGateway_1" targetRef="taskAddInsuranceBenefits"/>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_3" name="Approved by  BVIS">
       <bpmn2:incoming>SequenceFlow_26</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_23</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_27</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:receiveTask id="ReceiveTask_1" name="Receive revised agreement conditions">
+    <bpmn2:receiveTask id="taskReceiveAgreementConditions" name="Receive revised agreement conditions">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_26</bpmn2:outgoing>
     </bpmn2:receiveTask>
     <bpmn2:sequenceFlow id="SequenceFlow_23" name="false" sourceRef="ExclusiveGateway_3" targetRef="ExclusiveGateway_1">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${conditionsApproved == false}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:receiveTask id="ReceiveTask_3" name="Receive contract status">
+    <bpmn2:receiveTask id="taskReceiveContractStatus" name="Receive contract status">
       <bpmn2:incoming>SequenceFlow_27</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_25</bpmn2:outgoing>
     </bpmn2:receiveTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_25" name="" sourceRef="ReceiveTask_3" targetRef="ExclusiveGateway_2"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_26" name="" sourceRef="ReceiveTask_1" targetRef="ExclusiveGateway_3"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_27" name="true" sourceRef="ExclusiveGateway_3" targetRef="ReceiveTask_3">
+    <bpmn2:sequenceFlow id="SequenceFlow_25" name="" sourceRef="taskReceiveContractStatus" targetRef="ExclusiveGateway_2"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_26" name="" sourceRef="taskReceiveAgreementConditions" targetRef="ExclusiveGateway_3"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_27" name="true" sourceRef="ExclusiveGateway_3" targetRef="taskReceiveContractStatus">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${conditionsApproved == true}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:serviceTask id="UserTask_2" name="Persist and activate contract">
+    <bpmn2:serviceTask id="taskActivateContract" camunda:class="de.unimuenster.wi.wfm.delegates.ActivateContractDelegate" name="Persist and activate contract">
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_28</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_28" name="" sourceRef="UserTask_2" targetRef="EndEvent_2"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_28" name="" sourceRef="taskActivateContract" targetRef="EndEvent_2"/>
     <bpmn2:dataObject id="DataObject_1" name="Data Object 1"/>
-    <bpmn2:sendTask id="SendTask_1" name="Send agreement&#xA;conditions">
+    <bpmn2:sendTask id="taskSendAgreementConditions" camunda:class="de.unimuenster.wi.wfm.delegates.SendAgreementConditionsDelegate" name="Send agreement&#xA;conditions">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:sendTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="UserTask_1" targetRef="SendTask_1"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="SendTask_1" targetRef="ReceiveTask_1"/>
-    <bpmn2:serviceTask id="ServiceTask_1" name="Close case">
+    <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="taskAddInsuranceBenefits" targetRef="taskSendAgreementConditions"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="taskSendAgreementConditions" targetRef="taskReceiveAgreementConditions"/>
+    <bpmn2:serviceTask id="taskCloseCase" camunda:class="de.unimuenster.wi.wfm.delegates.CloseCaseDelegate" name="Close case">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_4" name="No&#x9;" sourceRef="ExclusiveGateway_2" targetRef="ServiceTask_1">
+    <bpmn2:sequenceFlow id="SequenceFlow_4" name="No&#x9;" sourceRef="ExclusiveGateway_2" targetRef="taskCloseCase">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[${contractSigned == false}
 ]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="ServiceTask_1" targetRef="EndEvent_3"/>
-    <bpmn2:serviceTask id="ServiceTask_2" name="Create new negotiating case">
+    <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="taskCloseCase" targetRef="EndEvent_3"/>
+    <bpmn2:serviceTask id="taskCreateNegotiationCase" camunda:class="de.unimuenster.wi.wfm.delegates.CreateNegotiationCaseDelegate" name="Create new negotiating case">
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="StartEvent_1" targetRef="ServiceTask_2"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_7" name="" sourceRef="ServiceTask_2" targetRef="ExclusiveGateway_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="StartEvent_1" targetRef="taskCreateNegotiationCase"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_7" name="" sourceRef="taskCreateNegotiationCase" targetRef="ExclusiveGateway_1"/>
     <bpmn2:textAnnotation id="TextAnnotation_1">
       <bpmn2:text><![CDATA[Parameters:
 - ID (int, required)
@@ -122,7 +123,7 @@
           <dc:Bounds height="0.0" width="0.0" x="373.0" y="185.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_UserTask_4" bpmnElement="UserTask_1">
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_4" bpmnElement="taskAddInsuranceBenefits">
         <dc:Bounds height="80.0" width="100.0" x="444.0" y="116.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_ExclusiveGateway_3" bpmnElement="ExclusiveGateway_2" isMarkerVisible="true">
@@ -164,7 +165,7 @@
           <dc:Bounds height="17.0" width="95.0" x="893.0" y="108.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_ReceiveTask_2" bpmnElement="ReceiveTask_1">
+      <bpmndi:BPMNShape id="_BPMNShape_ReceiveTask_2" bpmnElement="taskReceiveAgreementConditions">
         <dc:Bounds height="80.0" width="100.0" x="756.0" y="116.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_MessageFlow_5" bpmnElement="MessageFlow_5" sourceElement="_BPMNShape_Participant_3" targetElement="_BPMNShape_ReceiveTask_2">
@@ -184,7 +185,7 @@
           <dc:Bounds height="17.0" width="28.0" x="876.0" y="246.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ReceiveTask_4" bpmnElement="ReceiveTask_3">
+      <bpmndi:BPMNShape id="_BPMNShape_ReceiveTask_4" bpmnElement="taskReceiveContractStatus">
         <dc:Bounds height="80.0" width="100.0" x="1068.0" y="116.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_25" bpmnElement="SequenceFlow_25" sourceElement="_BPMNShape_ReceiveTask_4" targetElement="_BPMNShape_ExclusiveGateway_3">
@@ -219,7 +220,7 @@
           <dc:Bounds height="17.0" width="24.0" x="1008.0" y="158.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_UserTask_6" bpmnElement="UserTask_2">
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_6" bpmnElement="taskActivateContract">
         <dc:Bounds height="80.0" width="100.0" x="1332.0" y="51.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_28" bpmnElement="SequenceFlow_28" sourceElement="_BPMNShape_UserTask_6" targetElement="_BPMNShape_EndEvent_3">
@@ -229,7 +230,7 @@
           <dc:Bounds height="6.0" width="6.0" x="1447.0" y="91.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_SendTask_4" bpmnElement="SendTask_1">
+      <bpmndi:BPMNShape id="_BPMNShape_SendTask_4" bpmnElement="taskSendAgreementConditions">
         <dc:Bounds height="80.0" width="100.0" x="612.0" y="116.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_UserTask_4" targetElement="_BPMNShape_SendTask_4">
@@ -255,7 +256,7 @@
           <dc:Bounds height="6.0" width="6.0" x="731.0" y="156.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_9" bpmnElement="ServiceTask_1">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_9" bpmnElement="taskCloseCase">
         <dc:Bounds height="80.0" width="100.0" x="1332.0" y="182.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="_BPMNShape_ExclusiveGateway_3" targetElement="_BPMNShape_ServiceTask_9">
@@ -271,7 +272,7 @@
         <di:waypoint xsi:type="dc:Point" x="1432.0" y="222.0"/>
         <di:waypoint xsi:type="dc:Point" x="1464.0" y="222.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_10" bpmnElement="ServiceTask_2">
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_10" bpmnElement="taskCreateNegotiationCase">
         <dc:Bounds height="80.0" width="100.0" x="228.0" y="117.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_6" bpmnElement="SequenceFlow_6" sourceElement="_BPMNShape_StartEvent_2" targetElement="_BPMNShape_ServiceTask_10">
