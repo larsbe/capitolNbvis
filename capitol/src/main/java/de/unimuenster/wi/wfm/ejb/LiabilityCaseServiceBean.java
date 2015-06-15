@@ -1,18 +1,26 @@
 package de.unimuenster.wi.wfm.ejb;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.camunda.bpm.engine.cdi.jsf.TaskForm;
+
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 
 @Stateless
 public class LiabilityCaseServiceBean {
+	
+	// Inject task form available through the camunda cdi artifact
+	@Inject
+	private TaskForm taskForm;
 	
 	@PersistenceContext
 	protected EntityManager em;
@@ -37,8 +45,20 @@ public class LiabilityCaseServiceBean {
 		return liabilityCase;
 	}
 	
-	public LiabilityCase editLiabilityCase(LiabilityCase liabilityCase) {
+	/*
+    Merge updated order entity and complete task form in one transaction. This ensures
+    that both changes will rollback if an error occurs during transaction.
+	*/
+	public LiabilityCase mergeOrderAndCompleteTask(LiabilityCase liabilityCase) {
+		// Merge detached order entity with current persisted state
 		em.merge(liabilityCase);
+		try {
+			// Complete user task from
+			taskForm.completeTask();
+		} catch (IOException e) {
+			// Rollback both transactions on error
+			throw new RuntimeException("Cannot complete task", e);
+		}
 		return getLiabilityCase(liabilityCase.getId());
 	}
 }

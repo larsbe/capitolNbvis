@@ -20,7 +20,7 @@
     <h:form id="submitForm">
       <h:outputLabel>Eligible?</h:outputLabel>
       <h:selectBooleanCheckbox value="#{checkEligibility.liabilityCase.eligible}"/><br/>
-      <h:commandButton id="submit_button" value="Save changes" update="@form" action="#{checkEligibility.submitChanges()}" />
+      <h:commandButton id="submit_button" value="Save changes" update="@form" action="#{checkEligibility.submitForm()}" />
     </h:form>
   </h:body>
 </f:view>
