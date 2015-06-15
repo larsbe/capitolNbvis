@@ -21,6 +21,7 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 
 	@EJB
 	private LiabilityCaseServiceBean liabilityCaseService;
+	
 	@EJB
 	private InsuranceContractServiceBean insuranceContractService;
 	
