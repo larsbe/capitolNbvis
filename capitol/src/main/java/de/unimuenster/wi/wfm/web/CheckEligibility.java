@@ -42,7 +42,6 @@ public class CheckEligibility implements Serializable {
 	
 	public void submitForm() throws IOException {
 	    // Persist updated order entity and complete task form
-		//TODO Sollte glaube ich an einer anderen stelle gemacht werden
 		businessProcess.setVariable("claimIsEligible",liabilityCase.getEligible());
 		liabilityCase =  liabilityCaseService.mergeOrderAndCompleteTask(liabilityCase);
 	  }
