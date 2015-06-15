@@ -5,7 +5,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import de.unimuenster.wi.wfm.entitiy.Customer;
-import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 
 @Stateless
 public class CustomerServiceBean {
