@@ -19,6 +19,7 @@ public class LiabilityCaseServiceBean implements LiabilityCaseService {
 	
 	public LiabilityCase createLiabilityCase(LiabilityCase liabilityCase) {
 		em.persist(liabilityCase);
+		em.flush();
 		return liabilityCase;
 	}
 	
@@ -36,9 +37,9 @@ public class LiabilityCaseServiceBean implements LiabilityCaseService {
 		return liabilityCase;
 	}
 	
-	public boolean editLiabilityCase(LiabilityCase liabilityCase) {
+	public LiabilityCase editLiabilityCase(LiabilityCase liabilityCase) {
 		em.merge(liabilityCase);
-		return true;
+		return getLiabilityCase(liabilityCase.getId());
 	}
 }
 

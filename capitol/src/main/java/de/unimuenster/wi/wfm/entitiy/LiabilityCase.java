@@ -31,7 +31,7 @@ public class LiabilityCase extends AbstractEntity {
 		this.customer = customer;
 	}
 	
-	public boolean isEligible() {
+	public boolean getEligible() {
 		return eligible;
 	}
 	

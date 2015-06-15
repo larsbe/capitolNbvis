@@ -31,7 +31,7 @@
         <bpmn2:incoming>SequenceFlow_28</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_34</bpmn2:outgoing>
       </bpmn2:serviceTask>
-      <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="First_Level_Case_Handler" camunda:formKey="embedded:app:forms/eligibility_check.html" name="Check eligibility">
+      <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="First_Level_Case_Handler" camunda:formKey="app:CheckEligibility.jsf" name="Check eligibility">
         <bpmn2:incoming>SequenceFlow_36</bpmn2:incoming>
         <bpmn2:incoming>SequenceFlow_37</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_30</bpmn2:outgoing>
