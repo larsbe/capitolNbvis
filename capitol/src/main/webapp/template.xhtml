@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view>
+  <f:metadata>
+  	<!-- Start working on a task. Task Id is read internally from
+         request parameters and cached in the CDI conversation scope.
+    -->
+	<f:event type="preRenderView" listener="#{camundaTaskForm.startTaskForm()}" />
+  </f:metadata>
+  <h:head>
+    <title>Check Eligibility</title>
+    <!-- CSS Stylesheets -->
+  <h:outputStylesheet library="webjars/bootstrap/3.1.1/css" name="bootstrap.css"/>
+  <h:outputStylesheet library="css" name="capitol.css"/>
+
+  <!-- Javascript Libraries -->
+  <!--  <h:outputScript type="text/javascript" library="webjars/bootstrap/3.1.1/js" name="bootstrap.js" /> -->
+  </h:head>
+  <h:body>
+  	<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="#">Help</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Capitol for People, Inc.</h3>
+      </div>
+
+
+      <ui:insert name="content" >
+	  </ui:insert>
+
+      <footer class="footer">
+        <p>Capitol 2015</p>
+      </footer>
+
+    </div> <!-- /container -->
+  
+  </h:body>
+</f:view>
+</html>

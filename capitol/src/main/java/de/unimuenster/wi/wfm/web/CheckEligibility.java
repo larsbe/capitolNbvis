@@ -1,5 +1,6 @@
 package de.unimuenster.wi.wfm.web;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
@@ -39,8 +40,11 @@ public class CheckEligibility implements Serializable {
 		return liabilityCase;
 	}
 	
-	public void submitChanges() {
-		liabilityCase = liabilityCaseService.editLiabilityCase(liabilityCase);
-	}
+	public void submitForm() throws IOException {
+	    // Persist updated order entity and complete task form
+		//TODO Sollte glaube ich an einer anderen stelle gemacht werden
+		businessProcess.setVariable("claimIsEligible",liabilityCase.getEligible());
+		liabilityCase =  liabilityCaseService.mergeOrderAndCompleteTask(liabilityCase);
+	  }
 	
 }
