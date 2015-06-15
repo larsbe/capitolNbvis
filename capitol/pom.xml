@@ -23,6 +23,12 @@
       <artifactId>camunda-engine</artifactId>
     </dependency>
     
+    <dependency>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-email</artifactId>
+	<version>1.4</version>
+</dependency>
+    
     <!-- camunda cdi beans -->
     <dependency>
 	  <groupId>org.camunda.bpm</groupId>
