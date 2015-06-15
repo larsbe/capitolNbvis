@@ -28,8 +28,7 @@ public class DemoDataGenerator {
 	
 	@PostConstruct
 	public void initialise() {
-				
-		
+			
 		Customer c1 = new Customer();
 		c1.setName("BVIS");
 		customerService.createCustomer(c1);
@@ -41,7 +40,6 @@ public class DemoDataGenerator {
 		LiabilityCase lc1 = new LiabilityCase();
 		lc1.setStatus(CaseStatus.NEW);
 		lc1.setInsuranceContract(ic1);
-		
 		liabilityCaseService.createLiabilityCase(lc1);
 
 	}
