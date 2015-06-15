@@ -6,52 +6,52 @@
 
   <h:body>
 
-<ui:composition template="template.xhtml">
+		<ui:composition template="template.xhtml">
  
     		<ui:define name="content">
     		
-    		 <h1>Liability Case Eligibility Check</h1>
-	    <table class="table">
-	    	<tr>
-	    		<td>Case ID</td>
-	    		<td>#{checkEligibility.liabilityCase.id}</td>
-	    	</tr>
-	    	<tr>
-	    		<td>Contract ID</td>
-	    		<td>#{checkEligibility.liabilityCase.insuranceContract.id}</td>
-	    	</tr>
-	    	<tr>
-	    		<td>Customer Name</td>
-	    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}</td>
-	    	</tr>
-	    	<tr>
-	    		<td>Claim Details</td>
-	    		<td>Text goes here ... Still needs to be added!</td>
-	    	</tr>
-	    	<tr>
-	    		<td>Pictures</td>
-	    		<td>
-	    			<ui:repeat var="image" value="#{checkEligibility.liabilityCase.images}">
+    		 	<h1>Liability Case Eligibility Check</h1>
+			    <table class="table">
+			    	<tr>
+			    		<td>Case ID</td>
+			    		<td>#{checkEligibility.liabilityCase.id}</td>
+			    	</tr>
+			    	<tr>
+			    		<td>Contract ID</td>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.id}</td>
+			    	</tr>
+			    	<tr>
+			    		<td>Customer Name</td>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}</td>
+			    	</tr>
+			    	<tr>
+			    		<td>Claim Details</td>
+			    		<td>Text goes here ... Still needs to be added!</td>
+			    	</tr>
+			    	<tr>
+			    		<td>Pictures</td>
+			    		<td>
+			    			<ui:repeat var="image" value="#{checkEligibility.liabilityCase.images}">
+		
+								<a href="#{image.filePath}" target="_blank"><h:graphicImage value="#{image.filePath}" width="200"/></a>
+								
+					        </ui:repeat>
+			    		</td>
+			    	</tr>
+			    
+			    </table>
 
-	                    <h:outputText value="#{image.filePath}"/>
-
-			        </ui:repeat>
-	    		</td>
-	    	</tr>
-	    
-	    </table>
-
-	    <h:form id="submitForm">
-
-	      <div class="checkbox">
-		    <label>
-		      <h:selectBooleanCheckbox value="#{checkEligibility.liabilityCase.eligible}"/> Claim is eligible
-		    </label>
-		  </div>
-		  
-	      <h:commandButton id="submit_button" class="btn btn-primary" value="Save changes" update="@form" action="#{checkEligibility.submitForm()}" />
-	    	
-	    </h:form>
+			    <h:form id="submitForm">
+		
+			      <div class="checkbox">
+				    <label>
+				      <h:selectBooleanCheckbox value="#{checkEligibility.liabilityCase.eligible}"/> Claim is eligible
+				    </label>
+				  </div>
+				  
+			      <h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Save changes" update="@form" action="#{checkEligibility.submitForm()}" />
+			    	
+			    </h:form>
     		
     			
     		</ui:define>

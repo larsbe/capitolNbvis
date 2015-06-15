@@ -7,7 +7,7 @@ if(array_key_exists('imgUrl', $_GET) && array_key_exists('text', $_GET)) {
   $imageUrl = $_GET['imgUrl'];
   $savePath = downloadImage($imageUrl);
 
-  $jpg_image = extendCanvas($savePath, 0, 50);
+  $jpg_image = extendCanvas($savePath, 0, 30);
   $jpg_image = addTextToImage($jpg_image, $_GET['text']);
   renderImage($jpg_image);
 }
@@ -37,7 +37,7 @@ function addTextToImage($pImage, $pText) {
   $width = imagesx($image);
   $height = imagesy($image);
 
-  imagettftext($image, 25, 0, 75, $height-40, $white, $font_path, $pText);
+  imagettftext($image, 14, 0, 15, $height-22, $white, $font_path, $pText);
   return $image;
 }
 
