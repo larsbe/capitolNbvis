@@ -13,13 +13,15 @@
 			<h:form>
 				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error"
 					footerClass="form-footer">
-					<f:facet name="header">Customer</f:facet>
-					<h:outputText value="#{addInsuranceBenefits.negotiationCase.customer.name}" />
-					<h:outputLabel value="AgreementConditions" for="agreementConditions" />
-					<h:inputText id="agreementConditions" value="#{addInsuranceBenefits.negotiationCase.agreementConditions}">
+					<h:outputLabel value="Customer" for="customer" />
+					<h:outputText id="customer" value="#{addInsuranceBenefits.negotiationCase.customer.name}">
+					</h:outputText>
+					<h:outputLabel value="AgreementInfo" for="agreementInfo" />
+					<h:inputText id="agreementInfo" value="#{addInsuranceBenefits.negotiationCase.agreementInfo}">
 					</h:inputText>
-					<h:message for="agreementConditions" />
-					<h:outputText value="#{addInsuranceBenefits.negotiationCase.changeComments}" />
+					<h:message for="agreementInfo" />
+					<h:outputLabel value="Change comments" for="comments" />
+					<h:outputText id="comments" value="#{addInsuranceBenefits.negotiationCase.changeComments}" />
 					<f:facet name="footer">
 						<h:commandButton id="submit_button" class="btn btn-primary" value="Save changes" update="@form" action="#{addInsuranceBenefits.submitForm()}" />
 					</f:facet>
