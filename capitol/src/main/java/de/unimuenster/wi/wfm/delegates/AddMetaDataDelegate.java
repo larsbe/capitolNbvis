@@ -1,5 +1,6 @@
 package de.unimuenster.wi.wfm.delegates;
 
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -42,8 +43,10 @@ public class AddMetaDataDelegate implements JavaDelegate {
 			Date dateNow = new Date();
 			SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
 	        String date = DATE_FORMAT.format(dateNow);
+	        
+	        String query = date + " - " + Constants.IMG_METADATA_LIABILITYCLAIM_ABBR + "#" + claim.getId() + " - " + Constants.COMPANY_NAME;
 			
-			img.setFilePath(urlPrefix + img.getFilePath() + txtPrefix + date + " - " + Constants.IMG_METADATA_LIABILITYCLAIM_ABBR + "#" + claim.getId() + " - " + Constants.COMPANY_NAME);
+			img.setFilePath(urlPrefix + img.getFilePath() + txtPrefix +  URLEncoder.encode(query, "UTF-8"));
 			imageAttachmentService.editImageAttachment(img);
 		}
 		
