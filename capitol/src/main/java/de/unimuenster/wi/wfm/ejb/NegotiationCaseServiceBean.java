@@ -4,7 +4,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 import de.unimuenster.wi.wfm.entitiy.NegotiationCase;
 
 @Stateless

@@ -5,15 +5,17 @@ import org.apache.commons.mail.*;
 
 public class EmailHelper {
 
-	private static final String HOST = "cloud.webartifact.de";
-	private static final String USER = "wfm.capitol@jonasgerlach.de";
-	private static final String PWD = "test1234";
+	private static final String HOST = "smtp.gmail.com";
+	private static final String USER = "capitol.wfm@gmail.com";
+	private static final String PWD = "Test1234!";
 		
 	public static Email CreateNewEmail() {
 		Email email = new SimpleEmail();
 	    email.setHostName(HOST);
 	    email.setDebug(true);
-	    email.setSmtpPort(25);
+	    email.setSmtpPort(465);
+	    email.setSslSmtpPort("465");
+	    email.setSSLOnConnect(true);
 	    email.setAuthenticator(new DefaultAuthenticator(USER, PWD));
 	    return email;
 	}
