@@ -5,6 +5,7 @@
 "processVariables" : {
     "contractNo" : {"value" : "2", "type": "Long"},
     "imageCount" : {"value" : "2", "type": "Integer"},
+    "claimDetails" : {"value" : "Toller Text mit Details", "type": "String"},
     "image_1": {"value" : "http://capitol.jonasgerlach.de/testImg/TEST_IMG.JPG", "type": "String"},
     "image_2": {"value" : "http://www.winfridia-breslau.de/_img/content/D20_3861b-1.jpg", "type": "String"}
 }
