@@ -1,0 +1,10 @@
+{"messageName" : "newLiabilityCase",
+"businessKey" : "",
+"correlationKeys" : {
+},
+"processVariables" : {
+    "contractNo" : {"value" : "2", "type": "Long"},
+    "imageCount" : {"value" : "1", "type": "Integer"},
+    "image_1": {"value" : "http://www.androidmag.de/wp-content/uploads/2014/05/google.jpg", "type": "String"}
+}
+}
