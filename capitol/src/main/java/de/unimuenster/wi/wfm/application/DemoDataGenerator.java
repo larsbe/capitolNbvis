@@ -37,11 +37,12 @@ public class DemoDataGenerator {
 		ic1.setCustomer(c1);
 		insuranceContractService.createInsuranceContract(ic1);
 		
+		/* 
 		LiabilityCase lc1 = new LiabilityCase();
 		lc1.setStatus(CaseStatus.NEW);
 		lc1.setInsuranceContract(ic1);
 		liabilityCaseService.createLiabilityCase(lc1);
-
+		*/
 	}
 
 	
