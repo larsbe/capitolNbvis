@@ -7,7 +7,7 @@
     <bpmn2:messageFlow id="MessageFlow_2" name="" sourceRef="bvis" targetRef="StartEvent_2"/>
     <bpmn2:messageFlow id="MessageFlow_5" name="" sourceRef="SendTask_2" targetRef="bvis"/>
   </bpmn2:collaboration>
-  <bpmn2:process id="liability-case_capitol" isExecutable="true">
+  <bpmn2:process id="liability-case_capitol" name="Liability Case (Capitol)" isExecutable="true">
     <bpmn2:startEvent id="StartEvent_2">
       <bpmn2:outgoing>SequenceFlow_25</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="_MessageEventDefinition_4" messageRef="Message_1"/>
@@ -27,7 +27,7 @@
         <bpmn2:outgoing>SequenceFlow_28</bpmn2:outgoing>
       </bpmn2:startEvent>
       <bpmn2:sequenceFlow id="SequenceFlow_28" name="" sourceRef="StartEvent_3" targetRef="ServiceTask_2"/>
-      <bpmn2:serviceTask id="ServiceTask_2" camunda:class="de.unimuenster.wi.wfm.delegates.GatherAndPrepareContractDelegate" name="Gather and prepare necessary contract/insurance information">
+      <bpmn2:serviceTask id="ServiceTask_2" camunda:delegateExpression="${gatherAndPrepareContractDelegate}" name="Gather and prepare necessary contract/insurance information">
         <bpmn2:incoming>SequenceFlow_28</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_34</bpmn2:outgoing>
       </bpmn2:serviceTask>
@@ -52,7 +52,7 @@
       <bpmn2:sequenceFlow id="SequenceFlow_37" name="No" sourceRef="ExclusiveGateway_4" targetRef="UserTask_1">
         <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${hasImages == false}</bpmn2:conditionExpression>
       </bpmn2:sequenceFlow>
-      <bpmn2:serviceTask id="ServiceTask_4" camunda:class="de.unimuenster.wi.wfm.delegates.AddMetaDataDelegate" name="Add metadata to images">
+      <bpmn2:serviceTask id="ServiceTask_4" camunda:delegateExpression="${addMetaDataDelegate}" name="Add metadata to images">
         <bpmn2:incoming>SequenceFlow_35</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_36</bpmn2:outgoing>
       </bpmn2:serviceTask>
@@ -86,7 +86,7 @@
         <bpmn2:incoming>SequenceFlow_48</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_49</bpmn2:outgoing>
       </bpmn2:userTask>
-      <bpmn2:userTask id="ServiceTask_5" camunda:candidateGroups="Second_Level_Case_Handler" camunda:formKey="embedded:app:forms/car_value.html" name="Calculate the car's fair value">
+      <bpmn2:userTask id="ServiceTask_5" camunda:candidateGroups="Second_Level_Case_Handler" camunda:formKey="app:CalculateCarsFairValue.jsf" name="Calculate the car's fair value">
         <bpmn2:incoming>SequenceFlow_38</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_48</bpmn2:outgoing>
       </bpmn2:userTask>
