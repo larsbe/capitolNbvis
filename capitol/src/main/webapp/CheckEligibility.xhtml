@@ -33,8 +33,8 @@
 			    		<td>
 			    			<ui:repeat var="image" value="#{checkEligibility.liabilityCase.images}">
 		
-			                    <h:outputText value="#{image.filePath}"/>
-		
+								<a href="#{image.filePath}" target="_blank"><h:graphicImage value="#{image.filePath}" width="200"/></a>
+								
 					        </ui:repeat>
 			    		</td>
 			    	</tr>
@@ -49,7 +49,7 @@
 				    </label>
 				  </div>
 				  
-			      <h:commandButton id="submit_button" class="btn btn-primary" value="Save changes" update="@form" action="#{checkEligibility.submitForm()}" />
+			      <h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Save changes" update="@form" action="#{checkEligibility.submitForm()}" />
 			    	
 			    </h:form>
     		
