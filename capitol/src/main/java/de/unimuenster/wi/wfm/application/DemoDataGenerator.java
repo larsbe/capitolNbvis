@@ -6,7 +6,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
 import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
-import de.unimuenster.wi.wfm.ejb.LiabilityCaseService;
+import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
 import de.unimuenster.wi.wfm.entitiy.CaseStatus;
 import de.unimuenster.wi.wfm.entitiy.Customer;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
@@ -16,7 +16,7 @@ import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 public class DemoDataGenerator {
 
 	@EJB
-	private LiabilityCaseService liabilityCaseService;
+	private LiabilityCaseServiceBean liabilityCaseService;
 	
 	@EJB
 	private CustomerServiceBean customerService;

@@ -9,7 +9,7 @@ import javax.inject.Named;
 
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 
-import de.unimuenster.wi.wfm.ejb.LiabilityCaseService;
+import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 
 @Named
@@ -23,7 +23,7 @@ public class CheckEligibility implements Serializable {
 	private BusinessProcess businessProcess;
 
 	@EJB
-	private LiabilityCaseService liabilityCaseService;
+	private LiabilityCaseServiceBean liabilityCaseService;
 	private LiabilityCase liabilityCase;
 	private long liabilityCaseId;
 	
