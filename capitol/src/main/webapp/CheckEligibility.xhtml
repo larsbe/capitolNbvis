@@ -5,6 +5,7 @@
   xmlns:f="http://java.sun.com/jsf/core">
 
   <h:body>
+<<<<<<< HEAD
 
 <ui:composition template="template.xhtml">
  
@@ -61,5 +62,14 @@
      
 
   
+=======
+    <h1>Liability Case:</h1>
+    <p>Case_ID: #{checkEligibility.liabilityCase.id}</p>
+    <h:form id="submitForm">
+      <h:outputLabel>Eligible?</h:outputLabel>
+      <h:selectBooleanCheckbox value="#{checkEligibility.liabilityCase.eligible}"/><br/>
+      <h:commandButton id="submit_button" value="Save changes" update="@form" action="#{checkEligibility.submitForm()}" />
+    </h:form>
+>>>>>>> master
   </h:body>
 </html>
