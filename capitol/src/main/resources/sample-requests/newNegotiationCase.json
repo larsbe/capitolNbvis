@@ -1,0 +1,9 @@
+{"messageName" : "newAgreementConditions",
+"businessKey" : "",
+"correlationKeys" : {
+},
+"processVariables" : {
+"customer" : {"value" : "TestBVIS", "type": "String"},
+"agreementConditions" : {"value" : "Wants to rent 42 cars", "type": "String"}
+}
+}

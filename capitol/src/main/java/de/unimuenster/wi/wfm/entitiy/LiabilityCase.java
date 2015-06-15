@@ -3,6 +3,7 @@ package de.unimuenster.wi.wfm.entitiy;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import java.util.ArrayList;
@@ -13,22 +14,24 @@ public class LiabilityCase extends AbstractEntity {
 	
 	private static  final long serialVersionUID = 1L;
 	
-	protected String customer;
 	protected CaseStatus status;
 	protected boolean eligible;
+	
+	@ManyToOne
+	protected Customer customer;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "liabilityCase")
 	protected Collection<ImageAttachment> images = new ArrayList<ImageAttachment>();
 	
-	public String getCustomer() {
+	public Customer getCustomer() {
 		return customer;
 	}
 	
-	public void setCustomer(String customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 	
-	public boolean isEligible() {
+	public boolean getEligible() {
 		return eligible;
 	}
 	

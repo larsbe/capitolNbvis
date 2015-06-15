@@ -80,7 +80,7 @@
 ]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_5" name="" sourceRef="taskCloseCase" targetRef="EndEvent_3"/>
-    <bpmn2:serviceTask id="taskCreateNegotiationCase" camunda:class="de.unimuenster.wi.wfm.delegates.CreateNegotiationCaseDelegate" name="Create new negotiating case">
+    <bpmn2:serviceTask id="taskCreateNegotiationCase" camunda:delegateExpression="${createNegotiationCaseDelegate}" name="Create new negotiating case">
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -289,7 +289,7 @@
         <di:waypoint xsi:type="dc:Point" x="348.0" y="155.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_8" bpmnElement="TextAnnotation_1">
-        <dc:Bounds height="68.0" width="252.0" x="864.0" y="437.0"/>
+        <dc:Bounds height="92.0" width="252.0" x="864.0" y="437.0"/>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

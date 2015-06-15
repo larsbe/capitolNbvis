@@ -16,6 +16,6 @@ public interface LiabilityCaseService {
 	
 	public LiabilityCase getLiabilityCase(long id);
 
-	boolean editLiabilityCase(LiabilityCase liabilityCase);
+	LiabilityCase editLiabilityCase(LiabilityCase liabilityCase);
 }
 
