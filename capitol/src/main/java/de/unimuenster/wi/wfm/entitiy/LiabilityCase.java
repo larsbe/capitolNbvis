@@ -16,19 +16,21 @@ public class LiabilityCase extends AbstractEntity {
 	
 	protected CaseStatus status;
 	protected boolean eligible;
+
 	
 	@ManyToOne
-	protected Customer customer;
+	protected InsuranceContract insuranceContract;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "liabilityCase")
 	protected Collection<ImageAttachment> images = new ArrayList<ImageAttachment>();
 	
-	public Customer getCustomer() {
-		return customer;
+
+	public InsuranceContract getInsuranceContract() {
+		return insuranceContract;
 	}
 	
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setInsuranceContract(InsuranceContract insuranceContract) {
+		this.insuranceContract = insuranceContract;
 	}
 	
 	public boolean getEligible() {

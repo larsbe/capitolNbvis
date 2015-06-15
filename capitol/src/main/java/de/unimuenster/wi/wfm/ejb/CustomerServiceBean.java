@@ -5,12 +5,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import de.unimuenster.wi.wfm.entitiy.Customer;
+import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 
 @Stateless
 public class CustomerServiceBean {
 
 	@PersistenceContext
 	protected EntityManager em;
+	
+	public Customer createCustomer(Customer customer) {
+		em.persist(customer);
+		em.flush();
+		return customer;
+	}
 	
 	public Customer getCustomerByName(String name) {
 		//TODO: retrieve customer, if no customer is found, throw exception

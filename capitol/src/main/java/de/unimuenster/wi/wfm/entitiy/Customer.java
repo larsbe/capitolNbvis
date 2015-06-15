@@ -16,10 +16,10 @@ public class Customer extends AbstractEntity {
 	protected String name;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "customer")
-	protected Collection<LiabilityCase> liabilityCases = new ArrayList<LiabilityCase>();
+	protected Collection<NegotiationCase> negotiationCases = new ArrayList<NegotiationCase>();
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "customer")
-	protected Collection<NegotiationCase> negotiationCases = new ArrayList<NegotiationCase>();
+	protected Collection<InsuranceContract> insuranceContracts = new ArrayList<InsuranceContract>();
 
 	public String getName() {
 		return name;
@@ -29,12 +29,12 @@ public class Customer extends AbstractEntity {
 		this.name = name;
 	}
 
-	public Collection<LiabilityCase> getLiabilityCases() {
-		return liabilityCases;
-	}
-
 	public Collection<NegotiationCase> getNegotiationCases() {
 		return negotiationCases;
 	}
 
+	public Collection<InsuranceContract> getInsuranceContracts() {
+		return insuranceContracts;
+	}
+	
 }

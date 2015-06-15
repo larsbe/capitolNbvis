@@ -10,12 +10,8 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
-import de.unimuenster.wi.wfm.ejb.LiabilityCaseService;
 import de.unimuenster.wi.wfm.ejb.NegotiationCaseServiceBean;
-import de.unimuenster.wi.wfm.entitiy.CaseStatus;
 import de.unimuenster.wi.wfm.entitiy.Customer;
-import de.unimuenster.wi.wfm.entitiy.ImageAttachment;
-import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 import de.unimuenster.wi.wfm.entitiy.NegotiationCase;
 
 @Named
