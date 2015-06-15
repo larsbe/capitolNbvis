@@ -50,11 +50,8 @@ public class AddMetaDataDelegate implements JavaDelegate {
 			imageAttachmentService.editImageAttachment(img);
 		}
 		
+		delegateExecution.removeVariable("hasImages");
 		
-		System.out.println("Meta data added ...");
-		
-		//EmailHelper.SendMail("capitol.wfm@gmail.com", "mail@jonasgerlach.de", "Test-Mail", "MetaData added");
-
 	}
 
 }
