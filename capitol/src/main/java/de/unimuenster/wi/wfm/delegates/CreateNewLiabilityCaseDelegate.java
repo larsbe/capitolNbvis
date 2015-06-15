@@ -42,6 +42,9 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		variablesToRemove.put("customer", variables.get("customer"));
 		claim.setStatus(CaseStatus.NEW);
 		
+		claim.setClaimDetails((String) variables.get("claimDetails"));
+		variablesToRemove.put("claimDetails", variables.get("claimDetails"));
+		
 		// Process Images
 		Integer imageCount = (Integer) variables.get("imageCount");
 		variablesToRemove.put("imageCount", variables.get("imageCount"));

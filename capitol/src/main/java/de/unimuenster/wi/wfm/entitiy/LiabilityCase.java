@@ -16,6 +16,7 @@ public class LiabilityCase extends AbstractEntity {
 	
 	protected CaseStatus status;
 	protected boolean eligible;
+	protected String claimDetails;
 
 	
 	@ManyToOne
@@ -48,6 +49,14 @@ public class LiabilityCase extends AbstractEntity {
 	public void setStatus(CaseStatus status) {
 		this.status = status;
 	}	
+	
+	public void setClaimDetails(String claimDetails){
+		this.claimDetails = claimDetails;
+	}
+	
+	public String getClaimDetails(){
+		return claimDetails;
+	}
 	
 	public Collection<ImageAttachment> getImages() {
 		return images;
