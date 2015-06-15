@@ -10,10 +10,12 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
+import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
 import de.unimuenster.wi.wfm.entitiy.CaseStatus;
 import de.unimuenster.wi.wfm.entitiy.Customer;
 import de.unimuenster.wi.wfm.entitiy.ImageAttachment;
+import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 
 @Named
@@ -22,7 +24,7 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 	@EJB
 	private LiabilityCaseServiceBean liabilityCaseService;
 	@EJB
-	private CustomerServiceBean customerService;
+	private InsuranceContractServiceBean insuranceContractService;
 	
 	public void execute(DelegateExecution delegateExecution) throws Exception {
 		
@@ -35,8 +37,8 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		// Create new Case
 		LiabilityCase claim = new LiabilityCase();
 		
-		Customer customer = customerService.getCustomerByName((String) variables.get("customer"));
-		claim.setCustomer(customer);
+		InsuranceContract contract = insuranceContractService.getInsuranceContract((Long) variables.get("contractNo"));
+		claim.setInsuranceContract(contract);
 		
 		variablesToRemove.put("customer", variables.get("customer"));
 		claim.setStatus(CaseStatus.NEW);
