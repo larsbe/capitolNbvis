@@ -14,7 +14,7 @@ import de.unimuenster.wi.wfm.entitiy.NegotiationCase;
 
 @Named
 @ConversationScoped
-public class AddInsuranceBenefites implements Serializable {
+public class AddInsuranceBenefits implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

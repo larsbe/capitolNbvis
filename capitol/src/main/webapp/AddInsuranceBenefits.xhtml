@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core">
+
+  <h:body>
+
+<ui:composition template="template.xhtml">
+ <ui:define name="content">
+		<div class="insurance-benefits">
+			<h2>Add Insurance benefits for negotiation case #{addInsuranceBenefits.negotiationCase.id}</h2>
+			<h:form>
+				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error"
+					footerClass="form-footer">
+					<f:facet name="header">Customer</f:facet>
+					<h:outputText value="#{addInsuranceBenefits.negotiationCase.customer.name}" />
+					<h:outputLabel value="AgreementConditions" for="agreementConditions" />
+					<h:inputText id="agreementConditions" value="#{addInsuranceBenefits.negotiationCase.agreementConditions}">
+					</h:inputText>
+					<h:message for="agreementConditions" />
+					<h:outputText value="#{addInsuranceBenefits.negotiationCase.changeComments}" />
+					<f:facet name="footer">
+						<h:commandButton id="submit_button" class="btn btn-primary" value="Save changes" update="@form" action="#{addInsuranceBenefits.submitForm()}" />
+					</f:facet>
+				</h:panelGrid>
+			</h:form>
+		</div>
+	</ui:define>
+ 
+    	</ui:composition>
+
+     
+  </h:body>
+</html>
