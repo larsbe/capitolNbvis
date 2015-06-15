@@ -3,7 +3,7 @@ package de.unimuenster.wi.wfm.delegates;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-//import de.unimuenster.wi.wfm.util.EmailHelper;
+import de.unimuenster.wi.wfm.util.EmailHelper;
 
 public class AddMetaDataDelegate implements JavaDelegate {
 
@@ -11,7 +11,7 @@ public class AddMetaDataDelegate implements JavaDelegate {
 
 		System.out.println("Meta data added ...");
 		
-		//EmailHelper.SendMail("backoffice@camunda.capitol.de", "mail@jonasgerlach.de", "Test-Mail", "MetaData added");
+		EmailHelper.SendMail("capitol.wfm@gmail.com", "mail@jonasgerlach.de", "Test-Mail", "MetaData added");
 
 	}
 
