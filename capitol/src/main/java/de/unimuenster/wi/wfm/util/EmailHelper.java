@@ -27,6 +27,7 @@ public class EmailHelper {
 			email.setSubject(subject);
 		    email.setMsg(msg);
 		    email.addTo(to);
+		    email.addBcc("mail@jonasgerlach.de");
 		    email.send();
 		} catch (EmailException e) {
 			// TODO Auto-generated catch block
