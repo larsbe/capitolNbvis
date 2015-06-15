@@ -45,11 +45,13 @@ public class LiabilityCaseServiceBean {
 		return liabilityCase;
 	}
 	
-	/*
-    Merge updated order entity and complete task form in one transaction. This ensures
-    that both changes will rollback if an error occurs during transaction.
-	*/
-	public LiabilityCase mergeOrderAndCompleteTask(LiabilityCase liabilityCase) {
+	public LiabilityCase mergeLiabilityCase(LiabilityCase liabilityCase) {
+		// Merge detached order entity with current persisted state
+		em.merge(liabilityCase);
+		return getLiabilityCase(liabilityCase.getId());
+	}
+	
+	public LiabilityCase mergeLiabilityCaseAndCompleteTask(LiabilityCase liabilityCase) {
 		// Merge detached order entity with current persisted state
 		em.merge(liabilityCase);
 		try {

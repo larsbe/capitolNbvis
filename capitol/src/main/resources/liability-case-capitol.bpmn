@@ -7,7 +7,7 @@
     <bpmn2:messageFlow id="MessageFlow_2" name="" sourceRef="bvis" targetRef="StartEvent_2"/>
     <bpmn2:messageFlow id="MessageFlow_5" name="" sourceRef="SendTask_2" targetRef="bvis"/>
   </bpmn2:collaboration>
-  <bpmn2:process id="liability-case_capitol" isExecutable="true">
+  <bpmn2:process id="liability-case_capitol" name="Liability Case (Capitol)" isExecutable="true">
     <bpmn2:startEvent id="StartEvent_2">
       <bpmn2:outgoing>SequenceFlow_25</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="_MessageEventDefinition_4" messageRef="Message_1"/>
@@ -64,7 +64,7 @@
       <bpmn2:outgoing>SequenceFlow_33</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="SubProcess_1" targetRef="Analyze_Claim_Gateway"/>
-    <bpmn2:sendTask id="Task_2" camunda:class="de.unimuenster.wi.wfm.delegates.InformBvisAboutRejectionDelegate" name="Inform BVIS about rejection">
+    <bpmn2:sendTask id="Task_2" camunda:delegateExpression="${informBvisAboutRejectionDelegate}" name="Inform BVIS about rejection">
       <bpmn2:incoming>SequenceFlow_33</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_31</bpmn2:outgoing>
     </bpmn2:sendTask>
