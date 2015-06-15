@@ -4,24 +4,60 @@
   xmlns:h="http://java.sun.com/jsf/html"
   xmlns:f="http://java.sun.com/jsf/core">
 
-<f:view>
-  <f:metadata>
-  	<!-- Start working on a task. Task Id is read internally from
-         request parameters and cached in the CDI conversation scope.
-    -->
-	<f:event type="preRenderView" listener="#{camundaTaskForm.startTaskForm()}" />
-  </f:metadata>
-  <h:head>
-    <title>Check Eligibility</title>
-  </h:head>
   <h:body>
-    <h1>Liability Case:</h1>
-    <p>Case_ID: #{checkEligibility.liabilityCase.id}</p>
-    <h:form id="submitForm">
-      <h:outputLabel>Eligible?</h:outputLabel>
-      <h:selectBooleanCheckbox value="#{checkEligibility.liabilityCase.eligible}"/><br/>
-      <h:commandButton id="submit_button" value="Save changes" update="@form" action="#{checkEligibility.submitForm()}" />
-    </h:form>
+
+<ui:composition template="template.xhtml">
+ 
+    		<ui:define name="content">
+    		
+    		 <h1>Liability Case Eligibility Check</h1>
+	    <table class="table">
+	    	<tr>
+	    		<td>Case ID</td>
+	    		<td>#{checkEligibility.liabilityCase.id}</td>
+	    	</tr>
+	    	<tr>
+	    		<td>Contract ID</td>
+	    		<td>#{checkEligibility.liabilityCase.insuranceContract.id}</td>
+	    	</tr>
+	    	<tr>
+	    		<td>Customer Name</td>
+	    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}</td>
+	    	</tr>
+	    	<tr>
+	    		<td>Claim Details</td>
+	    		<td>Text goes here ... Still needs to be added!</td>
+	    	</tr>
+	    	<tr>
+	    		<td>Pictures</td>
+	    		<td>
+	    			<ui:repeat var="image" value="#{checkEligibility.liabilityCase.images}">
+
+	                    <h:outputText value="#{image.filePath}"/>
+
+			        </ui:repeat>
+	    		</td>
+	    	</tr>
+	    
+	    </table>
+
+	    <h:form id="submitForm">
+
+	      <div class="checkbox">
+		    <label>
+		      <h:selectBooleanCheckbox value="#{checkEligibility.liabilityCase.eligible}"/> Claim is eligible
+		    </label>
+		  </div>
+		  
+	      <h:commandButton id="submit_button" class="btn btn-primary" value="Save changes" update="@form" action="#{checkEligibility.submitChanges()}" />
+	    	
+	    </h:form>
+    		
+    			
+    		</ui:define>
+ 
+    	</ui:composition>
+
+     
   </h:body>
-</f:view>
 </html>
