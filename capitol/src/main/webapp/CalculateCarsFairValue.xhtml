@@ -2,20 +2,70 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:ui="http://java.sun.com/jsf/facelets"
   xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:f="http://java.sun.com/jsf/core">
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
   <h:body>
 
-<ui:composition template="template.xhtml">
+	<ui:composition template="template.xhtml">
  
-    		<ui:define name="content">
+    	<ui:define name="content">
     		
-    		 <h1>TODO</h1>
+    		<h1>Calculate Car's Fair Value</h1>
+    		<h3>Liability Case Info</h3>
+    		<table class="table">
+			    	<tr>
+			    		<th>Case ID</th>
+			    		<td>#{checkEligibility.liabilityCase.id}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Contract ID</th>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.id}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Customer Name</th>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Claim Details</th>
+			    		<td>#{checkEligibility.liabilityCase.claimDetails}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Claim Eligibility</th>
+			    		<td>#{checkEligibility.liabilityCase.eligible}</td>
+			    	</tr>
+			    
+			</table>
+			
+			<h3>Calculation</h3>
+			<div class="form-horizontal" style="margin-bottom: 20px;">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Calculation Service</label>
+					<div class="col-sm-9">
+						<a class="btn btn-default" href="http://www.dat.de/home.html" target="_blank">Open dat.de</a>
+					</div>
+				</div>
+			</div>
+			
     		
+    		<h:form class="form-horizontal">
+
+	    		<div class="form-group">
+					    <h:outputLabel class="col-sm-3 control-label" for="carValue" value="Fair Value" />
+					    <div class="input-group col-sm-4">
+					      <div class="input-group-addon">€</div>
+					      <h:inputText class="form-control" id="carValue" p:placeholder="Amount" value="" />
+					      <div class="input-group-addon">.00</div>
+					    </div>
+
+				</div>
+
+				<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Save changes" update="@form" action="#{checkEligibility.submitForm()}" />
+			</h:form>
     			
-    		</ui:define>
+    	</ui:define>
  
-    	</ui:composition>
+    </ui:composition>
 
   </h:body>
 </html>
