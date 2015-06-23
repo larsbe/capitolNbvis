@@ -13,9 +13,10 @@ import org.camunda.bpm.engine.cdi.BusinessProcess;
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 
+
 @Named
 @ConversationScoped
-public class CalculateCarsFairValue implements Serializable{
+public class CalculateInsuranceSum implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
