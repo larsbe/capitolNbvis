@@ -1,0 +1,9 @@
+{"messageName" : "revisedAgreementConditions",
+"businessKey" : "",
+"correlationKeys" : {
+"customer" : {"value" : "TestBVIS", "type": "String"}
+},
+"processVariables" : {
+"conditionsApproved" : {"value" : "true", "type": "boolean"}
+}
+}

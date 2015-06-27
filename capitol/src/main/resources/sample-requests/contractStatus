@@ -1,0 +1,9 @@
+{"messageName" : "contractSigned",
+"businessKey" : "",
+"correlationKeys" : {
+"customer" : {"value" : "TestBVIS", "type": "String"}
+},
+"processVariables" : {
+"contractSigned" : {"value" : "true", "type": "boolean"}
+}
+}

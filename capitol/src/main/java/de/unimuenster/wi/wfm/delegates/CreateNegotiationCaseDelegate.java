@@ -34,7 +34,6 @@ public class CreateNegotiationCaseDelegate implements JavaDelegate {
 		
 		Customer customer = customerService.getCustomerByName((String) variables.get("customer"));
 		negotiation.setCustomer(customer);
-		variablesToRemove.put("customer", variables.get("customer"));
 		negotiation.setAgreementInfo((String) variables.get("agreementConditions"));
 		variablesToRemove.put("agreementConditions", variables.get("agreementConditions"));
 		negotiation.setConditionsApproved(false);

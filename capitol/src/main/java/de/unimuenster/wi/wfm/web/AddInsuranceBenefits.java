@@ -39,7 +39,7 @@ public class AddInsuranceBenefits implements Serializable {
 		return negotiationCase;
 	}
 	
-	public void submitChanges() {
+	public void submitForm() {
 		negotiationCase = negotiationCaseService.editNegotiationCase(negotiationCase);
 	}
 
