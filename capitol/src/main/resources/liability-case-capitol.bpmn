@@ -82,11 +82,11 @@
         <bpmn2:incoming>SequenceFlow_49</bpmn2:incoming>
       </bpmn2:endEvent>
       <bpmn2:sequenceFlow id="SequenceFlow_38" name="" sourceRef="StartEvent_4" targetRef="ServiceTask_5"/>
-      <bpmn2:userTask id="UserTask_4" camunda:candidateGroups="Second_Level_Case_Handler" camunda:formKey="app:CalculateInsuranceSum.jsf" name="Calculate&#xA;insurance sum">
+      <bpmn2:userTask id="UserTask_4" camunda:candidateGroups="Second_Level_Case_Handler" camunda:formKey="embedded:app:forms/CalculateInsuranceSum.html" name="Calculate&#xA;insurance sum">
         <bpmn2:incoming>SequenceFlow_48</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_49</bpmn2:outgoing>
       </bpmn2:userTask>
-      <bpmn2:userTask id="ServiceTask_5" camunda:candidateGroups="Second_Level_Case_Handler" camunda:formKey="app:CalculateCarsFairValue.jsf" name="Calculate the car's fair value">
+      <bpmn2:userTask id="ServiceTask_5" camunda:candidateGroups="Second_Level_Case_Handler" camunda:formKey="embedded:app:forms/CarValue.html" name="Calculate the car's fair value">
         <bpmn2:incoming>SequenceFlow_38</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_48</bpmn2:outgoing>
       </bpmn2:userTask>
@@ -137,7 +137,7 @@
       <bpmn2:incoming>SequenceFlow_39</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_42</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:userTask id="UserTask_2" camunda:candidateGroups="Contract_Handler" name="Check if adjustment of insurance fee is needed">
+    <bpmn2:userTask id="UserTask_2" camunda:candidateGroups="Contract_Handler" camunda:formKey="embedded:app:forms/CheckIfAdjustmentIsNeeded.html" name="Check if adjustment of insurance fee is needed">
       <bpmn2:incoming>SequenceFlow_40</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -155,7 +155,7 @@
     </bpmn2:sendTask>
     <bpmn2:sequenceFlow id="SequenceFlow_44" name="" sourceRef="SendTask_2" targetRef="ParallelGateway_1"/>
     <bpmn2:sequenceFlow id="SequenceFlow_45" name="" sourceRef="SubProcess_2" targetRef="SendTask_2"/>
-    <bpmn2:userTask id="UserTask_3" camunda:candidateGroups="Contract_Handler" name="Adjust&#xA;insurance fee">
+    <bpmn2:userTask id="UserTask_3" camunda:candidateGroups="Contract_Handler" camunda:formKey="embedded:app:forms/AdjustInsuranceFee.html" name="Adjust&#xA;insurance fee">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_46</bpmn2:outgoing>
     </bpmn2:userTask>
