@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+
+	<ui:composition template="/resources/defaultLayout.xhtml">
+		<ui:define name="title">Create new Customer</ui:define>
+
+		<ui:define name="content">
+
+			<div class="inputForm"><h2>New Customer</h2>
+
+			<h:form>
+				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
+
+						<h:outputLabel value="Name" for="customer_name" />
+						<h:inputText id="customer_name" value="#{createCustomer.customer.name}"/>
+						<h:message for="customer_name"/>
+						
+						<h:outputLabel value="E-Mail" for="customer_email" />
+						<h:inputText id="customer_email" value="#{createCustomer.customer.email}"/>
+						<h:message for="customer_email"/>
+						
+						<h:outputLabel value="Address" for="customer_address" />
+						<h:inputText id="customer_address" value="#{createCustomer.customer.address}"/>
+						<h:message for="customer_address"/>
+						
+						<h:outputLabel value="Phone Number" for="customer_phoneNumber" />
+						<h:inputText id="customer_phoneNumber" value="#{createCustomer.customer.phoneNumber}"/>
+						<h:message for="customer_phoneNumber"/>
+
+				</h:panelGrid>
+
+					<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
+						<f:facet name="footer">
+							<h:commandButton id="submit_button"
+					class="btn btn-primary pull-right" value="Create Customer"
+					update="@form" action="#{createCustomer.submit()}" />
+						</f:facet>
+					</h:panelGrid>
+				
+			</h:form>
+			</div>
+
+		</ui:define>
+
+	</ui:composition>
+
+
+</h:body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:view>
+<ui:insert name="metadata" />
+<h:head>
+	  <h:outputStylesheet library="css" name="style.css"/>
+	<title><ui:insert name="title">Title</ui:insert></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</h:head>
+<h:body> 
+<div id="page">
+	<div id="header"><ui:insert name="header">
+		<span id="title">BVIS Mobility Solutions Ltd.</span>
+		<div class="clear"></div>
+		</ui:insert></div>
+	<div id="navigation">
+		<ui:insert name="navigation">
+			<ul>
+			<li><h:link outcome="/CreateCustomer.xhtml">Create Rental Agreement Request</h:link></li>
+			<li><h:link outcome="/CreateCustomer.xhtml">New Customer</h:link></li>		
+			</ul>
+			<div class="clear"></div>
+		</ui:insert>
+	</div>
+	<div id="content"><ui:insert name="content"></ui:insert></div>
+	<div id="footer"><ui:insert name="footer">&copy;BVIS Mobility Solutions Ltd.</ui:insert></div>
+</div>
+</h:body>
+</f:view>
+</html>
