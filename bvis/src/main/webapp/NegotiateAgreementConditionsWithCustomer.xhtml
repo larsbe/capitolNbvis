@@ -15,12 +15,13 @@
 
 			<h:form>
 				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
+						
+						<h:outputLabel value="Customer" for="negotiateAgreementConditions_Customer" />
+						<h:inputText
+							id="negotiateAgreementConditions_Customer" value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.customer.name}"  readonly="true" />
 
-						<h:outputLabel value="Customer" for="rentalAgreementRequest_customer" />
-							<h:selectOneMenu id="rentalAgreementRequest_customer" value="#{createRentalAgreementRequest.selectedCustomerId}">
-							  <f:selectItems value="#{createRentalAgreementRequest.customers}" var="cur" itemValue="#{cur.id}" itemLabel="#{cur.name}"/>
-							</h:selectOneMenu>  
-						<h:message for="rentalAgreementRequest_customer"/>
+						
+						<!--  class="field left"
 						
 						<h:outputLabel value="Type" for="rentalAgreementRequest_type" />
 			            <h:selectOneMenu value="#{createRentalAgreementRequest.selectedRentalAgreementRequestType}" >
@@ -34,17 +35,17 @@
 							id="rentalAgreementRequest_requirements" value="#{createRentalAgreementRequest.rentalAgreementRequest.requirements}"/>
 							
 						<h:message for="rentalAgreementRequest_requirements"/>
-						
+						-->
 
 				</h:panelGrid>
-
+<!--  
 					<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
 						<f:facet name="footer">
 							<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Create Rental Agreement Request"
 										update="@form" action="#{createRentalAgreementRequest.submit()}" />
 						</f:facet>
 					</h:panelGrid>
-				
+-->				
 			</h:form>
 			</div>
 

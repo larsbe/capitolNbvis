@@ -15,6 +15,6 @@ public interface RentalAgreementRequestService {
 
 	public RentalAgreementRequest getRentalAgreementRequest(long id);
 
-	public RentalAgreementRequest mergeAndCompleteTask(RentalAgreementRequest rentalAgreementRequest);
+	public RentalAgreementRequest merge(RentalAgreementRequest rentalAgreementRequest);
 
 }

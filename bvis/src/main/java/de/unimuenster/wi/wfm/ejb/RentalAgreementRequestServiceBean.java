@@ -18,9 +18,6 @@ import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
 @Stateless
 public class RentalAgreementRequestServiceBean implements RentalAgreementRequestService {
 
-	@Inject
-	private TaskForm taskForm;
-
 	@PersistenceContext
 	protected EntityManager em;
 
@@ -44,17 +41,10 @@ public class RentalAgreementRequestServiceBean implements RentalAgreementRequest
 		return rentalAgreementRequest;
 	}
 
-	public RentalAgreementRequest mergeAndCompleteTask(RentalAgreementRequest rentalAgreementRequest) {
+	public RentalAgreementRequest merge(RentalAgreementRequest rentalAgreementRequest) {
 		// Merge detached entity with current persisted state
 		rentalAgreementRequest = em.merge(rentalAgreementRequest);
 
-		try {
-			// Complete user task from
-			taskForm.completeTask();
-		} catch (IOException e) {
-			// Rollback both transactions on error
-			throw new RuntimeException("Cannot complete task", e);
-		}
 		return rentalAgreementRequest;
 	}
 

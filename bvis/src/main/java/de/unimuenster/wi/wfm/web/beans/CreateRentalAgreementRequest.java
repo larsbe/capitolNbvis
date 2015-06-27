@@ -11,6 +11,7 @@ import javax.faces.bean.*;
 import javax.inject.Inject;
 
 import org.camunda.bpm.engine.cdi.BusinessProcess;
+import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
 import de.unimuenster.wi.wfm.ejb.CustomerService;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestService;
@@ -28,15 +29,18 @@ public class CreateRentalAgreementRequest implements Serializable {
 	@Inject
 	private BusinessProcess businessProcess;
 	
+	@Inject
+	private TaskForm taskForm;
+	
 	@EJB
 	private RentalAgreementRequestService rentalAgreementRequestService;
 	@EJB
 	private CustomerService customerService;
 	
-	private long _selectedCustomerId;
-	private String _selectedRentalAgreementRequestType;
+	private long selectedCustomerId;
+	private String selectedRentalAgreementRequestType;
 	
-	private RentalAgreementRequest rentalAgreementRequest = new RentalAgreementRequest();
+	private RentalAgreementRequest rentalAgreementRequest;
 
 	public RentalAgreementRequest getRentalAgreementRequest() {
 		if (rentalAgreementRequest == null)
@@ -46,11 +50,11 @@ public class CreateRentalAgreementRequest implements Serializable {
 
 	
 	public String getSelectedRentalAgreementRequestType() {
-		return _selectedRentalAgreementRequestType;
+		return selectedRentalAgreementRequestType;
 	}
 
 	public void setSelectedRentalAgreementRequestType(String selectedRentalAgreementRequestType) {
-		_selectedRentalAgreementRequestType = selectedRentalAgreementRequestType;
+		this.selectedRentalAgreementRequestType = selectedRentalAgreementRequestType;
 	}
 	
 	public Collection<Customer> getCustomers() {
@@ -58,11 +62,11 @@ public class CreateRentalAgreementRequest implements Serializable {
 	}
 	
 	public long getSelectedCustomerId() {
-		return _selectedCustomerId;
+		return selectedCustomerId;
 	}
 
 	public void setSelectedCustomerId(long id) {
-		_selectedCustomerId = id;
+		selectedCustomerId = id;
 	}
 
 	public void submit() {
@@ -75,14 +79,28 @@ public class CreateRentalAgreementRequest implements Serializable {
 				getRentalAgreementRequest().setRentalAgreementRequestType(RentalAgreementRequestType.STANDARD);
 			}
 						
+			// store entity in database	
+			this.rentalAgreementRequest = rentalAgreementRequestService.merge(getRentalAgreementRequest());
+			
+			// store process variables of this process...
+			// store flag "individualSolutionRequested"
 			businessProcess.setVariable( "individualSolutionRequested", getRentalAgreementRequest().getRentalAgreementRequestType() == RentalAgreementRequestType.INDIVIDUAL);
-			rentalAgreementRequestService.mergeAndCompleteTask(getRentalAgreementRequest());
+			
+			// store rentalAgreementRequestId
+			businessProcess.setVariable("rentalAgreementRequestId", getRentalAgreementRequest().getId());
+			
+			// complete user task form
+			taskForm.completeTask();
+						
 			
 		} catch (EJBException e) {
-
 			// add all validation errors
 			Misc.ValidateBean(getRentalAgreementRequest());
+			
+		} catch (IOException e){
+			throw new RuntimeException("Cannot complete task", e);
 		}
+		
 	}
 
 }
