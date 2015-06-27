@@ -131,7 +131,7 @@
       <bpmn2:outgoing>SequenceFlow_42</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_60</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="Negotiator" name="negotiate agreement conditions with customer (via telephone or face2face) ">
+    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="Negotiator" camunda:formKey="app:NegotiateAgreementConditionsWithCustomer.jsf" name="negotiate agreement conditions with customer (via telephone or face2face) ">
       <bpmn2:incoming>SequenceFlow_42</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_59</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_43</bpmn2:outgoing>
