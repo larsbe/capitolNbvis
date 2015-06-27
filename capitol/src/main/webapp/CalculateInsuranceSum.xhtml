@@ -11,7 +11,7 @@
  
     	<ui:define name="content">
     		
-    		<h1>Calculate Car's Fair Value</h1>
+    		<h1>Calculate Insurance Sum</h1>
     		<h3>Liability Case Info</h3>
     		<table class="table">
 			    	<tr>
@@ -34,33 +34,28 @@
 			    		<th>Claim Eligibility</th>
 			    		<td>#{checkEligibility.liabilityCase.eligible}</td>
 			    	</tr>
+			    	<tr>
+			    		<th>Car's Fair Value</th>
+			    		<td>#{checkEligibility.liabilityCase.carsFairValue}</td>
+			    	</tr>
 			    
 			</table>
 			
 			<h3>Calculation</h3>
-			<div class="form-horizontal" style="margin-bottom: 20px;">
-				<div class="form-group">
-					<label class="col-sm-3 control-label">Calculation Service</label>
-					<div class="col-sm-9">
-						<a class="btn btn-default" href="http://www.dat.de/home.html" target="_blank">Open dat.de</a>
-					</div>
-				</div>
-			</div>
-			
     		
     		<h:form class="form-horizontal">
 
 	    		<div class="form-group">
-					    <h:outputLabel class="col-sm-3 control-label" for="carValue" value="Fair Value" />
+					    <h:outputLabel class="col-sm-3 control-label" for="insuranceSum" value="Insurance Sum" />
 					    <div class="input-group col-sm-4">
 					      <div class="input-group-addon">€</div>
-					      <h:inputText class="form-control" id="carValue" p:placeholder="Amount" value="#{calculateCarsFairValue.liabilityCase.carsFairValue}" />
+					      <h:inputText class="form-control" id="insuranceSum" p:placeholder="Amount" value="#{calculateInsuranceSum.liabilityCase.insuranceSum}" />
 					      <div class="input-group-addon">.00</div>
 					    </div>
 
 				</div>
 
-				<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Save changes" update="@form" action="#{calculateCarsFairValue.submitForm()}" />
+				<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Save changes" update="@form" action="#{calculateInsuranceSum.submitForm()}" />
 			</h:form>
     			
     	</ui:define>

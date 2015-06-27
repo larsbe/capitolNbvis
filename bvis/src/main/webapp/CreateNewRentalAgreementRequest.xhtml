@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+
+	<ui:composition template="/resources/defaultLayout.xhtml">
+		<ui:define name="title">Create new rental agreement request</ui:define>
+
+		<ui:define name="content">
+
+			<div class="inputForm"><h2>Create new rental agreement request</h2>
+
+			<h:form>
+				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
+
+						<h:outputLabel value="Customer" for="rentalAgreementRequest_customer" />
+							<h:selectOneMenu id="rentalAgreementRequest_customer" value="#{createRentalAgreementRequest.selectedCustomerId}">
+							  <f:selectItems value="#{createRentalAgreementRequest.customers}" var="cur" itemValue="#{cur.id}" itemLabel="#{cur.name}"/>
+							</h:selectOneMenu>  
+						<h:message for="rentalAgreementRequest_customer"/>
+						
+						<h:outputLabel value="Type" for="rentalAgreementRequest_type" />
+			            <h:selectOneMenu value="#{createRentalAgreementRequest.selectedRentalAgreementRequestType}" >
+			                <f:selectItem itemValue="STANDARD" itemLabel="Standard" />
+			                <f:selectItem itemValue="INDIVIDUAL" itemLabel="Individual" />
+			            </h:selectOneMenu>
+			            <h:message for="rentalAgreementRequest_type"/>
+						
+						<h:outputLabel value="Requirements" for="rentalAgreementRequest_requirements" />
+						<h:inputText 
+							id="rentalAgreementRequest_requirements" value="#{createRentalAgreementRequest.rentalAgreementRequest.requirements}"/>
+							
+						<h:message for="rentalAgreementRequest_requirements"/>
+						
+
+				</h:panelGrid>
+
+					<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
+						<f:facet name="footer">
+							<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Create Rental Agreement Request"
+										update="@form" action="#{createRentalAgreementRequest.submit()}" />
+						</f:facet>
+					</h:panelGrid>
+				
+			</h:form>
+			</div>
+
+		</ui:define>
+
+	</ui:composition>
+
+
+</h:body>
+</html>

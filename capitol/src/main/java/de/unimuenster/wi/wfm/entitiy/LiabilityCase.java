@@ -17,6 +17,8 @@ public class LiabilityCase extends AbstractEntity {
 	protected CaseStatus status;
 	protected boolean eligible;
 	protected String claimDetails;
+	protected Integer carsFairValue;
+	protected Integer insuranceSum;
 
 	
 	@ManyToOne
@@ -56,6 +58,22 @@ public class LiabilityCase extends AbstractEntity {
 	
 	public String getClaimDetails(){
 		return claimDetails;
+	}
+	
+	public void setCarsFairValue(Integer carsFairValue){
+		this.carsFairValue = carsFairValue;
+	}
+	
+	public Integer getCarsFairValue(){
+		return carsFairValue;
+	}
+	
+	public void setInsuranceSum(Integer insuranceSum){
+		this.insuranceSum = insuranceSum;
+	}
+	
+	public Integer getInsuranceSum(){
+		return insuranceSum;
 	}
 	
 	public Collection<ImageAttachment> getImages() {
