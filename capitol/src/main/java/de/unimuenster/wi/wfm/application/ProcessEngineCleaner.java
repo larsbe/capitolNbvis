@@ -9,7 +9,9 @@ import javax.inject.Inject;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RepositoryService;
+import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 
 @Startup
 @Singleton
@@ -19,22 +21,23 @@ public class ProcessEngineCleaner {
 	protected ProcessEngine processEngine;
 
 	@PostConstruct
-	public void initialise() {
+	public void deleteAllRunningInstances() {
 		RepositoryService repositoryService = processEngine.getRepositoryService();
+		RuntimeService runtimeService = processEngine.getRuntimeService();
 		
 		List<ProcessDefinition> definitions = repositoryService
 				.createProcessDefinitionQuery()
-				.active()
 				.list();
 		
 		for (ProcessDefinition definition : definitions) {
-			repositoryService.deleteDeployment(definition.getId(), true);
-			System.out.println("Deleted definition "+definition.getId());
-		}
-		
-		if (false) {
-			long count = repositoryService.createProcessDefinitionQuery().count();
-			throw new RuntimeException("test" + count);
+			List<ProcessInstance> instances = runtimeService
+					.createProcessInstanceQuery()
+					.processDefinitionId(definition.getId())
+					.list();
+			for (ProcessInstance instance : instances) {
+				runtimeService.deleteProcessInstance(instance.getId(), null);
+				System.out.println("Deleted instance "+instance.getId());
+			}
 		}
 	}
 }
