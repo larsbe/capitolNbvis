@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core">
+
+  <h:body>
+
+		<ui:composition template="template.xhtml">
+ 
+    		<ui:define name="content">
+    		
+    		 	<h1>Adjust Insurance Fee</h1>
+    		 	<h3>Liability Case Info</h3>
+			    <table class="table">
+			    	<tr>
+			    		<th>Case ID</th>
+			    		<td>#{checkEligibility.liabilityCase.id}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>TODO TODO ENTE ENTE ENTE TODO</th>
+			    	</tr>
+			    </table>
+
+				<h3>Eligibility</h3>
+			    <h:form id="submitForm" target="_parent">
+		
+			      <div class="checkbox">
+				    <label>
+				      <h:selectBooleanCheckbox value="#{}"/> Adjustment is needed
+				    </label>
+				  </div>
+			    </h:form>
+    		
+    			
+    		</ui:define>
+ 
+    	</ui:composition>
+
+     
+  </h:body>
+</html>
