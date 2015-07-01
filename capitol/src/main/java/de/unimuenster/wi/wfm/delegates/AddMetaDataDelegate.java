@@ -37,7 +37,7 @@ public class AddMetaDataDelegate implements JavaDelegate {
 			
 			ImageAttachment img = iterator.next();
 					
-			String urlPrefix = "http://capitol.jonasgerlach.de/AddMetadataToImage.php?imgUrl=";
+			String urlPrefix = Constants.IMAGE_SERVICE_URL + "?imgUrl=";
 			String txtPrefix = "&text=";
 			
 			Date dateNow = new Date();

@@ -49,7 +49,7 @@ function renderImage($pImage) {
 
 function downloadImage($pImgUrl) {
   $image =$pImgUrl;
-  $rename="123";
+  $rename= md5($image);
 
   $ch = curl_init($image);
   curl_setopt($ch, CURLOPT_HEADER, 0);
