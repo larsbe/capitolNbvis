@@ -28,6 +28,7 @@ public class RentalAgreementRequest extends AbstractEntity {
 	protected RentalAgreementRequestType rentalAgreementRequestType;
 	protected String requirementsOfCustomer;
 	protected NegotiationCase negotiationCase;
+	protected StandardAgreementType standardAgreementType; 
 	
 	// protected String agreementConditions;
 	
@@ -71,6 +72,14 @@ public class RentalAgreementRequest extends AbstractEntity {
 	public void setRentalAgreementRequestType(RentalAgreementRequestType rentalAgreementRequestType) {
 		this.rentalAgreementRequestType = rentalAgreementRequestType;
 	}	
+	
+	public StandardAgreementType getStandardAgreementType() {
+		return standardAgreementType;
+	}
+
+	public void setStandardAgreementType(StandardAgreementType standardAgreementType) {
+		this.standardAgreementType = standardAgreementType;
+	}
 	
 //	public String getAgreementConditions() {
 //		return agreementConditions;

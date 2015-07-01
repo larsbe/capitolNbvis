@@ -4,8 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:body>
 
+<h:body>
 	<ui:composition template="/resources/defaultLayout.xhtml">
 		<ui:define name="title">Set up standard solution</ui:define>
 
@@ -40,20 +40,15 @@
 			
 			
 			<h3>Solution type</h3>
-			
+
 			<div class="inputForm">
-				<h:form id="infoForm">
+				<h:form id="inputForm">
 					<h:panelGrid columns="2" columnClasses="form-label,form-input">
+						<h:outputLabel value="Contract Type" for="standardSolution_type" />
+						<h:selectOneMenu id="standardSolution_type" value="#{setUpStandardSolutionContract.selectedStandardSolutionType}" onchange="copy();">
+						  <f:selectItems value="#{setUpStandardSolutionContract.standardAgreementTypes}" var="cur" itemValue="#{cur}" itemLabel="#{cur.name}"/>
+						</h:selectOneMenu>
 													
-						<h:outputLabel value="Type" for="standardSolution_type" />
-			            <h:selectOneMenu value="#{setUpStandardSolutionContract.selectedStandardSolutionType}" >
-			                <f:selectItem itemValue="Bronze" itemLabel="Bronze" />
-			                <f:selectItem itemValue="Silver" itemLabel="Silver" />
-			                <f:selectItem itemValue="Gold" itemLabel="Gold" />
-			            </h:selectOneMenu>
-			            <h:message for="standardSolution_type"/>			
-	
-							
 					</h:panelGrid>
 					
 				</h:form>
@@ -63,7 +58,6 @@
 		</ui:define>
 
 	</ui:composition>
-
 
 </h:body>
 </html>

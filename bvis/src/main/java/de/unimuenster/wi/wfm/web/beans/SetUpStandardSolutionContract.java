@@ -2,6 +2,7 @@ package de.unimuenster.wi.wfm.web.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -13,8 +14,11 @@ import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
 import de.unimuenster.wi.wfm.ejb.CustomerService;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestService;
+import de.unimuenster.wi.wfm.ejb.StandardAgreementTypeService;
+import de.unimuenster.wi.wfm.persistence.Customer;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequestType;
+import de.unimuenster.wi.wfm.persistence.StandardAgreementType;
 import de.unimuenster.wi.wfm.web.Misc;
 
 @ManagedBean
@@ -24,20 +28,19 @@ public class SetUpStandardSolutionContract implements Serializable {
 	
 	@Inject
 	private BusinessProcess businessProcess;
-	
-	@EJB
-	private CustomerService customerService;
-	
-	
 	@Inject
 	private TaskForm taskForm;
 	
-	private RentalAgreementRequest rentalAgreementRequest;
-	
+	@EJB
+	private CustomerService customerService;
 	@EJB
 	private RentalAgreementRequestService rentalAgreementRequestService;
+	@EJB
+	private StandardAgreementTypeService standardAgreementTypeService;
 	
+	private RentalAgreementRequest rentalAgreementRequest;
 	private long rentalAgreementRequestId;
+	
 
 	public RentalAgreementRequest getRentalAgreementRequest() {
 		if (rentalAgreementRequest == null){
@@ -55,42 +58,28 @@ public class SetUpStandardSolutionContract implements Serializable {
 	
 	
 	
-	
-	
-	private String selectedStandardSolutionType;
-	
-	
-	public String getSelectedStandardSolution() {
+	private StandardAgreementType selectedStandardSolutionType;
+		
+	public StandardAgreementType getSelectedStandardSolutionType() {
 		return selectedStandardSolutionType;
 	}
 
-	public void setSelectedStandardSolution(String selectedStandardSolutionType) {
+	public void setSelectedStandardSolutionType(StandardAgreementType selectedStandardSolutionType) {
 		this.selectedStandardSolutionType = selectedStandardSolutionType;
 	}
+	
+	public Collection<StandardAgreementType> getStandardAgreementTypes() {
+		return standardAgreementTypeService.getAllStandardAgreementTypes();
+	}
+	
 	
 	public void submit() {
 		try {
 			
-			getRentalAgreementRequest().setCustomer(customerService.getCustomer(getSelectedCustomerId()));
-			if(getSelectedRentalAgreementRequestType().equals("INDIVIDUAL")){
-				getRentalAgreementRequest().setRentalAgreementRequestType(RentalAgreementRequestType.INDIVIDUAL);
-			}else{
-				getRentalAgreementRequest().setRentalAgreementRequestType(RentalAgreementRequestType.STANDARD);
-			}
+			getRentalAgreementRequest().setStandardAgreementType(getSelectedStandardSolutionType());
 						
 			// store entity in database	
 			this.rentalAgreementRequest = rentalAgreementRequestService.merge(getRentalAgreementRequest());
-			
-			// store process variables of this process...
-			// store flag "individualSolutionRequested"
-			businessProcess.setVariable( "individualSolutionRequested", getRentalAgreementRequest().getRentalAgreementRequestType() == RentalAgreementRequestType.INDIVIDUAL);
-			
-			// store rentalAgreementRequestId
-			businessProcess.setVariable("rentalAgreementRequestId", getRentalAgreementRequest().getId());
-			
-			// store flag, that customer is on site
-			businessProcess.setVariable("isCustomerOnSite", true);
-			
 			
 			// complete user task form
 			taskForm.completeTask();
@@ -103,6 +92,10 @@ public class SetUpStandardSolutionContract implements Serializable {
 		} catch (IOException e){
 			throw new RuntimeException("Cannot complete task", e);
 		}
+		
+	}
+	
+	public void refreshDropDown(){
 		
 	}
 }

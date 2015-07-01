@@ -140,7 +140,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_53" name="yes" sourceRef="ExclusiveGateway_4" targetRef="UserTask_3">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${isCustomerOnSite}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="UserTask_4" camunda:candidateGroups="Contract handler" name="set up standard solution contract">
+    <bpmn2:userTask id="UserTask_4" camunda:candidateGroups="Contract handler" camunda:formKey="app:SetUpStandardSolutionContract.jsf" name="set up standard solution contract">
       <bpmn2:incoming>SequenceFlow_60</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_68</bpmn2:outgoing>
       <bpmn2:dataInputAssociation id="DataInputAssociation_6">
@@ -238,7 +238,10 @@
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="ServiceTask_2" targetRef="UserTask_5"/>
     <bpmn2:textAnnotation id="TextAnnotation_1">
       <bpmn2:text><![CDATA[Parameters:
-- contractSigned (boolean, required)]]></bpmn2:text>
+- contractSigned (boolean, required)
+
+For standard contract: 
+- call another interface and add information about standard contract "A", "B" or "C"]]></bpmn2:text>
     </bpmn2:textAnnotation>
     <bpmn2:textAnnotation id="TextAnnotation_2">
       <bpmn2:text><![CDATA[Parameters:
@@ -683,7 +686,7 @@ Second: (evaluate, how to create buttons in .pdfs with logic)
         <di:waypoint xsi:type="dc:Point" x="718.0" y="662.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_6" bpmnElement="TextAnnotation_1">
-        <dc:Bounds height="50.0" width="217.0" x="3196.0" y="489.0"/>
+        <dc:Bounds height="117.0" width="308.0" x="3196.0" y="468.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_TextAnnotation_7" bpmnElement="TextAnnotation_2">
         <dc:Bounds height="67.0" width="217.0" x="1844.0" y="489.0"/>

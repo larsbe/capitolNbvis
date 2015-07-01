@@ -37,11 +37,11 @@ public class CustomerServiceBean implements CustomerService {
 	}
 
 	public Customer getCustomer(long id) {
-		Customer Customer = em.find(Customer.class, id);
-		if (Customer == null)
+		Customer customer = em.find(Customer.class, id);
+		if (customer == null)
 			throw new IllegalArgumentException(String.format(
 					"Customer with ID %s not found", id));
-		return Customer;
+		return customer;
 	}
 
 	public Customer mergeAndCompleteTask(Customer customer) {

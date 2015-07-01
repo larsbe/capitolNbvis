@@ -93,7 +93,6 @@ public class CreateRentalAgreementRequest implements Serializable {
 			// store flag, that customer is on site
 			businessProcess.setVariable("isCustomerOnSite", true);
 			
-			
 			// complete user task form
 			taskForm.completeTask();
 						
