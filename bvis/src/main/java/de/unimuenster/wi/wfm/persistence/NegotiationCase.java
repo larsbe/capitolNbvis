@@ -1,5 +1,7 @@
 package de.unimuenster.wi.wfm.persistence;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
@@ -9,22 +11,41 @@ public class NegotiationCase extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
 	
-	@NotNull
+	@NotNull(message="You have to enter a value for the field 'idOfOpposite'" )
+	protected long idOfOpposite;	
+	@NotNull(message="You have to enter a value for the field 'Date'" )
+	protected Date date;	
+	@NotNull(message="You have to enter a value for the field 'agreementInformation'" )
 	protected String agreementInfo;
 	protected String changeComments;
-	@NotNull
+	@NotNull(message="You have to enter a value for the field 'conditionsApproved'" )
 	protected boolean conditionsApproved;
-	
 	@ManyToOne
-	@NotNull
-	protected Customer customer;
+	protected RentalAgreementRequest rentalAgreementRequest;
 
-	public Customer getCustomer() {
-		return customer;
+	
+	public Long getIdOfOpposite() {
+		return idOfOpposite;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setIdOfOpposite(Long idOfOpposite) {
+		this.idOfOpposite = idOfOpposite;
+	}
+	
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	public RentalAgreementRequest getRentalAgreementRequest() {
+		return rentalAgreementRequest;
+	}
+
+	public void setRentalAgreementRequest(RentalAgreementRequest rentalAgreementRequest) {
+		this.rentalAgreementRequest = rentalAgreementRequest;
 	}
 
 	public String getAgreementInfo() {

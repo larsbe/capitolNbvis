@@ -13,10 +13,11 @@ import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
 import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestService;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
+import de.unimuenster.wi.wfm.persistence.RentalAgreementRequestType;
 import de.unimuenster.wi.wfm.web.Misc;
 
 @ManagedBean
-public class NegotiateAgreementConditionsWithCustomer implements Serializable {
+public class CheckAgreementConditionsOfCapitol implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -55,7 +56,11 @@ public class NegotiateAgreementConditionsWithCustomer implements Serializable {
 			
 			// complete user task form
 			taskForm.completeTask();
-						
+			
+			// store process variables of this process...
+			// store flag "insuranceConditionsApproved"
+			businessProcess.setVariable( "insuranceConditionsApproved", getRentalAgreementRequest().getNegotiationCase().isConditionsApproved() );
+			
 			
 		} catch (EJBException e) {
 			// add all validation errors

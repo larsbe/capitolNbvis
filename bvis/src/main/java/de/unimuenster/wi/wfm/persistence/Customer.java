@@ -24,10 +24,6 @@ public class Customer extends AbstractEntity {
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH,
 			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, mappedBy = "customer")
-	protected Collection<NegotiationCase> negotiationCases = new ArrayList<NegotiationCase>();
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH,
-			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, mappedBy = "customer")
 	protected Collection<InsuranceContract> insuranceContracts = new ArrayList<InsuranceContract>();
 
 	public String getEmail() {
@@ -61,10 +57,7 @@ public class Customer extends AbstractEntity {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	public Collection<NegotiationCase> getNegotiationCases() {
-		return negotiationCases;
-	}
+
 
 	public Collection<InsuranceContract> getInsuranceContracts() {
 		return insuranceContracts;

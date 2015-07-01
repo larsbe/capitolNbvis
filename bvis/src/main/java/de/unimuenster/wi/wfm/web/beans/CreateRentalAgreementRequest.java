@@ -3,10 +3,10 @@ package de.unimuenster.wi.wfm.web.beans;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.*;
 import javax.inject.Inject;
 
@@ -45,6 +45,7 @@ public class CreateRentalAgreementRequest implements Serializable {
 	public RentalAgreementRequest getRentalAgreementRequest() {
 		if (rentalAgreementRequest == null)
 			rentalAgreementRequest = new RentalAgreementRequest();
+			rentalAgreementRequest.setDate(new Date());
 		return rentalAgreementRequest;
 	}
 
@@ -88,6 +89,10 @@ public class CreateRentalAgreementRequest implements Serializable {
 			
 			// store rentalAgreementRequestId
 			businessProcess.setVariable("rentalAgreementRequestId", getRentalAgreementRequest().getId());
+			
+			// store flag, that customer is on site
+			businessProcess.setVariable("isCustomerOnSite", true);
+			
 			
 			// complete user task form
 			taskForm.completeTask();

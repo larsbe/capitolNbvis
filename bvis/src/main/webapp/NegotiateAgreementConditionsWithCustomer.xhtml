@@ -11,41 +11,56 @@
 
 		<ui:define name="content">
 
-			<div class="inputForm"><h2>Negotiate agreement conditions with customer</h2>
+			
+			<h2>Negotiate agreement conditions with customer</h2>
 
-			<h:form>
-				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
-						
+    		 	<h3>Info</h3>
+    		 	<div class="inputForm">
+				<h:form id="infoForm">
+					<h:panelGrid columns="2" columnClasses="form-label,form-input">
+													
+						<h:outputLabel value="Rental Agreement Request ID" for="negotiateAgreementConditions_RequestId" />
+						<h:inputText
+							id="negotiateAgreementConditions_RequestId" value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.id}"  
+							disabled="true" />
+
 						<h:outputLabel value="Customer" for="negotiateAgreementConditions_Customer" />
 						<h:inputText
-							id="negotiateAgreementConditions_Customer" value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.customer.name}"  readonly="true" />
-
-						
-						<!--  class="field left"
-						
-						<h:outputLabel value="Type" for="rentalAgreementRequest_type" />
-			            <h:selectOneMenu value="#{createRentalAgreementRequest.selectedRentalAgreementRequestType}" >
-			                <f:selectItem itemValue="STANDARD" itemLabel="Standard" />
-			                <f:selectItem itemValue="INDIVIDUAL" itemLabel="Individual" />
-			            </h:selectOneMenu>
-			            <h:message for="rentalAgreementRequest_type"/>
-						
-						<h:outputLabel value="Agreements" for="negotiationCustomer_Agreements" />
-						<h:inputText 
-							id="rentalAgreementRequest_requirements" value="#{createRentalAgreementRequest.rentalAgreementRequest.requirements}"/>
+							id="negotiateAgreementConditions_Customer" value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.customer.name}"
+							disabled="true" />
 							
-						<h:message for="rentalAgreementRequest_requirements"/>
-						-->
+						<h:outputLabel value="Address" for="negotiateAgreementConditions_Customer_Address" />
+						<h:inputText
+							id="negotiateAgreementConditions_Customer_Address" value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.customer.address}" 
+							disabled="true" />
+							
+						<h:outputLabel value="E-Mail" for="negotiateAgreementConditions_Customer_EMail" />
+						<h:inputText
+							id="negotiateAgreementConditions_Customer_EMail" value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.customer.email}" 
+							disabled="true" />
+					</h:panelGrid>
+				</h:form>
+			</div>													
+
+			<h3>Insurance Requirements</h3>
+
+			<div class="inputForm">
+				<h:form id="submitForm">
+				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
+						<h:outputLabel value="Customer Requirements" for="negotiateAgreementConditions_reqs" />
+						<h:inputText 
+							id="negotiateAgreementConditions_reqs" value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.requirementsOfCustomer}"/>							
+						<h:message for="negotiateAgreementConditions_reqs"/>
 
 				</h:panelGrid>
-<!--  
+
 					<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
 						<f:facet name="footer">
-							<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Create Rental Agreement Request"
-										update="@form" action="#{createRentalAgreementRequest.submit()}" />
+							<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Update Agreement Conditions"
+										update="@form" action="#{negotiateAgreementConditionsWithCustomer.submit()}" />
 						</f:facet>
 					</h:panelGrid>
--->				
+		
 			</h:form>
 			</div>
 

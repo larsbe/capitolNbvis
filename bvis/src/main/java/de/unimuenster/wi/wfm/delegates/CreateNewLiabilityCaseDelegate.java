@@ -39,20 +39,20 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		// get Customer
 		Customer customer = customerService.getCustomer((Long) variables.get("customer"));
 		
-		// Create new Case
-		LiabilityCase claim = new LiabilityCase();
-		claim.setCustomer(customer);
-		variablesToRemove.put("customer", variables.get("customer"));
-		claim.setStatus(CaseStatus.NEW);
-
-		// Store claim
-		claim = liabilityCaseService.createLiabilityCase(claim);
-
-		// Publish ID
-		delegateExecution.setVariable("caseID", claim.getId());
-
-		// Remove process vars (not longer needed)
-		delegateExecution.removeVariables(variablesToRemove.keySet());
+//		// Create new Case
+//		LiabilityCase claim = new LiabilityCase();
+//		claim.setCustomer(customer);
+//		variablesToRemove.put("customer", variables.get("customer"));
+//		claim.setStatus(CaseStatus.NEW);
+//
+//		// Store claim
+//		claim = liabilityCaseService.createLiabilityCase(claim);
+//
+//		// Publish ID
+//		delegateExecution.setVariable("caseID", claim.getId());
+//
+//		// Remove process vars (not longer needed)
+//		delegateExecution.removeVariables(variablesToRemove.keySet());
 
 		// inform Customer about received Claim
 		try {
