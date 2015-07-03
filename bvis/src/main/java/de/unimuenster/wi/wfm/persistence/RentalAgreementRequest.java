@@ -29,8 +29,10 @@ public class RentalAgreementRequest extends AbstractEntity {
 	protected String requirementsOfCustomer;
 	protected NegotiationCase negotiationCase;
 	protected StandardAgreementType standardAgreementType; 
-	
-	// protected String agreementConditions;
+	protected String agreementConditions;
+
+
+	private SpecificRentalAgreementContractData specificRentalAgreementContractData;
 	
 	
 	public NegotiationCase getNegotiationCase() {
@@ -81,12 +83,22 @@ public class RentalAgreementRequest extends AbstractEntity {
 		this.standardAgreementType = standardAgreementType;
 	}
 	
-//	public String getAgreementConditions() {
-//		return agreementConditions;
-//	}
-//
-//	public void setAgreementConditions(String agreementConditions) {
-//		this.agreementConditions = agreementConditions;
-//	}
+	public String getAgreementConditions() {
+		return agreementConditions;
+	}
+
+	public void setAgreementConditions(String agreementConditions) {
+		this.agreementConditions = agreementConditions;
+	}
+	
+	public SpecificRentalAgreementContractData getSpecificRentalAgreementContractData() {
+		return specificRentalAgreementContractData;
+	}
+
+	public void setSpecificRentalAgreementContractData(
+			SpecificRentalAgreementContractData specificRentalAgreementContractData) {
+		this.specificRentalAgreementContractData = specificRentalAgreementContractData;		
+	}
+
 	
 }
