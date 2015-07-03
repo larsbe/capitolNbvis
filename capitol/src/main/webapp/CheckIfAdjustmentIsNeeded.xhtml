@@ -19,7 +19,60 @@
 			    	<tr>
 			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.customer.name}</td>
 			    	</tr>
-			    </table>
+			    	<tr>
+			    		<th>Contract ID</th>
+			    	</tr>
+			    	<tr>
+			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.id}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Liability Cases</th>
+			    	</tr>
+			    	<h:dataTable value="#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.getLiabilityCases()}" var="cur"
+					styleClass="data-table" headerClass="data-cell header-cell"
+					columnClasses="data-cell,data-cell,data-cell,data-cell"
+					rendered="#{not empty checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.getLiabilityCases()}">
+						<h:column>
+							<f:facet name="header">Status</f:facet>
+							<h:outputText value="#{cur.status}">
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Eligible          </f:facet>
+							<h:outputText value="#{cur.eligible}">
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Claim Details     </f:facet>
+							<h:outputText value="#{cur.claimDetails}">
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Cars Fair Value   </f:facet>
+							<h:outputText value="#{cur.carsFairValue}">
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">InsuranceSum      </f:facet>
+							<h:outputText value="#{cur.insuranceSum}">
+							</h:outputText>
+						</h:column>
+					</h:dataTable>
+					</table>
+					
+					<h3>Adjustment needed?</h3>
+				    <h:form id="submitForm" target="_parent">
+			
+				      <div class="checkbox">
+					    <label>
+					      <h:selectBooleanCheckbox value="#{checkIfAdjestmentIsNeeded.adjustmentNeeded}"/> Adjustment is needed
+					    </label>
+					  </div>
+					  
+				      <h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Save changes" update="@form" action="#{checkIfAdjestmentIsNeeded.submitForm()}" />
+				    	
+				    </h:form>
+			    
     		</ui:define>
  
     	</ui:composition>
