@@ -38,12 +38,12 @@
 			</table>
 			
 			
-			
-			<h3>Car Information</h3>
-			
-			<h:graphicImage value="#{calculateCarsFairValue.carInformation.imageUrl}" />
-			
+						
 			<h:form class="form-horizontal" target="_self">
+			
+				<div class="form-group">
+					<img src="#{calculateCarsFairValue.carInformation.imageUrl}" class="img-responsive" alt="Car Image"></img>
+				</div>
 				<div class="form-group">
 				    <h:outputLabel class="col-sm-3 control-label" for="carHsn" value="HSN" />
 				    <div class="input-group col-sm-4">
@@ -64,8 +64,10 @@
 				    </div>
 				</div>
 				
-			    <h:commandButton id="loadAdditonalCarInfomrationBtn" class="btn btn-primary pull-right" value="Search by HSN/TSN" update="@form" action="#{calculateCarsFairValue.loadAdditionalCarInformation()}" />
-				
+				<div class="form-group">
+					<h:commandButton id="loadAdditonalCarInfomrationBtn" class="btn btn-primary pull-right" value="Search by HSN/TSN" update="@form" action="#{calculateCarsFairValue.loadAdditionalCarInformation()}" />
+				</div>
+								
 				<div class="form-group">
 				    <h:outputLabel class="col-sm-3 control-label" for="carName" value="Name" />
 				    <div class="input-group col-sm-4">
@@ -97,20 +99,29 @@
 				    <div class="input-group col-sm-4">
 				      <h:inputText class="form-control" id="carClassKH" value="#{calculateCarsFairValue.carInformation.classKH}" />
 				    </div>
+				    <div class="progress">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="#{calculateCarsFairValue.carInformation.classKH}" aria-valuemin="0" aria-valuemax="100" style="width: #{calculateCarsFairValue.carInformation.classKH * 4}%;"></div>
+					</div>
 				</div>
 				<div class="form-group">
 				    <h:outputLabel class="col-sm-3 control-label" for="carClassTK" value="Partial Cover (TK) 10-33" />
 				    <div class="input-group col-sm-4">
 				      <h:inputText class="form-control" id="carClassTK" value="#{calculateCarsFairValue.carInformation.classTK}" />
 				    </div>
+				    <div class="progress">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="#{calculateCarsFairValue.carInformation.classTK}" aria-valuemin="0" aria-valuemax="100" style="width: #{calculateCarsFairValue.carInformation.classTK * 3}%;"></div>
+					</div>
 				</div>
 				<div class="form-group">
 				    <h:outputLabel class="col-sm-3 control-label" for="carClassVK" value="Fully Comprehensive (VK) 10-34" />
 				    <div class="input-group col-sm-4">
 				      <h:inputText class="form-control" id="carClassVK" value="#{calculateCarsFairValue.carInformation.classVK}" />
 				    </div>
+				    <div class="progress">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="#{calculateCarsFairValue.carInformation.classVK}" aria-valuemin="0" aria-valuemax="100" style="width: #{calculateCarsFairValue.carInformation.classVK * 3}%;"></div>
+					</div>
 				</div>
-				
+
 			</h:form>
 			
     		<h3>Calculation</h3>

@@ -12,9 +12,9 @@ public class CarInformation {
 	private String enginePower;
 	private String engineSize;
 	private String fuelType;
-	private String classKH;
-	private String classTK;
-	private String classVK;
+	private int classKH;
+	private int classTK;
+	private int classVK;
 	private String year;
 	private String imageUrl;
 	
@@ -25,9 +25,9 @@ public class CarInformation {
 		setEnginePower("");
 		setEngineSize("");
 		setFuelType("");
-		setClassKH("");
-		setClassTK("");
-		setClassVK("");
+		setClassKH(0);
+		setClassTK(0);
+		setClassVK(0);
 		setYear(pYear);
 		setImageUrl("http://placehold.it/250x250?text=No+Image");
 	}
@@ -68,27 +68,27 @@ public class CarInformation {
 	public void setFuelType(String fuelType) {
 		this.fuelType = fuelType;
 	}
-	public String getClassKH() {
+	public int getClassKH() {
 		return classKH;
 	}
 
-	public void setClassKH(String classKH) {
+	public void setClassKH(int classKH) {
 		this.classKH = classKH;
 	}
 
-	public String getClassTK() {
+	public int getClassTK() {
 		return classTK;
 	}
 
-	public void setClassTK(String classTK) {
+	public void setClassTK(int classTK) {
 		this.classTK = classTK;
 	}
 
-	public String getClassVK() {
+	public int getClassVK() {
 		return classVK;
 	}
 
-	public void setClassVK(String classVK) {
+	public void setClassVK(int classVK) {
 		this.classVK = classVK;
 	}
 	public String getYear() {

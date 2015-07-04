@@ -1,12 +1,9 @@
 package de.unimuenster.wi.wfm.util;
 
-import java.io.Console;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -80,9 +77,9 @@ public class CarInformationService {
 			e.printStackTrace();
 		}
 		
-		carInfo.setClassKH(GetXPathContent(doc, XPATH_CLASS_KH));
-		carInfo.setClassTK(GetXPathContent(doc, XPATH_CLASS_TK));
-		carInfo.setClassVK(GetXPathContent(doc, XPATH_CLASS_VK));
+		carInfo.setClassKH(Integer.parseInt(GetXPathContent(doc, XPATH_CLASS_KH)));
+		carInfo.setClassTK(Integer.parseInt(GetXPathContent(doc, XPATH_CLASS_TK)));
+		carInfo.setClassVK(Integer.parseInt(GetXPathContent(doc, XPATH_CLASS_VK)));
 
 		return carInfo;
 	}
