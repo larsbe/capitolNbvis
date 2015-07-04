@@ -1,44 +1,27 @@
 package de.unimuenster.wi.wfm.sharedLib.data;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 public class CarData {
 
-	private String hsntsn;
-	private int amount;
-	private InsuranceType insuranceType;
-	private List<InsuranceBenefit> benefits;
-	private BigDecimal insurancePrice;
+	private String licenseNumber;
+	private String hsn;
+	private String tsn;
 	
-	public String getHsntsn() {
-		return hsntsn;
+	public String getLicenseNumber() {
+		return licenseNumber;
 	}
-	public void setHsntsn(String hsntsn) {
-		this.hsntsn = hsntsn;
+	public void setLicenseNumber(String licenseNumber) {
+		this.licenseNumber = licenseNumber;
 	}
-	public int getAmount() {
-		return amount;
+	public String getHsn() {
+		return hsn;
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setHsn(String hsn) {
+		this.hsn = hsn;
 	}
-	public InsuranceType getInsuranceType() {
-		return insuranceType;
+	public String getTsn() {
+		return tsn;
 	}
-	public void setInsuranceType(InsuranceType insuranceType) {
-		this.insuranceType = insuranceType;
-	}
-	public List<InsuranceBenefit> getBenefits() {
-		return benefits;
-	}
-	public void setBenefits(List<InsuranceBenefit> benefits) {
-		this.benefits = benefits;
-	}
-	public BigDecimal getInsurancePrice() {
-		return insurancePrice;
-	}
-	public void setInsurancePrice(BigDecimal insurancePrice) {
-		this.insurancePrice = insurancePrice;
+	public void setTsn(String tsn) {
+		this.tsn = tsn;
 	}
 }
