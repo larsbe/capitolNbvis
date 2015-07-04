@@ -1,5 +1,6 @@
 package de.unimuenster.wi.wfm.entitiy;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 
 @Entity
 public class InsuranceContract extends AbstractEntity {
@@ -18,10 +20,43 @@ public class InsuranceContract extends AbstractEntity {
 	protected Customer customer;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "insuranceContract")
+	protected Collection<CarData> cardatas = new ArrayList<CarData>();
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "insuranceContract")
 	protected Collection<LiabilityCase> liabilityCases = new ArrayList<LiabilityCase>();
 	
-	protected double insuranceFee;
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "insuranceContract")
+	protected Collection<InsuranceBenefitEntity> insuranceBenefitEntity = new ArrayList<InsuranceBenefitEntity>();
 	
+	private String additionalInfo;
+	private InsuranceType insuranceType;
+	
+	private BigDecimal insurancePrice;
+	
+	public String getAdditionalInfo() {
+		return additionalInfo;
+	}
+
+	public void setAdditionalInfo(String additionalInfo) {
+		this.additionalInfo = additionalInfo;
+	}
+
+	public InsuranceType getInsuranceType() {
+		return insuranceType;
+	}
+
+	public void setInsuranceType(InsuranceType insuranceType) {
+		this.insuranceType = insuranceType;
+	}
+
+	public BigDecimal getInsurancePrice() {
+		return insurancePrice;
+	}
+
+	public void setInsurancePrice(BigDecimal insurancePrice) {
+		this.insurancePrice = insurancePrice;
+	}
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -33,13 +68,27 @@ public class InsuranceContract extends AbstractEntity {
 	public Collection<LiabilityCase> getLiabilityCases() {
 		return liabilityCases;
 	}
-	
-	public double getInsuranceFee() {
-		return insuranceFee;
+
+	public Collection<CarData> getCardatas() {
+		return cardatas;
+	}
+
+	public void setCardatas(Collection<CarData> cardatas) {
+		this.cardatas = cardatas;
+	}
+
+	public Collection<InsuranceBenefitEntity> getInsuranceBenefitEntity() {
+		return insuranceBenefitEntity;
+	}
+
+	public void setInsuranceBenefitEntity(
+			Collection<InsuranceBenefitEntity> insuranceBenefitEntity) {
+		this.insuranceBenefitEntity = insuranceBenefitEntity;
+	}
+
+	public void setLiabilityCases(Collection<LiabilityCase> liabilityCases) {
+		this.liabilityCases = liabilityCases;
 	}
 	
-	public void setInsuranceFee(double insuranceFee) {
-		this.insuranceFee = insuranceFee;
-	}
 
 }

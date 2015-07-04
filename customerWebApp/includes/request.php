@@ -1,5 +1,4 @@
       <div>
-      <form id="offerForm">
         <div class="form-group">
           <label for="offerCompany">Company</label>
           <input class="form-control" id="offerCompany" placeholder="Company">
@@ -41,7 +40,29 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="carType">
+          <label>Car Type</label>
+          <div class="radio">
+            <label>
+              <input type="radio" name="offerCarType" id="offerCarType1" value="bmw5" checked>
+              BMW 5
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="offerCarType" id="offerCarType2" value="audia3">
+              Audi A3 etron
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="offerCarType" id="offerCarType3" value="audia3">
+              Nissan micra
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" id="insurance">
           <label>Insurance</label>
           <div class="radio">
             <label>
@@ -69,14 +90,28 @@
         </div>
 
         <div class="clearfix">
-          <button type="submit" class="btn btn-primary pull-right">Send Request</button>
+          <button id="submitForm" type="submit" class="btn btn-primary pull-right">Send Request</button>
         </div>
-      </form>
       </div>
 
       <script>
-        $(window).ready(function() {
-          $( "#offerForm" ).submit(function( event ) {
+
+        $(document).on('change', '#offerForm', function() {
+            if($('#offerSolution1').is(':checked')) {
+              $('#carType').show();
+              $('#insurance').show();
+            }
+
+            if($('#offerSolution2').is(':checked')) {
+              $('#carType').hide();
+              $('#insurance').hide();
+            }
+          });
+
+        $(window).ready(function() {       
+
+          $( "#submitForm" ).click(function( event ) {
+
             var json = { "messageName" : "NewRentalAgreementRequest",
               "businessKey" : null,
               "correlationKeys" : {},
@@ -87,6 +122,7 @@
                   "phoneNumber" : {"value" : "", "type": "String"},
                   "address" : {"value" : "", "type": "String"},
                   "solutionType" : {"value" : "", "type": "String"},
+                  "carType" : {"value" : "", "type": "String"},
                   "insurancePack" : {"value" : "", "type": "String"},
                   "additionalInfo" : {"value" : "", "type": "String"}
               }
@@ -100,18 +136,25 @@
             json.processVariables.phoneNumber.value = $('#offerPhoneNumber').val();
             json.processVariables.address.value = $('#offerAddress').val();
             json.processVariables.solutionType.value = $('input[name=offerSolution]:checked').val();
-            json.processVariables.insurancePack.value = $('input[name=offerInsurance]:checked').val(); // = "" bei solutionType=individual
+            if($('#offerSolution1').is(':checked')) {
+              json.processVariables.carType.value = $('input[name=offerCarType]:checked').val();
+              json.processVariables.insurancePack.value = $('input[name=offerInsurance]:checked').val();
+            }
             json.processVariables.additionalInfo.value = $('#offerAdditionalInfo').val();
             
             console.log(json);
 
-            $.post( "http://localhost:8080/engine-rest/engine/default/message", json)
-              .done(function() {
+            $.ajax({
+              url:serveradress,
+              type:"POST",
+              data:JSON.stringify(json),
+              contentType:"application/json; charset=utf-8",
+              dataType:"json",
+              success: function() {
                 console.log('success');
-              })
-              .fail(function() {
-                console.log('error');
-              });
+                window.location = "index.php?page=request-success";
+              }
+            });
 
             event.preventDefault();
           });

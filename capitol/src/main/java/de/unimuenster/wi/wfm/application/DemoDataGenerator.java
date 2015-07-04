@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.math.BigDecimal;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -85,7 +86,7 @@ public class DemoDataGenerator {
 
 		InsuranceContract ic1 = new InsuranceContract();
 		ic1.setCustomer(c1);
-		ic1.setInsuranceFee(125.88);
+		ic1.setInsurancePrice(BigDecimal.valueOf(125.23));
 		insuranceContractService.createInsuranceContract(ic1);
 
 		// only if no demo data is avl.
