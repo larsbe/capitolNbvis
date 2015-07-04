@@ -3,7 +3,6 @@ package de.unimuenster.wi.wfm.entitiy;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,8 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
-import de.unimuenster.wi.wfm.sharedLib.data.InsuranceType;
 
 @Entity
 public class InsuranceContract extends AbstractEntity {
@@ -27,6 +24,9 @@ public class InsuranceContract extends AbstractEntity {
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "insuranceContract")
 	protected Collection<LiabilityCase> liabilityCases = new ArrayList<LiabilityCase>();
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "insuranceContract")
+	protected Collection<InsuranceBenefitEntity> insuranceBenefitEntity = new ArrayList<InsuranceBenefitEntity>();
 	
 	private String additionalInfo;
 	private InsuranceType insuranceType;
@@ -67,6 +67,27 @@ public class InsuranceContract extends AbstractEntity {
 	
 	public Collection<LiabilityCase> getLiabilityCases() {
 		return liabilityCases;
+	}
+
+	public Collection<CarData> getCardatas() {
+		return cardatas;
+	}
+
+	public void setCardatas(Collection<CarData> cardatas) {
+		this.cardatas = cardatas;
+	}
+
+	public Collection<InsuranceBenefitEntity> getInsuranceBenefitEntity() {
+		return insuranceBenefitEntity;
+	}
+
+	public void setInsuranceBenefitEntity(
+			Collection<InsuranceBenefitEntity> insuranceBenefitEntity) {
+		this.insuranceBenefitEntity = insuranceBenefitEntity;
+	}
+
+	public void setLiabilityCases(Collection<LiabilityCase> liabilityCases) {
+		this.liabilityCases = liabilityCases;
 	}
 	
 
