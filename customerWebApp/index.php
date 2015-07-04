@@ -4,8 +4,14 @@
   case "request":
     $page = "includes/request.php";
     break;
+  case "request-success":
+    $page = "includes/request-success.php";
+    break;
   case "liability":
     $page = "includes/liability.php";
+    break;
+  case "liability-success":
+    $page = "includes/liability-success.php";
     break;
 
   default: $page = "includes/request.php";
@@ -40,23 +46,30 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="assets/js/jquery-2.1.4.min.js"></script>
+    <script src="assets/js/jquery.form.js"></script> 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="assets/js/bootstrap.min.js"></script>
+    <script>
+      var serveradress = 'http://localhost:8080/engine-rest/engine/default/message';
+    </script>
   </head>
 
   <body>
 
     <div class="container">
+      <div id="logos">
+          <img src="assets/img/bvis_logo.png" border="0" alt="" height="30" />
+          <img src="assets/img/capitol_logo.png" border="0" alt="" height="40" />
+        </div>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="index.php?page=request">Request Offer</a></li>
-            <li role="presentation"><a href="index.php?page=liability">New Insurance Claim</a></li>
+            <li role="presentation" class="<?php if($_GET['page'] == 'request') echo 'active'; ?>"><a href="index.php?page=request">Request Offer</a></li>
+            <li role="presentation" class="<?php if($_GET['page'] == 'liability') echo 'active'; ?>"><a href="index.php?page=liability">New Insurance Claim</a></li>
           </ul>
         </nav>
         <!--<h3 class="text-muted">BVIS</h3>-->
-        <img src="assets/img/bvis_logo.png" border="0" alt="" height="40" />
-        <img src="assets/img/capitol_logo.png" border="0" alt="" height="40" />
+        
       </div>
 
       <?php include($page); ?>

@@ -70,5 +70,40 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+  #logos {
+    float: left;
+    margin-bottom: 0;
+  }
 }
 
+.thumb {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  float: left;
+  margin: 5px;
+}
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  width: 120px;
+  margin: 20px auto;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  font-size: 23px;
+  direction: ltr;
+  cursor: pointer;
+}
+#logos {
+  margin-bottom: 20px;
+}
+#logos img {
+  margin-right: 10px;
+}
