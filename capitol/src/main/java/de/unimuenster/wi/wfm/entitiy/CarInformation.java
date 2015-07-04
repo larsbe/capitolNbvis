@@ -18,7 +18,7 @@ public class CarInformation {
 	private String year;
 	private String imageUrl;
 	
-	public CarInformation(String pHSN, String pTSN) {
+	public CarInformation(String pHSN, String pTSN, String pYear) {
 		setHsn(pHSN);
 		setTsn(pTSN);
 		setName("");
@@ -28,8 +28,8 @@ public class CarInformation {
 		setClassKH("");
 		setClassTK("");
 		setClassVK("");
-		setYear("");
-		setImageUrl("");
+		setYear(pYear);
+		setImageUrl("http://placehold.it/250x250?text=No+Image");
 	}
 	
 	public String getHsn() {

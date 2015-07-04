@@ -3,10 +3,13 @@ package de.unimuenster.wi.wfm.util;
 import java.io.Console;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -34,9 +37,9 @@ public class CarInformationService {
 	private final static String XPATH_CLASS_VK = "#tab_versicherung > table:nth-child(4) > tbody > tr:nth-child(3) > td:nth-child(3) > span";
 	private final static String XPATH_IMAGE_FIRST = "#rg_s > div:nth-child(1) > a";
 	
-	public static CarInformation GetCarInformation(String pHSN, String pTSN) {
+	public static CarInformation GetCarInformation(String pHSN, String pTSN, String pYear) {
 	
-		CarInformation carInfo = new CarInformation(pHSN, pTSN);
+		CarInformation carInfo = new CarInformation(pHSN, pTSN, pYear);
 		carInfo = AddMasterData(carInfo);
 		carInfo = AddClassificationData(carInfo);
 		carInfo = AddImage(carInfo);
@@ -54,21 +57,15 @@ public class CarInformationService {
 		}
 		
 		String imgLinkUrl = GetXPathHref(doc, XPATH_IMAGE_FIRST);
-		System.out.println(imgLinkUrl);
-		carInfo.setImageUrl(imgLinkUrl);
-		
-		/*List<NameValuePair> paramsList = URLEncodedUtils.parse(new URI(imgLinkUrl),"utf-8");
-		for (NameValuePair parameter : paramsList)
-		    if (parameter.getName().equals("productId"))
-		        System.out.println(parameter.getValue());
-		*/
-		
-		Pattern imgUrl = Pattern.compile("imgurl=([^&]+)");
-		Matcher matchImgUrl = imgUrl.matcher(imgLinkUrl);
-		System.out.println(matchImgUrl.matches());
-		if (matchImgUrl.matches()) {
-			System.out.println("Match");
-			carInfo.setImageUrl(matchImgUrl.group(1));
+		List<NameValuePair> paramsList;
+		try {
+			paramsList = URLEncodedUtils.parse(new URI(imgLinkUrl),"utf-8");
+			for (NameValuePair parameter : paramsList)
+			    if (parameter.getName().equals("imgurl")) {
+			    	carInfo.setImageUrl(parameter.getValue());
+			    }
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
 		}
 		
 		return carInfo;

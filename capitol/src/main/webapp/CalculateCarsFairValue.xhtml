@@ -41,6 +41,8 @@
 			
 			<h3>Car Information</h3>
 			
+			<h:graphicImage value="#{calculateCarsFairValue.carInformation.imageUrl}" />
+			
 			<h:form class="form-horizontal" target="_self">
 				<div class="form-group">
 				    <h:outputLabel class="col-sm-3 control-label" for="carHsn" value="HSN" />
@@ -52,6 +54,13 @@
 				    <h:outputLabel class="col-sm-3 control-label" for="carTsn" value="TSN" />
 				    <div class="input-group col-sm-4">
 				      <h:inputText class="form-control" id="carTsn" value="#{calculateCarsFairValue.carInformation.tsn}" />
+				    </div>
+				</div>
+				
+				<div class="form-group">
+				    <h:outputLabel class="col-sm-3 control-label" for="carYear" value="Year" />
+				    <div class="input-group col-sm-4">
+				      <h:inputText class="form-control" id="carYear" value="#{calculateCarsFairValue.carInformation.year}" />
 				    </div>
 				</div>
 				
@@ -81,14 +90,6 @@
 				      <h:inputText class="form-control" id="carFuelType" value="#{calculateCarsFairValue.carInformation.fuelType}" />
 				    </div>
 				</div>
-				<div class="form-group">
-				    <h:outputLabel class="col-sm-3 control-label" for="carImageUrl" value="Image" />
-				    <div class="input-group col-sm-4">
-				      <h:inputText class="form-control" id="carImageUrl" value="#{calculateCarsFairValue.carInformation.imageUrl}" />
-				    </div>
-				</div>
-				
-				<h:graphicImage value="#{calculateCarsFairValue.carInformation.imageUrl}" />
 				
 				<h2>Insurance Classification</h2>
 				<div class="form-group">
