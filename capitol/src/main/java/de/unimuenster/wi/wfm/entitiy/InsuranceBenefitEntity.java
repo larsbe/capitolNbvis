@@ -3,6 +3,8 @@ package de.unimuenster.wi.wfm.entitiy;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
+
 @Entity
 public class InsuranceBenefitEntity extends AbstractEntity{
 	

@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import de.unimuenster.wi.wfm.entitiy.Customer;
+import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 
 @Stateless
 public class CustomerServiceBean {
@@ -24,6 +25,19 @@ public class CustomerServiceBean {
 		customer.setName(name);
 		em.persist(customer);
 		return customer;
+	}
+	
+	public Customer getCustomer(long id) {
+		Customer customer = em.find(Customer.class, id);
+		if(customer == null)
+			throw new IllegalArgumentException(String.format("Customer with ID %s not found", id));
+		return customer;
+	}
+	
+	public Customer mergeCustomer(Customer customer) {
+		// Merge detached order entity with current persisted state
+		em.merge(customer);
+		return getCustomer(customer.getId());
 	}
 
 }
