@@ -4,6 +4,13 @@
 },
 "processVariables" : {
 "customer" : {"value" : "TestBVIS", "type": "String"},
-"agreementConditions" : {"value" : "Wants to rent 42 cars", "type": "String"}
+"agreementConditions" : {
+	"value" : {"rentalAgreementRequestId":1,"customerData":{"name":"Robert Voscort","company":"Capitol","email":"robert.voscort@capitol.to","phoneNumber":"0190666666","address":"TestAddress"},"carsData":{"hsntsn":"XXX","amount":8,"insuranceType":"PARTIAL","benefits":["AWESOME"],"insurancePrice":null},"additionalInfo":"Test"},
+	"type" : "Object",
+	"valueInfo" : {
+		"objectTypeName": "de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage",
+		"serializationDataFormat": "application/json"
+	}
+}
 }
 }

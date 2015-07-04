@@ -1,5 +1,6 @@
 package de.unimuenster.wi.wfm.application;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +13,14 @@ import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.value.ObjectValue;
+
+import de.unimuenster.wi.wfm.sharedLib.data.AgreementConditions;
+import de.unimuenster.wi.wfm.sharedLib.data.CarData;
+import de.unimuenster.wi.wfm.sharedLib.data.CustomerData;
+import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
+import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 
 @Startup
 @Singleton

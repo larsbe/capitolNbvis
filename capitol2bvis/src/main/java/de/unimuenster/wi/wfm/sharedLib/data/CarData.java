@@ -6,7 +6,7 @@ import java.util.List;
 public class CarData {
 
 	private String hsntsn;
-	private String amount;
+	private int amount;
 	private InsuranceType insuranceType;
 	private List<InsuranceBenefit> benefits;
 	private BigDecimal insurancePrice;
@@ -17,10 +17,10 @@ public class CarData {
 	public void setHsntsn(String hsntsn) {
 		this.hsntsn = hsntsn;
 	}
-	public String getAmount() {
+	public int getAmount() {
 		return amount;
 	}
-	public void setAmount(String amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	public InsuranceType getInsuranceType() {

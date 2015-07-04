@@ -2,6 +2,7 @@ package de.unimuenster.wi.wfm.sharedLib.data;
 
 public class CustomerData {
 
+	//serves as ID
 	private String name;
 	private String company;
 	private String email;
