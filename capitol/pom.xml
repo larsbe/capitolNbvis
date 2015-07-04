@@ -34,6 +34,12 @@
 	<artifactId>commons-email</artifactId>
 	<version>1.4</version>
 </dependency>
+
+<dependency>
+	<groupId>org.jsoup</groupId>
+	<artifactId>jsoup</artifactId>
+	<version>1.8.2</version>
+</dependency>
  
   <dependency>
     <groupId>org.camunda.spin</groupId>
