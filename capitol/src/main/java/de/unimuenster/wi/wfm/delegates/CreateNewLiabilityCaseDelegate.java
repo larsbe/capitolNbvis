@@ -18,7 +18,7 @@ import de.unimuenster.wi.wfm.entitiy.ImageAttachment;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 import de.unimuenster.wi.wfm.sharedLib.data.AgreementConditions;
-
+import de.unimuenster.wi.wfm.util.ReportPDF;
 import static org.camunda.spin.Spin.*;
 
 @Named
@@ -84,6 +84,10 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		
 		// Remove process vars (not longer needed)
 		delegateExecution.removeVariables(variablesToRemove.keySet());
+		
+		//PDF Test
+		//ReportPDF rpdf = new ReportPDF();
+		//rpdf.generatePDF();
 	}
 
 }
