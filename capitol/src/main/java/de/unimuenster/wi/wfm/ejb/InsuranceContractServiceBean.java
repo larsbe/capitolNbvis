@@ -9,8 +9,8 @@ import javax.persistence.PersistenceContext;
 
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
+import de.unimuenster.wi.wfm.entitiy.InsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
-import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 
 @Stateless
 public class InsuranceContractServiceBean {
@@ -45,6 +45,19 @@ public class InsuranceContractServiceBean {
 			throw new RuntimeException("Cannot complete task", e);
 		}
 		return getInsuranceContract(insuranceContract.getId());
+	}
+	
+	public void addInsuranceBenefitEntities(long id, InsuranceBenefitEntity insuranceBenefitEntity) {
+		InsuranceContract insuranceContract = getInsuranceContract(id);
+		insuranceBenefitEntity.setInsuranceContract(insuranceContract);
+		em.persist(insuranceBenefitEntity);
+	}
+
+	public void removeFromInsuranceBenefitEntities(InsuranceBenefitEntity detachedInsuranceBenefitEntity) {
+		InsuranceBenefitEntity insuranceBenefitEntities = em.merge(detachedInsuranceBenefitEntity);
+		InsuranceContract insuranceContract = insuranceBenefitEntities.getInsuranceContract();
+		insuranceContract.getInsuranceBenefitEntity().remove(insuranceBenefitEntities);
+		em.remove(insuranceBenefitEntities);
 	}
 }
 

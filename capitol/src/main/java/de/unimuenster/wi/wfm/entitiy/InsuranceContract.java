@@ -5,16 +5,22 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import de.unimuenster.wi.wfm.sharedLib.data.InsuranceType;
 
 
 @Entity
 public class InsuranceContract extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Column(unique=true)
+	private long rentalAgreementIdBVIS;
 	
 	@ManyToOne
 	protected Customer customer;
@@ -33,6 +39,14 @@ public class InsuranceContract extends AbstractEntity {
 	
 	private BigDecimal insurancePrice;
 	
+	public long getRentalAgreementIdBVIS() {
+		return rentalAgreementIdBVIS;
+	}
+
+	public void setRentalAgreementIdBVIS(long rentalAgreementIdBVIS) {
+		this.rentalAgreementIdBVIS = rentalAgreementIdBVIS;
+	}
+
 	public String getAdditionalInfo() {
 		return additionalInfo;
 	}

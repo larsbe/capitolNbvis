@@ -12,7 +12,7 @@ public class CarDataServiceBean {
 	@PersistenceContext
 	protected EntityManager em;
 	
-	public CarData carData(CarData carData) {
+	public CarData createCarData(CarData carData) {
 		em.persist(carData);
 		em.flush();
 		return carData;
