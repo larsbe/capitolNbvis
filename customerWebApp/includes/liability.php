@@ -91,14 +91,17 @@
             
             console.log(json);
 
-            $.post(serveradress, json)
-              .done(function() {
+            $.ajax({
+              url:serveradress,
+              type:"POST",
+              data:JSON.stringify(json),
+              contentType:"application/json; charset=utf-8",
+              dataType:"json",
+              success: function() {
                 console.log('success');
                 window.location = "index.php?page=liability-success";
-              })
-              .fail(function() {
-                console.log('error');
-              });
+              }
+            });
 
             event.preventDefault();
           });

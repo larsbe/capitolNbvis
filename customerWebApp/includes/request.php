@@ -111,6 +111,7 @@
         $(window).ready(function() {       
 
           $( "#submitForm" ).click(function( event ) {
+
             var json = { "messageName" : "NewRentalAgreementRequest",
               "businessKey" : null,
               "correlationKeys" : {},
@@ -142,14 +143,6 @@
             json.processVariables.additionalInfo.value = $('#offerAdditionalInfo').val();
             
             console.log(json);
-
-            /*$.post(serveradress, json, function() {
-                console.log('success');
-                window.location = "index.php?page=request-success";
-              }, "json")
-              .fail(function() {
-                console.log('error');
-              });*/
 
             $.ajax({
               url:serveradress,
