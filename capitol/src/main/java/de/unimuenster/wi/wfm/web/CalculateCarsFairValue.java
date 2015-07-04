@@ -11,7 +11,9 @@ import javax.inject.Named;
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
+import de.unimuenster.wi.wfm.entitiy.CarInformation;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
+import de.unimuenster.wi.wfm.util.CarInformationService;
 
 @Named
 @ConversationScoped
@@ -40,9 +42,25 @@ public class CalculateCarsFairValue implements Serializable{
 		return liabilityCase;
 	}
 	
+	/* BEGIN: Test CarInformation */
+	
+	private CarInformation carInformation;
+	
+	public CarInformation getCarInformation() {
+		if(carInformation == null)
+			//TODO: HSN and TSN from Process Variables or Contract
+			carInformation = new CarInformation("0005", "156");
+		return carInformation;
+	}
+	
+	public void loadAdditionalCarInformation() {
+		carInformation = CarInformationService.GetCarInformation(carInformation.getHsn(), carInformation.getTsn());
+	}
+	
+	/* END: Test CarInformation */
+	
 	public void submitForm() throws IOException {
 		liabilityCase =  liabilityCaseService.mergeLiabilityCaseAndCompleteTask(liabilityCase);
-
 	}
 
 }
