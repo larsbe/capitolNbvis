@@ -20,6 +20,8 @@ public class InsuranceContract extends AbstractEntity {
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "insuranceContract")
 	protected Collection<LiabilityCase> liabilityCases = new ArrayList<LiabilityCase>();
 	
+	protected double insuranceFee;
+	
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -30,6 +32,14 @@ public class InsuranceContract extends AbstractEntity {
 	
 	public Collection<LiabilityCase> getLiabilityCases() {
 		return liabilityCases;
+	}
+	
+	public double getInsuranceFee() {
+		return insuranceFee;
+	}
+	
+	public void setInsuranceFee(double insuranceFee) {
+		this.insuranceFee = insuranceFee;
 	}
 
 }

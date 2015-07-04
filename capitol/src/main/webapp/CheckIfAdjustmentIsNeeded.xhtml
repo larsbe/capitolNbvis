@@ -20,10 +20,15 @@
 			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.customer.name}</td>
 			    	</tr>
 			    	<tr>
-			    		<th>Contract ID</th>
+			    		<th>Contract</th>
 			    	</tr>
 			    	<tr>
+			    		<th>Contract ID</th>
 			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.id}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Insurance Fee</th>
+			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.insuranceFee}</td>
 			    	</tr>
 			    	<tr>
 			    		<th>Liability Cases</th>
@@ -33,27 +38,27 @@
 					columnClasses="data-cell,data-cell,data-cell,data-cell"
 					rendered="#{not empty checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.getLiabilityCases()}">
 						<h:column>
-							<f:facet name="header">Status</f:facet>
+							<f:facet name="header">________Status________</f:facet>
 							<h:outputText value="#{cur.status}">
 							</h:outputText>
 						</h:column>
 						<h:column>
-							<f:facet name="header">Eligible          </f:facet>
+							<f:facet name="header">________Eligible________</f:facet>
 							<h:outputText value="#{cur.eligible}">
 							</h:outputText>
 						</h:column>
 						<h:column>
-							<f:facet name="header">Claim Details     </f:facet>
+							<f:facet name="header">________Claim Details________</f:facet>
 							<h:outputText value="#{cur.claimDetails}">
 							</h:outputText>
 						</h:column>
 						<h:column>
-							<f:facet name="header">Cars Fair Value   </f:facet>
+							<f:facet name="header">________Cars Fair Value________</f:facet>
 							<h:outputText value="#{cur.carsFairValue}">
 							</h:outputText>
 						</h:column>
 						<h:column>
-							<f:facet name="header">InsuranceSum      </f:facet>
+							<f:facet name="header">________InsuranceSum________</f:facet>
 							<h:outputText value="#{cur.insuranceSum}">
 							</h:outputText>
 						</h:column>

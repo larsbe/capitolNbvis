@@ -2,35 +2,85 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:ui="http://java.sun.com/jsf/facelets"
   xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:f="http://java.sun.com/jsf/core">
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
   <h:body>
 
-		<ui:composition template="template.xhtml">
+	<ui:composition template="template.xhtml">
  
     		<ui:define name="content">
     		
-    		 	<h1>Adjust Insurance Fee</h1>
+    		 	<h1>Adjust of Insurance Fee</h1>
     		 	<h3>Liability Case Info</h3>
 			    <table class="table">
 			    	<tr>
-			    		<th>Case ID</th>
-			    		<td>#{checkEligibility.liabilityCase.id}</td>
+			    		<th>Customer</th>
 			    	</tr>
 			    	<tr>
-			    		<th>TODO TODO ENTE ENTE ENTE TODO</th>
+			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.customer.name}</td>
 			    	</tr>
-			    </table>
-
-				<h3>Eligibility</h3>
-			    <h:form id="submitForm" target="_parent">
+			    	<tr>
+			    		<th>Contract</th>
+			    	</tr>
+			    	<tr>
+			    		<th>Contract Id</th>
+			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.id}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Insurance Fee</th>
+			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.insuranceFee}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Liability Cases</th>
+			    	</tr>
+			    	<h:dataTable value="#{adjustInsuranceFee.liabilityCase.insuranceContract.getLiabilityCases()}" var="cur"
+					styleClass="data-table" headerClass="data-cell header-cell"
+					columnClasses="data-cell,data-cell,data-cell,data-cell"
+					rendered="#{not empty adjustInsuranceFee.liabilityCase.insuranceContract.getLiabilityCases()}">
+						<h:column>
+							<f:facet name="header">________Status________</f:facet>
+							<h:outputText value="#{cur.status}">
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">________Eligible________</f:facet>
+							<h:outputText value="#{cur.eligible}">
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">________Claim Details________</f:facet>
+							<h:outputText value="#{cur.claimDetails}">
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">________Cars Fair Value________</f:facet>
+							<h:outputText value="#{cur.carsFairValue}">
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">________InsuranceSum________</f:facet>
+							<h:outputText value="#{cur.insuranceSum}">
+							</h:outputText>
+						</h:column>
+					</h:dataTable>
+					</table>
+					
+					<h3>Calculation</h3>
+    		
+		    		<h:form class="form-horizontal" target="_parent">
 		
-			      <div class="checkbox">
-				    <label>
-				      <h:selectBooleanCheckbox value="#{}"/> Adjustment is needed
-				    </label>
-				  </div>
-			    </h:form>
+			    		<div class="form-group">
+							    <h:outputLabel class="col-sm-3 control-label" for="insuranceFee" value="Insurance Fee" />
+							    <div class="input-group col-sm-4">
+							      <div class="input-group-addon">€</div>
+							      <h:inputText class="form-control" id="insuranceFee" value="#{adjustInsuranceFee.liabilityCase.insuranceContract.insuranceFee}" />
+							    </div>
+		
+						</div>
+		
+						<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Save changes" update="@form" action="#{adjustInsuranceFee.submitForm()}" />
+					</h:form>
     		
     			
     		</ui:define>

@@ -35,6 +35,7 @@ public class DemoDataGenerator {
 		
 		InsuranceContract ic1 = new InsuranceContract();
 		ic1.setCustomer(c1);
+		ic1.setInsuranceFee(125.88);
 		insuranceContractService.createInsuranceContract(ic1);
 		
 		/* 
