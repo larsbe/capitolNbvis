@@ -49,12 +49,12 @@ public class CalculateCarsFairValue implements Serializable{
 	public CarInformation getCarInformation() {
 		if(carInformation == null)
 			//TODO: HSN and TSN from Process Variables or Contract
-			carInformation = new CarInformation("0005", "156");
+			carInformation = new CarInformation("0005", "156", "2006");
 		return carInformation;
 	}
 	
 	public void loadAdditionalCarInformation() {
-		carInformation = CarInformationService.GetCarInformation(carInformation.getHsn(), carInformation.getTsn());
+		carInformation = CarInformationService.GetCarInformation(carInformation.getHsn(), carInformation.getTsn(), carInformation.getYear());
 	}
 	
 	/* END: Test CarInformation */

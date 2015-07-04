@@ -41,6 +41,8 @@
 			
 			<h3>Car Information</h3>
 			
+			<h:graphicImage value="#{calculateCarsFairValue.carInformation.imageUrl}" />
+			
 			<h:form class="form-horizontal" target="_self">
 				<div class="form-group">
 				    <h:outputLabel class="col-sm-3 control-label" for="carHsn" value="HSN" />
@@ -55,35 +57,60 @@
 				    </div>
 				</div>
 				
-				<table class="table">
-			    	<tr>
-			    		<th>HSN</th>
-			    		<td>#{calculateCarsFairValue.carInformation.hsn}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>TSN</th>
-			    		<td>#{calculateCarsFairValue.carInformation.tsn}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Description</th>
-			    		<td>#{calculateCarsFairValue.carInformation.name}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Engine Power</th>
-			    		<td>#{calculateCarsFairValue.carInformation.enginePower}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Engine Size</th>
-			    		<td>#{calculateCarsFairValue.carInformation.engineSize}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Fuel Type</th>
-			    		<td>#{calculateCarsFairValue.carInformation.fuelType}</td>
-			    	</tr>
-			    
-			</table>
+				<div class="form-group">
+				    <h:outputLabel class="col-sm-3 control-label" for="carYear" value="Year" />
+				    <div class="input-group col-sm-4">
+				      <h:inputText class="form-control" id="carYear" value="#{calculateCarsFairValue.carInformation.year}" />
+				    </div>
+				</div>
 				
-				<h:commandButton id="loadAdditonalCarInfomrationBtn" class="btn btn-primary pull-right" value="Load Additional Information" update="@form" action="#{calculateCarsFairValue.loadAdditionalCarInformation()}" />
+			    <h:commandButton id="loadAdditonalCarInfomrationBtn" class="btn btn-primary pull-right" value="Search by HSN/TSN" update="@form" action="#{calculateCarsFairValue.loadAdditionalCarInformation()}" />
+				
+				<div class="form-group">
+				    <h:outputLabel class="col-sm-3 control-label" for="carName" value="Name" />
+				    <div class="input-group col-sm-4">
+				      <h:inputText class="form-control" id="carName" value="#{calculateCarsFairValue.carInformation.name}" />
+				    </div>
+				</div>
+				<div class="form-group">
+				    <h:outputLabel class="col-sm-3 control-label" for="carEnginePower" value="Engine Power" />
+				    <div class="input-group col-sm-4">
+				      <h:inputText class="form-control" id="carEnginePower" value="#{calculateCarsFairValue.carInformation.enginePower}" />
+				    </div>
+				</div>
+				<div class="form-group">
+				    <h:outputLabel class="col-sm-3 control-label" for="carEngineSize" value="Engine Size" />
+				    <div class="input-group col-sm-4">
+				      <h:inputText class="form-control" id="carEngineSize" value="#{calculateCarsFairValue.carInformation.engineSize}" />
+				    </div>
+				</div>
+				<div class="form-group">
+				    <h:outputLabel class="col-sm-3 control-label" for="carFuelType" value="Fuel Type" />
+				    <div class="input-group col-sm-4">
+				      <h:inputText class="form-control" id="carFuelType" value="#{calculateCarsFairValue.carInformation.fuelType}" />
+				    </div>
+				</div>
+				
+				<h2>Insurance Classification</h2>
+				<div class="form-group">
+				    <h:outputLabel class="col-sm-3 control-label" for="carClassKH" value="General Liability 10-25" />
+				    <div class="input-group col-sm-4">
+				      <h:inputText class="form-control" id="carClassKH" value="#{calculateCarsFairValue.carInformation.classKH}" />
+				    </div>
+				</div>
+				<div class="form-group">
+				    <h:outputLabel class="col-sm-3 control-label" for="carClassTK" value="Partial Cover (TK) 10-33" />
+				    <div class="input-group col-sm-4">
+				      <h:inputText class="form-control" id="carClassTK" value="#{calculateCarsFairValue.carInformation.classTK}" />
+				    </div>
+				</div>
+				<div class="form-group">
+				    <h:outputLabel class="col-sm-3 control-label" for="carClassVK" value="Fully Comprehensive (VK) 10-34" />
+				    <div class="input-group col-sm-4">
+				      <h:inputText class="form-control" id="carClassVK" value="#{calculateCarsFairValue.carInformation.classVK}" />
+				    </div>
+				</div>
+				
 			</h:form>
 			
     		<h3>Calculation</h3>
