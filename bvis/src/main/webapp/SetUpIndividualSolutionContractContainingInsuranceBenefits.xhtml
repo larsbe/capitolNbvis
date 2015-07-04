@@ -7,12 +7,12 @@
 
 <h:body>
 	<ui:composition template="/resources/defaultLayout.xhtml">
-		<ui:define name="title">Set up individual solution containing insurance benefit</ui:define>
+		<ui:define name="title">Set up individual solution containing insurance benefits</ui:define>
 
 		<ui:define name="content">
 
 			
-			<h2>Set up individual solution containing insurance benefit</h2>
+			<h2>Set up individual solution containing insurance benefits</h2>
 
     		 	<h3>Info</h3>
     		 	<div class="inputForm">
@@ -22,22 +22,22 @@
 
 						<h:outputLabel value="Customer" for="rentalAgreementRequest_Customer" />
 						<h:inputText
-							id="rentalAgreementRequest_Customer" value="#{setUpIndividualSolutionContract.rentalAgreementRequest.customer.name}"
+							id="rentalAgreementRequest_Customer" value="#{setUpIndividualSolutionContractContainingInsuranceBenefits.rentalAgreementRequest.customer.name}"
 							disabled="true" />
 							
 						<h:outputLabel value="Address" for="rentalAgreementRequest_Customer_Address" />
 						<h:inputText
-							id="rentalAgreementRequest_Customer_Address" value="#{setUpIndividualSolutionContract.rentalAgreementRequest.customer.address}" 
+							id="rentalAgreementRequest_Customer_Address" value="#{setUpIndividualSolutionContractContainingInsuranceBenefits.rentalAgreementRequest.customer.address}" 
 							disabled="true" />
 							
 						<h:outputLabel value="E-Mail" for="rentalAgreementRequest_Customer_EMail" />
 						<h:inputText
-							id="rentalAgreementRequest_Customer_EMail" value="#{setUpIndividualSolutionContract.rentalAgreementRequest.customer.email}" 
+							id="rentalAgreementRequest_Customer_EMail" value="#{setUpIndividualSolutionContractContainingInsuranceBenefits.rentalAgreementRequest.customer.email}" 
 							disabled="true" />
 							
-						<h:outputLable value="Insurance Benefits" for="rentalAgreementRequest_NegotiationCase_agreementInfo" />
+						<h:outputLabel value="Insurance Benefits" for="rentalAgreementRequest_NegotiationCase_agreementInfo" />
 						<h:inputText
-						    id="rentalAgreementRequest_NegotiationCase_agreementInfo" value="#{setUpIndividualSolutionContract.rentalAgreementRequest.negotiationCase.agreementInfo}"
+						    id="rentalAgreementRequest_NegotiationCase_agreementInfo" value="#{setUpIndividualSolutionContractContainingInsuranceBenefits.rentalAgreementRequest.negotiationCase.agreementInfo}"
 						    disabled="true" />
 					</h:panelGrid>
 				</h:form>
@@ -51,14 +51,14 @@
 					<h:panelGrid columns="2" columnClasses="form-label,form-input">
 						<h:outputLabel value="Specific Rental-Agreement Contract Data" for="rentalAgreementRequest_SpecificRentalAgreementContractData" />
 						<h:inputText
-						    id="rentalAgreementRequest_SpecificRentalAgreementContractData" value="#{setUpIndividualSolutionContract.rentalAgreementRequest.specifcRentalAgreementContractData}"
+						    id="rentalAgreementRequest_SpecificRentalAgreementContractData" value="#{setUpIndividualSolutionContractContainingInsuranceBenefits.rentalAgreementRequest.specificRentalAgreementContractData}"
 						    disabled="true" />		
 					</h:panelGrid>
 					
 					<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
 						<f:facet name="footer">
 							<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Update Individual Solution"
-										update="@form" action="#{setUpIndividualSolutionContract.submit()}" />
+										update="@form" action="#{setUpIndividualSolutionContractContainingInsuranceBenefits.submit()}" />
 						</f:facet>
 					</h:panelGrid>
 					
