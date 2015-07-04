@@ -12,6 +12,11 @@ public class CarInformation {
 	private String enginePower;
 	private String engineSize;
 	private String fuelType;
+	private String classKH;
+	private String classTK;
+	private String classVK;
+	private String year;
+	private String imageUrl;
 	
 	public CarInformation(String pHSN, String pTSN) {
 		setHsn(pHSN);
@@ -20,6 +25,11 @@ public class CarInformation {
 		setEnginePower("");
 		setEngineSize("");
 		setFuelType("");
+		setClassKH("");
+		setClassTK("");
+		setClassVK("");
+		setYear("");
+		setImageUrl("");
 	}
 	
 	public String getHsn() {
@@ -58,5 +68,42 @@ public class CarInformation {
 	public void setFuelType(String fuelType) {
 		this.fuelType = fuelType;
 	}
+	public String getClassKH() {
+		return classKH;
+	}
+
+	public void setClassKH(String classKH) {
+		this.classKH = classKH;
+	}
+
+	public String getClassTK() {
+		return classTK;
+	}
+
+	public void setClassTK(String classTK) {
+		this.classTK = classTK;
+	}
+
+	public String getClassVK() {
+		return classVK;
+	}
+
+	public void setClassVK(String classVK) {
+		this.classVK = classVK;
+	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	
 }
