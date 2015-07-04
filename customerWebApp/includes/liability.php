@@ -28,7 +28,7 @@
         <form id="imageform" method="post" enctype="multipart/form-data" action="ajaximage.php">
             <span class="btn btn-default fileinput-button">
                 <span>Add Photo</span>
-                <input type="file" name="fileupload" id="fileupload" multiple data-role="none" />
+                <input type="file" name="fileupload" id="fileupload" data-role="none" />
             </span>
         </form>
         </div>
