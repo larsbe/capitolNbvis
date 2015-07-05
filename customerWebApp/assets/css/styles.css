@@ -1,6 +1,6 @@
 /* Space out content a bit */
 body {
-  padding-top: 20px;
+  padding-top: 75px;
   padding-bottom: 20px;
 }
 
@@ -70,10 +70,6 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
-  #logos {
-    float: left;
-    margin-bottom: 0;
-  }
 }
 
 .thumb {
@@ -101,12 +97,16 @@ body {
   direction: ltr;
   cursor: pointer;
 }
-#logos {
-  margin-bottom: 20px;
-}
-#logos img {
+
+.navbar-brand img {
+  display: inline;
   margin-right: 10px;
 }
 #loader {
   margin: 40px;
+}
+#navbar ul li.active a {
+  color: #fff;
+  background-color: #e20025 !important;
+  background-image: none !important;
 }

@@ -65,22 +65,34 @@
 
   <body>
 
-    <div class="container">
-      <div id="logos">
-          <img src="assets/img/bvis_logo.png" border="0" alt="" height="30" />
-          <img src="assets/img/capitol_logo.png" border="0" alt="" height="40" />
+  <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <img alt="Brand" src="assets/img/bvis_logo.png" height="20">
+            <img alt="Brand" src="assets/img/capitol_logo.png" height="25">
+          </a>
         </div>
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="<?php if($_GET['page'] == 'request') echo 'active'; ?>"><a href="index.php?page=request" target="_self">Request Offer</a></li>
-            <li role="presentation" class="<?php if($_GET['page'] == 'fileupload') echo 'active'; ?>"><a href="index.php?page=fileupload" target="_self">Contract Upload</a></li>
-            <li role="presentation" class="<?php if($_GET['page'] == 'liability') echo 'active'; ?>"><a href="index.php?page=liability" target="_self">New Insurance Claim</a></li>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="<?php if($_GET['page'] == 'request') echo 'active'; ?>"><a href="index.php?page=request" target="_self">Request Offer</a></li>
+            <li class="<?php if($_GET['page'] == 'fileupload') echo 'active'; ?>"><a href="index.php?page=fileupload" target="_self">Contract Upload</a></li>
+            <li class="<?php if($_GET['page'] == 'liability') echo 'active'; ?>"><a href="index.php?page=liability" target="_self">New Insurance Claim</a></li>
           </ul>
-        </nav>
-        <!--<h3 class="text-muted">BVIS</h3>-->
-        
+        </div><!--/.nav-collapse -->
       </div>
+    </nav>
+
+
+
+    <div class="container">
 
       <?php include($page); ?>
 
