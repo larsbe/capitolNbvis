@@ -3,9 +3,12 @@ package de.unimuenster.wi.wfm.ejb;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import de.unimuenster.wi.wfm.entitiy.Customer;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
+import de.unimuenster.wi.wfm.sharedLib.data.CustomerData;
+import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 
 @Stateless
 public class CustomerServiceBean {
@@ -19,12 +22,27 @@ public class CustomerServiceBean {
 		return customer;
 	}
 	
+	public Customer createCustomerFromMessage(RentalAgreementMessage rentalAgreementMsg) {
+		CustomerData customerData = rentalAgreementMsg.getCustomerData();
+		Customer customer = this.getCustomerByName(customerData.getName());
+		customer.setAddress(customerData.getAddress());
+		customer.setCompany(customerData.getCompany());
+		customer.setEmail(customerData.getEmail());
+		customer.setPhoneNumber(customerData.getPhoneNumber());
+		return this.mergeCustomer(customer);
+	}
+	
 	public Customer getCustomerByName(String name) {
-		//TODO: retrieve customer, if no customer is found, throw exception
-		Customer customer = new Customer();
-		customer.setName(name);
-		em.persist(customer);
-		return customer;
+//		Query q = em.createQuery("SELECT C FROM Customer C WHERE name = :name", Customer.class)
+//			.setParameter("name", name);
+//		if (q.getSingleResult() == null) {
+			Customer customer = new Customer();
+			customer.setName(name);
+			em.persist(customer);
+			return customer;
+//		} else {
+//			return (Customer) q.getSingleResult();
+//		}
 	}
 	
 	public Customer getCustomer(long id) {

@@ -34,8 +34,6 @@ import static org.camunda.spin.Spin.JSON;
 public class CreateNegotiationCaseDelegate implements JavaDelegate {
 
 	@EJB
-	private NegotiationCaseServiceBean negotiationService;
-	@EJB
 	private CustomerServiceBean customerService;
 	@EJB
 	private InsuranceContractServiceBean insuranceContractService;
@@ -50,50 +48,13 @@ public class CreateNegotiationCaseDelegate implements JavaDelegate {
 		delegateExecution.setVariable("rentalAgreementRequestIdBVIS", rentalAgreementMsg.getRentalAgreementRequestId());
 		
 		//create and store entities
-		Customer customer = createCustomer(rentalAgreementMsg);
-		InsuranceContract contract = createInsuranceContract(rentalAgreementMsg, customer);
-		createCarData(rentalAgreementMsg, contract);
+		Customer customer = customerService.createCustomerFromMessage(rentalAgreementMsg);
+		InsuranceContract contract = insuranceContractService.createInsuranceContractFromMessage(rentalAgreementMsg, customer);
+		carDataService.createCarDataFromMessage(rentalAgreementMsg, contract);
 		
 		delegateExecution.setVariable("contractId", contract.getId());
 		
 		//createExampleMessage(delegateExecution, variablesToRemove);
-	}
-
-	private void createCarData(RentalAgreementMessage rentalAgreementMsg, InsuranceContract contract) {
-		for(de.unimuenster.wi.wfm.sharedLib.data.CarData carData : rentalAgreementMsg.getCarsData()) {
-			CarData carDataEntity = new CarData();
-			carDataEntity.setInsuranceContract(contract);
-			carDataEntity.setHsn(carData.getHsn());
-			carDataEntity.setTsn(carData.getTsn());
-			carDataEntity.setLicenseNumber(carData.getLicenseNumber());
-			carDataService.createCarData(carDataEntity);
-		}
-	}
-
-	private InsuranceContract createInsuranceContract(RentalAgreementMessage rentalAgreementMsg, Customer customer) {
-		InsuranceContract insuranceContract = new InsuranceContract();
-		insuranceContract.setRentalAgreementIdBVIS(rentalAgreementMsg.getRentalAgreementRequestId());
-		insuranceContract.setCustomer(customer);
-		insuranceContract.setInsuranceType(rentalAgreementMsg.getInsuranceType());
-		insuranceContract.setAdditionalInfo(rentalAgreementMsg.getAdditionalInfo());
-		insuranceContract = insuranceContractService.createInsuranceContract(insuranceContract);
-		//create benefit entities and add them to insuranceContract
-		for (InsuranceBenefit benefit : rentalAgreementMsg.getBenefits()) {
-			InsuranceBenefitEntity benefitEntity = new InsuranceBenefitEntity();
-			benefitEntity.setInsuranceBenefit(benefit);
-			insuranceContractService.addInsuranceBenefitEntities(insuranceContract.getId(), benefitEntity);
-		}
-		return insuranceContract;
-	}
-
-	private Customer createCustomer(RentalAgreementMessage rentalAgreementMsg) {
-		CustomerData customerData = rentalAgreementMsg.getCustomerData();
-		Customer customer = customerService.getCustomerByName(customerData.getName());
-		customer.setAddress(customerData.getAddress());
-		customer.setCompany(customerData.getCompany());
-		customer.setEmail(customerData.getEmail());
-		customer.setPhoneNumber(customerData.getPhoneNumber());
-		return customerService.mergeCustomer(customer);
 	}
 
 	private void createExampleMessage(DelegateExecution delegateExecution,

@@ -39,6 +39,8 @@ public class InsuranceContract extends AbstractEntity {
 	
 	private BigDecimal insurancePrice;
 	
+	private InsuranceStatus status;
+	
 	public long getRentalAgreementIdBVIS() {
 		return rentalAgreementIdBVIS;
 	}
@@ -103,6 +105,15 @@ public class InsuranceContract extends AbstractEntity {
 	public void setLiabilityCases(Collection<LiabilityCase> liabilityCases) {
 		this.liabilityCases = liabilityCases;
 	}
+
+	public InsuranceStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(InsuranceStatus status) {
+		this.status = status;
+	}
+	
 	
 
 }

@@ -3,6 +3,15 @@ package de.unimuenster.wi.wfm.sharedLib.data;
 import java.math.BigDecimal;
 import java.util.List;
 
+/* 
+ * This class is used to exchange RentalAgreement data including insurance contract data
+ * between Capitol and BVIS.
+ * 
+ * Note that it is used for both individual and standard solutions.
+ * Depending on the negotiation phase, the content varies.
+ * The rentalAgreementRequestId serves as the correlation key; other state information 
+ * is held by each participant individually.
+ */
 public class RentalAgreementMessage {
 
 	private long rentalAgreementRequestId;
@@ -12,7 +21,7 @@ public class RentalAgreementMessage {
 	private InsuranceType insuranceType;
 	private List<InsuranceBenefit> benefits;
 	private BigDecimal insurancePrice;
-	
+	private boolean approvedByBVIS;
 	
 	public long getRentalAgreementRequestId() {
 		return rentalAgreementRequestId;
@@ -56,4 +65,12 @@ public class RentalAgreementMessage {
 	public void setInsurancePrice(BigDecimal insurancePrice) {
 		this.insurancePrice = insurancePrice;
 	}
+	public boolean isApprovedByBVIS() {
+		return approvedByBVIS;
+	}
+	public void setApprovedByBVIS(boolean approvedByBVIS) {
+		this.approvedByBVIS = approvedByBVIS;
+	}
+	
+	
 }
