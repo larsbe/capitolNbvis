@@ -5,6 +5,7 @@ public class CarData {
 	private String licenseNumber;
 	private String hsn;
 	private String tsn;
+	private String year; // Format: YYYY
 	
 	public String getLicenseNumber() {
 		return licenseNumber;
@@ -24,4 +25,11 @@ public class CarData {
 	public void setTsn(String tsn) {
 		this.tsn = tsn;
 	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	
 }
