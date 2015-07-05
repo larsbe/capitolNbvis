@@ -20,34 +20,30 @@
         
 
         <div class="form-group">
-          <label>Photos</label>
-          <div id="imagelist">
+          <label>Contract File</label>
+          <div id="fileList">
             <img id="loader" style="display: none;" src="assets/img/loader.gif" alt="Uploading..."/>
           </div>
         </div>
 
         <div class="clearfix">
-        <form id="imageform" method="post" enctype="multipart/form-data" action="ajaximage.php">
+        <form id="imageform" method="post" enctype="multipart/form-data" action="ajaxpdf.php">
             <span class="btn btn-default fileinput-button">
-                <span>Add Photo</span>
+                <span>Add File</span>
                 <input type="file" name="fileupload" id="fileupload" data-role="none" />
             </span>
         </form>
         </div>
-        
-        <div class="form-group">
-          <label>Claim Details</label>
-          <textarea class="form-control" rows="3" id="liabilityClaimDetails"></textarea>
-        </div>
 
         <div class="clearfix">
-          <button id="submitForm" type="submit" class="btn btn-primary pull-right">Submit Case</button>
+          <button id="submitForm" type="submit" class="btn btn-primary pull-right">Send Contract</button>
         </div>
       
       </div>
 
       <script>
-      var imagearray = [];
+
+      var contractfile = '';
 
         $(window).ready(function() {
 
@@ -55,11 +51,11 @@
             $("#loader").show();
             $("#imageform").ajaxForm({  
                 //target: '#preview',
-                success: function(url) {
-                  imagearray.push(url);
-                  //$('#imagelist').append('<div class="thumb" style="background-image: url(\'uploads/' + url + '\')"></div>');
+                success: function(filename) {
                   $('#loader').hide();
-                  $('<div class="thumb" style="background-image: url(\'uploads/' + url + '\')"></div>').insertBefore('#loader');
+                  $('#fileList').append('<p>' +  filename + '</p>');
+                  $('#imageform').remove();
+                  contractfile = filename;
                 },
                 error: function() { alert('error'); }
             }).submit();
@@ -68,29 +64,20 @@
 
 
           $( "#submitForm" ).click(function( event ) {
-            var json = { "messageName" : "NewLiabilityCase",
+            var json = { "messageName" : "NewContractUpload",
               "businessKey" : null,
               "correlationKeys" : {},
               "processVariables" : {
                   "customerNoBVIS" : {"value" : "", "type": "Long"},
                   "contractNoBVIS" : {"value" : "", "type": "Long"},
-                  "imageCount" : {"value" : "", "type": "Integer"},
-                  "claimDetails" : {"value" : "", "type": "String"}
+                  "contract" : {"value" : "", "type": "String"}
               }
             };
-
-            $.each(imagearray, function(i, val) {
-              i++;
-              json.processVariables["image_" + i] = { value: imagefolder + val, type: "String"};
-
-            });
-
 
 
             json.processVariables.customerNoBVIS.value = $('#liabilityCustomerNo').val();
             json.processVariables.contractNoBVIS.value = $('#liabilityContractNo').val();
-            json.processVariables.claimDetails.value = $('#liabilityClaimDetails').val();
-            json.processVariables.imageCount.value = imagearray.length;
+            json.processVariables.contract.value = contractfolder + contractfile;
             
             console.log(json);
 
@@ -102,7 +89,7 @@
               dataType:"json",
               success: function() {
                 console.log('success');
-                window.location = "index.php?page=liability-success";
+                window.location = "index.php?page=fileupload-success";
               }
             });
 

@@ -13,6 +13,9 @@
   case "liability-success":
     $page = "includes/liability-success.php";
     break;
+  case "fileupload":
+    $page = "includes/fileupload.php";
+    break;
 
   default: $page = "includes/request.php";
   }
@@ -52,6 +55,7 @@
     <script>
       var camundaserver = 'http://localhost:8080/engine-rest/engine/default/message';
       var imagefolder = 'http://capitol.jonasgerlach.de/customerWebApp/uploads/';
+      var contractfolder = 'http://capitol.jonasgerlach.de/customerWebApp/contracts/';
     </script>
   </head>
 
@@ -66,6 +70,7 @@
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="<?php if($_GET['page'] == 'request') echo 'active'; ?>"><a href="index.php?page=request">Request Offer</a></li>
+            <li role="presentation" class="<?php if($_GET['page'] == 'fileupload') echo 'active'; ?>"><a href="index.php?page=fileupload">Contract Upload</a></li>
             <li role="presentation" class="<?php if($_GET['page'] == 'liability') echo 'active'; ?>"><a href="index.php?page=liability">New Insurance Claim</a></li>
           </ul>
         </nav>

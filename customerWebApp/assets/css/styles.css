@@ -107,3 +107,6 @@ body {
 #logos img {
   margin-right: 10px;
 }
+#loader {
+  margin: 40px;
+}
