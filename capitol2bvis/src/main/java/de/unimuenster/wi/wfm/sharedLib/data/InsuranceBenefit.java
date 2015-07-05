@@ -5,5 +5,17 @@ public enum InsuranceBenefit {
 	ABROADBRAKEDOWNCOVER, 
 	WITHOUTOWNRISK,
 	ROADSTONE,
-	HAILDAMAGE
+	HAILDAMAGE;
+	
+	@Override
+	  public String toString() {
+	    switch(this) {
+	      case BRAKEDOWNCOVER: return "Accident and Breakdown Cover";
+	      case ABROADBRAKEDOWNCOVER: return "Accident and Breakdown Cover (Abroad)";
+	      case WITHOUTOWNRISK: return "Without Own Risk";
+	      case ROADSTONE: return "Road Stone";
+	      case HAILDAMAGE: return "Hail Damage";
+	      default: throw new IllegalArgumentException();
+	    }
+	  }
 }

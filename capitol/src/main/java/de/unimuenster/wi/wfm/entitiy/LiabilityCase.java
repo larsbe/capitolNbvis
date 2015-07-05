@@ -19,6 +19,7 @@ public class LiabilityCase extends AbstractEntity {
 	protected String claimDetails;
 	protected Integer carsFairValue;
 	protected Integer insuranceSum;
+	protected Double estimateOfCosts;
 
 	
 	@ManyToOne
@@ -87,5 +88,15 @@ public class LiabilityCase extends AbstractEntity {
 	public String toString() {
 		return "LiabilityCasse: ID=" + this.getId();
 	}
+
+	public Double getEstimateOfCosts() {
+		return estimateOfCosts;
+	}
+
+	public void setEstimateOfCosts(Double estimateOfCosts) {
+		this.estimateOfCosts = estimateOfCosts;
+	}
+	
+	
 		
 }

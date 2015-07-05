@@ -6,6 +6,7 @@
     "contractNo" : {"value" : "2", "type": "Long"},
     "imageCount" : {"value" : "2", "type": "Integer"},
     "claimDetails" : {"value" : "Toller Text mit Details", "type": "String"},
+    "estimateOfCosts" :{"value" : "325.59", "type": "Double"},
     "image_1": {"value" : "http://capitol.jonasgerlach.de/testImg/TEST_IMG.JPG", "type": "String"},
     "image_2": {"value" : "http://www.winfridia-breslau.de/_img/content/D20_3861b-1.jpg", "type": "String"}
 }
