@@ -1,78 +1,89 @@
 // WebApp to BVIS New Rental Agreement
-var json = { "messageName" : "NewRentalAgreementRequest",
-        "businessKey" : null,
-        "correlationKeys" : {},
-        "processVariables" : {
-            "name" : {"value" : "", "type": "String"},
-              "company" : {"value" : "", "type": "String"},
-              "email" : {"value" : "", "type": "String"},
-              "phoneNumber" : {"value" : "", "type": "String"},
-              "address" : {"value" : "", "type": "String"},
-              "solutionType" : {"value" : "", "type": "String"}, // individual oder standard
-              "carType" : {"value" : "", "type": "String"}, // leerer String bei individual solution
-              "insurancePack" : {"value" : "", "type": "String"}, // leerer String bei individual solution
-              "additionalInfo" : {"value" : "", "type": "String"}
-        }
-      };
+{ "messageName" : "NewRentalAgreementRequest",
+  "businessKey" : null,
+  "correlationKeys" : {},
+  "processVariables" : {
+      "name" : {"value" : "", "type": "String"},
+        "company" : {"value" : "", "type": "String"},
+        "email" : {"value" : "", "type": "String"},
+        "phoneNumber" : {"value" : "", "type": "String"},
+        "address" : {"value" : "", "type": "String"},
+        "solutionType" : {"value" : "", "type": "String"}, // individual oder standard
+        "carType" : {"value" : "", "type": "String"}, // leerer String bei individual solution
+        "insurancePack" : {"value" : "", "type": "String"}, // leerer String bei individual solution
+        "additionalInfo" : {"value" : "", "type": "String"}
+  }
+};
+
+// WebApp to BVIS Contract PDF Upload
+{ "messageName" : "NewContractUpload",
+  "businessKey" : null,
+  "correlationKeys" : {},
+  "processVariables" : {
+      "customerNoBVIS" : {"value" : "", "type": "Long"},
+      "contractNoBVIS" : {"value" : "", "type": "Long"},
+      "contract" : {"value" : "", "type": "String"} // URI of contract PDF file
+  }
+};
 
 // BVIS to Capitol individual solution
-var json = { "messageName" : "???",
-        "businessKey" : null,
-        "correlationKeys" : {},
-        "processVariables" : {
-            "rentalAgreementRequestIdBVIS" : {"value" : "", "type" : "Long"},
-            "name" : {"value" : "", "type": "String"},
-            "company" : {"value" : "", "type": "String"},
-            "email" : {"value" : "", "type": "String"},
-            "phoneNumber" : {"value" : "", "type": "String"},
-            "address" : {"value" : "", "type": "String"},
-            "additionalInfo" : {"value" : "", "type": "String"}
-        }
-      };
+{ "messageName" : "???",
+  "businessKey" : null,
+  "correlationKeys" : {},
+  "processVariables" : {
+      "rentalAgreementRequestIdBVIS" : {"value" : "", "type" : "Long"},
+      "name" : {"value" : "", "type": "String"},
+      "company" : {"value" : "", "type": "String"},
+      "email" : {"value" : "", "type": "String"},
+      "phoneNumber" : {"value" : "", "type": "String"},
+      "address" : {"value" : "", "type": "String"},
+      "additionalInfo" : {"value" : "", "type": "String"}
+  }
+};
 
 
 
 
 // LIABILITY CASE:
 // WebApp to BVIS New Liability Case
-var json = { "messageName" : "NewLiabilityCase",
-        "businessKey" : null,
-        "correlationKeys" : {},
-        "processVariables" : {
-            "customerNoBVIS" : {"value" : "", "type": "Long"},
-            "contractNoBVIS" : {"value" : "", "type": "Long"},
-            "imageCount" : {"value" : int, "type": "Integer"}, // Anzahl der angehängten Bilder
-            "claimDetails" : {"value" : "", "type": "String"},
-            "image_1": {"value" : "", "type": "String"},
-            "image_2": {"value" : "", "type": "String"}
-            ...
-        }
-      };
+{ "messageName" : "NewLiabilityCase",
+  "businessKey" : null,
+  "correlationKeys" : {},
+  "processVariables" : {
+      "customerNoBVIS" : {"value" : "", "type": "Long"},
+      "contractNoBVIS" : {"value" : "", "type": "Long"},
+      "imageCount" : {"value" : int, "type": "Integer"}, // Anzahl der angehängten Bilder
+      "claimDetails" : {"value" : "", "type": "String"},
+      "image_1": {"value" : "", "type": "String"}, // URI of image_1
+      "image_2": {"value" : "", "type": "String"}
+      ...
+  }
+};
 
 // BVIS to Capitol New Liability Case
-var json = { "messageName" : "newLiabilityCase",
-        "businessKey" : null,
-        "correlationKeys" : {},
-        "processVariables" : {
-            "contractNoCapitol" : {"value" : "", "type": "Long"},
-            "claimIdBVIS" : {"value" : "", "type": "Long"},
-            "imageCount" : {"value" : "", "type": "Integer"},
-            "claimDetails" : {"value" : "", "type": "String"},
-            "image_1": {"value" : "", "type": "String"},
-            "image_2": {"value" : "", "type": "String"}
-        }
-      };
+{ "messageName" : "newLiabilityCase",
+  "businessKey" : null,
+  "correlationKeys" : {},
+  "processVariables" : {
+      "contractNoCapitol" : {"value" : "", "type": "Long"},
+      "claimIdBVIS" : {"value" : "", "type": "Long"},
+      "imageCount" : {"value" : "", "type": "Integer"},
+      "claimDetails" : {"value" : "", "type": "String"},
+      "image_1": {"value" : "", "type": "String"},
+      "image_2": {"value" : "", "type": "String"}
+  }
+};
 
 // Capitol to BVIS Approval / Rejection
-var json = { "messageName" : "ClaimInformation",
-        "businessKey" : null,
-        "correlationKeys" : {
-            "claimIdBVIS" : {"value" : "", "type": "Long"}
-        },
-        "processVariables" : {
-            "claimCovered" : {"value" : true, "type": "Boolean"},
-            "insuranceSum" : {"value" : "", "type": "Long"},
-            "rejectionInfo" : {"value" : "", "type": "String"}
-        }
-      };
+{ "messageName" : "ClaimInformation",
+  "businessKey" : null,
+  "correlationKeys" : {
+      "claimIdBVIS" : {"value" : "", "type": "Long"}
+  },
+  "processVariables" : {
+      "claimCovered" : {"value" : true, "type": "Boolean"},
+      "insuranceSum" : {"value" : "", "type": "Long"},
+      "rejectionInfo" : {"value" : "", "type": "String"}
+  }
+};
 
