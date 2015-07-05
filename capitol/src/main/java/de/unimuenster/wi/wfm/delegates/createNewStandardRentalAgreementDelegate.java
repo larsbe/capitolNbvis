@@ -16,7 +16,6 @@ import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
 import de.unimuenster.wi.wfm.entitiy.CarData;
 import de.unimuenster.wi.wfm.entitiy.CaseStatus;
 import de.unimuenster.wi.wfm.entitiy.Customer;
-import de.unimuenster.wi.wfm.entitiy.InsuranceBenefit;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 
