@@ -1,12 +1,6 @@
 package de.unimuenster.wi.wfm.application;
 
-import java.util.Arrays;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.inject.Inject;
 
 import org.camunda.bpm.engine.FilterService;
 import org.camunda.bpm.engine.IdentityService;
@@ -17,14 +11,6 @@ import org.camunda.bpm.engine.authorization.Groups;
 import org.camunda.bpm.engine.filter.Filter;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.engine.variable.Variables;
-import org.camunda.bpm.engine.variable.value.ObjectValue;
-
-import de.unimuenster.wi.wfm.sharedLib.data.AgreementConditions;
-import de.unimuenster.wi.wfm.sharedLib.data.CarData;
-import de.unimuenster.wi.wfm.sharedLib.data.CustomerData;
-import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
-import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 
 public class ProcessEngineCleaner {
 
