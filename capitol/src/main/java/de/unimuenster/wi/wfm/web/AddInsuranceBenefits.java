@@ -4,6 +4,7 @@ import static org.camunda.spin.Spin.JSON;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
 import de.unimuenster.wi.wfm.entitiy.InsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
+import de.unimuenster.wi.wfm.sharedLib.data.InsuranceType;
 import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 
 @Named
@@ -42,6 +44,7 @@ public class AddInsuranceBenefits implements Serializable {
 	private long contractId;
 	
 	private InsuranceBenefit newBenefit;
+	private InsuranceType insuranceType;
 	
 	private RentalAgreementMessage rentalAgreementMsg;
 	
@@ -76,7 +79,7 @@ public class AddInsuranceBenefits implements Serializable {
 	public void submitForm() {
 		
 		try {
-			// Complete user task from
+			contract =  insuranceContractService.mergeInsuranceContract(contract);
 			//Doesn't work so far!!!!!!!!!!!!!!!!!!!!
 			taskForm.completeTask();
 		} catch (IOException e) {
@@ -87,30 +90,47 @@ public class AddInsuranceBenefits implements Serializable {
 	
 	public void addBenefit() {
 		try  {
+			System.out.println("Adding");
 			InsuranceBenefitEntity benefitEntity = new InsuranceBenefitEntity();
 			benefitEntity.setInsuranceBenefit(newBenefit);
 			insuranceContractService.addInsuranceBenefitEntities(contractId, benefitEntity);
+			contract = insuranceContractService.getInsuranceContract(getContractId());
 		} catch (EJBException e) {
-			
+			System.out.println("oops an error");
 		}
-		toPage();
 	}
 
-	public String removeFromBenefits(InsuranceBenefitEntity benefitEntity) {
+	public void removeFromBenefits(InsuranceBenefitEntity benefitEntity) {
 		insuranceContractService.removeFromInsuranceBenefitEntities(benefitEntity);
-		return toPage();
+		contract = insuranceContractService.getInsuranceContract(getContractId());
 	}
 	
 	public InsuranceBenefit getNewBenefit() {
 		return newBenefit;
 	}
 	
+	public void setNewBenefit(InsuranceBenefit benefit) {
+		newBenefit = benefit;
+	}
+	
 	public List<InsuranceBenefit> getAllBenefits() {
 		return Arrays.asList(InsuranceBenefit.values());
 	}
 	
-	private String toPage() {
-		return "/deliveryOrder/details.xhtml?faces-redirect=true&id=" + contractId;
+	public InsuranceType getInsuranceType() {
+		return insuranceType;
+	}
+	
+	public void setInsuranceType(InsuranceType type) {
+		insuranceType = type;
+	}
+	
+	public List<InsuranceType> getAllInsuranceTypes() {
+		return Arrays.asList(InsuranceType.values());
+	}
+	
+	public BigDecimal getSuggestedPrice() {
+		return new BigDecimal(20);
 	}
 
 }

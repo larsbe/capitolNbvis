@@ -41,12 +41,14 @@
 			    	</tr>
 			    	<tr>
 			    		<th>Insurance Type</th>
-			    		<td><h:inputText class="form-control" id="benefits" value="#{addInsuranceBenefits.contract.insuranceType}" /></td>
-			    	
+			    		<h:selectOneMenu id="types" value="#{addInsuranceBenefits.insuranceType}">
+							<f:selectItems value="#{addInsuranceBenefits.allInsuranceTypes}" />
+						</h:selectOneMenu>
 			    	</tr>
 			</table>
 			
 			<h3>Insurance benefits</h3>
+			<h:form class="form-horizontal" target="_self">
 			<h:dataTable value="#{addInsuranceBenefits.contract.insuranceBenefitEntity}" var="cur"
 				styleClass="data-table" headerClass="data-cell header-cell"
 				columnClasses="data-cell,data-cell,data-cell">
@@ -61,15 +63,21 @@
 					</f:facet>
 				</h:column>
 				<h:column>
-					<h:commandButton value="Remove" action="#{addInsuranceBenefits.removeFromBenefits(cur)}" />
+					<h:commandButton id="remove_button" value="Remove" update="@form" action="#{addInsuranceBenefits.removeFromBenefits(cur)}" />
 					<f:facet name="footer">
-						<h:commandButton value="Add" action="#{addInsuranceBenefits.addBenefit()}" />
+						<h:commandButton id="add_button" value="Add" update="@form" action="#{addInsuranceBenefits.addBenefit()}" />
 					</f:facet>
 				</h:column>
 			</h:dataTable>
+			</h:form>
+			
+			<h3>The ultimate price is #{addInsuranceBenefits.suggestedPrice}</h3>
+			
+			<h:form class="form-horizontal" target="_self">
+				<h:commandButton id="update_button" class="btn btn-primary" value="Update" update="@form" action="#{addInsuranceBenefits.update()}" />
+			</h:form>
 			
 			<h:form class="form-horizontal" target="_parent">
-				<h:commandButton id="update_button" class="btn btn-primary" value="Update" update="@form" action="#{addInsuranceBenefits.update()}" />
 				<h:commandButton id="save_button" class="btn btn-primary" value="Save changes" update="@form" action="#{addInsuranceBenefits.submitForm()}" />
 			</h:form>	
 
