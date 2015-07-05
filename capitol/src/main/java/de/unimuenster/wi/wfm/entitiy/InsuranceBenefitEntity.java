@@ -29,5 +29,8 @@ public class InsuranceBenefitEntity extends AbstractEntity{
 		this.insuranceBenefit = insuranceBenefit;
 	}
 	
+	public String toString() {
+		return insuranceBenefit.toString();
+	}
 	
 }
