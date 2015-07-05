@@ -78,7 +78,7 @@
 
             $.each(imagearray, function(i, val) {
               i++;
-              json.processVariables["image_" + i] = { value: val, type: "String"};
+              json.processVariables["image_" + i] = { value: imagefolder + val, type: "String"};
 
             });
 
@@ -92,7 +92,7 @@
             console.log(json);
 
             $.ajax({
-              url:serveradress,
+              url:camundaserver,
               type:"POST",
               data:JSON.stringify(json),
               contentType:"application/json; charset=utf-8",

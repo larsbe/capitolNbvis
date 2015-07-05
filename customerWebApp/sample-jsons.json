@@ -4,13 +4,14 @@ var json = { "messageName" : "NewRentalAgreementRequest",
         "correlationKeys" : {},
         "processVariables" : {
             "name" : {"value" : "", "type": "String"},
-            "company" : {"value" : "", "type": "String"},
-            "email" : {"value" : "", "type": "String"},
-            "phoneNumber" : {"value" : "", "type": "String"},
-            "address" : {"value" : "", "type": "String"},
-            "solutionType" : {"value" : "", "type": "String"},
-            "insurancePack" : {"value" : "", "type": "String"}, // A, B or C
-            "additionalInfo" : {"value" : "", "type": "String"}
+              "company" : {"value" : "", "type": "String"},
+              "email" : {"value" : "", "type": "String"},
+              "phoneNumber" : {"value" : "", "type": "String"},
+              "address" : {"value" : "", "type": "String"},
+              "solutionType" : {"value" : "", "type": "String"}, // individual oder standard
+              "carType" : {"value" : "", "type": "String"}, // leerer String bei individual solution
+              "insurancePack" : {"value" : "", "type": "String"}, // leerer String bei individual solution
+              "additionalInfo" : {"value" : "", "type": "String"}
         }
       };
 
@@ -40,10 +41,11 @@ var json = { "messageName" : "NewLiabilityCase",
         "processVariables" : {
             "customerNoBVIS" : {"value" : "", "type": "Long"},
             "contractNoBVIS" : {"value" : "", "type": "Long"},
-            "imageCount" : {"value" : "", "type": "Integer"},
+            "imageCount" : {"value" : int, "type": "Integer"}, // Anzahl der angehängten Bilder
             "claimDetails" : {"value" : "", "type": "String"},
             "image_1": {"value" : "", "type": "String"},
             "image_2": {"value" : "", "type": "String"}
+            ...
         }
       };
 

@@ -46,12 +46,12 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="assets/js/jquery-2.1.4.min.js"></script>
-    <script src="assets/js/jquery.mobile-1.4.5.min.js"></script>
     <script src="assets/js/jquery.form.js"></script> 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="assets/js/bootstrap.min.js"></script>
     <script>
-      var serveradress = 'http://localhost:8080/engine-rest/engine/default/message';
+      var camundaserver = 'http://localhost:8080/engine-rest/engine/default/message';
+      var imagefolder = 'http://capitol.jonasgerlach.de/customerWebApp/uploads/';
     </script>
   </head>
 

@@ -24,7 +24,7 @@
           <textarea class="form-control" rows="3" id="offerAddress"></textarea>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="solutionType">
           <label>Solution Type</label>
           <div class="radio">
             <label>
@@ -96,7 +96,7 @@
 
       <script>
 
-        $(document).on('change', '#offerForm', function() {
+        $(document).on('change', '#solutionType', function() {
             if($('#offerSolution1').is(':checked')) {
               $('#carType').show();
               $('#insurance').show();
@@ -145,7 +145,7 @@
             console.log(json);
 
             $.ajax({
-              url:serveradress,
+              url:camundaserver,
               type:"POST",
               data:JSON.stringify(json),
               contentType:"application/json; charset=utf-8",
