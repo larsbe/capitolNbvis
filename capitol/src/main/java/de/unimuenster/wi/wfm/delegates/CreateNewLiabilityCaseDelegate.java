@@ -8,8 +8,6 @@ import javax.inject.Named;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpm.engine.variable.Variables;
-import org.camunda.bpm.engine.variable.value.ObjectValue;
 
 import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
@@ -17,9 +15,6 @@ import de.unimuenster.wi.wfm.entitiy.CaseStatus;
 import de.unimuenster.wi.wfm.entitiy.ImageAttachment;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
-import de.unimuenster.wi.wfm.sharedLib.data.AgreementConditions;
-import de.unimuenster.wi.wfm.util.ReportPDF;
-import static org.camunda.spin.Spin.*;
 
 @Named
 public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
@@ -71,13 +66,6 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		
 		// Store claim
 		claim = liabilityCaseService.createLiabilityCase(claim);
-			
-		// Test serialization
-		AgreementConditions ac = new AgreementConditions();
-		ObjectValue caseValue = Variables.objectValue(ac)
-				   .serializationDataFormat(Variables.SerializationDataFormats.JSON)
-				   .create();	
-		delegateExecution.setVariable("conditions", caseValue);
 		
 		// Publish ID
 		delegateExecution.setVariable("caseID", claim.getId());
