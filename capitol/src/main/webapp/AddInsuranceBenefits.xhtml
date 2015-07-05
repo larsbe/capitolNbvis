@@ -8,22 +8,68 @@
 
 	<ui:composition template="template.xhtml">
  		<ui:define name="content">
-			<h1>Add Insurance benefits for negotiation case #{addInsuranceBenefits.negotiationCase.id}</h1>
+			<h1>Add Insurance benefits for negotiation case #{addInsuranceBenefits.contract.id}</h1>
+			<h3>Customer</h3>
 			<table class="table">
 			    	<tr>
-			    		<th>Customer</th>
-			    		<td>#{addInsuranceBenefits.negotiationCase.customer.name}</td>
+			    		<th>Name</th>
+			    		<td>#{addInsuranceBenefits.contract.customer.name}</td>
 			    	</tr>
 			    	<tr>
-			    		<th>AgreementInfo</th>
-			    		<td><h:inputText class="form-control" id="benefits" value="#{addInsuranceBenefits.negotiationCase.agreementInfo}" /></td>
+			    		<th>Address</th>
+			    		<td>#{addInsuranceBenefits.contract.customer.address}</td>
 			    	</tr>
 			    	<tr>
-			    		<th>Change comments</th>
-			    		<td><h:inputText class="form-control" id="comment" value="#{addInsuranceBenefits.negotiationCase.changeComments}" /></td>
+			    		<th>Company</th>
+			    		<td>#{addInsuranceBenefits.contract.customer.company}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Email</th>
+			    		<td>#{addInsuranceBenefits.contract.customer.email}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>PhoneNumber</th>
+			    		<td>#{addInsuranceBenefits.contract.customer.phoneNumber}</td>
 			    	</tr>
 			</table>
+			
+			<h3>Details</h3>
+			<table class="table">
+			    	<tr>
+			    		<th>AgreementInfo</th>
+			    		<td><h:inputText class="form-control" id="agreementInfo" value="#{addInsuranceBenefits.additionalInfo}" /></td>
+			    	</tr>
+			    	<tr>
+			    		<th>Insurance Type</th>
+			    		<td><h:inputText class="form-control" id="benefits" value="#{addInsuranceBenefits.contract.insuranceType}" /></td>
+			    	
+			    	</tr>
+			</table>
+			
+			<h3>Insurance benefits</h3>
+			<h:dataTable value="#{addInsuranceBenefits.contract.insuranceBenefitEntity}" var="cur"
+				styleClass="data-table" headerClass="data-cell header-cell"
+				columnClasses="data-cell,data-cell,data-cell">
+			<!-- columns for properties of the referenced entity -->
+				<h:column>
+					<f:facet name="header">Name</f:facet>
+					#{cur}
+					<f:facet name="footer">
+						<h:selectOneMenu id="benefitForContract" value="#{addInsuranceBenefits.newBenefit}">
+							<f:selectItems value="#{addInsuranceBenefits.allBenefits}" />
+						</h:selectOneMenu>
+					</f:facet>
+				</h:column>
+				<h:column>
+					<h:commandButton value="Remove" action="#{addInsuranceBenefits.removeFromBenefits(cur)}" />
+					<f:facet name="footer">
+						<h:commandButton value="Add" action="#{addInsuranceBenefits.addBenefit()}" />
+					</f:facet>
+				</h:column>
+			</h:dataTable>
+			
 			<h:form class="form-horizontal" target="_parent">
+				<h:commandButton id="update_button" class="btn btn-primary" value="Update" update="@form" action="#{addInsuranceBenefits.update()}" />
 				<h:commandButton id="save_button" class="btn btn-primary" value="Save changes" update="@form" action="#{addInsuranceBenefits.submitForm()}" />
 			</h:form>	
 

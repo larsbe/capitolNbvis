@@ -1,7 +1,8 @@
 package de.unimuenster.wi.wfm.delegates;
 
+import static org.camunda.spin.Spin.JSON;
+
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.ejb.EJB;
@@ -9,26 +10,16 @@ import javax.inject.Named;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpm.engine.variable.Variables;
-import org.camunda.bpm.engine.variable.value.ObjectValue;
-
-import com.sun.mail.util.BEncoderStream;
 
 import de.unimuenster.wi.wfm.ejb.CarDataServiceBean;
 import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
 import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
-import de.unimuenster.wi.wfm.ejb.NegotiationCaseServiceBean;
 import de.unimuenster.wi.wfm.entitiy.Customer;
-import de.unimuenster.wi.wfm.entitiy.InsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
-import de.unimuenster.wi.wfm.entitiy.NegotiationCase;
-import de.unimuenster.wi.wfm.entitiy.CarData;
-import de.unimuenster.wi.wfm.sharedLib.data.AgreementConditions;
 import de.unimuenster.wi.wfm.sharedLib.data.CustomerData;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceType;
 import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
-import static org.camunda.spin.Spin.JSON;
 
 @Named
 public class CreateNegotiationCaseDelegate implements JavaDelegate {
@@ -64,7 +55,7 @@ public class CreateNegotiationCaseDelegate implements JavaDelegate {
 		RentalAgreementMessage message = new RentalAgreementMessage();
 		message.setRentalAgreementRequestId(1);
 		message.setAdditionalInfo("Test");
-		message.setBenefits(Arrays.asList(InsuranceBenefit.HAILDAMAGE));
+		message.setBenefits(Arrays.asList(InsuranceBenefit.BRAKEDOWNCOVER));
 		message.setInsuranceType(InsuranceType.PARTIAL);
 		CustomerData customerData = new CustomerData();
 		customerData.setName("Robert Voscort");

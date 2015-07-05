@@ -1,12 +1,15 @@
 package de.unimuenster.wi.wfm.application;
 
+import static org.camunda.bpm.engine.authorization.Authorization.ANY;
+import static org.camunda.bpm.engine.authorization.Authorization.AUTH_TYPE_GRANT;
+import static org.camunda.bpm.engine.authorization.Permissions.ALL;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.math.BigDecimal;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -14,44 +17,37 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
-import static org.camunda.bpm.engine.authorization.Authorization.ANY;
-import static org.camunda.bpm.engine.authorization.Authorization.AUTH_TYPE_GRANT;
-import static org.camunda.bpm.engine.authorization.Permissions.ACCESS;
-import static org.camunda.bpm.engine.authorization.Permissions.ALL;
-import static org.camunda.bpm.engine.authorization.Permissions.READ;
-import static org.camunda.bpm.engine.authorization.Permissions.UPDATE;
-import static org.camunda.bpm.engine.authorization.Resources.APPLICATION;
-import static org.camunda.bpm.engine.authorization.Resources.FILTER;
-import static org.camunda.bpm.engine.authorization.Resources.TASK;
-import static org.camunda.bpm.engine.authorization.Resources.USER;
-
 import org.camunda.bpm.engine.AuthorizationService;
 import org.camunda.bpm.engine.FilterService;
 import org.camunda.bpm.engine.IdentityService;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.authorization.Groups;
+import org.camunda.bpm.engine.authorization.Resource;
+import org.camunda.bpm.engine.authorization.Resources;
 import org.camunda.bpm.engine.filter.Filter;
 import org.camunda.bpm.engine.identity.Group;
 import org.camunda.bpm.engine.identity.User;
 import org.camunda.bpm.engine.impl.persistence.entity.AuthorizationEntity;
 import org.camunda.bpm.engine.task.TaskQuery;
-import org.camunda.bpm.engine.authorization.Resource;
-import org.camunda.bpm.engine.authorization.Resources;
 
 import de.unimuenster.wi.wfm.ejb.CarDataServiceBean;
 import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
 import de.unimuenster.wi.wfm.ejb.InsuranceBenefitEntityServiceBean;
 import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
+
 import de.unimuenster.wi.wfm.entitiy.CarData;
 import de.unimuenster.wi.wfm.entitiy.CaseStatus;
+
 import de.unimuenster.wi.wfm.entitiy.Customer;
 import de.unimuenster.wi.wfm.entitiy.InsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
+
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceType;
+
 
 @Startup
 @Singleton

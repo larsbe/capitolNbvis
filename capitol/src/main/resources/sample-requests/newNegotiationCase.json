@@ -4,7 +4,7 @@
 },
 "processVariables" : {
 "agreementConditions" : {
-	"value" : "{\"rentalAgreementRequestId\":1,\"customerData\":{\"name\":\"Robert Voscort\",\"company\":\"Capitol\",\"email\":\"robert.voscort@capitol.to\",\"phoneNumber\":\"0190666666\",\"address\":\"TestAddress\"},\"carsData\":[{\"licenseNumber\":\"TR-L-2608\",\"hsn\":\"489032\",\"tsn\":\"8593402\"},{\"licenseNumber\":\"MS-X-320\",\"hsn\":\"49302\",\"tsn\":\"520358\"}],\"additionalInfo\":\"Test\",\"insuranceType\":\"PARTIAL\",\"benefits\":[\"AWESOME\"],\"insurancePrice\":null}"
+	"value" : "{\"rentalAgreementRequestId\":1,\"customerData\":{\"name\":\"Robert Voscort\",\"company\":\"Capitol\",\"email\":\"robert.voscort@capitol.to\",\"phoneNumber\":\"0190666666\",\"address\":\"TestAddress\"},\"carsData\":[{\"licenseNumber\":\"TR-L-2608\",\"hsn\":\"489032\",\"tsn\":\"8593402\"},{\"licenseNumber\":\"MS-X-320\",\"hsn\":\"49302\",\"tsn\":\"520358\"}],\"additionalInfo\":\"Test\",\"insuranceType\":\"PARTIAL\",\"benefits\":[\"BRAKEDOWNCOVER\"],\"insurancePrice\":null}",
 	"type" : "String",
 	"valueInfo" : {
 		"objectTypeName": "de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage",
