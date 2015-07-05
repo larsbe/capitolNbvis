@@ -1,6 +1,8 @@
 package de.unimuenster.wi.wfm.application;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,13 +39,19 @@ import org.camunda.bpm.engine.task.TaskQuery;
 import org.camunda.bpm.engine.authorization.Resource;
 import org.camunda.bpm.engine.authorization.Resources;
 
+import de.unimuenster.wi.wfm.ejb.CarDataServiceBean;
 import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
+import de.unimuenster.wi.wfm.ejb.InsuranceBenefitEntityServiceBean;
 import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
+import de.unimuenster.wi.wfm.entitiy.CarData;
 import de.unimuenster.wi.wfm.entitiy.CaseStatus;
 import de.unimuenster.wi.wfm.entitiy.Customer;
+import de.unimuenster.wi.wfm.entitiy.InsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
+import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
+import de.unimuenster.wi.wfm.sharedLib.data.InsuranceType;
 
 @Startup
 @Singleton
@@ -57,6 +65,12 @@ public class DemoDataGenerator {
 
 	@EJB
 	private InsuranceContractServiceBean insuranceContractService;
+	
+	@EJB
+	private CarDataServiceBean carDataService;
+	
+	@EJB
+	private InsuranceBenefitEntityServiceBean insuranceBenefitEntitySerice;
 
 	@Inject
 	protected ProcessEngine processEngine;
@@ -81,13 +95,40 @@ public class DemoDataGenerator {
 
 		// generate
 		Customer c1 = new Customer();
-		c1.setName("BVIS");
+		c1.setName("Peter");
+		c1.setCompany("BVIS");
+		c1.setEmail("BVIS@gmail.de");
+		c1.setPhoneNumber("0190123456");
+		c1.setAddress("münster");
 		customerService.createCustomer(c1);
 
 		InsuranceContract ic1 = new InsuranceContract();
 		ic1.setCustomer(c1);
+		ic1.setAdditionalInfo("BLABLA");
+		InsuranceType type = InsuranceType.PARTIAL;
+		ic1.setInsuranceType(type);
+		CarData carData = new CarData();
+		carData.setHsn("0005");
+		carData.setTsn("156");
+		carData.setLicenseNumber("MS-JG-1990");
+		Collection<CarData> cardatas = new ArrayList<CarData>();
+		cardatas.add(carData);
+		ic1.setCardatas(cardatas);
+		InsuranceBenefit insu = InsuranceBenefit.BRAKEDOWNCOVER;
+		
+		InsuranceBenefitEntity insuranceBenefitEntity = new InsuranceBenefitEntity();
+		insuranceBenefitEntity.setInsuranceBenefit(insu);
+		Collection<InsuranceBenefitEntity> insuranceBenefitEntitys = new ArrayList<InsuranceBenefitEntity>();
+		insuranceBenefitEntitys.add(insuranceBenefitEntity);
+		ic1.setInsuranceBenefitEntity(insuranceBenefitEntitys);
 		ic1.setInsurancePrice(BigDecimal.valueOf(125.23));
 		insuranceContractService.createInsuranceContract(ic1);
+		
+		carData.setInsuranceContract(ic1);
+		carDataService.createCarData(carData);
+		
+		insuranceBenefitEntity.setInsuranceContract(ic1);
+		insuranceBenefitEntitySerice.createInsuranceBenefitEntity(insuranceBenefitEntity);
 
 		// only if no demo data is avl.
 		if (isDemoDataAvl())

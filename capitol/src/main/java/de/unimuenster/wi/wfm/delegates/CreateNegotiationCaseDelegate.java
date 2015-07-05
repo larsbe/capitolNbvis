@@ -64,7 +64,7 @@ public class CreateNegotiationCaseDelegate implements JavaDelegate {
 		RentalAgreementMessage message = new RentalAgreementMessage();
 		message.setRentalAgreementRequestId(1);
 		message.setAdditionalInfo("Test");
-		message.setBenefits(Arrays.asList(InsuranceBenefit.AWESOME));
+		message.setBenefits(Arrays.asList(InsuranceBenefit.HAILDAMAGE));
 		message.setInsuranceType(InsuranceType.PARTIAL);
 		CustomerData customerData = new CustomerData();
 		customerData.setName("Robert Voscort");
