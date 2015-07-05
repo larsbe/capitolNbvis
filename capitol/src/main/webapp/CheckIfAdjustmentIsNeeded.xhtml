@@ -11,59 +11,65 @@
     		<ui:define name="content">
     		
     		 	<h1>Check if Adjustment of Insurance Fee is needed</h1>
-    		 	<h3>Liability Case Info</h3>
+    		 	<h3>Customer</h3>
 			    <table class="table">
 			    	<tr>
-			    		<th>Customer</th>
-			    	</tr>
-			    	<tr>
+			    		<th>Name</th>
 			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.customer.name}</td>
 			    	</tr>
 			    	<tr>
-			    		<th>Contract</th>
+			    		<th>Company</th>
+			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.customer.company}</td>
 			    	</tr>
+			    	<tr>
+			    		<th>Email</th>
+			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.customer.email}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Phone Number</th>
+			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.customer.phoneNumber}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Address</th>
+			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.customer.address}</td>
+			    	</tr>
+			    </table>	
+			   <h3>Contract</h3>
+			    <table class="table">
 			    	<tr>
 			    		<th>Contract ID</th>
 			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.id}</td>
 			    	</tr>
 			    	<tr>
-			    		<th>Insurance Fee</th>
+			    		<th>Insurance Price</th>
 			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.insurancePrice}</td>
 			    	</tr>
 			    	<tr>
-			    		<th>Liability Cases</th>
+			    		<th>Insurance Type</th>
+			    		<td>#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.insuranceType}</td>
 			    	</tr>
+			    </table>
+			    	<h3>Liability Cases</h3>
 			    	<h:dataTable value="#{checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.getLiabilityCases()}" var="cur"
-					styleClass="data-table" headerClass="data-cell header-cell"
-					columnClasses="data-cell,data-cell,data-cell,data-cell"
+					styleClass="table" headerClass="table-cell table-cell"
+					columnClasses="table-cell,table-cell,table-cell"
 					rendered="#{not empty checkIfAdjestmentIsNeeded.liabilityCase.insuranceContract.getLiabilityCases()}">
 						<h:column>
-							<f:facet name="header">________Status________</f:facet>
+							<f:facet name="header">Status</f:facet>
 							<h:outputText value="#{cur.status}">
 							</h:outputText>
 						</h:column>
 						<h:column>
-							<f:facet name="header">________Eligible________</f:facet>
+							<f:facet name="header">Eligible</f:facet>
 							<h:outputText value="#{cur.eligible}">
 							</h:outputText>
 						</h:column>
 						<h:column>
-							<f:facet name="header">________Claim Details________</f:facet>
-							<h:outputText value="#{cur.claimDetails}">
-							</h:outputText>
-						</h:column>
-						<h:column>
-							<f:facet name="header">________Cars Fair Value________</f:facet>
-							<h:outputText value="#{cur.carsFairValue}">
-							</h:outputText>
-						</h:column>
-						<h:column>
-							<f:facet name="header">________InsuranceSum________</f:facet>
+							<f:facet name="header">Insurance Sum</f:facet>
 							<h:outputText value="#{cur.insuranceSum}">
 							</h:outputText>
 						</h:column>
 					</h:dataTable>
-					</table>
 					
 					<h3>Adjustment needed?</h3>
 				    <h:form id="submitForm" target="_parent">
