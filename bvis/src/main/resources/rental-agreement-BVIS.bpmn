@@ -69,7 +69,7 @@
       <bpmn2:endEvent id="EndEvent_1" name="agreed on &#xD;&#xA;insurance conditions">
         <bpmn2:incoming>SequenceFlow_16</bpmn2:incoming>
       </bpmn2:endEvent>
-      <bpmn2:userTask id="Task_4" camunda:candidateGroups="AgreementConditionsImprover" camunda:formKey="app:CheckAgreementConditionsOfCapitol.jsf" name="check agreement conditions ">
+      <bpmn2:userTask id="Task_4" camunda:candidateGroups="AgreementConditionsImprover" camunda:formKey="embedded:app:forms/CheckAgreementConditionsOfCapitol.html" name="check agreement conditions ">
         <bpmn2:incoming>SequenceFlow_23</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
         <bpmn2:dataInputAssociation id="DataInputAssociation_3">
@@ -117,7 +117,7 @@
       <bpmn2:outgoing>SequenceFlow_42</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_60</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="Negotiator" camunda:formKey="app:NegotiateAgreementConditionsWithCustomer.jsf" name="negotiate agreement conditions with customer (via telephone or face2face) ">
+    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="Negotiator" camunda:formKey="embedded:app:forms/NegotiateAgreementConditionsWithCustomer.html" name="negotiate agreement conditions with customer (via telephone or face2face) ">
       <bpmn2:incoming>SequenceFlow_42</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_59</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_43</bpmn2:outgoing>
@@ -129,7 +129,7 @@
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${individualSolutionRequested}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_43" name="" sourceRef="UserTask_1" targetRef="SubProcess_1"/>
-    <bpmn2:userTask id="UserTask_2" camunda:candidateGroups="Contract handler" camunda:formKey="app:SetUpIndividualSolutionContract.jsf" name="set up individual solution contract containing insurance benefits">
+    <bpmn2:userTask id="UserTask_2" camunda:candidateGroups="Contract handler" camunda:formKey="embedded:app:forms/IndividualContract.html" name="set up individual solution contract containing insurance benefits">
       <bpmn2:incoming>SequenceFlow_48</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
       <bpmn2:dataInputAssociation id="DataInputAssociation_4">
@@ -139,14 +139,14 @@
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_48" name="" sourceRef="SubProcess_1" targetRef="UserTask_2"/>
     <bpmn2:dataObject id="DataObject_6" name="Data Object 6"/>
-    <bpmn2:userTask id="UserTask_3" camunda:candidateGroups="Contract handler" name="propose contract to customer (in office)">
+    <bpmn2:userTask id="UserTask_3" camunda:candidateGroups="Contract handler" camunda:formKey="embedded:app:forms/ProposeContractToCustomer.html" name="propose contract to customer (in office)">
       <bpmn2:incoming>SequenceFlow_53</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_53" name="yes" sourceRef="ExclusiveGateway_4" targetRef="UserTask_3">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${isCustomerOnSite}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="UserTask_4" camunda:candidateGroups="Contract handler" camunda:formKey="app:SetUpStandardSolutionContract.jsf" name="set up standard solution contract">
+    <bpmn2:userTask id="UserTask_4" camunda:candidateGroups="Contract handler" camunda:formKey="embedded:app:forms/StandardContract.html" name="set up standard solution contract">
       <bpmn2:incoming>SequenceFlow_60</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_68</bpmn2:outgoing>
       <bpmn2:dataInputAssociation id="DataInputAssociation_6">
@@ -176,7 +176,7 @@
     </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_67" name="" sourceRef="SendTask_3" targetRef="EndEvent_3"/>
     <bpmn2:sequenceFlow id="SequenceFlow_68" name="" sourceRef="UserTask_4" targetRef="ExclusiveGateway_4"/>
-    <bpmn2:userTask id="UserTask_8" camunda:formKey="app:CreateNewRentalAgreementRequest.jsf" name="Search customer and create new Rental Agreement Request">
+    <bpmn2:userTask id="UserTask_8" camunda:formKey="embedded:app:forms/CreateNewRentalAgreementRequest.html" name="Search customer and create new Rental Agreement Request">
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -214,7 +214,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_9" name="no" sourceRef="ExclusiveGateway_4" targetRef="ExclusiveGateway_8">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!isCustomerOnSite}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="UserTask_5" camunda:formKey="app:CheckContractIsSigned.jsf" name="check if contract is signed or cancelled">
+    <bpmn2:userTask id="UserTask_5" camunda:formKey="embedded:app:forms/CheckContractIsSigned.html" name="check if contract is signed or cancelled">
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_20</bpmn2:outgoing>
     </bpmn2:userTask>
