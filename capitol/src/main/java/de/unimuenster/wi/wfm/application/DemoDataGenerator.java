@@ -97,7 +97,7 @@ public class DemoDataGenerator {
 		c1.setCompany("BVIS");
 		c1.setEmail("BVIS@gmail.de");
 		c1.setPhoneNumber("0190123456");
-		c1.setAddress("m�nster");
+		c1.setAddress("muenster");
 		customerService.createCustomer(c1);
 
 		InsuranceContract ic1 = new InsuranceContract();
