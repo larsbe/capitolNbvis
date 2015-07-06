@@ -46,7 +46,7 @@
 			<h3>Car Pool</h3>
 			
 			<div class="inputForm">
-				<h:form id="carForm" target="_parent">
+				<h:form id="carForm" target="_self">
 					<div class="data">
 						<h:dataTable id="orderLines" 
 							value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.carPool}" var="cur"
@@ -78,9 +78,9 @@
 						<h:commandButton id="action_addToCarPool" value="Add to Car Pool" action="#{negotiateAgreementConditionsWithCustomer.addCarPool()}" />
 					</h:panelGrid>
 					
-
+			</h:form>
 			<h3>Insurance Requirements</h3>
-
+			<h:form target="_parent">
 
 				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
 						<h:outputLabel value="Customer Requirements" for="negotiateAgreementConditions_reqs" />
