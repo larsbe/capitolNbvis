@@ -8,9 +8,9 @@ public enum InsuranceType {
 	@Override
 	  public String toString() {
 	    switch(this) {
-	      case PARTIAL: return "General Liability";
-	      case FULL: return "Partial Cover";
-	      case GENERAL: return "Fully Comprehensive";
+	      case PARTIAL: return "General Liability (CP 500€)";
+	      case FULL: return "Partial Cover (CP 500€)";
+	      case GENERAL: return "Fully Comprehensive (CP 500€)";
 	      default: throw new IllegalArgumentException();
 	    }
 	  }

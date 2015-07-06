@@ -17,40 +17,52 @@
     		<h3>Liability Case Info</h3>
     		<table class="table">
 			    	<tr>
-			    		<th>Case ID</th>
-			    		<td>#{checkEligibility.liabilityCase.id}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Contract ID</th>
-			    		<td>#{checkEligibility.liabilityCase.insuranceContract.id}
-			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModalContract">
-							  Details
-							</button>
-			    		</td>
-			    	</tr>
-			    	<tr>
 			    		<th>Customer Name</th>
 			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}
 			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModal">
-							  Details
+							  Customer Details
 							</button>
 			    		</td>
 			    	</tr>
 			    	<tr>
-			    		<th>Claim Details</th>
-			    		<td>#{checkEligibility.liabilityCase.claimDetails}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Claim Eligibility</th>
-			    		<td>#{checkEligibility.liabilityCase.eligible}</td>
-			    	</tr>
-			    	<tr>
 			    		<th>Car's Fair Value</th>
-			    		<td>#{checkEligibility.liabilityCase.carsFairValue}</td>
+			    		<td>#{checkEligibility.liabilityCase.carsFairValue}
+			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModalLiability">
+							  Liability Case Details
+							</button>
+			    		</td>
 			    	</tr>
 			    	<tr>
-			    		<th>Estimate of Costs</th>
+			    		<th>Expected amount of Loss</th>
 			    		<td>#{checkEligibility.liabilityCase.estimateOfCosts}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Insurance Type</th>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.insuranceType.toString()}
+			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModalContract">
+							  Contract Details
+							</button>
+			    		</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Standard Insurance Benefits</th>
+			    		<td>
+			    			<ui:repeat value="#{checkEligibility.liabilityCase.insuranceContract.getInsuranceBenefitEntity()}" var="cur">
+						        <li>
+						            <h:outputText value="#{cur.insuranceBenefit.toString()}"></h:outputText>
+						        </li>
+						    </ui:repeat>
+			    		</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Individual Insurance Benefits</th>
+			    		<td>
+			    			<ui:repeat value="#{checkEligibility.liabilityCase.insuranceContract.getIndividualInsuranceBenefitEntity()}" var="cur">
+						        <li>
+						            <h:outputText value="#{cur.name}"></h:outputText>
+						        </li>
+						    </ui:repeat>
+			    		</td>
 			    	</tr>
 			</table>
 			
@@ -59,21 +71,22 @@
     		<h:form class="form-horizontal" target="_parent">
 
 	    		<div class="form-group">
-					    <h:outputLabel class="col-sm-3 control-label" for="insuranceSum" value="Insurance Sum" />
+					    <h:outputLabel class="col-sm-3 control-label" for="carValue" value="Fair Value" />
 					    <div class="input-group col-sm-4">
 					      <div class="input-group-addon">€</div>
-					      <h:inputText class="form-control" id="insuranceSum" p:placeholder="Amount" value="#{calculateInsuranceSum.liabilityCase.insuranceSum}" />
-					      <div class="input-group-addon">.00</div>
-					    </div>
-					    
-					    <div class="form-group">
-					    <h:outputLabel class="col-sm-3 control-label" for="note" value="Note" />
-					    <div class="input-group col-sm-4">
-					      <h:inputTextarea class="form-control" id="note" value="#{calculateInsuranceSum.liabilityCase.decisionNote}" />
-					    </div>
+					      <h:inputText class="form-control" id="carValue" p:placeholder="Amount" value="#{calculateCarsFairValue.liabilityCase.carsFairValue}" />
 					    </div>
 
 				</div>
+					    
+					    <div class="form-group">
+					    <h:outputLabel for="note" value="Note" />
+					    
+					      <h:inputTextarea class="form-control" id="note" value="#{calculateInsuranceSum.liabilityCase.decisionNote}" />
+					    
+					    </div>
+
+				
 
 				<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Save changes" action="#{calculateInsuranceSum.submitForm()}" />
 			</h:form>
