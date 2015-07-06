@@ -32,27 +32,27 @@
 					    		<th>Additional Info</th>
 					    		<td>#{checkEligibility.liabilityCase.insuranceContract.additionalInfo}</td>
 					    	</tr>
+					    	<tr>
+			    		<th>Standard Insurance Benefits</th>
+			    		<td>
+			    			<ui:repeat value="#{checkEligibility.liabilityCase.insuranceContract.getInsuranceBenefitEntity()}" var="cur">
+						        <li>
+						            <h:outputText value="#{cur.insuranceBenefit.toString()}"></h:outputText>
+						        </li>
+						    </ui:repeat>
+			    		</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Individual Insurance Benefits</th>
+			    		<td>
+			    			<ui:repeat value="#{checkEligibility.liabilityCase.insuranceContract.getIndividualInsuranceBenefitEntity()}" var="cur">
+						        <li>
+						            <h:outputText value="#{cur.name}"></h:outputText>
+						        </li>
+						    </ui:repeat>
+			    		</td>
+			    	</tr>
 					    </table>
-					    
-					    <h:dataTable value="#{checkEligibility.liabilityCase.insuranceContract.getInsuranceBenefitEntity()}" var="cur"
-						styleClass="table" headerClass="table-cell table-cell"
-						columnClasses="table-cell,table-cell,table-cell">
-							<h:column>
-								<f:facet name="header">Standard Insurance Benefit</f:facet>
-								<h:outputText value="#{cur.insuranceBenefit.toString()}">
-								</h:outputText>
-							</h:column>
-						</h:dataTable>
-						
-						 <h:dataTable value="#{checkEligibility.liabilityCase.insuranceContract.getIndividualInsuranceBenefitEntity()}" var="cur"
-						styleClass="table" headerClass="table-cell table-cell"
-						columnClasses="table-cell,table-cell,table-cell">
-							<h:column>
-								<f:facet name="header">Individual Insurance Benefit</f:facet>
-								<h:outputText value="#{cur.name}">
-								</h:outputText>
-							</h:column>
-						</h:dataTable>
 					    
 				      </div>
 				    </div>
