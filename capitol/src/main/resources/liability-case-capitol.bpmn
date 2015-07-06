@@ -122,7 +122,7 @@
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_25" name="" sourceRef="StartEvent_2" targetRef="ServiceTask_1"/>
     <bpmn2:sequenceFlow id="SequenceFlow_26" name="" sourceRef="ServiceTask_1" targetRef="SubProcess_1"/>
-    <bpmn2:serviceTask id="ServiceTask_3" camunda:class="de.unimuenster.wi.wfm.delegates.CloseClaimDelegate" name="Close claim">
+    <bpmn2:serviceTask id="ServiceTask_3" camunda:delegateExpression="${closeClaimDelegate}" name="Close claim">
       <bpmn2:incoming>SequenceFlow_31</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_32</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -133,7 +133,7 @@
     </bpmn2:sequenceFlow>
     <bpmn2:dataObjectReference id="DataObjectReference_1" name="Claim" dataObjectRef="DataObject_1"/>
     <bpmn2:dataObjectReference id="DataObjectReference_4" name="Agreement Conditions" dataObjectRef="DataObject_1"/>
-    <bpmn2:serviceTask id="ServiceTask_6" camunda:class="de.unimuenster.wi.wfm.delegates.InitiatePaymentDelegate" name="Initiate payment">
+    <bpmn2:serviceTask id="ServiceTask_6" camunda:delegateExpression="${initiatePaymentDelegate}" name="Initiate payment">
       <bpmn2:incoming>SequenceFlow_39</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_42</bpmn2:outgoing>
     </bpmn2:serviceTask>
@@ -143,13 +143,13 @@
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_39" name="" sourceRef="ParallelGateway_1" targetRef="ServiceTask_6"/>
     <bpmn2:sequenceFlow id="SequenceFlow_40" name="" sourceRef="ParallelGateway_1" targetRef="UserTask_2"/>
-    <bpmn2:serviceTask id="ServiceTask_7" camunda:class="de.unimuenster.wi.wfm.delegates.CloseClaimDelegate" name="Close claim">
+    <bpmn2:serviceTask id="ServiceTask_7" camunda:delegateExpression="${closeClaimDelegate}" name="Close claim">
       <bpmn2:incoming>SequenceFlow_42</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_41</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_41" name="" sourceRef="ServiceTask_7" targetRef="EndEvent_4"/>
     <bpmn2:sequenceFlow id="SequenceFlow_42" name="" sourceRef="ServiceTask_6" targetRef="ServiceTask_7"/>
-    <bpmn2:sendTask id="SendTask_2" camunda:class="de.unimuenster.wi.wfm.delegates.InformBvisAboutInsuranceSumDelegate" name="Inform BVIS about insurance sum">
+    <bpmn2:sendTask id="SendTask_2" camunda:delegateExpression="${informBvisAboutInsuranceSumDelegate}" name="Inform BVIS about insurance sum">
       <bpmn2:incoming>SequenceFlow_45</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_44</bpmn2:outgoing>
     </bpmn2:sendTask>

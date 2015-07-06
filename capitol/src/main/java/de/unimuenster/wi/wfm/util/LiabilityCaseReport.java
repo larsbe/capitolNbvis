@@ -11,6 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import javax.inject.Inject;
+
+import org.camunda.bpm.engine.IdentityService;
+import org.camunda.bpm.engine.ProcessEngine;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.Pipeline;
@@ -50,7 +55,7 @@ public class LiabilityCaseReport {
 	public static String PDF_LIABILITY_CASE_REPORT_URL = "http://capitol.jonasgerlach.de/resources/pdf/LiabilityCaseReport.html";
 	public static String PDF_LIABILITY_CASE_REPORT_CSS_URL = "http://capitol.jonasgerlach.de/resources/pdf/style.css";
 	public static String UPLOAD_DIR_HTTP_URL = "http://capitol.jonasgerlach.de/resources/uploads/";
-
+	
 	public String generatePDF() {
 		File file = GeneratePDF();
 		FTPUpload.uploadFile(file);
@@ -81,7 +86,8 @@ public class LiabilityCaseReport {
 		if(deduction < 0)
 			deduction = 0.0;
 		report.setDeductions(deduction.toString());
-		report.setPayment("0.00 EUR");
+		report.setPayment(claim.getInsuranceSum() + " EUR");
+		report.setNameReviser("Bernd Stromberg / CEO");
 		return report;
 	}
 	
@@ -104,6 +110,7 @@ public class LiabilityCaseReport {
 		report.setCarsFairValue("/");
 		report.setDeductions("/");
 		report.setPayment("0.00 EUR");
+		report.setNameReviser("Bernd Stromberg / CEO");
 		return report;
 	}
 	
