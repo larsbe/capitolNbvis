@@ -6,12 +6,13 @@ import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 
 public class BvisREST {
 
-	public static String LiabilityCaseRejectionInformation(String correlationKey, String decisionNote, String reportUrl) {
+	public static String LiabilityCaseRejectionInformation(Long correlationKey, String decisionNote, String reportUrl) {
+//		correlationID: claimIdBVIS
 		String json = "";
 		return json;
 	}
 
-	public static String LiabilityCasePaymentInformation(String correlationKey, String decisionNote, String reportUrl, Double payment) {
+	public static String LiabilityCasePaymentInformation(Long correlationKey, String decisionNote, String reportUrl, Double payment) {
 		String json = "";
 		return json;
 	}
