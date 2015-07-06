@@ -43,8 +43,22 @@
 				</h:form>
 				</div>													
 			
+			<h3>View Contract</h3>
+			
+			<div class="inputForm">
+				<h:form id="viewForm">
+					<h:panelGrid columns="2" columnClasses="form-label,form-input">
+						<h:outputLabel value="View Contract" for="view_Contract" />
+						<h:inputText
+							id="view_Contract" value="#{checkContractIsSigned.rentalAgreementContract.urlToSignedContract}" 
+							disabled="true" />
+					</h:panelGrid>
+				</h:form>
+				</div>		
+				
 			
 			<h3>Check Contract</h3>
+		
 
 			<div class="inputForm">
 				<h:form id="submitForm">
