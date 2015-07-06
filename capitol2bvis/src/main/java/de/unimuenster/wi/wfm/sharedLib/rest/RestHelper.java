@@ -39,7 +39,7 @@ public class RestHelper {
 
 			// if content -> check 201
 			if (response.getStatusLine().getStatusCode() != 201) {
-				throw new RuntimeException("Failed : HTTP error code : "
+				System.err.println("REST Call Failed : HTTP error code : "
 						+ response.getStatusLine().getStatusCode());
 			}
 
