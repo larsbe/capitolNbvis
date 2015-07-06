@@ -34,6 +34,9 @@ public class InsuranceContract extends AbstractEntity {
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "insuranceContract")
 	protected Collection<InsuranceBenefitEntity> insuranceBenefitEntity = new ArrayList<InsuranceBenefitEntity>();
 	
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "insuranceContract")
+	protected Collection<IndividualInsuranceBenefitEntity> individualInsuranceBenefitEntity = new ArrayList<IndividualInsuranceBenefitEntity>();
+	
 	private String additionalInfo;
 	private InsuranceType insuranceType;
 	
