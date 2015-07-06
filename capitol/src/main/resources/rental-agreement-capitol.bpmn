@@ -61,19 +61,19 @@
     <bpmn2:sequenceFlow id="SequenceFlow_27" name="true" sourceRef="ExclusiveGateway_3" targetRef="taskReceiveContractStatus">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${conditionsApproved == true}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:serviceTask id="taskActivateContract" camunda:class="de.unimuenster.wi.wfm.delegates.ActivateContractDelegate" name="Persist and activate contract">
+    <bpmn2:serviceTask id="taskActivateContract" camunda:delegateExpression="${activateContractDelegate}" name="Persist and activate contract">
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_28</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_28" name="" sourceRef="taskActivateContract" targetRef="EndEvent_2"/>
     <bpmn2:dataObject id="DataObject_1" name="Data Object 1"/>
-    <bpmn2:sendTask id="taskSendAgreementConditions" camunda:class="de.unimuenster.wi.wfm.delegates.SendAgreementConditionsDelegate" name="Send agreement&#xA;conditions">
+    <bpmn2:sendTask id="taskSendAgreementConditions" camunda:delegateExpression="${sendAgreementConditionsDelegate}" name="Send agreement&#xA;conditions">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
     </bpmn2:sendTask>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="taskAddInsuranceBenefits" targetRef="taskSendAgreementConditions"/>
     <bpmn2:sequenceFlow id="SequenceFlow_3" name="" sourceRef="taskSendAgreementConditions" targetRef="taskReceiveAgreementConditions"/>
-    <bpmn2:serviceTask id="taskCloseCase" camunda:class="de.unimuenster.wi.wfm.delegates.CloseCaseDelegate" name="Close case">
+    <bpmn2:serviceTask id="taskCloseCase" camunda:delegateExpression="${closeCaseDelegate}" name="Close case">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:serviceTask>
