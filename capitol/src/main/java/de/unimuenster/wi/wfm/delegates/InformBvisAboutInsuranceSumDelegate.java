@@ -23,24 +23,18 @@ public class InformBvisAboutInsuranceSumDelegate implements JavaDelegate {
 	public void execute(DelegateExecution delegateExecution) throws Exception {
 
 		Map<String, Object> variables = delegateExecution.getVariables();
-		
-		System.out.println("Case ID:" + variables.get("caseID"));
-		
 		LiabilityCase claim = liabilityCaseService
 				.getLiabilityCase((Long) variables.get("caseID"));
-		
-		System.out.println("Claim: " + claim.getId());
-		System.out.println("CFV: ");
-		System.out.println(claim.getCarsFairValue());
-		System.out.println("IS: ");
-		System.out.println(claim.getInsuranceSum());
-		
 
 		// Create PDF
 		LiabilityCaseReport report = LiabilityCaseReport
 				.CreatePaymentReport(claim);
 		String reportUrl = report.generatePDF();
 		System.out.println("Payment Report: " + reportUrl);
+
+		// Update Claim
+		claim.setReportUrl(reportUrl);
+		claim = liabilityCaseService.mergeLiabilityCase(claim);
 
 		// Infrom BVIS
 		REST.SendLiabilityCasePaymentInformation(claim);
