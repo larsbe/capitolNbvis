@@ -6,10 +6,20 @@ import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 
 public class CapitolREST {
 
-	public static String ContractStatus(String correlationKey_rentalAgreementRequestIdBVIS) {
-		return "";
+	public static String ContractStatus(
+			Long correlationKey_rentalAgreementRequestIdBVIS, Boolean signed) {
+		CamundaMessage msg = new CamundaMessage(
+				Capitol.REST_MSG_CONTRACT_STATUS);
+		msg.addCorrelationKey("rentalAgreementRequestIdBVIS",
+				new CamundaMessageVariable(
+						correlationKey_rentalAgreementRequestIdBVIS.toString(),
+						CamundaVariableType.LONG));
+		msg.addProcessVariables("signed",
+				new CamundaMessageVariable(signed.toString(),
+						CamundaVariableType.BOOLEAN));
+		return msg.toString();
 	}
-	
+
 	public static String NewStandardRentalAgreement(
 			RentalAgreementMessage rentalAgreementMsg) {
 		CamundaMessage msg = new CamundaMessage(

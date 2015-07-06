@@ -2,7 +2,7 @@ package de.unimuenster.wi.wfm.sharedLib.rest;
 
 public enum CamundaVariableType {
 
-	LONG("Long"), DOUBLE("Double"), STRING("String"), OBJECT("Object"), INTEGER("Integer");
+	LONG("Long"), DOUBLE("Double"), STRING("String"), OBJECT("Object"), INTEGER("Integer"), BOOLEAN("Boolean");
 
 	private final String name;
 
