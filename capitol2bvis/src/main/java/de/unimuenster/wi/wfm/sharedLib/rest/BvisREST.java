@@ -11,5 +11,10 @@ public class BvisREST {
 		String json = "";
 		return json;
 	}
+	
+	public static String AgreementConditionsWithInsurance(String correlationKey) {
+		return "";
+		
+	}
 
 }
