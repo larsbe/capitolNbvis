@@ -19,6 +19,7 @@ import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
 import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
 import de.unimuenster.wi.wfm.entitiy.CarData;
+import de.unimuenster.wi.wfm.entitiy.IndividualInsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
@@ -46,6 +47,8 @@ public class AddInsuranceBenefits implements Serializable {
 	private long contractId;
 	
 	private InsuranceBenefit newBenefit;
+	private BigDecimal priceOfNewIndividualBenefit = BigDecimal.ZERO;
+	private String nameOfNewIndividualBenefit = "";
 	
 	private RentalAgreementMessage rentalAgreementMsg;
 	
@@ -74,7 +77,7 @@ public class AddInsuranceBenefits implements Serializable {
 	}
 	
 	public void update() {
-		
+		contract =  insuranceContractService.mergeInsuranceContract(contract);
 	}
 	
 	public void submitForm() {
@@ -91,7 +94,6 @@ public class AddInsuranceBenefits implements Serializable {
 	
 	public void addBenefit() {
 		try  {
-			System.out.println("Adding");
 			InsuranceBenefitEntity benefitEntity = new InsuranceBenefitEntity();
 			benefitEntity.setInsuranceBenefit(newBenefit);
 			insuranceContractService.addInsuranceBenefitEntities(contractId, benefitEntity);
@@ -106,6 +108,24 @@ public class AddInsuranceBenefits implements Serializable {
 		contract = insuranceContractService.getInsuranceContract(getContractId());
 	}
 	
+	public void addIndividualBenefit() {
+		try  {
+			IndividualInsuranceBenefitEntity benefitEntity = new IndividualInsuranceBenefitEntity();
+			benefitEntity.setPrice(priceOfNewIndividualBenefit);
+			benefitEntity.setName(nameOfNewIndividualBenefit);
+			insuranceContractService.addIndividualInsuranceBenefitEntities(contractId, benefitEntity);
+			contract = insuranceContractService.getInsuranceContract(getContractId());
+			System.out.println("New number of individual benefits " + contract.getIndividualInsuranceBenefitEntity().size());
+		} catch (EJBException e) {
+			System.out.println("oops an error");
+		}
+	}
+
+	public void removeFromIndividualBenefits(IndividualInsuranceBenefitEntity benefitEntity) {
+		insuranceContractService.removeFromIndividualInsuranceBenefitEntities(benefitEntity);
+		contract = insuranceContractService.getInsuranceContract(getContractId());
+	}
+	
 	public InsuranceBenefit getNewBenefit() {
 		return newBenefit;
 	}
@@ -114,17 +134,25 @@ public class AddInsuranceBenefits implements Serializable {
 		newBenefit = benefit;
 	}
 	
+	public String getPriceOfNewIndividualBenefit() {
+		return priceOfNewIndividualBenefit.toString();
+	}
+
+	public void setPriceOfNewIndividualBenefit(
+			String priceOfNewIndividualBenefit) {
+		this.priceOfNewIndividualBenefit = new BigDecimal(priceOfNewIndividualBenefit);
+	}
+
+	public String getNameOfNewIndividualBenefit() {
+		return nameOfNewIndividualBenefit;
+	}
+
+	public void setNameOfNewIndividualBenefit(String nameOfNewIndividualBenefit) {
+		this.nameOfNewIndividualBenefit = nameOfNewIndividualBenefit;
+	}
+
 	public List<InsuranceBenefit> getAllBenefits() {
 		return Arrays.asList(InsuranceBenefit.values());
-	}
-	
-	public InsuranceType getInsuranceType() {
-		return contract.getInsuranceType();
-	}
-	
-	public void setInsuranceType(InsuranceType type) {
-		contract.setInsuranceType(type);
-		contract = insuranceContractService.mergeInsuranceContract(contract);
 	}
 	
 	public List<InsuranceType> getAllInsuranceTypes() {
