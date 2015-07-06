@@ -8,10 +8,10 @@ import javax.inject.Named;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-import de.unimuenster.wi.wfm.application.EMailSender;
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementContractServiceBean;
 import de.unimuenster.wi.wfm.persistence.LiabilityCase;
+import de.unimuenster.wi.wfm.util.EMailSender;
 
 @Named
 public class InformCustomerAboutInsuranceDecisionDelegate implements JavaDelegate {

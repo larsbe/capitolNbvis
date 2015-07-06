@@ -10,11 +10,8 @@ public class SendAgreementConditionsToCapitolDelegate implements JavaDelegate {
 
 	
 	public void execute(DelegateExecution delegateExecution) throws Exception {
-		// TODO Auto-generated method stub
 		System.out.println("SendAgreementConditionsToCapitolDelegate");
 		
-		System.out.println("------------------------------------");
-		System.out.println("ProcessInstanceId: " + delegateExecution.getProcessInstanceId());
 		
 		
 		

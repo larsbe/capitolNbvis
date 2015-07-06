@@ -18,6 +18,7 @@ import de.unimuenster.wi.wfm.ejb.CarDataServiceBean;
 import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
 import de.unimuenster.wi.wfm.persistence.CarData;
+import de.unimuenster.wi.wfm.persistence.CarPool;
 import de.unimuenster.wi.wfm.persistence.Customer;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequestType;
@@ -74,9 +75,12 @@ public class CreateNewRentalAgreementRequestDelegate implements JavaDelegate {
 			
 			CarData carData = carDataService.getCarDataByName((String) businessProcess.getVariable("carType"));
 			if( carData != null){
-				Collection<CarData> carsData = new ArrayList<CarData>();
-				carsData.add(carData);
-				req.setCarsData(carsData);
+				Collection<CarPool> carPool = new ArrayList<CarPool>();
+				CarPool carPool_line = new CarPool();
+				carPool_line.setCarData(carData);
+				carPool_line.setQuantity(1);
+				carPool.add(carPool_line);
+				req.setCarPool(carPool);
 			}
 		}
 		req = rentalAgreementRequestService.merge(req);

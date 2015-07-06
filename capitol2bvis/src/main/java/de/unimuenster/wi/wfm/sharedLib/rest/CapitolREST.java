@@ -6,6 +6,30 @@ import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 
 public class CapitolREST {
 
+	public static String RevisedAgreementConditions(
+			Long correlationKey_rentalAgreementRequestIdBVIS,
+			RentalAgreementMessage rentalAgreementMsg,
+			Boolean conditionsApproved) {
+		CamundaMessage msg = new CamundaMessage(
+				Capitol.REST_MSG_REVISED_AGREEMENTL_CONDITIONS);
+		msg.addCorrelationKey("rentalAgreementRequestIdBVIS",
+				new CamundaMessageVariable(
+						correlationKey_rentalAgreementRequestIdBVIS.toString(),
+						CamundaVariableType.LONG));
+		String json = JSON(rentalAgreementMsg).toString();
+		msg.addProcessVariables(
+				"agreementConditions",
+				new CamundaMessageVariable(
+						json,
+						CamundaVariableType.STRING,
+						"de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage",
+						"application/json"));
+		msg.addProcessVariables("conditionsApproved",
+				new CamundaMessageVariable(conditionsApproved.toString(),
+						CamundaVariableType.BOOLEAN));
+		return msg.toString();
+	}
+
 	public static String ContractStatus(
 			Long correlationKey_rentalAgreementRequestIdBVIS, Boolean signed) {
 		CamundaMessage msg = new CamundaMessage(

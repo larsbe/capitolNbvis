@@ -15,7 +15,6 @@ import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementContractServiceBean;
 import de.unimuenster.wi.wfm.persistence.LiabilityCase;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementContract;
-import de.unimuenster.wi.wfm.web.Misc;
 
 @ManagedBean
 public class CheckClaimEligible implements Serializable {
@@ -34,6 +33,7 @@ public class CheckClaimEligible implements Serializable {
 	
 	@EJB
 	private RentalAgreementContractServiceBean rentalAgreementContractService;
+	@EJB
 	private LiabilityCaseServiceBean liabilityCaseService;
 	
 
@@ -60,24 +60,22 @@ public class CheckClaimEligible implements Serializable {
 	
 	public void submit() {
 		try {
-						
+			
+			System.out.println(".......liabilityCase: " + getLiabilityCase());
+			getLiabilityCase().setRentalAgreementContract(getRentalAgreementContract());
+			
 			// store new liability case in database
 			this.liabilityCase = liabilityCaseService.merge(getLiabilityCase());
 			
-			// store changes of contract in database	
-			this.rentalAgreementContract = rentalAgreementContractService.merge(getRentalAgreementContract());
-			
-			// complete user task form
-			taskForm.completeTask();
 			
 			// store process variables of this process...
 			// store flag "claimIsEligible"
 			businessProcess.setVariable( "claimIsEligible", getLiabilityCase().getEligible());
 			
+			// complete user task form
+			taskForm.completeTask();
 			
 		} catch (EJBException e) {
-			// add all validation errors
-			Misc.ValidateBean(getRentalAgreementContract());
 			
 		} catch (IOException e){
 			throw new RuntimeException("Cannot complete task", e);

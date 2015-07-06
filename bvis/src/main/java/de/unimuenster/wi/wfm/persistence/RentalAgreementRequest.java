@@ -1,5 +1,6 @@
 package de.unimuenster.wi.wfm.persistence;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -33,9 +34,8 @@ public class RentalAgreementRequest extends AbstractEntity {
 	protected StandardAgreementType standardAgreementType; 
 	protected String agreementConditions;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH,
-			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	protected Collection<CarData> carsData;
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, mappedBy = "rentalAgreementRequest")
+	protected Collection<CarPool> carPool = new ArrayList<CarPool>();
 
 	@OneToOne
 	private RentalAgreementContract rentalAgreementContract;
@@ -105,11 +105,15 @@ public class RentalAgreementRequest extends AbstractEntity {
 		this.rentalAgreementContract = rentalAgreementContract;		
 	}
 	
-	public Collection<CarData> getCarsData() {
-		return carsData;
+	public Collection<CarPool> getCarPool() {
+		return carPool;
 	}
-	public void setCarsData(Collection<CarData> carsData) {
-		this.carsData = carsData;
+	public void setCarPool(Collection<CarPool> carPool) {
+		this.carPool = carPool;
+	}
+
+	public void addCarPool(CarPool carPool){
+		this.carPool.add(carPool);
 	}
 
 	
