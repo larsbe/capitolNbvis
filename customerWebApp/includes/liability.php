@@ -85,7 +85,7 @@
                   "contractNoBVIS" : {"value" : "", "type": "Long"},
                   "imageCount" : {"value" : "", "type": "Integer"},
                   "claimDetails" : {"value" : "", "type": "String"},
-                  "estCosts" : {"value" : "", "type": "String"},
+                  "estCosts" : {"value" : "", "type": "Double"},
                   "licenseNumber":{"value" : "", "type": "String"}
               }
             };
