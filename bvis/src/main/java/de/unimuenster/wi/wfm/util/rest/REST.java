@@ -22,6 +22,16 @@ public class REST extends RestHelper {
 		System.out.println(msg);
 		SendMessageToCapitol(msg);
 	}
+	
+	public static void SendRevisedAgreementConditions(long correlationKey, RentalAgreementMessage rentalAgreementMsg, boolean approved) {
+		String msg = CapitolREST.RevisedAgreementConditions(
+				correlationKey,
+				rentalAgreementMsg,
+				approved
+		);
+		System.out.println(msg);
+		SendMessageToCapitol(msg);
+	}
 
 	public static void SendMessageToCapitol(String msg) {
 		RestHelper.SendMessage(Constants.CAMUNDA_REST_CAPITOL, msg);
