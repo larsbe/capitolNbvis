@@ -163,6 +163,7 @@
     </bpmn2:sequenceFlow>
     <bpmn2:sendTask id="SendTask_3" camunda:delegateExpression="${informCapitolAboutContractStatusDelegate}" name="inform Capitol about contract status">
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_19</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_67</bpmn2:outgoing>
     </bpmn2:sendTask>
     <bpmn2:endEvent id="EndEvent_3">
@@ -214,8 +215,9 @@
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_20" name="" sourceRef="UserTask_5" targetRef="ExclusiveGateway_6"/>
     <bpmn2:boundaryEvent id="BoundaryEvent_1" name="after 2 weeks" attachedToRef="UserTask_5">
+      <bpmn2:outgoing>SequenceFlow_19</bpmn2:outgoing>
       <bpmn2:timerEventDefinition id="TimerEventDefinition_2">
-        <bpmn2:timeCycle xsi:type="bpmn2:tFormalExpression">R3/PT10H</bpmn2:timeCycle>
+        <bpmn2:timeDuration xsi:type="bpmn2:tFormalExpression">30S</bpmn2:timeDuration>
       </bpmn2:timerEventDefinition>
     </bpmn2:boundaryEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="ServiceTask_2" targetRef="ReceiveTask_2"/>
@@ -227,6 +229,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="signed or cancelled" sourceRef="ExclusiveGateway_6" targetRef="SendTask_3">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[${contractStatus=="contractSigned" || contractStatus=="cancelled"}]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_19" name="" sourceRef="BoundaryEvent_1" targetRef="SendTask_3"/>
     <bpmn2:textAnnotation id="TextAnnotation_1">
       <bpmn2:text><![CDATA[Parameters:
 - contractSigned (boolean, required)
@@ -765,6 +768,12 @@ For standard contract:
         <di:waypoint xsi:type="dc:Point" x="3238.0" y="769.0"/>
         <di:waypoint xsi:type="dc:Point" x="3238.0" y="776.0"/>
         <di:waypoint xsi:type="dc:Point" x="3405.0" y="776.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_19" bpmnElement="SequenceFlow_19" sourceElement="_BPMNShape_BoundaryEvent_2" targetElement="_BPMNShape_SendTask_4">
+        <di:waypoint xsi:type="dc:Point" x="2881.0" y="828.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2881.0" y="858.0"/>
+        <di:waypoint xsi:type="dc:Point" x="3455.0" y="858.0"/>
+        <di:waypoint xsi:type="dc:Point" x="3455.0" y="816.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
