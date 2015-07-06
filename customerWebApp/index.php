@@ -1,24 +1,41 @@
 <?php
+  $active = 'request';
+  $page = "includes/request.php";
 
-  switch($_GET['page']) {
-  case "request":
-    $page = "includes/request.php";
-    break;
-  case "request-success":
-    $page = "includes/request-success.php";
-    break;
-  case "liability":
-    $page = "includes/liability.php";
-    break;
-  case "liability-success":
-    $page = "includes/liability-success.php";
-    break;
-  case "fileupload":
-    $page = "includes/fileupload.php";
-    break;
+  if(isset($_GET['page'])) {
 
-  default: $page = "includes/request.php";
+    switch($_GET['page']) {
+      case "request":
+        $page = "includes/request.php";
+        $active = $_GET['page'];
+        break;
+      case "request-success":
+        $page = "includes/request-success.php";
+        $active = $_GET['page'];
+        break;
+      case "liability":
+        $page = "includes/liability.php";
+        $active = $_GET['page'];
+        break;
+      case "liability-success":
+        $page = "includes/liability-success.php";
+        $active = $_GET['page'];
+        break;
+      case "fileupload":
+        $page = "includes/fileupload.php";
+        $active = $_GET['page'];
+        break;
+      case "fileupload-success":
+        $page = "includes/fileupload-success.php";
+        $active = $_GET['page'];
+        break;
+
+      default: $page = "includes/request.php";
+    }
+
   }
+
+  
 
 
 ?>
@@ -82,9 +99,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="<?php if($_GET['page'] == 'request') echo 'active'; ?>"><a href="index.php?page=request" target="_self">Request Offer</a></li>
-            <li class="<?php if($_GET['page'] == 'fileupload') echo 'active'; ?>"><a href="index.php?page=fileupload" target="_self">Contract Upload</a></li>
-            <li class="<?php if($_GET['page'] == 'liability') echo 'active'; ?>"><a href="index.php?page=liability" target="_self">New Insurance Claim</a></li>
+            <li class="<?php if($active == 'request') echo 'active'; ?>"><a href="index.php?page=request" target="_self">Request Offer</a></li>
+            <li class="<?php if($active == 'fileupload') echo 'active'; ?>"><a href="index.php?page=fileupload" target="_self">Contract Upload</a></li>
+            <li class="<?php if($active == 'liability') echo 'active'; ?>"><a href="index.php?page=liability" target="_self">New Insurance Claim</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
