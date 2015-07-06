@@ -39,11 +39,13 @@ public class InsuranceContractServiceBean {
 		insuranceContract.setAdditionalInfo(rentalAgreementMsg.getAdditionalInfo());
 		insuranceContract.setStatus(InsuranceStatus.SUBMITTED);
 		insuranceContract = this.createInsuranceContract(insuranceContract);
-		//create benefit entities and add them to insuranceContract
-		for (InsuranceBenefit benefit : rentalAgreementMsg.getBenefits()) {
-			InsuranceBenefitEntity benefitEntity = new InsuranceBenefitEntity();
-			benefitEntity.setInsuranceBenefit(benefit);
-			this.addInsuranceBenefitEntities(insuranceContract.getId(), benefitEntity);
+		if (rentalAgreementMsg.getBenefits() != null) {
+			//create benefit entities and add them to insuranceContract
+			for (InsuranceBenefit benefit : rentalAgreementMsg.getBenefits()) {
+				InsuranceBenefitEntity benefitEntity = new InsuranceBenefitEntity();
+				benefitEntity.setInsuranceBenefit(benefit);
+				this.addInsuranceBenefitEntities(insuranceContract.getId(), benefitEntity);
+			}
 		}
 		return insuranceContract;
 	}

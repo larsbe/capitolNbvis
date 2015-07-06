@@ -18,11 +18,13 @@ import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
 import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
+import de.unimuenster.wi.wfm.entitiy.CarData;
 import de.unimuenster.wi.wfm.entitiy.InsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceType;
 import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
+import de.unimuenster.wi.wfm.util.InsurancePriceCalculator;
 
 @Named
 @ConversationScoped
@@ -44,7 +46,6 @@ public class AddInsuranceBenefits implements Serializable {
 	private long contractId;
 	
 	private InsuranceBenefit newBenefit;
-	private InsuranceType insuranceType;
 	
 	private RentalAgreementMessage rentalAgreementMsg;
 	
@@ -118,11 +119,12 @@ public class AddInsuranceBenefits implements Serializable {
 	}
 	
 	public InsuranceType getInsuranceType() {
-		return insuranceType;
+		return contract.getInsuranceType();
 	}
 	
 	public void setInsuranceType(InsuranceType type) {
-		insuranceType = type;
+		contract.setInsuranceType(type);
+		contract = insuranceContractService.mergeInsuranceContract(contract);
 	}
 	
 	public List<InsuranceType> getAllInsuranceTypes() {
@@ -130,7 +132,18 @@ public class AddInsuranceBenefits implements Serializable {
 	}
 	
 	public BigDecimal getSuggestedPrice() {
-		return new BigDecimal(20);
+		BigDecimal price = BigDecimal.ZERO;
+		for (CarData car : contract.getCardatas()) {
+			price = price.add(InsurancePriceCalculator.calculateInsurancePrice(
+					car.getHsn(),
+					car.getTsn(),
+					Integer.valueOf(car.getYear()).toString(),
+					contract.getInsuranceBenefitEntity(),
+					contract.getIndividualInsuranceBenefitEntity(),
+					contract.getInsuranceType()
+			));
+		}
+		return price;
 	}
 
 }

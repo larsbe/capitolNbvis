@@ -116,6 +116,15 @@ public class InsuranceContract extends AbstractEntity {
 	public void setStatus(InsuranceStatus status) {
 		this.status = status;
 	}
+
+	public Collection<IndividualInsuranceBenefitEntity> getIndividualInsuranceBenefitEntity() {
+		return individualInsuranceBenefitEntity;
+	}
+
+	public void setIndividualInsuranceBenefitEntity(
+			Collection<IndividualInsuranceBenefitEntity> individualInsuranceBenefitEntity) {
+		this.individualInsuranceBenefitEntity = individualInsuranceBenefitEntity;
+	}
 	
 	
 
