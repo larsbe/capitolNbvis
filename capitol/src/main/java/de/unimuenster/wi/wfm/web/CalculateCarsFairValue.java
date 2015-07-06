@@ -10,8 +10,12 @@ import javax.inject.Named;
 
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 
+import de.unimuenster.wi.wfm.ejb.CarDataServiceBean;
+import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
+import de.unimuenster.wi.wfm.entitiy.CarData;
 import de.unimuenster.wi.wfm.entitiy.CarInformation;
+import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 import de.unimuenster.wi.wfm.util.CarInformationService;
 
@@ -27,6 +31,13 @@ public class CalculateCarsFairValue implements Serializable{
 	
 	@EJB
 	private LiabilityCaseServiceBean liabilityCaseService;
+	
+	@EJB
+	private InsuranceContractServiceBean insuranceContractService;
+	
+	@EJB
+	private CarDataServiceBean carDataService;
+	
 	private LiabilityCase liabilityCase;
 	private long liabilityCaseId;
 	
@@ -38,26 +49,34 @@ public class CalculateCarsFairValue implements Serializable{
 	public LiabilityCase getLiabilityCase() {
 		if (liabilityCase == null) {
 			liabilityCase = liabilityCaseService.getLiabilityCase(getLiabilityCaseId());
+			InsuranceContract contract = insuranceContractService.getInsuranceContract(liabilityCase.getInsuranceContract().getId());
+			liabilityCase.setInsuranceContract(contract);
 		}
 		return liabilityCase;
 	}
 	
-	/* BEGIN: Test CarInformation */
+	public CarData getCarData(String licenseNumber){
+		CarData carData =carDataService.getCarData(licenseNumber);
+		return carData;
+	}
+	
 	
 	private CarInformation carInformation;
 	
 	public CarInformation getCarInformation() {
-		if(carInformation == null)
-			//TODO: HSN and TSN from Process Variables or Contract
-			carInformation = new CarInformation("0005", "156", "2006");
+		CarData carData = new CarData();
+		if(carInformation == null){
+			carData = getCarData(getLiabilityCase().getLicenseNumber());
+			carInformation = new CarInformation(carData.getHsn(), carData.getTsn(), String.valueOf(carData.getYear()));
+		}
 		return carInformation;
 	}
+	
 	
 	public void loadAdditionalCarInformation() {
 		carInformation = CarInformationService.GetCarInformation(carInformation.getHsn(), carInformation.getTsn(), carInformation.getYear());
 	}
 	
-	/* END: Test CarInformation */
 	
 	public void submitForm() throws IOException {
 		liabilityCase =  liabilityCaseService.mergeLiabilityCaseAndCompleteTask(liabilityCase);

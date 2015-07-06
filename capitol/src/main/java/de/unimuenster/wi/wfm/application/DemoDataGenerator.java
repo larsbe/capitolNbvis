@@ -110,7 +110,7 @@ public class DemoDataGenerator {
 		CarData carData = new CarData();
 		carData.setHsn("0005");
 		carData.setTsn("156");
-		carData.setYear(2007);
+		carData.setYear(2005);
 		carData.setLicenseNumber("MS-C-80");
 		Collection<CarData> cardatas = new ArrayList<CarData>();
 		cardatas.add(carData);
