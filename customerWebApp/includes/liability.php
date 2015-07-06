@@ -34,6 +34,16 @@
             </span>
         </form>
         </div>
+
+
+            <div class="form-group">
+              <label for="offerEmail">Estimate of Cost</label>
+              <div class="input-group">
+                <div class="input-group-addon">€</div>
+                <input class="form-control" id="liabilityEstCosts" placeholder="0.00">
+              </div>
+            </div>
+
         
         <div class="form-group">
           <label>Claim Details</label>
@@ -75,7 +85,8 @@
                   "customerNoBVIS" : {"value" : "", "type": "Long"},
                   "contractNoBVIS" : {"value" : "", "type": "Long"},
                   "imageCount" : {"value" : "", "type": "Integer"},
-                  "claimDetails" : {"value" : "", "type": "String"}
+                  "claimDetails" : {"value" : "", "type": "String"},
+                  "estCosts" : {"value" : "", "type": "String"}
               }
             };
 
@@ -90,6 +101,7 @@
             json.processVariables.customerNoBVIS.value = $('#liabilityCustomerNo').val();
             json.processVariables.contractNoBVIS.value = $('#liabilityContractNo').val();
             json.processVariables.claimDetails.value = $('#liabilityClaimDetails').val();
+            json.processVariables.estCosts.value = $('#liabilityEstCosts').val();
             json.processVariables.imageCount.value = imagearray.length;
             
             console.log(json);
