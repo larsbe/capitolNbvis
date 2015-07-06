@@ -14,7 +14,7 @@ public class Sandbox {
 	public static void main(String[] args) {
 
 		RentalAgreementMessage message = new RentalAgreementMessage();
-		message.setRentalAgreementRequestId(189);
+		message.setRentalAgreementRequestId(9);
 		message.setAdditionalInfo("Test");
 		message.setBenefits(Arrays.asList(InsuranceBenefit.BRAKEDOWNCOVER));
 		message.setInsuranceType(InsuranceType.PARTIAL);
@@ -35,7 +35,7 @@ public class Sandbox {
 		car2.setTsn("520358");
 		message.setCarsData(Arrays.asList(car1, car2));
 
-		RestHelper.SendMessage("http://localhost:8080/engine-rest/engine/default/message", CapitolREST.RevisedAgreementConditions(189L, message, true));
+		RestHelper.SendMessage("http://localhost:8080/engine-rest/engine/default/message", CapitolREST.NewStandardRentalAgreement(message));
 	}
 
 }

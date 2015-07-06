@@ -27,6 +27,7 @@ public class LiabilityCase extends AbstractEntity {
 	protected String licenseNumber = "";
 	@Column( length = 100000 )
 	protected String decisionNote = "";
+	protected Long bvisCaseID = 0L;
 	
 	@ManyToOne
 	protected InsuranceContract insuranceContract;
@@ -126,5 +127,14 @@ public class LiabilityCase extends AbstractEntity {
 	public void setDecisionNote(String decisionNote) {
 		this.decisionNote = decisionNote;
 	}
+
+	public Long getBvisCaseID() {
+		return bvisCaseID;
+	}
+
+	public void setBvisCaseID(Long bvisCaseID) {
+		this.bvisCaseID = bvisCaseID;
+	}
+	
 		
 }
