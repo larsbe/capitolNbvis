@@ -13,8 +13,8 @@ import javax.inject.Inject;
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
-import de.unimuenster.wi.wfm.ejb.CustomerService;
-import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestService;
+import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
+import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
 import de.unimuenster.wi.wfm.persistence.Customer;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequestType;
@@ -33,9 +33,9 @@ public class CreateRentalAgreementRequest implements Serializable {
 	private TaskForm taskForm;
 	
 	@EJB
-	private RentalAgreementRequestService rentalAgreementRequestService;
+	private RentalAgreementRequestServiceBean rentalAgreementRequestService;
 	@EJB
-	private CustomerService customerService;
+	private CustomerServiceBean customerService;
 	
 	private long selectedCustomerId;
 	private String selectedRentalAgreementRequestType;
@@ -72,7 +72,6 @@ public class CreateRentalAgreementRequest implements Serializable {
 
 	public void submit() {
 		try {
-			
 			getRentalAgreementRequest().setCustomer(customerService.getCustomer(getSelectedCustomerId()));
 			if(getSelectedRentalAgreementRequestType().equals("INDIVIDUAL")){
 				getRentalAgreementRequest().setRentalAgreementRequestType(RentalAgreementRequestType.INDIVIDUAL);

@@ -22,11 +22,11 @@ public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 
 	@EJB
 	private RentalAgreementRequestServiceBean rentalAgreementRequestService;
-
+	
 	public void execute(DelegateExecution delegateExecution) throws Exception {
 		System.out.println("SendContractViaEmailToTheCustomerDelegateDelegate");
 
-		// get needed information
+		// get business process variables
 		Map<String, Object> variables = delegateExecution.getVariables();
 		RentalAgreementRequest rentalAgreementRequest = rentalAgreementRequestService
 				.getRentalAgreementRequest((Long) variables

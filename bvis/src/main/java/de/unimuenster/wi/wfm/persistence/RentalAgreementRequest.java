@@ -1,16 +1,17 @@
 package de.unimuenster.wi.wfm.persistence;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 
 @Entity
@@ -27,12 +28,17 @@ public class RentalAgreementRequest extends AbstractEntity {
 	@NotNull(message="You have to enter a value for the field 'RentalAgreementRequestType'" )
 	protected RentalAgreementRequestType rentalAgreementRequestType;
 	protected String requirementsOfCustomer;
+	@OneToOne
 	protected NegotiationCase negotiationCase;
 	protected StandardAgreementType standardAgreementType; 
 	protected String agreementConditions;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH,
+			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+	protected Collection<CarData> carsData;
 
-
-	private SpecificRentalAgreementContractData specificRentalAgreementContractData;
+	@OneToOne
+	private RentalAgreementContract rentalAgreementContract;
 	
 	
 	public NegotiationCase getNegotiationCase() {
@@ -91,13 +97,19 @@ public class RentalAgreementRequest extends AbstractEntity {
 		this.agreementConditions = agreementConditions;
 	}
 	
-	public SpecificRentalAgreementContractData getSpecificRentalAgreementContractData() {
-		return specificRentalAgreementContractData;
+	public RentalAgreementContract getRentalAgreementContract() {
+		return rentalAgreementContract;
 	}
 
-	public void setSpecificRentalAgreementContractData(
-			SpecificRentalAgreementContractData specificRentalAgreementContractData) {
-		this.specificRentalAgreementContractData = specificRentalAgreementContractData;		
+	public void setRentalAgreementContract( RentalAgreementContract rentalAgreementContract) {
+		this.rentalAgreementContract = rentalAgreementContract;		
+	}
+	
+	public Collection<CarData> getCarsData() {
+		return carsData;
+	}
+	public void setCarsData(Collection<CarData> carsData) {
+		this.carsData = carsData;
 	}
 
 	

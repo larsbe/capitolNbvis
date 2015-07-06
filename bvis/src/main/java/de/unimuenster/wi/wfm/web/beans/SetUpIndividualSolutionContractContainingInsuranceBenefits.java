@@ -2,7 +2,7 @@ package de.unimuenster.wi.wfm.web.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -12,14 +12,10 @@ import javax.inject.Inject;
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
-import de.unimuenster.wi.wfm.ejb.CustomerService;
-import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestService;
-import de.unimuenster.wi.wfm.ejb.StandardAgreementTypeService;
-import de.unimuenster.wi.wfm.persistence.Customer;
+import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
+import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
+import de.unimuenster.wi.wfm.persistence.RentalAgreementContract;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
-import de.unimuenster.wi.wfm.persistence.RentalAgreementRequestType;
-import de.unimuenster.wi.wfm.persistence.SpecificRentalAgreementContractData;
-import de.unimuenster.wi.wfm.persistence.StandardAgreementType;
 import de.unimuenster.wi.wfm.web.Misc;
 
 @ManagedBean
@@ -33,14 +29,14 @@ public class SetUpIndividualSolutionContractContainingInsuranceBenefits implemen
 	private TaskForm taskForm;
 	
 	@EJB
-	private CustomerService customerService;
+	private CustomerServiceBean customerService;
 	@EJB
-	private RentalAgreementRequestService rentalAgreementRequestService;
+	private RentalAgreementRequestServiceBean rentalAgreementRequestService;
 
 	
 	private RentalAgreementRequest rentalAgreementRequest;
 	private long rentalAgreementRequestId;
-	private SpecificRentalAgreementContractData specificRentalAgreementContractData;
+	private RentalAgreementContract rentalAgreementContract;
 	
 
 
@@ -56,11 +52,14 @@ public class SetUpIndividualSolutionContractContainingInsuranceBenefits implemen
 		return rentalAgreementRequestId;
 	}
 
-	public SpecificRentalAgreementContractData getSpecificRentalAgreementContractData() {
-		return specificRentalAgreementContractData;
+	public RentalAgreementContract getRentalAgreementContract() {
+		if (rentalAgreementContract == null)
+			rentalAgreementContract = new RentalAgreementContract();
+		rentalAgreementContract.setDate(new Date());
+		return rentalAgreementContract;
 	}
-	public void setSpecificRentalAgreementContractData(SpecificRentalAgreementContractData specificRentalAgreementContractData) {
-		this.specificRentalAgreementContractData = specificRentalAgreementContractData;
+	public void setRentalAgreementContract(RentalAgreementContract rentalAgreementContract) {
+		this.rentalAgreementContract = rentalAgreementContract;
 	}
 	
 
@@ -68,7 +67,7 @@ public class SetUpIndividualSolutionContractContainingInsuranceBenefits implemen
 	public void submit() {
 		try {
 			
-			getRentalAgreementRequest().setSpecificRentalAgreementContractData(getSpecificRentalAgreementContractData());
+			getRentalAgreementRequest().setRentalAgreementContract(getRentalAgreementContract());
 						
 			// store entity in database	
 			this.rentalAgreementRequest = rentalAgreementRequestService.merge(getRentalAgreementRequest());

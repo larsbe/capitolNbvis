@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 import de.unimuenster.wi.wfm.persistence.NegotiationCase;
 
 @Stateless
-public class NegotiationCaseServiceBean implements NegotiationCaseService {
+public class NegotiationCaseServiceBean {
 	
 	@PersistenceContext
 	protected EntityManager em;
@@ -36,8 +36,7 @@ public class NegotiationCaseServiceBean implements NegotiationCaseService {
 		return NegotiationCase;
 	}
 	
-	public boolean editNegotiationCase(NegotiationCase NegotiationCase) {
-		em.merge(NegotiationCase);
-		return true;
+	public NegotiationCase merge(NegotiationCase negotiationCase) {
+		return em.merge(negotiationCase);
 	}
 }

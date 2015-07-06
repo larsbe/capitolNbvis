@@ -16,12 +16,13 @@
 };
 
 // WebApp to BVIS Contract PDF Upload
-{ "messageName" : "NewContractUpload",
+{ "messageName" : "RentalAgreementContract",
   "businessKey" : null,
-  "correlationKeys" : {},
+  "correlationKeys" : {
+      "contractNoBVIS" : {"value" : "", "type": "Long"}
+    },
   "processVariables" : {
       "customerNoBVIS" : {"value" : "", "type": "Long"},
-      "contractNoBVIS" : {"value" : "", "type": "Long"},
       "contract" : {"value" : "", "type": "String"} // URI of contract PDF file
   }
 };

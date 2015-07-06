@@ -75,10 +75,7 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		
 		// Remove process vars (not longer needed)
 		delegateExecution.removeVariables(variablesToRemove.keySet());
-		
-		//PDF Test
-		//ReportPDF rpdf = new ReportPDF();
-		//rpdf.generatePDF();
+	
 	}
 
 }

@@ -15,6 +15,8 @@
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
+
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -22,6 +24,11 @@
 		<dependency>
 			<groupId>org.camunda.bpm</groupId>
 			<artifactId>camunda-engine</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.camunda.spin</groupId>
+			<artifactId>camunda-spin-core</artifactId>
 		</dependency>
 
 		<!-- camunda cdi beans -->
@@ -55,7 +62,27 @@
 			<artifactId>bootstrap</artifactId>
 			<version>3.1.1</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.zefer.pd4ml</groupId>
+			<artifactId>pd4ml</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/pd4ml_demo.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>capitol2bvis</groupId>
+			<artifactId>sharedLib</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

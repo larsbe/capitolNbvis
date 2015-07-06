@@ -73,12 +73,12 @@
 				
 			<div class="inputForm">
 				<h:form id="submitForm">
-					<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
-						<h:outputLabel value="Approve Conditions" for="rentalAgreementRequest_NegotiationCase_conditionsApproved" />
-						<h:inputText
-							id="negotiateAgreementConditions_reqs" value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.negotiationCase.conditionsApproved}"/>							
-						<h:message for="rentalAgreementRequest_NegotiationCase_conditionsApproved"/>
-					</h:panelGrid>
+
+					<div class="checkbox">
+				    <label>
+				      <h:selectBooleanCheckbox value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.negotiationCase.conditionsApproved}"/> Agree on Conditions
+				    </label>
+				  </div>
 
 
 					<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">

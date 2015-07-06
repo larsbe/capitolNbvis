@@ -1,6 +1,7 @@
 package de.unimuenster.wi.wfm.ejb;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -9,14 +10,42 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import de.unimuenster.wi.wfm.persistence.CarData;
+import de.unimuenster.wi.wfm.persistence.Customer;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
+import de.unimuenster.wi.wfm.persistence.RentalAgreementRequestType;
+import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 
 @Stateless
-public class RentalAgreementRequestServiceBean implements RentalAgreementRequestService {
+public class RentalAgreementRequestServiceBean {
 
 	@PersistenceContext
 	protected EntityManager em;
 
+	public RentalAgreementRequest createObjectFromMessage(RentalAgreementMessage rentalAgreementMsg, Customer customer, Collection<CarData> carsData) {
+		RentalAgreementRequest rentalAgreementRequest = new RentalAgreementRequest();
+		
+		rentalAgreementRequest.setDate(new Date( ));
+		if(rentalAgreementMsg.getCarsData() == null){
+			// Individual Solution requested
+			rentalAgreementRequest.setRentalAgreementRequestType(RentalAgreementRequestType.INDIVIDUAL);
+			rentalAgreementRequest.setRequirementsOfCustomer(rentalAgreementMsg.getAdditionalInfo());
+		
+		}else{
+			// Standard Solution requested
+			rentalAgreementRequest.setRentalAgreementRequestType(RentalAgreementRequestType.STANDARD);	
+		}
+		
+		
+		rentalAgreementRequest.setCustomer(customer);
+		rentalAgreementRequest.setCarsData(carsData);
+		
+		
+		// persist data
+		rentalAgreementRequest = this.createRentalAgreementRequest(rentalAgreementRequest);
+		return rentalAgreementRequest;
+	}
+	
 	public RentalAgreementRequest createRentalAgreementRequest(RentalAgreementRequest RentalAgreementRequest) {
 		em.persist(RentalAgreementRequest);
 		return RentalAgreementRequest;
@@ -43,5 +72,4 @@ public class RentalAgreementRequestServiceBean implements RentalAgreementRequest
 
 		return rentalAgreementRequest;
 	}
-
 }

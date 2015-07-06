@@ -11,9 +11,8 @@ import javax.inject.Inject;
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
-import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestService;
+import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
-import de.unimuenster.wi.wfm.persistence.RentalAgreementRequestType;
 import de.unimuenster.wi.wfm.web.Misc;
 
 @ManagedBean
@@ -30,7 +29,7 @@ public class CheckAgreementConditionsOfCapitol implements Serializable {
 	private RentalAgreementRequest rentalAgreementRequest;
 	
 	@EJB
-	private RentalAgreementRequestService rentalAgreementRequestService;
+	private RentalAgreementRequestServiceBean rentalAgreementRequestService;
 	
 	private long rentalAgreementRequestId;
 
@@ -59,7 +58,7 @@ public class CheckAgreementConditionsOfCapitol implements Serializable {
 			
 			// store process variables of this process...
 			// store flag "insuranceConditionsApproved"
-			businessProcess.setVariable( "insuranceConditionsApproved", getRentalAgreementRequest().getNegotiationCase().isConditionsApproved() );
+			businessProcess.setVariable( "insuranceConditionsApproved", getRentalAgreementRequest().getNegotiationCase().getConditionsApproved() );
 			
 			
 		} catch (EJBException e) {
