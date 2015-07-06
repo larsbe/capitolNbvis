@@ -1,5 +1,7 @@
 package de.unimuenster.wi.wfm.web.beans;
 
+import static org.camunda.spin.Spin.JSON;
+
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -13,6 +15,7 @@ import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
 import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
+import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 import de.unimuenster.wi.wfm.web.Misc;
 
 @ManagedBean
@@ -32,6 +35,7 @@ public class CheckAgreementConditionsOfCapitol implements Serializable {
 	private RentalAgreementRequestServiceBean rentalAgreementRequestService;
 	
 	private long rentalAgreementRequestId;
+	private RentalAgreementMessage rentalAgreementMessage;
 
 	public RentalAgreementRequest getRentalAgreementRequest() {
 		if (rentalAgreementRequest == null){
@@ -45,7 +49,13 @@ public class CheckAgreementConditionsOfCapitol implements Serializable {
 		return rentalAgreementRequestId;
 	}
 
-	
+	public RentalAgreementMessage getRentalAgreementMessage() {
+		if (rentalAgreementMessage == null) {
+			JSON((String)businessProcess.getVariable("agreementConditions"))
+				.mapTo(RentalAgreementMessage.class);
+		}
+		return rentalAgreementMessage;
+	}
 	
 	public void submit() {
 		try {
