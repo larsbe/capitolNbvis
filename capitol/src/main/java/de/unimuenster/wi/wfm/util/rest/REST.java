@@ -28,7 +28,7 @@ public class REST extends RestHelper {
 				rentalAgreementMsg
 		);
 		System.out.println(msg);
-		//SendMessageToBVIS(msg);
+		SendMessageToBVIS(msg);
 	}
 
 	private static void SendMessageToBVIS(String msg) {
