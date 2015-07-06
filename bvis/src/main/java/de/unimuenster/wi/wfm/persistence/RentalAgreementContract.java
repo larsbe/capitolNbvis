@@ -23,7 +23,7 @@ public class RentalAgreementContract extends AbstractEntity {
 	protected Date date;
 	protected String rentalAgreementContractData;
 	protected String insuranceBenefits;
-	
+	protected String urlToSignedContract;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "rentalAgreementContract")
 	protected Collection<LiabilityCase> liabilityCases = new ArrayList<LiabilityCase>();
@@ -70,6 +70,14 @@ public class RentalAgreementContract extends AbstractEntity {
 
 	public void setInsuranceBenefits(String insuranceBenefits) {
 		this.insuranceBenefits = insuranceBenefits;
+	}
+	
+	public String getUrlToSignedContract() {
+		return urlToSignedContract;
+	}
+
+	public void setUrlToSignedContract(String urlToSignedContract) {
+		this.urlToSignedContract = urlToSignedContract;
 	}
 
 }
