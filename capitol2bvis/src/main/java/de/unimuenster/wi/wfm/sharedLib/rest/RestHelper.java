@@ -1,4 +1,4 @@
-package de.unimuenster.wi.wfm.util.rest;
+package de.unimuenster.wi.wfm.sharedLib.rest;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,25 +11,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 
-import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
-import de.unimuenster.wi.wfm.util.Constants;
+public class RestHelper {
 
-public class REST {
-
-	public static void SendMessageToBVIS(String msg) {
-		SendMessage(Constants.BVIS_CAMUNDA_REST, msg);
+	public static String escape(String str) {
+		return str;
 	}
 	
-	public static void SendLiabilityCaseRejectionInformation(LiabilityCase claim) {
-		
-	}
-	
-	public static void SendLiabilityCasePaymentInformation(LiabilityCase claim) {
-		
-	}
-
-	@SuppressWarnings("deprecation")
-	private static void SendMessage(String host, String msg) {
+	@SuppressWarnings({ "deprecation", "unused" })
+	public static void SendMessage(String host, String msg) {
 		try {
 
 			HttpClient httpClient = HttpClientBuilder.create().build();
@@ -45,7 +34,7 @@ public class REST {
 			if (response.getStatusLine().getStatusCode() == 204) {
 				return;
 			}
-			
+
 			// if content -> check 201
 			if (response.getStatusLine().getStatusCode() != 201) {
 				throw new RuntimeException("Failed : HTTP error code : "
@@ -69,4 +58,5 @@ public class REST {
 			e.printStackTrace();
 		}
 	}
+
 }
