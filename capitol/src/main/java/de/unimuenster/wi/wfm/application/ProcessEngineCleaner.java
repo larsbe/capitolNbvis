@@ -2,11 +2,13 @@ package de.unimuenster.wi.wfm.application;
 
 import java.util.List;
 
+import org.camunda.bpm.engine.AuthorizationService;
 import org.camunda.bpm.engine.FilterService;
 import org.camunda.bpm.engine.IdentityService;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.authorization.Authorization;
 import org.camunda.bpm.engine.authorization.Groups;
 import org.camunda.bpm.engine.filter.Filter;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
@@ -20,6 +22,7 @@ public class ProcessEngineCleaner {
 	protected RepositoryService repositoryService;
 	protected RuntimeService runtimeService;
 	protected FilterService filterService;
+	protected AuthorizationService authorizationService;
 
 	public void performCleaning(ProcessEngine pProcessEngine) {
 
@@ -29,6 +32,7 @@ public class ProcessEngineCleaner {
 		repositoryService = processEngine.getRepositoryService();
 		runtimeService = processEngine.getRuntimeService();
 		filterService = processEngine.getFilterService();
+		authorizationService = processEngine.getAuthorizationService();
 
 		// actions
 		deleteAllInstances();
@@ -36,9 +40,11 @@ public class ProcessEngineCleaner {
 		cleanUsers();
 		cleanGroups();
 		cleanFilter();
+		cleanAuth();
 	}
 
 	private void cleanUsers() {
+		identityService.deleteUser("capitol");
 		identityService.deleteUser("stromberg");
 		identityService.deleteUser("heisterkamp");
 		identityService.deleteUser("steinke");
@@ -52,7 +58,7 @@ public class ProcessEngineCleaner {
 	}
 
 	private void cleanMemberships() {
-		identityService.deleteMembership("stromberg", Groups.CAMUNDA_ADMIN);
+		identityService.deleteMembership("capitol", Groups.CAMUNDA_ADMIN);
 
 		identityService.deleteMembership("stromberg", "capitol");
 		identityService.deleteMembership("heisterkamp", "capitol");
@@ -63,6 +69,13 @@ public class ProcessEngineCleaner {
 				"First_Level_Case_Handler");
 		identityService
 				.deleteMembership("steinke", "Second_Level_Case_Handler");
+	}
+	
+	private void cleanAuth() {
+		List<Authorization> auths = authorizationService.createAuthorizationQuery().list();
+		for (Authorization a : auths) {
+			authorizationService.deleteAuthorization(a.getId());
+		}
 	}
 
 	private void cleanFilter() {
