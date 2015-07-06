@@ -65,6 +65,13 @@
 					      <h:inputText class="form-control" id="insuranceSum" p:placeholder="Amount" value="#{calculateInsuranceSum.liabilityCase.insuranceSum}" />
 					      <div class="input-group-addon">.00</div>
 					    </div>
+					    
+					    <div class="form-group">
+					    <h:outputLabel class="col-sm-3 control-label" for="note" value="Note" />
+					    <div class="input-group col-sm-4">
+					      <h:inputTextarea class="form-control" id="note" value="#{calculateInsuranceSum.liabilityCase.decisionNote}" />
+					    </div>
+					    </div>
 
 				</div>
 
