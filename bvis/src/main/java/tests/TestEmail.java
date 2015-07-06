@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 import javax.mail.MessagingException;
 
-import de.unimuenster.wi.wfm.application.EMailSender;
-import de.unimuenster.wi.wfm.application.PdfGenerator;
+import de.unimuenster.wi.wfm.util.EMailSender;
+import de.unimuenster.wi.wfm.util.PdfGenerator;
 
 public class TestEmail {
 

@@ -43,7 +43,7 @@ public class TestRest {
 					+"\r\n}"
 					;
 				
-		REST.SendMessageToCapitol(msg);
+//		REST.SendMessageToCapitol(msg);
 	}
 
 }

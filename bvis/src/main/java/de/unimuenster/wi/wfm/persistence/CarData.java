@@ -1,11 +1,6 @@
 package de.unimuenster.wi.wfm.persistence;
 
-import java.util.Collection;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class CarData extends AbstractEntity {
@@ -17,11 +12,7 @@ public class CarData extends AbstractEntity {
 	protected String hsn;
 	protected String tsn;
 	protected String year; // Format: YYYY
-	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH,
-			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, mappedBy = "carsData")
-	protected Collection<RentalAgreementRequest> rentalAgreementRequests;
-	
+		
 	public String getName() {
 		return name;
 	}
