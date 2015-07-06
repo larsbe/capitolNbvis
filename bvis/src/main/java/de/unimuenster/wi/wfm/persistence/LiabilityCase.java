@@ -20,6 +20,7 @@ public class LiabilityCase extends AbstractEntity {
 	protected Integer insuranceSum;
 	protected boolean claimCovered;
 	protected String rejectionInfo;
+	protected Double estimateOfCosts;
 
 	
 	@ManyToOne
@@ -97,5 +98,11 @@ public class LiabilityCase extends AbstractEntity {
 	public void setRejectionInfo(String rejectionInfo) {
 		this.rejectionInfo = rejectionInfo;
 	}	
-		
+	public Double getEstimateOfCosts() {
+		return estimateOfCosts;
+	}
+	
+	public void setEstimateOfCosts(Double estimateOfCosts) {
+		this.estimateOfCosts = estimateOfCosts;
+	}	
 }
