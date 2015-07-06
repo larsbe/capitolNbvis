@@ -125,7 +125,4 @@ public class InsuranceContract extends AbstractEntity {
 			Collection<IndividualInsuranceBenefitEntity> individualInsuranceBenefitEntity) {
 		this.individualInsuranceBenefitEntity = individualInsuranceBenefitEntity;
 	}
-	
-	
-
 }

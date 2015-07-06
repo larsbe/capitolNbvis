@@ -8,6 +8,8 @@
   <h:body>
 
 	<ui:composition template="template.xhtml">
+	<ui:include src="/CustomerDetails.xhtml" />
+			<ui:include src="/ContractDetails.xhtml" />
  
     		<ui:define name="content">
     		
@@ -15,41 +17,22 @@
     		 	<h3>Customer</h3>
 			    <table class="table">
 			    	<tr>
-			    		<th>Name</th>
-			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.customer.name}</td>
+			    		<th>Customer</th>
+			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.customer.name}
+			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModal">
+							  Details
+							</button>
+			    		</td>
 			    	</tr>
-			    	<tr>
-			    		<th>Company</th>
-			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.customer.company}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Email</th>
-			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.customer.email}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Phone Number</th>
-			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.customer.phoneNumber}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Address</th>
-			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.customer.address}</td>
-			    	</tr>
-			    </table>	
-			   <h3>Contract</h3>
-			    <table class="table">
 			    	<tr>
 			    		<th>Contract ID</th>
-			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.id}</td>
+			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.id}
+			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModalContract">
+							  Details
+							</button>
+			    		</td>
 			    	</tr>
-			    	<tr>
-			    		<th>Insurance Price</th>
-			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.insurancePrice}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Insurance Type</th>
-			    		<td>#{adjustInsuranceFee.liabilityCase.insuranceContract.insuranceType}</td>
-			    	</tr>
-			    </table>
+			    </table>	
 			    	<h3>Liability Cases</h3>
 			    	<h:dataTable value="#{adjustInsuranceFee.liabilityCase.insuranceContract.getLiabilityCases()}" var="cur"
 					styleClass="table" headerClass="table-cell table-cell"

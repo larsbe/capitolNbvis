@@ -6,11 +6,13 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import de.unimuenster.wi.wfm.persistence.CarData;
+import de.unimuenster.wi.wfm.persistence.Customer;
 import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 
 @Stateless
@@ -38,6 +40,14 @@ public class CarDataServiceBean {
 			carsData.add(carDataEntity);
 		}
 		return carsData;
+	}
+	
+	
+	public CarData getCarDataByName(String name) {
+		Query q = em.createQuery("FROM CarData c WHERE c.name=:name", CarData.class)
+			.setParameter("name", name);
+			// return existing carData
+			return (CarData) q.getSingleResult();
 	}
 
 	public Collection<CarData> getAllCarDatas() {
