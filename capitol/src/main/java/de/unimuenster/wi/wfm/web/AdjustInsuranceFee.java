@@ -53,6 +53,8 @@ public class AdjustInsuranceFee implements Serializable {
 	public LiabilityCase getLiabilityCase() {
 		if (liabilityCase == null) {
 			liabilityCase = liabilityCaseService.getLiabilityCase(getLiabilityCaseId());
+			InsuranceContract contract = insuranceContractService.getInsuranceContract(liabilityCase.getInsuranceContract().getId());
+			liabilityCase.setInsuranceContract(contract);
 		}
 		return liabilityCase;
 	}
