@@ -10,7 +10,9 @@ import javax.inject.Named;
 
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 
+import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
+import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 
 @Named
@@ -25,6 +27,8 @@ public class CheckEligibility implements Serializable {
 
 	@EJB
 	private LiabilityCaseServiceBean liabilityCaseService;
+	@EJB
+	private InsuranceContractServiceBean insuranceContractService;
 	private LiabilityCase liabilityCase;
 	private long liabilityCaseId;
 	
@@ -36,6 +40,8 @@ public class CheckEligibility implements Serializable {
 	public LiabilityCase getLiabilityCase() {
 		if (liabilityCase == null) {
 			liabilityCase = liabilityCaseService.getLiabilityCase(getLiabilityCaseId());
+			InsuranceContract contract = insuranceContractService.getInsuranceContract(liabilityCase.getInsuranceContract().getId());
+			liabilityCase.setInsuranceContract(contract);
 		}
 		return liabilityCase;
 	}

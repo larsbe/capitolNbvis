@@ -1,0 +1,53 @@
+<ui:composition 
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+	  <!-- Modal -->
+		<div class="modal fade" id="myModalLiability" tabindex="-1" role="dialog" aria-labelledby="myModalLabelLiability">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+		        <h4 class="modal-title" id="myModalLabelLiability">Liability Case Details</h4>
+		      </div>
+		      <div class="modal-body">
+
+		        <table class="table">
+			    	<tr>
+			    		<th>Status</th>
+			    		<td>#{checkEligibility.liabilityCase.status}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Eligible</th>
+			    		<td>#{checkEligibility.liabilityCase.eligible}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Cars Fair Value</th>
+			    		<td>#{checkEligibility.liabilityCase.carsFairValue}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Insurance Sum</th>
+			    		<td>#{checkEligibility.liabilityCase.insuranceSum}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Expected amount of Loss</th>
+			    		<td>#{checkEligibility.liabilityCase.estimateOfCosts}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>License Number </th>
+			    		<td>#{checkEligibility.liabilityCase.licenseNumber}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Claim Details</th>
+			    		<td>#{checkEligibility.liabilityCase.claimDetails}</td>
+			    	</tr>
+			    
+			    </table>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	  
+</ui:composition>

@@ -44,19 +44,19 @@
           <label>Car Type</label>
           <div class="radio">
             <label>
-              <input type="radio" name="offerCarType" id="offerCarType1" value="bmw5" checked>
-              BMW 5
+              <input type="radio" name="offerCarType" id="offerCarType1" value="BMW 530 D" checked>
+              BMW 530 D
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="offerCarType" id="offerCarType2" value="audia3">
-              Audi A3 etron
+              <input type="radio" name="offerCarType" id="offerCarType2" value="Audi S3 CABRIO 2.0 TFSI">
+              Audi S3 Cabrio
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="offerCarType" id="offerCarType3" value="micra">
+              <input type="radio" name="offerCarType" id="offerCarType3" value="Nissan MICRA 1.2">
               Nissan micra
             </label>
           </div>

@@ -14,14 +14,15 @@ public class LiabilityCase extends AbstractEntity {
 	
 	private static  final long serialVersionUID = 1L;
 	
-	protected CaseStatus status;
-	protected boolean eligible;
+	protected CaseStatus status = CaseStatus.NEW;
+	protected boolean eligible =false;
 	protected String claimDetails = "";
 	protected Double carsFairValue = 0.0;
 	protected Double insuranceSum = 0.0;
 	protected Double estimateOfCosts = 0.0;
 	protected String reportUrl = "";
 	protected String licenseNumber;
+	protected String decisionNote = "";
 	
 	@ManyToOne
 	protected InsuranceContract insuranceContract;
@@ -113,7 +114,13 @@ public class LiabilityCase extends AbstractEntity {
 	public void setLicenseNumber(String licenseNumber) {
 		this.licenseNumber = licenseNumber;
 	}
-	
-	
+
+	public String getDecisionNote() {
+		return decisionNote;
+	}
+
+	public void setDecisionNote(String decisionNote) {
+		this.decisionNote = decisionNote;
+	}
 		
 }
