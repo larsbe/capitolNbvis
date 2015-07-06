@@ -3,7 +3,9 @@ package de.unimuenster.wi.wfm.util;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -34,13 +36,20 @@ public class CarInformationService {
 	private final static String XPATH_CLASS_VK = "#tab_versicherung > table:nth-child(4) > tbody > tr:nth-child(3) > td:nth-child(3) > span";
 	private final static String XPATH_IMAGE_FIRST = "#rg_s > div:nth-child(1) > a";
 	
-	public static CarInformation GetCarInformation(String pHSN, String pTSN, String pYear) {
+	//key is hsn+tsn
+	private static Map<String, CarInformation> loadedCarInformation = new HashMap<String, CarInformation>();
 	
+	public static CarInformation GetCarInformation(String pHSN, String pTSN, String pYear) {
+		//lazy loading
+		if (loadedCarInformation.containsKey(pHSN + pTSN)) {
+			return loadedCarInformation.get(pHSN + pTSN);
+		}
 		CarInformation carInfo = new CarInformation(pHSN, pTSN, pYear);
 		carInfo = AddMasterData(carInfo);
 		carInfo = AddClassificationData(carInfo);
 		carInfo = AddImage(carInfo);
 		
+		loadedCarInformation.put(pHSN + pTSN, carInfo);
 		return carInfo;
 	}
 	

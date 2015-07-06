@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
 import de.unimuenster.wi.wfm.entitiy.Customer;
+import de.unimuenster.wi.wfm.entitiy.IndividualInsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.entitiy.InsuranceStatus;
@@ -39,11 +40,13 @@ public class InsuranceContractServiceBean {
 		insuranceContract.setAdditionalInfo(rentalAgreementMsg.getAdditionalInfo());
 		insuranceContract.setStatus(InsuranceStatus.SUBMITTED);
 		insuranceContract = this.createInsuranceContract(insuranceContract);
-		//create benefit entities and add them to insuranceContract
-		for (InsuranceBenefit benefit : rentalAgreementMsg.getBenefits()) {
-			InsuranceBenefitEntity benefitEntity = new InsuranceBenefitEntity();
-			benefitEntity.setInsuranceBenefit(benefit);
-			this.addInsuranceBenefitEntities(insuranceContract.getId(), benefitEntity);
+		if (rentalAgreementMsg.getBenefits() != null) {
+			//create benefit entities and add them to insuranceContract
+			for (InsuranceBenefit benefit : rentalAgreementMsg.getBenefits()) {
+				InsuranceBenefitEntity benefitEntity = new InsuranceBenefitEntity();
+				benefitEntity.setInsuranceBenefit(benefit);
+				this.addInsuranceBenefitEntities(insuranceContract.getId(), benefitEntity);
+			}
 		}
 		return insuranceContract;
 	}
@@ -52,6 +55,11 @@ public class InsuranceContractServiceBean {
 		InsuranceContract item = em.find(InsuranceContract.class, id);
 		if(item == null)
 			throw new IllegalArgumentException(String.format("InsuranceContract with ID %s not found", id));
+		//force load of associations
+		item.getCardatas().size();
+		item.getIndividualInsuranceBenefitEntity().size();
+		item.getInsuranceBenefitEntity().size();
+		item.getLiabilityCases().size();
 		return item;
 	}
 	
@@ -84,6 +92,20 @@ public class InsuranceContractServiceBean {
 		InsuranceBenefitEntity insuranceBenefitEntities = em.merge(detachedInsuranceBenefitEntity);
 		InsuranceContract insuranceContract = insuranceBenefitEntities.getInsuranceContract();
 		insuranceContract.getInsuranceBenefitEntity().remove(insuranceBenefitEntities);
+		em.remove(insuranceBenefitEntities);
+	}
+	
+	public void addIndividualInsuranceBenefitEntities(long id, IndividualInsuranceBenefitEntity insuranceBenefitEntity) {
+		System.out.println("Adding Individual Benefit");
+		InsuranceContract insuranceContract = getInsuranceContract(id);
+		insuranceBenefitEntity.setInsuranceContract(insuranceContract);
+		em.persist(insuranceBenefitEntity);
+	}
+
+	public void removeFromIndividualInsuranceBenefitEntities(IndividualInsuranceBenefitEntity detachedInsuranceBenefitEntity) {
+		IndividualInsuranceBenefitEntity insuranceBenefitEntities = em.merge(detachedInsuranceBenefitEntity);
+		InsuranceContract insuranceContract = insuranceBenefitEntities.getInsuranceContract();
+		insuranceContract.getIndividualInsuranceBenefitEntity().remove(insuranceBenefitEntities);
 		em.remove(insuranceBenefitEntities);
 	}
 }

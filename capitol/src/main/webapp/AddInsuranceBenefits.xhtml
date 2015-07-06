@@ -33,19 +33,22 @@
 			    	</tr>
 			</table>
 			
+			<h:form class="form-horizontal" target="_self">
 			<h3>Details</h3>
 			<table class="table">
 			    	<tr>
 			    		<th>AgreementInfo</th>
-			    		<td><h:inputText class="form-control" id="agreementInfo" value="#{addInsuranceBenefits.additionalInfo}" /></td>
+			    		<td>#{addInsuranceBenefits.additionalInfo}</td>
 			    	</tr>
 			    	<tr>
 			    		<th>Insurance Type</th>
-			    		<h:selectOneMenu id="types" value="#{addInsuranceBenefits.insuranceType}">
+			    		<h:selectOneMenu id="types" value="#{addInsuranceBenefits.contract.insuranceType}">
 							<f:selectItems value="#{addInsuranceBenefits.allInsuranceTypes}" />
 						</h:selectOneMenu>
 			    	</tr>
 			</table>
+					<h:commandButton id="update_button" class="btn btn-primary" value="Update" update="@form" action="#{addInsuranceBenefits.update()}" />
+			</h:form>
 			
 			<h3>Insurance benefits</h3>
 			<h:form class="form-horizontal" target="_self">
@@ -71,13 +74,45 @@
 			</h:dataTable>
 			</h:form>
 			
-			<h3>The ultimate price is #{addInsuranceBenefits.suggestedPrice}</h3>
-			
+			<h3>Individual insurance benefits</h3>
 			<h:form class="form-horizontal" target="_self">
-				<h:commandButton id="update_button" class="btn btn-primary" value="Update" update="@form" action="#{addInsuranceBenefits.update()}" />
+			<h:dataTable value="#{addInsuranceBenefits.contract.individualInsuranceBenefitEntity}" var="cur"
+				styleClass="data-table" headerClass="data-cell header-cell"
+				columnClasses="data-cell,data-cell,data-cell">
+			<!-- columns for properties of the referenced entity -->
+				<h:column>
+					<f:facet name="header">Name</f:facet>
+					#{cur.name}
+					<f:facet name="footer">
+						<h:inputText id="nameOfNewIndividualBenefit" value="#{addInsuranceBenefits.nameOfNewIndividualBenefit}">
+						</h:inputText>
+					</f:facet>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Price</f:facet>
+					#{cur.price}
+					<f:facet name="footer">
+						<h:inputText id="priceOfNewIndividualBenefit" value="#{addInsuranceBenefits.priceOfNewIndividualBenefit}">
+						</h:inputText>
+					</f:facet>
+				</h:column>
+				<h:column>
+					<h:commandButton id="remove_button_2" value="Remove" update="@form" action="#{addInsuranceBenefits.removeFromIndividualBenefits(cur)}" />
+					<f:facet name="footer">
+						<h:commandButton id="add_button_2" value="Add" update="@form" action="#{addInsuranceBenefits.addIndividualBenefit()}" />
+					</f:facet>
+				</h:column>
+			</h:dataTable>
 			</h:form>
 			
 			<h:form class="form-horizontal" target="_parent">
+			<table class="table">
+			    	<tr>
+			    		<th>Insurance price</th>
+			    		<td><h:inputText class="form-control" id="insuranceSum" value="#{addInsuranceBenefits.suggestedPrice}" /></td>
+			    	</tr>
+			</table>
+
 				<h:commandButton id="save_button" class="btn btn-primary" value="Save changes" update="@form" action="#{addInsuranceBenefits.submitForm()}" />
 			</h:form>	
 
