@@ -22,6 +22,7 @@ import de.unimuenster.wi.wfm.entitiy.CarData;
 import de.unimuenster.wi.wfm.entitiy.IndividualInsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
+import de.unimuenster.wi.wfm.entitiy.InsuranceStatus;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceType;
 import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
@@ -83,8 +84,8 @@ public class AddInsuranceBenefits implements Serializable {
 	public void submitForm() {
 		
 		try {
+			contract.setStatus(InsuranceStatus.PROCESSED);
 			contract =  insuranceContractService.mergeInsuranceContract(contract);
-			//Doesn't work so far!!!!!!!!!!!!!!!!!!!!
 			taskForm.completeTask();
 		} catch (IOException e) {
 			// Rollback both transactions on error
@@ -172,6 +173,10 @@ public class AddInsuranceBenefits implements Serializable {
 			));
 		}
 		return price;
+	}
+	
+	public void setSuggestedPrice(BigDecimal price) {
+		contract.setInsurancePrice(price);
 	}
 
 }
