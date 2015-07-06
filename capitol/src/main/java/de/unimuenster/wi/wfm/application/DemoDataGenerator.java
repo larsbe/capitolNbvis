@@ -3,6 +3,11 @@ package de.unimuenster.wi.wfm.application;
 import static org.camunda.bpm.engine.authorization.Authorization.ANY;
 import static org.camunda.bpm.engine.authorization.Authorization.AUTH_TYPE_GRANT;
 import static org.camunda.bpm.engine.authorization.Permissions.ALL;
+import static org.camunda.bpm.engine.authorization.Resources.FILTER;
+import static org.camunda.bpm.engine.authorization.Permissions.READ;
+import static org.camunda.bpm.engine.authorization.Permissions.ACCESS;
+import static org.camunda.bpm.engine.authorization.Resources.APPLICATION;
+import static org.camunda.bpm.engine.authorization.Resources.USER;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -22,6 +27,7 @@ import org.camunda.bpm.engine.FilterService;
 import org.camunda.bpm.engine.IdentityService;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.TaskService;
+import org.camunda.bpm.engine.authorization.Authorization;
 import org.camunda.bpm.engine.authorization.Groups;
 import org.camunda.bpm.engine.authorization.Resource;
 import org.camunda.bpm.engine.authorization.Resources;
@@ -36,18 +42,14 @@ import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
 import de.unimuenster.wi.wfm.ejb.InsuranceBenefitEntityServiceBean;
 import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
-
 import de.unimuenster.wi.wfm.entitiy.CarData;
 import de.unimuenster.wi.wfm.entitiy.CaseStatus;
-
 import de.unimuenster.wi.wfm.entitiy.Customer;
 import de.unimuenster.wi.wfm.entitiy.InsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
-
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceType;
-
 
 @Startup
 @Singleton
@@ -61,10 +63,10 @@ public class DemoDataGenerator {
 
 	@EJB
 	private InsuranceContractServiceBean insuranceContractService;
-	
+
 	@EJB
 	private CarDataServiceBean carDataService;
-	
+
 	@EJB
 	private InsuranceBenefitEntityServiceBean insuranceBenefitEntitySerice;
 
@@ -95,7 +97,7 @@ public class DemoDataGenerator {
 		c1.setCompany("BVIS");
 		c1.setEmail("BVIS@gmail.de");
 		c1.setPhoneNumber("0190123456");
-		c1.setAddress("münster");
+		c1.setAddress("mï¿½nster");
 		customerService.createCustomer(c1);
 
 		InsuranceContract ic1 = new InsuranceContract();
@@ -112,7 +114,7 @@ public class DemoDataGenerator {
 		cardatas.add(carData);
 		ic1.setCardatas(cardatas);
 		InsuranceBenefit insu = InsuranceBenefit.BRAKEDOWNCOVER;
-		
+
 		InsuranceBenefitEntity insuranceBenefitEntity = new InsuranceBenefitEntity();
 		insuranceBenefitEntity.setInsuranceBenefit(insu);
 		Collection<InsuranceBenefitEntity> insuranceBenefitEntitys = new ArrayList<InsuranceBenefitEntity>();
@@ -120,12 +122,13 @@ public class DemoDataGenerator {
 		ic1.setInsuranceBenefitEntity(insuranceBenefitEntitys);
 		ic1.setInsurancePrice(BigDecimal.valueOf(125.23));
 		insuranceContractService.createInsuranceContract(ic1);
-		
+
 		carData.setInsuranceContract(ic1);
 		carDataService.createCarData(carData);
-		
+
 		insuranceBenefitEntity.setInsuranceContract(ic1);
-		insuranceBenefitEntitySerice.createInsuranceBenefitEntity(insuranceBenefitEntity);
+		insuranceBenefitEntitySerice
+				.createInsuranceBenefitEntity(insuranceBenefitEntity);
 
 		// only if no demo data is avl.
 		if (isDemoDataAvl())
@@ -134,6 +137,7 @@ public class DemoDataGenerator {
 		createUser();
 		createGroups();
 		allocateUsersToGroups();
+		createAuth();
 		createTaskListFilter();
 	}
 
@@ -142,12 +146,13 @@ public class DemoDataGenerator {
 	 */
 
 	private void createUser() {
+		identityService.saveUser(initUser("capitol", "Admin", "Capitol",
+				"demo"));
 		identityService.saveUser(initUser("stromberg", "Bernd", "Stromberg",
 				"demo"));
-		identityService.saveUser(initUser("heisterkamp", "Berthold (Ernie)",
-				"Heisterkamp", "demo"));
-		identityService.saveUser(initUser("steinke", "Ulf", "Steinke", "demo"));
-
+		identityService.saveUser(initUser("erni", "Berthold (Ernie)",
+				"erni", "demo"));
+		identityService.saveUser(initUser("ulf", "Ulf", "ulf", "demo"));
 	}
 
 	private void createGroups() {
@@ -158,7 +163,9 @@ public class DemoDataGenerator {
 				"Second Level Case Handler", "WORKFLOW"));
 		identityService.saveGroup(initGroup("Contract_Handler",
 				"Contract Handler", "WORKFLOW"));
+	}
 
+	private void createAuth() {
 		// create admin group if necessary
 		if (identityService.createGroupQuery().groupId(Groups.CAMUNDA_ADMIN)
 				.count() == 0) {
@@ -183,20 +190,29 @@ public class DemoDataGenerator {
 				authorizationService.saveAuthorization(userAdminAuth);
 			}
 		}
+
+		// Task-List
+		Authorization capitolTasklistAuth = authorizationService
+				.createNewAuthorization(AUTH_TYPE_GRANT);
+		capitolTasklistAuth.setGroupId("capitol");
+		capitolTasklistAuth.addPermission(ACCESS);
+		capitolTasklistAuth.setResourceId("tasklist");
+		capitolTasklistAuth.setResource(APPLICATION);
+		authorizationService.saveAuthorization(capitolTasklistAuth);
 	}
 
 	private void allocateUsersToGroups() {
-		identityService.createMembership("stromberg", Groups.CAMUNDA_ADMIN);
+		identityService.createMembership("capitol", Groups.CAMUNDA_ADMIN);
 
 		identityService.createMembership("stromberg", "capitol");
-		identityService.createMembership("heisterkamp", "capitol");
-		identityService.createMembership("steinke", "capitol");
+		identityService.createMembership("erni", "capitol");
+		identityService.createMembership("ulf", "capitol");
 
 		identityService.createMembership("stromberg", "Contract_Handler");
-		identityService.createMembership("heisterkamp",
+		identityService.createMembership("erni",
 				"First_Level_Case_Handler");
 		identityService
-				.createMembership("steinke", "Second_Level_Case_Handler");
+				.createMembership("ulf", "Second_Level_Case_Handler");
 	}
 
 	private void createTaskListFilter() {
@@ -209,40 +225,124 @@ public class DemoDataGenerator {
 				"All Liability Cases that have not been checked yet");
 		filterProperties.put("priority", 10);
 		filterProperties.put("refresh", true);
-		filterProperties.put("color", "#0cb52c");
+		filterProperties.put("color", "#8ad69a");
 		addVariables(filterProperties);
 		query = taskService.createTaskQuery().taskName("Check eligibility");
 		Filter newLiabilityCasesFilter = filterService.newTaskFilter()
 				.setName("New Liability Cases").setProperties(filterProperties)
-				.setOwner("stromberg").setQuery(query);
+				.setOwner("capitol").setQuery(query);
 		filterService.saveFilter(newLiabilityCasesFilter);
+
+		Authorization newLiabilityCaseGroup1FilterRead = authorizationService
+				.createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
+		newLiabilityCaseGroup1FilterRead.setResource(FILTER);
+		newLiabilityCaseGroup1FilterRead.setResourceId(newLiabilityCasesFilter
+				.getId());
+		newLiabilityCaseGroup1FilterRead.addPermission(READ);
+		newLiabilityCaseGroup1FilterRead.setGroupId("First_Level_Case_Handler");
+		authorizationService
+				.saveAuthorization(newLiabilityCaseGroup1FilterRead);
+
+// deactivate 2nd lvl
+//		Authorization newLiabilityCaseGroup2FilterRead = authorizationService
+//				.createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
+//		newLiabilityCaseGroup2FilterRead.setResource(FILTER);
+//		newLiabilityCaseGroup2FilterRead.setResourceId(newLiabilityCasesFilter
+//				.getId());
+//		newLiabilityCaseGroup2FilterRead.addPermission(READ);
+//		newLiabilityCaseGroup2FilterRead
+//				.setGroupId("Second_Level_Case_Handler");
+//		authorizationService
+//				.saveAuthorization(newLiabilityCaseGroup2FilterRead);
 
 		/* New Insurance Contract */
 		filterProperties.clear();
 		filterProperties.put("description", "All Open Negotiation Cases");
 		filterProperties.put("priority", 10);
 		filterProperties.put("refresh", true);
-		filterProperties.put("color", "#0cb52c");
+		filterProperties.put("color", "#8ad69a");
 		addVariables(filterProperties);
 		query = taskService.createTaskQuery()
 				.taskName("Add insurance benefits");
 		Filter openIncuranceContractsFilter = filterService.newTaskFilter()
 				.setName("Open Negotiation Cases")
-				.setProperties(filterProperties).setOwner("stromberg")
+				.setProperties(filterProperties).setOwner("capitol")
 				.setQuery(query);
 		filterService.saveFilter(openIncuranceContractsFilter);
 
-		// all tasks
+		Authorization newRentalAgreementGroupFilterRead = authorizationService
+				.createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
+		newRentalAgreementGroupFilterRead.setResource(FILTER);
+		newRentalAgreementGroupFilterRead
+				.setResourceId(openIncuranceContractsFilter.getId());
+		newRentalAgreementGroupFilterRead.addPermission(READ);
+		newRentalAgreementGroupFilterRead.setGroupId("Contract_Handler");
+		authorizationService
+				.saveAuthorization(newRentalAgreementGroupFilterRead);
+
+		// My Tasks
+		filterProperties.clear();
+		filterProperties.put("description", "Tasks assigned to me");
+		filterProperties.put("priority", -10);
+		filterProperties.put("refresh", true);
+		addVariables(filterProperties);
+		query = taskService.createTaskQuery().taskAssigneeExpression(
+				"${currentUser()}");
+		Filter myTasksFilter = filterService.newTaskFilter()
+				.setName("My Tasks").setProperties(filterProperties)
+				.setOwner("capitol").setQuery(query);
+		filterService.saveFilter(myTasksFilter);
+
+		// Unasigned Tasks
 		filterProperties.clear();
 		filterProperties.put("description",
-				"All Tasks");
-		filterProperties.put("priority", 10);
+				"Tasks that have not been assigned yet");
+		filterProperties.put("priority", -10);
+		filterProperties.put("refresh", true);
 		addVariables(filterProperties);
-		query = taskService.createTaskQuery();
-		Filter allTasksFilter = filterService.newTaskFilter()
-				.setName("All Tasks").setProperties(filterProperties)
-				.setOwner("stromberg").setQuery(query);
-		filterService.saveFilter(allTasksFilter);
+		query = taskService.createTaskQuery()
+				.taskCandidateGroupInExpression("${currentUserGroups()}")
+				.taskUnassigned();
+		Filter unassignedTasksFilter = filterService.newTaskFilter()
+				.setName("Unassigned Tasks").setProperties(filterProperties)
+				.setOwner("capitol").setQuery(query);
+		filterService.saveFilter(unassignedTasksFilter);
+		
+		// all tasks
+				filterProperties.clear();
+				filterProperties.put("description", "All Tasks");
+				filterProperties.put("priority", 10);
+				addVariables(filterProperties);
+				query = taskService.createTaskQuery();
+				Filter allTasksFilter = filterService.newTaskFilter()
+						.setName("All Tasks").setProperties(filterProperties)
+						.setOwner("capitol").setQuery(query);
+				filterService.saveFilter(allTasksFilter);
+
+		// global read authorizations for these filters
+
+		Authorization globalMyTaskFilterRead = authorizationService
+				.createNewAuthorization(Authorization.AUTH_TYPE_GLOBAL);
+		globalMyTaskFilterRead.setResource(FILTER);
+		globalMyTaskFilterRead.setResourceId(myTasksFilter.getId());
+		globalMyTaskFilterRead.addPermission(READ);
+		authorizationService.saveAuthorization(globalMyTaskFilterRead);
+
+		Authorization globalUnassignedFilterRead = authorizationService
+				.createNewAuthorization(Authorization.AUTH_TYPE_GLOBAL);
+		globalUnassignedFilterRead.setResource(FILTER);
+		globalUnassignedFilterRead.setResourceId(unassignedTasksFilter.getId());
+		globalUnassignedFilterRead.addPermission(READ);
+		authorizationService.saveAuthorization(globalUnassignedFilterRead);
+		
+// only: user "capitol" for debug reasons
+//		Authorization globalAllTasksFilterRead = authorizationService
+//				.createNewAuthorization(Authorization.AUTH_TYPE_GLOBAL);
+//		globalAllTasksFilterRead.setResource(FILTER);
+//		globalAllTasksFilterRead.setResourceId(allTasksFilter.getId());
+//		globalAllTasksFilterRead.addPermission(READ);
+//		authorizationService.saveAuthorization(globalAllTasksFilterRead);
+
 	}
 
 	/*

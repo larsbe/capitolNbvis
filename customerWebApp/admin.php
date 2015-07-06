@@ -65,7 +65,7 @@ function write_ini_file($assoc_arr, $path, $has_sections=FALSE) {
 <html>
 <body>
 <form action="admin.php" method="post">
-  <label for="idAddr">IP-Adresse Camunda:</label>
+  <label for="idAddr">Camunda REST Host:</label>
   <input id="idAddr" name="ipAddr" type="text" value="<?=$server?>" />
   <input type="submit" />
 </form>

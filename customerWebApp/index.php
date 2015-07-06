@@ -74,7 +74,11 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="assets/js/bootstrap.min.js"></script>
     <script>
-      var camundaserver = 'http://localhost:8080/engine-rest/engine/default/message';
+      <?php
+      $config = parse_ini_file("./config.ini"); 
+      $server= $config["ipAddr"]; 
+      ?>
+      var camundaserver = 'http://<?=$server?>/engine-rest/engine/default/message';
       var imagefolder = 'http://capitol.jonasgerlach.de/customerWebApp/uploads/';
       var contractfolder = 'http://capitol.jonasgerlach.de/customerWebApp/contracts/';
     </script>
