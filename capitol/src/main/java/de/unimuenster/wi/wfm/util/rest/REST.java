@@ -1,6 +1,7 @@
 package de.unimuenster.wi.wfm.util.rest;
 
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
+import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 import de.unimuenster.wi.wfm.sharedLib.rest.BvisREST;
 import de.unimuenster.wi.wfm.sharedLib.rest.RestHelper;
 import de.unimuenster.wi.wfm.util.Constants;
@@ -18,6 +19,15 @@ public class REST extends RestHelper {
 		String msg = BvisREST.LiabilityCasePaymentInformation("correlationKey",
 				claim.getDecisionNote(), claim.getReportUrl(),
 				claim.getInsuranceSum());
+		//SendMessageToBVIS(msg);
+	}
+	
+	public static void SendAgreementConditionsWithInsurance(RentalAgreementMessage rentalAgreementMsg) {
+		String msg = BvisREST.AgreementConditionsWithInsurance(
+				Long.valueOf(rentalAgreementMsg.getRentalAgreementRequestId()).toString(),
+				rentalAgreementMsg
+		);
+		System.out.println(msg);
 		//SendMessageToBVIS(msg);
 	}
 

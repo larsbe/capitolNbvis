@@ -20,6 +20,7 @@ public class RentalAgreementMessage {
 	private String additionalInfo;
 	private InsuranceType insuranceType;
 	private List<InsuranceBenefit> benefits;
+	private List<String> individualBenefits;
 	private BigDecimal insurancePrice;
 	
 	public long getRentalAgreementRequestId() {
@@ -64,6 +65,11 @@ public class RentalAgreementMessage {
 	public void setInsurancePrice(BigDecimal insurancePrice) {
 		this.insurancePrice = insurancePrice;
 	}
-	
+	public List<String> getIndividualBenefits() {
+		return individualBenefits;
+	}
+	public void setIndividualBenefits(List<String> individualBenefits) {
+		this.individualBenefits = individualBenefits;
+	}
 	
 }

@@ -9,7 +9,6 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
-import de.unimuenster.wi.wfm.entitiy.CaseStatus;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 import de.unimuenster.wi.wfm.util.LiabilityCaseReport;
 import de.unimuenster.wi.wfm.util.rest.REST;
