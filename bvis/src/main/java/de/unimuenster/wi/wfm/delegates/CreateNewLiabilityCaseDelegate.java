@@ -41,6 +41,17 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		LiabilityCase liabilityCase = new LiabilityCase();
 		liabilityCase.setRentalAgreementContract(contract);
 		
+		liabilityCase.setClaimDetails((String) variables.get("claimDetails"));
+		
+		
+		Double estimateOfCosts = (Double) variables.get("estCosts");
+		if(estimateOfCosts == null){
+			liabilityCase.setEstimateOfCosts(0.0);
+		}else{
+			liabilityCase.setEstimateOfCosts(estimateOfCosts);
+		}
+		
+		
 		// persist liabilityCase in database
 		liabilityCase = liabilityCaseService.createLiabilityCase(liabilityCase);
 		
@@ -54,6 +65,8 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 			images.add(image);
 		}
 		liabilityCase.setImages(images);
+		
+		
 
 
 

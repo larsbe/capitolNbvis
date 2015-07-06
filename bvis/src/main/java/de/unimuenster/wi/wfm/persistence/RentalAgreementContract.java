@@ -79,5 +79,7 @@ public class RentalAgreementContract extends AbstractEntity {
 	public void setUrlToSignedContract(String urlToSignedContract) {
 		this.urlToSignedContract = urlToSignedContract;
 	}
+	
+//	getRentalAgreementRequest
 
 }

@@ -2,6 +2,7 @@ package de.unimuenster.wi.wfm.web.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -52,7 +53,8 @@ public class CheckClaimEligible implements Serializable {
 	
 	public LiabilityCase getLiabilityCase() {
 		if (liabilityCase == null){
-			liabilityCase = new LiabilityCase();
+			
+			liabilityCase = liabilityCaseService.getLiabilityCase((Long) businessProcess.getVariable("claimIdBVIS"));
 		}			
 		return liabilityCase;
 	}
