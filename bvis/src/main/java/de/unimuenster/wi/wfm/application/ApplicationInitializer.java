@@ -1,5 +1,7 @@
 package de.unimuenster.wi.wfm.application;
 
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -8,6 +10,7 @@ import javax.persistence.PersistenceContext;
 
 import de.unimuenster.wi.wfm.persistence.CarData;
 import de.unimuenster.wi.wfm.persistence.Customer;
+import de.unimuenster.wi.wfm.persistence.RentalAgreementContract;
 import de.unimuenster.wi.wfm.persistence.StandardAgreementType;
 
 @Startup
@@ -38,41 +41,61 @@ public class ApplicationInitializer {
 		
 		
 		// create some Cars
-		CarData carData;
 		
-		carData = new CarData();
-		carData.setName("Audi A4 2.8");
-		carData.setHsn("0588");
-		carData.setTsn("597");
-		carData.setYear("2011");
-		carData.setLicenseNumber("WfM WfM WfM");
-		em.persist(carData);
+		CarData carData61 = new CarData();
+		carData61.setName("Audi A4 2.8");
+		carData61.setHsn("0588");
+		carData61.setTsn("597");
+		carData61.setYear("2011");
+		carData61.setLicenseNumber("WfM WfM WfM");
+		em.persist(carData61);
 		
-		carData = new CarData();
-		carData.setName("Audi A8 4.2");
-		carData.setHsn("0588");
-		carData.setTsn("581");
-		carData.setYear("2014");
-		carData.setLicenseNumber("WfM");
-		em.persist(carData);
+		CarData carData62 = new CarData();
+		carData62.setName("Audi A8 4.2");
+		carData62.setHsn("0588");
+		carData62.setTsn("581");
+		carData62.setYear("2014");
+		carData62.setLicenseNumber("WfM");
+		em.persist(carData62);
 		
-		carData = new CarData();
-		carData.setName("BMW 325 I Cabrio");
-		carData.setHsn("0005");
-		carData.setTsn("531");
-		carData.setYear("2012");
-		carData.setLicenseNumber("WfM everyday");
-		em.merge(carData);
+		CarData carData63 = new CarData();
+		carData63.setName("BMW 325 I Cabrio");
+		carData63.setHsn("0005");
+		carData63.setTsn("531");
+		carData63.setYear("2012");
+		carData63.setLicenseNumber("WfM everyday");
+		em.persist(carData63);
 		
-		carData.setName("BMW 530 D");
-		carData.setHsn("0005");
-		carData.setTsn("761");
-		carData.setYear("2013");
-		carData.setLicenseNumber("WfM-4-Life");
-		em.persist(carData);
+		CarData carData64 = new CarData();
+		carData64.setName("BMW 530 D");
+		carData64.setHsn("0005");
+		carData64.setTsn("761");
+		carData64.setYear("2013");
+		carData64.setLicenseNumber("WfM-4-Life");
+		em.persist(carData64);
+		
+		CarData carData65 = new CarData();
+		carData65.setName("Audi S3 CABRIO 2.0 TFSI");
+		carData65.setHsn("0588");
+		carData65.setTsn("BAS");
+		carData65.setYear("2013");
+		carData65.setLicenseNumber("MS-WFM-1337");
+		em.persist(carData65);
+		
+		CarData carData6 = new CarData();
+		carData6.setName("Nissan MICRA 1.2");
+		carData6.setHsn("1329");
+		carData6.setTsn("ACJ");
+		carData6.setYear("2013");
+		carData6.setLicenseNumber("WfM-4-Ever");
+		em.persist(carData6);
 		
 
 		
+		RentalAgreementContract contract = new RentalAgreementContract();
+		contract.setCustomer(c1);
+		contract.setDate(new Date());
+		em.persist(contract);
 		
 
 		

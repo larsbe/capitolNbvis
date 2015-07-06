@@ -30,7 +30,9 @@ public class CarDataServiceBean {
 			carDataEntity.setHsn(carData.getHsn());
 			carDataEntity.setTsn(carData.getTsn());
 			carDataEntity.setLicenseNumber(carData.getLicenseNumber());
-			carDataEntity.setYear(Integer.parseInt(carData.getYear()));
+			if (carData.getYear() != null && !carData.getYear().equals("")) {
+				carDataEntity.setYear(Integer.parseInt(carData.getYear()));
+			}
 			this.createCarData(carDataEntity);
 		}
 	}

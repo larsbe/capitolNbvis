@@ -35,12 +35,16 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		Map<String, Object> variablesToRemove = new HashMap<String, Object>();
 		
 		// Load Contract (contractNo is provided)
-		InsuranceContract contract = insuranceContractService.getInsuranceContract((Long) variables.get("contractNo"));
+		//InsuranceContract contract = insuranceContractService.getInsuranceContract((Long) variables.get("contractNo"));
+		
+		InsuranceContract contract = insuranceContractService.getInsuranceContractByBVISid((Long) variables.get("contractNo"));
+
 		
 		// Create new Case
 		LiabilityCase claim = new LiabilityCase();
 		claim.setStatus(CaseStatus.NEW);
 		claim.setInsuranceContract(contract);
+		claim.setBvisCaseID((Long) variables.get("bvisCaseID"));
 		
 		
 		claim.setClaimDetails((String) variables.get("claimDetails"));

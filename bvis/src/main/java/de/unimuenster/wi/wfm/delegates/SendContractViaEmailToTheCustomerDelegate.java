@@ -12,12 +12,12 @@ import javax.mail.MessagingException;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-import de.unimuenster.wi.wfm.application.EMailSender;
-import de.unimuenster.wi.wfm.application.PdfGenerator;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementContract;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
+import de.unimuenster.wi.wfm.util.EMailSender;
+import de.unimuenster.wi.wfm.util.PdfGenerator;
 
 @Named
 public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {

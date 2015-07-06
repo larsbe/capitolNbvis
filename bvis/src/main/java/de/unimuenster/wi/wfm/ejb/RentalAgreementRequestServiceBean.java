@@ -22,30 +22,30 @@ public class RentalAgreementRequestServiceBean {
 	@PersistenceContext
 	protected EntityManager em;
 
-	public RentalAgreementRequest createObjectFromMessage(RentalAgreementMessage rentalAgreementMsg, Customer customer, Collection<CarData> carsData) {
-		RentalAgreementRequest rentalAgreementRequest = new RentalAgreementRequest();
-		
-		rentalAgreementRequest.setDate(new Date( ));
-		if(rentalAgreementMsg.getCarsData() == null){
-			// Individual Solution requested
-			rentalAgreementRequest.setRentalAgreementRequestType(RentalAgreementRequestType.INDIVIDUAL);
-			rentalAgreementRequest.setRequirementsOfCustomer(rentalAgreementMsg.getAdditionalInfo());
-		
-		}else{
-			// Standard Solution requested
-			rentalAgreementRequest.setRentalAgreementRequestType(RentalAgreementRequestType.STANDARD);	
-		}
-		
-		
-		rentalAgreementRequest.setCustomer(customer);
-		rentalAgreementRequest.setCarsData(carsData);
-		
-		
-		// persist data
-		rentalAgreementRequest = this.createRentalAgreementRequest(rentalAgreementRequest);
-		return rentalAgreementRequest;
-	}
-	
+//	public RentalAgreementRequest createObjectFromMessage(RentalAgreementMessage rentalAgreementMsg, Customer customer, Collection<CarData> carsData) {
+//		RentalAgreementRequest rentalAgreementRequest = new RentalAgreementRequest();
+//		
+//		rentalAgreementRequest.setDate(new Date( ));
+//		if(rentalAgreementMsg.getCarsData() == null){
+//			// Individual Solution requested
+//			rentalAgreementRequest.setRentalAgreementRequestType(RentalAgreementRequestType.INDIVIDUAL);
+//			rentalAgreementRequest.setRequirementsOfCustomer(rentalAgreementMsg.getAdditionalInfo());
+//		
+//		}else{
+//			// Standard Solution requested
+//			rentalAgreementRequest.setRentalAgreementRequestType(RentalAgreementRequestType.STANDARD);	
+//		}
+//		
+//		
+//		rentalAgreementRequest.setCustomer(customer);
+//		rentalAgreementRequest.setCarsData(carsData);
+//		
+//		
+//		// persist data
+//		rentalAgreementRequest = this.createRentalAgreementRequest(rentalAgreementRequest);
+//		return rentalAgreementRequest;
+//	}
+//	
 	public RentalAgreementRequest createRentalAgreementRequest(RentalAgreementRequest RentalAgreementRequest) {
 		em.persist(RentalAgreementRequest);
 		return RentalAgreementRequest;

@@ -5,16 +5,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.camunda.bpm.engine.impl.util.JsonUtil;
 
 public class RestHelper {
 
 	public static String escape(String str) {
-		return str;
+		return StringEscapeUtils.escapeJson(str);
 	}
 	
 	@SuppressWarnings({ "deprecation", "unused" })
@@ -37,7 +39,7 @@ public class RestHelper {
 
 			// if content -> check 201
 			if (response.getStatusLine().getStatusCode() != 201) {
-				throw new RuntimeException("Failed : HTTP error code : "
+				System.err.println("REST Call Failed : HTTP error code : "
 						+ response.getStatusLine().getStatusCode());
 			}
 

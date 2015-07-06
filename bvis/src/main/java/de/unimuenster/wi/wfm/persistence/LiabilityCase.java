@@ -88,7 +88,7 @@ public class LiabilityCase extends AbstractEntity {
 	}
 
 	public String toString() {
-		return "LiabilityCasse: ID=" + this.getId();
+		return "LiabilityCase: ID=" + this.getId();
 	}
 	
 	public String getRejectionInfo() {
