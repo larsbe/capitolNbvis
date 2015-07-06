@@ -15,19 +15,34 @@
 				  <div class="modal-dialog" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Customer Details</h4>
 				      </div>
 				      <div class="modal-body">
-				        #{checkEligibility.liabilityCase.insuranceContract.customer.name}<br />
-				        #{checkEligibility.liabilityCase.insuranceContract.customer.company}<br />
-				        #{checkEligibility.liabilityCase.insuranceContract.customer.email}<br />
-				        #{checkEligibility.liabilityCase.insuranceContract.customer.phoneNumber}<br />
-				        #{checkEligibility.liabilityCase.insuranceContract.customer.address}
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				        <button type="button" class="btn btn-primary">Save changes</button>
+
+				        <table class="table">
+					    	<tr>
+					    		<th>Company</th>
+					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.company}</td>
+					    	</tr>
+					    	<tr>
+					    		<th>Contact Person</th>
+					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}</td>
+					    	</tr>
+					    	<tr>
+					    		<th>E-Mail</th>
+					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.email}</td>
+					    	</tr>
+					    	<tr>
+					    		<th>Phone Number</th>
+					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.phoneNumber}</td>
+					    	</tr>
+					    	<tr>
+					    		<th>Address</th>
+					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.address}</td>
+					    	</tr>
+					    
+					    </table>
 				      </div>
 				    </div>
 				  </div>
@@ -46,8 +61,8 @@
 			    	</tr>
 			    	<tr>
 			    		<th>Customer Name</th>
-			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}
-				    		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.company} 
+				    		<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">
 							  Details
 							</button>
 						</td>
