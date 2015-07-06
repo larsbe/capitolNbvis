@@ -1,6 +1,7 @@
 package de.unimuenster.wi.wfm.entitiy;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -16,12 +17,15 @@ public class LiabilityCase extends AbstractEntity {
 	
 	protected CaseStatus status = CaseStatus.NEW;
 	protected boolean eligible =false;
+
+	@Column( length = 100000 )
 	protected String claimDetails = "";
 	protected Double carsFairValue = 0.0;
 	protected Double insuranceSum = 0.0;
 	protected Double estimateOfCosts = 0.0;
 	protected String reportUrl = "";
 	protected String licenseNumber = "";
+	@Column( length = 100000 )
 	protected String decisionNote = "";
 	
 	@ManyToOne

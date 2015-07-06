@@ -11,14 +11,14 @@ public class REST extends RestHelper {
 		String msg = BvisREST
 				.LiabilityCaseRejectionInformation("correlationKey",
 						claim.getDecisionNote(), claim.getReportUrl());
-		SendMessageToBVIS(msg);
+		//SendMessageToBVIS(msg);
 	}
 
 	public static void SendLiabilityCasePaymentInformation(LiabilityCase claim) {
 		String msg = BvisREST.LiabilityCasePaymentInformation("correlationKey",
 				claim.getDecisionNote(), claim.getReportUrl(),
 				claim.getInsuranceSum());
-		SendMessageToBVIS(msg);
+		//SendMessageToBVIS(msg);
 	}
 
 	private static void SendMessageToBVIS(String msg) {
