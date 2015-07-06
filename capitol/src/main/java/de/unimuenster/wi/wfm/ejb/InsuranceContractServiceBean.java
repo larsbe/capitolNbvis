@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
@@ -61,6 +62,18 @@ public class InsuranceContractServiceBean {
 		item.getInsuranceBenefitEntity().size();
 		item.getLiabilityCases().size();
 		return item;
+	}
+	
+	public InsuranceContract getInsuranceContractByBVISid(long id) {
+		Query q = em.createQuery("FROM InsuranceContract c WHERE c.rentalAgreementIdBVIS=:bvisId", InsuranceContract.class)
+				.setParameter("bvisId", id);
+		if (q.getResultList().size() > 0) {
+			InsuranceContract item = (InsuranceContract) q.getSingleResult();
+			//force load of associations
+			return getInsuranceContract(item.getId());
+		} else {
+			throw new IllegalStateException("No contract with BVISid found " + id);
+		}
 	}
 	
 	public InsuranceContract mergeInsuranceContract(InsuranceContract insuranceContract) {

@@ -1,9 +1,17 @@
-{"messageName" : "contractSigned",
+{"messageName" : "contractStatus",
 "businessKey" : "",
 "correlationKeys" : {
-"customer" : {"value" : "TestBVIS", "type": "String"}
+"rentalAgreementRequestIdBVIS" : {"value" : 3, "type": "long"}
 },
 "processVariables" : {
-"contractSigned" : {"value" : "true", "type": "boolean"}
+"agreementConditions" : {
+	"value" : "{\"rentalAgreementRequestId\":1,\"customerData\":{\"name\":\"Robert Voscort\",\"company\":\"Capitol\",\"email\":\"robert.voscort@capitol.to\",\"phoneNumber\":\"0190666666\",\"address\":\"TestAddress\"},\"carsData\":[{\"licenseNumber\":\"MS-C-80\",\"hsn\":\"0005\",\"tsn\":\"156\", \"year\":\"2004\"},{\"licenseNumber\":\"MS-C-80\",\"hsn\":\"0005\",\"tsn\":\"156\", \"year\":\"2004\"}],\"additionalInfo\":\"Test\"}",
+	"type" : "String",
+	"valueInfo" : {
+		"objectTypeName": "de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage",
+		"serializationDataFormat": "application/json"
+	}
+},
+"contractSigned" : {"value" : "true", "type" : "boolean" }
 }
 }

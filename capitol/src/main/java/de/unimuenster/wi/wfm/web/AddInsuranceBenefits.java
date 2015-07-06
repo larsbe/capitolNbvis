@@ -178,5 +178,14 @@ public class AddInsuranceBenefits implements Serializable {
 	public void setSuggestedPrice(BigDecimal price) {
 		contract.setInsurancePrice(price);
 	}
+	
+	public String getHeader() {
+		InsuranceContract contract = getContract();
+		if (contract.getStatus() == InsuranceStatus.REVISED) {
+			return "Agreement conditions need revising";
+		} else {
+			return "New negotiation case arrived";
+		}
+	}
 
 }

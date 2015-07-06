@@ -48,8 +48,8 @@ public class CheckEligibility implements Serializable {
 	
 	public void submitForm() throws IOException {
 	    // Persist updated order entity and complete task form
-		businessProcess.setVariable("claimIsEligible",liabilityCase.getEligible());
-		liabilityCase =  liabilityCaseService.mergeLiabilityCaseAndCompleteTask(liabilityCase);
+		businessProcess.setVariable("claimIsEligible",getLiabilityCase().getEligible());
+		liabilityCase =  liabilityCaseService.mergeLiabilityCaseAndCompleteTask(getLiabilityCase());
 	  }
 	
 }
