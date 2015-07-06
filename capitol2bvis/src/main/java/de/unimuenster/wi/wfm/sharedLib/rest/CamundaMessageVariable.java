@@ -11,6 +11,12 @@ public class CamundaMessageVariable {
 		this.type = type;
 	}
 	
+	public CamundaMessageVariable(String value, CamundaVariableType type, String objectTypeName, String serializationDataFormat) {
+		this.value = value;
+		this.type = type;
+		this.valueInfo = new CamundaValueInfo(objectTypeName, serializationDataFormat);
+	}
+	
 	public String getValue() {
 		return value;
 	}
@@ -32,7 +38,7 @@ public class CamundaMessageVariable {
 	
 	public String toString() {
 		if(valueInfo != null)
-			return "{\"type\": \""+type+"\", \"value\": \""+RestHelper.escape(value)+"\", \"valueInfo\": "+valueInfo+"}";
+			return "{\"type\": \""+type+"\", \"value\": \""+RestHelper.escape(value)+"\", \"valueInfo\": "+valueInfo.toString()+"}";
 		else
 			return "{\"type\": \""+type+"\", \"value\": \""+RestHelper.escape(value)+"\"}";
 	}

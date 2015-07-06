@@ -1,22 +1,55 @@
 package de.unimuenster.wi.wfm.sharedLib.rest;
 
+import static org.camunda.spin.Spin.JSON;
 import de.unimuenster.wi.wfm.sharedLib.constants.Capitol;
+import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 
 public class CapitolREST {
 
+	public static String ContractStatus(String correlationKey_rentalAgreementRequestIdBVIS) {
+		return "";
+	}
+	
+	public static String NewStandardRentalAgreement(
+			RentalAgreementMessage rentalAgreementMsg) {
+		CamundaMessage msg = new CamundaMessage(
+				Capitol.REST_MSG_NEW_STANDARD_RENTAL_AGREEMENT);
+		String json = JSON(rentalAgreementMsg).toString();
+		msg.addProcessVariables(
+				"agreementConditions",
+				new CamundaMessageVariable(
+						json,
+						CamundaVariableType.STRING,
+						"de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage",
+						"application/json"));
+		return msg.toString();
+	}
+
+	public static String NewNegotiationCase(
+			RentalAgreementMessage rentalAgreementMsg) {
+		CamundaMessage msg = new CamundaMessage(
+				Capitol.REST_MSG_NEW_AGREEMENT_CONDITIONS);
+		String json = JSON(rentalAgreementMsg).toString();
+		msg.addProcessVariables(
+				"agreementConditions",
+				new CamundaMessageVariable(
+						json,
+						CamundaVariableType.STRING,
+						"de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage",
+						"application/json"));
+		return msg.toString();
+	}
+
 	public static String NewLiabilityCase(Long contractNo, String claimDetails,
 			Double estimateOfCosts, String[] imageUrls) {
-
 		CamundaMessage msg = new CamundaMessage(
 				Capitol.REST_MSG_NEW_LIABILITY_CASE);
-
 		msg.addProcessVariables("contractNo", new CamundaMessageVariable(
 				contractNo.toString(), CamundaVariableType.LONG));
 		msg.addProcessVariables("estimateOfCosts", new CamundaMessageVariable(
 				estimateOfCosts.toString(), CamundaVariableType.DOUBLE));
 		msg.addProcessVariables("claimDetails", new CamundaMessageVariable(
 				claimDetails, CamundaVariableType.STRING));
-
 		if (imageUrls.length > 0) {
 			msg.addProcessVariables("imageCount", new CamundaMessageVariable(
 					String.valueOf(imageUrls.length),
@@ -26,7 +59,6 @@ public class CapitolREST {
 						new CamundaMessageVariable(imageUrls[i],
 								CamundaVariableType.STRING));
 		}
-
 		return msg.toString();
 	}
 
