@@ -56,7 +56,7 @@
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="offerCarType" id="offerCarType3" value="audia3">
+              <input type="radio" name="offerCarType" id="offerCarType3" value="micra">
               Nissan micra
             </label>
           </div>
