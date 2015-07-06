@@ -1,6 +1,6 @@
 var embedForm = function(pIFrameId, pTaskId, pExtFormId) {
       		
-	var prefix = "/capitol/" + pExtFormId + ".jsf?taskId=";
+	var prefix = "/bvis/" + pExtFormId + ".jsf?taskId=";
 	var suffix = "&callbackUrl=http://localhost:8080/camunda/app/tasklist/default/#/";
 	var loc = prefix + pTaskId + suffix;     
 	
