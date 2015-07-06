@@ -1,5 +1,7 @@
 package de.unimuenster.wi.wfm.sharedLib.data;
 
+import java.math.BigDecimal;
+
 public enum InsuranceBenefit {
 	BRAKEDOWNCOVER, 
 	ABROADBRAKEDOWNCOVER, 
@@ -18,4 +20,15 @@ public enum InsuranceBenefit {
 	      default: throw new IllegalArgumentException();
 	    }
 	  }
+	
+	public BigDecimal toPrice(){
+		switch(this) {
+		  case BRAKEDOWNCOVER: return BigDecimal.valueOf(20);
+	      case ABROADBRAKEDOWNCOVER: return BigDecimal.valueOf(10);
+	      case WITHOUTOWNRISK: return BigDecimal.valueOf(100);
+	      case ROADSTONE: return BigDecimal.valueOf(10);
+	      case HAILDAMAGE: return BigDecimal.valueOf(10);
+	      default: throw new IllegalArgumentException();
+	    }
+	}
 }
