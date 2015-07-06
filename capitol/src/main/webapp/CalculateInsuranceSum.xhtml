@@ -10,6 +10,8 @@
 	<ui:composition template="template.xhtml">
  
     	<ui:define name="content">
+    	<ui:include src="/CustomerDetails.xhtml" />
+			<ui:include src="/ContractDetails.xhtml" />
     		
     		<h1>Calculate Insurance Sum</h1>
     		<h3>Liability Case Info</h3>
@@ -20,11 +22,19 @@
 			    	</tr>
 			    	<tr>
 			    		<th>Contract ID</th>
-			    		<td>#{checkEligibility.liabilityCase.insuranceContract.id}</td>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.id}
+			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModalContract">
+							  Details
+							</button>
+			    		</td>
 			    	</tr>
 			    	<tr>
 			    		<th>Customer Name</th>
-			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}</td>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}
+			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModal">
+							  Details
+							</button>
+			    		</td>
 			    	</tr>
 			    	<tr>
 			    		<th>Claim Details</th>
@@ -54,6 +64,13 @@
 					      <div class="input-group-addon">€</div>
 					      <h:inputText class="form-control" id="insuranceSum" p:placeholder="Amount" value="#{calculateInsuranceSum.liabilityCase.insuranceSum}" />
 					      <div class="input-group-addon">.00</div>
+					    </div>
+					    
+					    <div class="form-group">
+					    <h:outputLabel class="col-sm-3 control-label" for="note" value="Note" />
+					    <div class="input-group col-sm-4">
+					      <h:inputTextarea class="form-control" id="note" value="#{calculateInsuranceSum.liabilityCase.decisionNote}" />
+					    </div>
 					    </div>
 
 				</div>

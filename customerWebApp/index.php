@@ -52,7 +52,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
     <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
-    <!--<link rel="icon" href="../../favicon.ico">-->
 
     <title>BVIS Customer WebApp</title>
 
@@ -63,6 +62,7 @@
 
     <!-- Custom styles for this template -->
     <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="assets/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

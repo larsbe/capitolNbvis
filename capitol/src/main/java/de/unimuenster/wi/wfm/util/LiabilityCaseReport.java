@@ -11,6 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import javax.inject.Inject;
+
+import org.camunda.bpm.engine.IdentityService;
+import org.camunda.bpm.engine.ProcessEngine;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.Pipeline;
@@ -45,12 +50,13 @@ public class LiabilityCaseReport {
 	private String payment = "";
 	private String nameReviser = "";
 	private String date = "";
+	private String decisionNote = "";
 	
 	
 	public static String PDF_LIABILITY_CASE_REPORT_URL = "http://capitol.jonasgerlach.de/resources/pdf/LiabilityCaseReport.html";
 	public static String PDF_LIABILITY_CASE_REPORT_CSS_URL = "http://capitol.jonasgerlach.de/resources/pdf/style.css";
 	public static String UPLOAD_DIR_HTTP_URL = "http://capitol.jonasgerlach.de/resources/uploads/";
-
+	
 	public String generatePDF() {
 		File file = GeneratePDF();
 		FTPUpload.uploadFile(file);
@@ -81,7 +87,9 @@ public class LiabilityCaseReport {
 		if(deduction < 0)
 			deduction = 0.0;
 		report.setDeductions(deduction.toString());
-		report.setPayment("0.00 EUR");
+		report.setPayment(claim.getInsuranceSum() + " EUR");
+		report.setNameReviser("Bernd Stromberg / CEO");
+		report.setDecisionNote(claim.getDecisionNote());
 		return report;
 	}
 	
@@ -104,6 +112,8 @@ public class LiabilityCaseReport {
 		report.setCarsFairValue("/");
 		report.setDeductions("/");
 		report.setPayment("0.00 EUR");
+		report.setNameReviser("Bernd Stromberg / CEO");
+		report.setDecisionNote(claim.getDecisionNote());
 		return report;
 	}
 	
@@ -123,6 +133,7 @@ public class LiabilityCaseReport {
 		output = output.replace("#{DEDUCTIONS}", deductions);
 		output = output.replace("#{PAYMENT}", payment);
 		output = output.replace("#{NAME_REVISER}", nameReviser);
+		output = output.replace("#{DECISION_NOTE}", decisionNote);
 		return output;
 	}
 	
@@ -297,6 +308,14 @@ public class LiabilityCaseReport {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getDecisionNote() {
+		return decisionNote;
+	}
+
+	public void setDecisionNote(String decisionNote) {
+		this.decisionNote = decisionNote;
 	}
 	
 	

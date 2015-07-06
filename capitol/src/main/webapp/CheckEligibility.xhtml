@@ -9,80 +9,72 @@
 		<ui:composition template="template.xhtml">
  
     		<ui:define name="content">
-    		
-				<!-- Modal -->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				  <div class="modal-dialog" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-				        <h4 class="modal-title" id="myModalLabel">Customer Details</h4>
-				      </div>
-				      <div class="modal-body">
-
-				        <table class="table">
-					    	<tr>
-					    		<th>Company</th>
-					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.company}</td>
-					    	</tr>
-					    	<tr>
-					    		<th>Contact Person</th>
-					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}</td>
-					    	</tr>
-					    	<tr>
-					    		<th>E-Mail</th>
-					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.email}</td>
-					    	</tr>
-					    	<tr>
-					    		<th>Phone Number</th>
-					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.phoneNumber}</td>
-					    	</tr>
-					    	<tr>
-					    		<th>Address</th>
-					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.address}</td>
-					    	</tr>
-					    
-					    </table>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-    		
+				<ui:include src="/CustomerDetails.xhtml" />
+				<ui:include src="/ContractDetails.xhtml" />
+				<ui:include src="/LiabilityCaseDetails.xhtml" />
+				
     		 	<h1>Liability Case Eligibility Check</h1>
     		 	<h3>Liability Case Info</h3>
 			    <table class="table">
 			    	<tr>
-			    		<th>Case ID</th>
-			    		<td>#{checkEligibility.liabilityCase.id}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Contract ID</th>
-			    		<td>#{checkEligibility.liabilityCase.insuranceContract.id}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Customer</th>
+			    		<th>Customer Name</th>
 			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.company} 
 				    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModal">
-							  Details
+							   Customer Details
+							</button>
+						</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Insurance Type</th>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.insuranceType.toString()}
+			    			<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModalContract">
+							  Contract Details
 							</button>
 						</td>
 			    	</tr>
 			    	<tr>
 			    		<th>Claim Details</th>
-			    		<td>#{checkEligibility.liabilityCase.claimDetails}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Pictures</th>
-			    		<td>
-			    			<ui:repeat var="image" value="#{checkEligibility.liabilityCase.images}">
-		
-								<a href="#{image.filePath}" target="_blank"><h:graphicImage value="#{image.filePath}" width="200"/></a>
-								
-					        </ui:repeat>
+			    		<td>#{checkEligibility.liabilityCase.claimDetails}
+			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModalLiability">
+							 Liability Case Details
+							</button>
 			    		</td>
 			    	</tr>
+			    	 </table>
 			    
-			    </table>
+			    <h:dataTable value="#{checkEligibility.liabilityCase.insuranceContract.getInsuranceBenefitEntity()}" var="cur"
+						styleClass="table" headerClass="table-cell table-cell"
+						columnClasses="table-cell,table-cell,table-cell">
+							<h:column>
+								<f:facet name="header">Standard Insurance Benefit</f:facet>
+								<h:outputText value="#{cur.insuranceBenefit.toString()}">
+								</h:outputText>
+							</h:column>
+						</h:dataTable>
+						
+						 <h:dataTable value="#{checkEligibility.liabilityCase.insuranceContract.getIndividualInsuranceBenefitEntity()}" var="cur"
+						styleClass="table" headerClass="table-cell table-cell"
+						columnClasses="table-cell,table-cell,table-cell">
+							<h:column>
+								<f:facet name="header">Individual Insurance Benefit</f:facet>
+								<h:outputText value="#{cur.name}">
+								</h:outputText>
+							</h:column>
+						</h:dataTable>
+						
+						<table class="table">
+				    	<tr>
+				    		<th>Pictures</th>
+				    		<td>
+				    			<ui:repeat var="image" value="#{checkEligibility.liabilityCase.images}">
+			
+									<a href="#{image.filePath}" target="_blank"><h:graphicImage value="#{image.filePath}" width="200"/></a>
+									
+						        </ui:repeat>
+				    		</td>
+				    	</tr>
+				    
+				    	</table>
 
 				<h3>Eligibility</h3>
 			    <h:form id="submitForm" target="_parent">
@@ -92,6 +84,13 @@
 				      <h:selectBooleanCheckbox value="#{checkEligibility.liabilityCase.eligible}"/> Claim is eligible
 				    </label>
 				  </div>
+				  
+				  <div class="form-group">
+					    <h:outputLabel class="col-sm-3 control-label" for="note" value="Note" />
+					    <div class="input-group col-sm-4">
+					      <h:inputTextarea class="form-control" id="note" value="#{checkEligibility.liabilityCase.decisionNote}" />
+					    </div>
+					    </div>
 				  
 			      <h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Save changes" update="@form" action="#{checkEligibility.submitForm()}" />
 			    	

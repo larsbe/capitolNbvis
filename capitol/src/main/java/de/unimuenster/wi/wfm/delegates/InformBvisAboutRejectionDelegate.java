@@ -25,19 +25,17 @@ public class InformBvisAboutRejectionDelegate implements JavaDelegate {
 		Map<String, Object> variables = delegateExecution.getVariables();
 		LiabilityCase claim = liabilityCaseService
 				.getLiabilityCase((Long) variables.get("caseID"));
-
-		claim.setStatus(CaseStatus.REJECTED);
-		claim = liabilityCaseService.mergeLiabilityCase(claim);
-
-		// EmailHelper.SendMail("capitol.wfm@gmail.com",
-		// "bvis.service@gmail.com", "LiabilityCase#" + claim.getId() +
-		// " was rejected", "/EOF");
-
+		
 		// Create PDF
 		LiabilityCaseReport report = LiabilityCaseReport.CreateRejection(claim);
 		String reportUrl = report.generatePDF();
 		System.out.println("Rejection Report: " + reportUrl);
 
+		// Update Claim
+		claim.setStatus(CaseStatus.REJECTED);
+		claim.setReportUrl(reportUrl);
+		claim = liabilityCaseService.mergeLiabilityCase(claim);
+		
 		// Inform BVIS
 		REST.SendLiabilityCaseRejectionInformation(claim);
 

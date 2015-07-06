@@ -35,7 +35,6 @@ public class CustomerServiceBean {
 	public Customer getCustomerByName(String name) {
 		Query q = em.createQuery("FROM Customer c WHERE c.name=:name", Customer.class)
 			.setParameter("name", name);
-		System.out.println("Attention");
 		if (q.getResultList().size() == 0) {
 			Customer customer = new Customer();
 			customer.setName(name);

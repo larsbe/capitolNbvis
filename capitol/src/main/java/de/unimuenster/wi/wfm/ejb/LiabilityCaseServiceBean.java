@@ -61,6 +61,7 @@ public class LiabilityCaseServiceBean {
 			// Rollback both transactions on error
 			throw new RuntimeException("Cannot complete task", e);
 		}
+		System.out.println(liabilityCase.getId());
 		return getLiabilityCase(liabilityCase.getId());
 	}
 }
