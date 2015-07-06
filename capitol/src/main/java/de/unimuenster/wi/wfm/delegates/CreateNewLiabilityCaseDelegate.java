@@ -12,6 +12,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
 import de.unimuenster.wi.wfm.entitiy.CaseStatus;
+import de.unimuenster.wi.wfm.entitiy.Customer;
 import de.unimuenster.wi.wfm.entitiy.ImageAttachment;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
@@ -33,14 +34,14 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		// Content will be deleted at the end ...
 		Map<String, Object> variablesToRemove = new HashMap<String, Object>();
 		
+		// Load Contract (contractNo is provided)
+		InsuranceContract contract = insuranceContractService.getInsuranceContract((Long) variables.get("contractNo"));
+		
 		// Create new Case
 		LiabilityCase claim = new LiabilityCase();
-		
-		InsuranceContract contract = insuranceContractService.getInsuranceContract((Long) variables.get("contractNo"));
+		claim.setStatus(CaseStatus.NEW);
 		claim.setInsuranceContract(contract);
 		
-		variablesToRemove.put("customer", variables.get("customer"));
-		claim.setStatus(CaseStatus.NEW);
 		
 		claim.setClaimDetails((String) variables.get("claimDetails"));
 		variablesToRemove.put("claimDetails", variables.get("claimDetails"));

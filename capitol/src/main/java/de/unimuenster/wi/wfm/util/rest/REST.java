@@ -11,12 +11,21 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 import de.unimuenster.wi.wfm.util.Constants;
 
 public class REST {
 
 	public static void SendMessageToBVIS(String msg) {
 		SendMessage(Constants.BVIS_CAMUNDA_REST, msg);
+	}
+	
+	public static void SendLiabilityCaseRejectionInformation(LiabilityCase claim) {
+		
+	}
+	
+	public static void SendLiabilityCasePaymentInformation(LiabilityCase claim) {
+		
 	}
 
 	@SuppressWarnings("deprecation")

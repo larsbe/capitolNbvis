@@ -98,7 +98,8 @@ public class DemoDataGenerator {
 		c1.setEmail("BVIS@gmail.de");
 		c1.setPhoneNumber("0190123456");
 		c1.setAddress("m�nster");
-		customerService.createCustomer(c1);
+		c1 = customerService.createCustomer(c1);
+		System.out.println("Customer: " + c1.getId());
 
 		InsuranceContract ic1 = new InsuranceContract();
 		ic1.setCustomer(c1);
@@ -120,7 +121,8 @@ public class DemoDataGenerator {
 		insuranceBenefitEntitys.add(insuranceBenefitEntity);
 		ic1.setInsuranceBenefitEntity(insuranceBenefitEntitys);
 		ic1.setInsurancePrice(BigDecimal.valueOf(125.23));
-		insuranceContractService.createInsuranceContract(ic1);
+		ic1 = insuranceContractService.createInsuranceContract(ic1);
+		System.out.println("InsuranceContract: " + ic1.getId());
 
 		carData.setInsuranceContract(ic1);
 		carDataService.createCarData(carData);
@@ -128,10 +130,6 @@ public class DemoDataGenerator {
 		insuranceBenefitEntity.setInsuranceContract(ic1);
 		insuranceBenefitEntitySerice
 				.createInsuranceBenefitEntity(insuranceBenefitEntity);
-
-		// only if no demo data is avl.
-		if (isDemoDataAvl())
-			return;
 
 		createUser();
 		createGroups();
@@ -367,7 +365,7 @@ public class DemoDataGenerator {
 
 	private boolean isDemoDataAvl() {
 		User singleResult = identityService.createUserQuery()
-				.userId("stromberg").singleResult();
+				.userId("capitol").singleResult();
 		if (singleResult != null) {
 			return true;
 		}
