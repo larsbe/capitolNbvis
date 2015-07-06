@@ -14,8 +14,8 @@ public class LiabilityCase extends AbstractEntity {
 	
 	private static  final long serialVersionUID = 1L;
 	
-	protected CaseStatus status;
-	protected boolean eligible;
+	protected CaseStatus status = CaseStatus.NEW;
+	protected boolean eligible =false;
 	protected String claimDetails = "";
 	protected Double carsFairValue = 0.0;
 	protected Double insuranceSum = 0.0;
