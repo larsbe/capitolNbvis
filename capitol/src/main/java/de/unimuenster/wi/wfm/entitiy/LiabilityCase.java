@@ -21,7 +21,7 @@ public class LiabilityCase extends AbstractEntity {
 	protected Double insuranceSum = 0.0;
 	protected Double estimateOfCosts = 0.0;
 	protected String reportUrl = "";
-	protected String licenseNumber;
+	protected String licenseNumber = "";
 	protected String decisionNote = "";
 	
 	@ManyToOne
