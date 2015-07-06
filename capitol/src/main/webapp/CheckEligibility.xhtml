@@ -40,56 +40,57 @@
 							</button>
 			    		</td>
 			    	</tr>
-			    	 </table>
-			    
-			    <h:dataTable value="#{checkEligibility.liabilityCase.insuranceContract.getInsuranceBenefitEntity()}" var="cur"
-						styleClass="table" headerClass="table-cell table-cell"
-						columnClasses="table-cell,table-cell,table-cell">
-							<h:column>
-								<f:facet name="header">Standard Insurance Benefit</f:facet>
-								<h:outputText value="#{cur.insuranceBenefit.toString()}">
-								</h:outputText>
-							</h:column>
-						</h:dataTable>
-						
-						 <h:dataTable value="#{checkEligibility.liabilityCase.insuranceContract.getIndividualInsuranceBenefitEntity()}" var="cur"
-						styleClass="table" headerClass="table-cell table-cell"
-						columnClasses="table-cell,table-cell,table-cell">
-							<h:column>
-								<f:facet name="header">Individual Insurance Benefit</f:facet>
-								<h:outputText value="#{cur.name}">
-								</h:outputText>
-							</h:column>
-						</h:dataTable>
-						
-						<table class="table">
-				    	<tr>
+			    	<tr>
+			    		<th>Standard Insurance Benefits</th>
+			    		<td>
+			    			<ui:repeat value="#{checkEligibility.liabilityCase.insuranceContract.getInsuranceBenefitEntity()}" var="cur">
+						        <li>
+						            <h:outputText value="#{cur.insuranceBenefit.toString()}"></h:outputText>
+						        </li>
+						    </ui:repeat>
+			    		</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Individual Insurance Benefits</th>
+			    		<td>
+			    			<ui:repeat value="#{checkEligibility.liabilityCase.insuranceContract.getIndividualInsuranceBenefitEntity()}" var="cur">
+						        <li>
+						            <h:outputText value="#{cur.name}"></h:outputText>
+						        </li>
+						    </ui:repeat>
+			    		</td>
+			    	</tr>
+			    	<tr>
 				    		<th>Pictures</th>
 				    		<td>
 				    			<ui:repeat var="image" value="#{checkEligibility.liabilityCase.images}">
 			
-									<a href="#{image.filePath}" target="_blank"><h:graphicImage value="#{image.filePath}" width="200"/></a>
+									<a href="#{image.filePath}" target="_blank"><h:graphicImage value="#{image.filePath}" height="100"/></a>
 									
 						        </ui:repeat>
 				    		</td>
 				    	</tr>
-				    
-				    	</table>
+			    	 </table>
+
 
 				<h3>Eligibility</h3>
 			    <h:form id="submitForm" target="_parent">
 		
-			      <div class="checkbox">
-				    <label>
-				      <h:selectBooleanCheckbox value="#{checkEligibility.liabilityCase.eligible}"/> Claim is eligible
-				    </label>
-				  </div>
+			      
+				  
+				  <div class="panel panel-default">
+					  <div class="panel-body">
+					    	<div class="checkbox">
+							    <label>
+							      <h:selectBooleanCheckbox value="#{checkEligibility.liabilityCase.eligible}"/> Claim is eligible
+							    </label>
+							  </div>
+					  </div>
+					</div>
 				  
 				  <div class="form-group">
 					    <h:outputLabel class="col-sm-3 control-label" for="note" value="Note" />
-					    <div class="input-group col-sm-4">
 					      <h:inputTextarea class="form-control" id="note" value="#{calculateCarsFairValue.liabilityCase.decisionNote}" />
-					    </div>
 					    </div>
 				  
 			      <h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Save changes" update="@form" action="#{checkEligibility.submitForm()}" />

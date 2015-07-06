@@ -42,60 +42,67 @@
 			    	</tr>
 			    
 			</table>
-						
-			<h:form class="form-horizontal" target="_self">
+			
+			<div>
+			<h:form class="form-inline" target="_self">
 			
 				<div class="form-group">
-					<img src="#{calculateCarsFairValue.carInformation.imageUrl}" class="img-responsive" alt="Car Image"></img>
-				</div>
-				<div class="form-group">
-				    <h:outputLabel class="col-sm-3 control-label" for="carHsn" value="HSN" />
-				    <div class="input-group col-sm-4">
+				    <h:outputLabel for="carHsn" value="HSN" />
 				      <h:inputText class="form-control" id="carHsn" value="#{calculateCarsFairValue.carInformation.hsn}" />
-				    </div>
 				</div>
 				<div class="form-group">
-				    <h:outputLabel class="col-sm-3 control-label" for="carTsn" value="TSN" />
-				    <div class="input-group col-sm-4">
+				    <h:outputLabel for="carTsn" value="TSN" />
 				      <h:inputText class="form-control" id="carTsn" value="#{calculateCarsFairValue.carInformation.tsn}" />
-				    </div>
 				</div>
 				
 				<div class="form-group">
-				    <h:outputLabel class="col-sm-3 control-label" for="carYear" value="Year" />
-				    <div class="input-group col-sm-4">
+				    <h:outputLabel for="carYear" value="Year" />
 				      <h:inputText class="form-control" id="carYear" value="#{calculateCarsFairValue.carInformation.year}" />
-				    </div>
 				</div>
 				
-				<div class="form-group">
-					<h:commandButton id="loadAdditonalCarInfomrationBtn" class="btn btn-primary pull-right" value="Search by HSN/TSN" update="@form" action="#{calculateCarsFairValue.loadAdditionalCarInformation()}" />
-				</div>
+					<h:commandButton id="loadAdditonalCarInfomrationBtn" class="btn btn-primary" value="Search by HSN/TSN" update="@form" action="#{calculateCarsFairValue.loadAdditionalCarInformation()}" />
+			</h:form>	
+			</div>	
+			
+			<h:panelGroup layout="block" rendered="#{calculateCarsFairValue.carInformation.name != ''}">
+			
 								
-				<div class="form-group">
-				    <h:outputLabel class="col-sm-3 control-label" for="carName" value="Name" />
-				    <div class="input-group col-sm-4">
-				      <h:inputText class="form-control" id="carName" value="#{calculateCarsFairValue.carInformation.name}" />
-				    </div>
-				</div>
-				<div class="form-group">
-				    <h:outputLabel class="col-sm-3 control-label" for="carEnginePower" value="Engine Power" />
-				    <div class="input-group col-sm-4">
-				      <h:inputText class="form-control" id="carEnginePower" value="#{calculateCarsFairValue.carInformation.enginePower}" />
-				    </div>
-				</div>
-				<div class="form-group">
-				    <h:outputLabel class="col-sm-3 control-label" for="carEngineSize" value="Engine Size" />
-				    <div class="input-group col-sm-4">
-				      <h:inputText class="form-control" id="carEngineSize" value="#{calculateCarsFairValue.carInformation.engineSize}" />
-				    </div>
-				</div>
-				<div class="form-group">
-				    <h:outputLabel class="col-sm-3 control-label" for="carFuelType" value="Fuel Type" />
-				    <div class="input-group col-sm-4">
-				      <h:inputText class="form-control" id="carFuelType" value="#{calculateCarsFairValue.carInformation.fuelType}" />
-				    </div>
-				</div>
+				<table class="table">
+			    	<tr>
+			    		<th>Car Model</th>
+			    		<td>
+			    			<h:outputText value="#{calculateCarsFairValue.carInformation.name}"></h:outputText>
+						</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Engine Power</th>
+			    		<td>
+			    			<h:outputText value="#{calculateCarsFairValue.carInformation.enginePower}"></h:outputText>
+						</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Engine Size</th>
+			    		<td>
+			    			<h:outputText value="#{calculateCarsFairValue.carInformation.engineSize}"></h:outputText>
+			    		</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Fuel Type</th>
+			    		<td>
+			    			<h:outputText value="#{calculateCarsFairValue.carInformation.fuelType}"></h:outputText>
+			    		</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Picture</th>
+			    		<td>
+			    			<img src="#{calculateCarsFairValue.carInformation.imageUrl}" class="img-responsive" alt="Car Image" />
+			    		</td>
+			    	</tr>
+			    	
+			    	 </table>
+				</h:panelGroup>
+				
+			
 				<!--
 				<h2>Insurance Classification</h2>
 				<div class="form-group">
@@ -126,7 +133,7 @@
 					</div>
 				</div>
 				  -->
-			</h:form>
+			
 			
     		<h3>Calculation</h3>
 			<div class="form-horizontal" style="margin-bottom: 20px;">
@@ -144,7 +151,6 @@
 					    <div class="input-group col-sm-4">
 					      <div class="input-group-addon">€</div>
 					      <h:inputText class="form-control" id="carValue" p:placeholder="Amount" value="#{calculateCarsFairValue.liabilityCase.carsFairValue}" />
-					      <div class="input-group-addon">.00</div>
 					    </div>
 
 				</div>
