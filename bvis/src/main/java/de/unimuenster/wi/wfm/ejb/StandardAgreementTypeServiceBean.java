@@ -17,7 +17,7 @@ import de.unimuenster.wi.wfm.persistence.Customer;
 import de.unimuenster.wi.wfm.persistence.StandardAgreementType;
 
 @Stateless
-public class StandardAgreementTypeServiceBean implements StandardAgreementTypeService {
+public class StandardAgreementTypeServiceBean {
 
 	@Inject
 	private TaskForm taskForm;

@@ -42,14 +42,27 @@
 				</h:form>
 			</div>													
 
+
+			<h3>Car Pool</h3>
+			
+			<div class="inputForm">
+				<h:form id="carForm">
+				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
+						<h:outputLabel value="Car" for="rentalAgreementRequest_car" />
+							<h:selectOneMenu id="rentalAgreementRequest_car" value="#{negotiateAgreementConditionsWithCustomer.selectedCarDataId}">
+							  <f:selectItems value="#{negotiateAgreementConditionsWithCustomer.carDatas}" var="cur" itemValue="#{cur.id}" itemLabel="#{cur.description}"/>
+							</h:selectOneMenu>  
+						<h:message for="rentalAgreementRequest_car"/>
+				</h:panelGrid>
+
+
 			<h3>Insurance Requirements</h3>
 
-			<div class="inputForm">
-				<h:form id="submitForm">
+
 				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
 						<h:outputLabel value="Customer Requirements" for="negotiateAgreementConditions_reqs" />
 						<h:inputText 
-							id="negotiateAgreementConditions_reqs" value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.requirementsOfCustomer}"/>							
+							id="negotiateAgreementConditions_reqs" value="#{negotiateAgreementConditionsWithCustomer.negotiationCase.agreementInfo}"/>							
 						<h:message for="negotiateAgreementConditions_reqs"/>
 
 				</h:panelGrid>
@@ -59,7 +72,7 @@
 							<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Update Agreement Conditions"
 										update="@form" action="#{negotiateAgreementConditionsWithCustomer.submit()}" />
 						</f:facet>
-					</h:panelGrid>
+				</h:panelGrid>
 		
 			</h:form>
 			</div>

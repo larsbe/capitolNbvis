@@ -16,6 +16,7 @@ public class Customer extends AbstractEntity {
 
 	@NotNull(message="You have to enter a value for the field 'Name'" )@Size(min=1, message="Name required.")
 	protected String name;
+	protected String company;
 	@NotNull(message="You have to enter a value for the field 'E-Mail'" )@Size(min=1, message="E-Mail required.")
 	protected String email;
 	@NotNull(message="You have to enter a value for the field 'Address'" )@Size(min=1, message="Address required.")
@@ -24,7 +25,7 @@ public class Customer extends AbstractEntity {
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH,
 			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, mappedBy = "customer")
-	protected Collection<InsuranceContract> insuranceContracts = new ArrayList<InsuranceContract>();
+	protected Collection<RentalAgreementContract> rentalAgreementContracts = new ArrayList<RentalAgreementContract>();
 
 	public String getEmail() {
 		return email;
@@ -32,6 +33,14 @@ public class Customer extends AbstractEntity {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
 	}
 
 	public String getName() {
@@ -57,10 +66,9 @@ public class Customer extends AbstractEntity {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
-
-	public Collection<InsuranceContract> getInsuranceContracts() {
-		return insuranceContracts;
+	
+	public Collection<RentalAgreementContract> getRentalAgreementContracts() {
+		return rentalAgreementContracts;
 	}
 
 }

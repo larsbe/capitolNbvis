@@ -1,0 +1,10 @@
+{"messageName" : "newAgreementConditions",
+"businessKey" : "",
+"correlationKeys" : {
+},
+"processVariables" : {
+"negoatioationCaseIdCapitol" : {"value" : "9990123", "type": "Long"},
+"negoatioationCaseIdBVIS" : {"value" : "1110123", "type": "Long"},
+"insuranceBenefits" : {"value" : "Tolle Insurance Benefits", "type": "String"}
+}
+}

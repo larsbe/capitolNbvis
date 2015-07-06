@@ -1,6 +1,5 @@
 package de.unimuenster.wi.wfm.web.beans;
 
-import java.io.IOException;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
@@ -9,13 +8,9 @@ import javax.faces.bean.*;
 import javax.inject.Inject;
 
 import org.camunda.bpm.engine.cdi.BusinessProcess;
-import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
-import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestService;
-import de.unimuenster.wi.wfm.ejb.StandardAgreementTypeService;
+import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
-import de.unimuenster.wi.wfm.persistence.RentalAgreementRequestType;
-import de.unimuenster.wi.wfm.persistence.StandardAgreementType;
 import de.unimuenster.wi.wfm.web.Misc;
 
 @ManagedBean
@@ -26,13 +21,10 @@ public class ProposeContractToCustomer implements Serializable {
 	@Inject
 	private BusinessProcess businessProcess;
 	
-	@Inject
-	private TaskForm taskForm;
-	
 	private RentalAgreementRequest rentalAgreementRequest;
 	
 	@EJB
-	private RentalAgreementRequestService rentalAgreementRequestService;
+	private RentalAgreementRequestServiceBean rentalAgreementRequestService;
 	
 	private long rentalAgreementRequestId;
 
@@ -58,9 +50,10 @@ public class ProposeContractToCustomer implements Serializable {
 			// add all validation errors
 			Misc.ValidateBean(getRentalAgreementRequest());
 			
-		} catch (IOException e){
-			throw new RuntimeException("Cannot complete task", e);
-		}
+		} 
+//			catch (IOException ex){
+////			throw new RuntimeException("Cannot complete task", ex);
+//		}
 	}	
 	
 }

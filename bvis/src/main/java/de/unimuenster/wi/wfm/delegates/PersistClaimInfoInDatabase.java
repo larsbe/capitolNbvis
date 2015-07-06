@@ -1,7 +1,5 @@
 package de.unimuenster.wi.wfm.delegates;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
 
 import javax.ejb.EJB;
@@ -14,12 +12,10 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import de.unimuenster.wi.wfm.ejb.LiabilityCaseServiceBean;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementContractServiceBean;
-import de.unimuenster.wi.wfm.persistence.ImageAttachment;
 import de.unimuenster.wi.wfm.persistence.LiabilityCase;
-import de.unimuenster.wi.wfm.persistence.RentalAgreementContract;
 
 @Named
-public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
+public class PersistClaimInfoInDatabase implements JavaDelegate {
 	
 	@Inject
 	private BusinessProcess businessProcess;
@@ -29,30 +25,27 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 	private RentalAgreementContractServiceBean rentalAgreementContractServiceBean;
 
 	public void execute(DelegateExecution delegateExecution) throws Exception {
-		System.out.println("CreateNewLiabilityCaseDelegate");
+		System.out.println("PersistClaimInfoInDatabase");
 
 		// get business process variables
 		Map<String, Object> variables = delegateExecution.getVariables();
 
-		// --- get contract ---
-		RentalAgreementContract contract = rentalAgreementContractServiceBean.getRentalAgreementContract((Long) variables.get("contractNoBVIS"));
+		// --- get liability case ---
+		LiabilityCase liabilityCase = liabilityCaseService.getLiabilityCase((Long) variables.get("claimIdBVIS"));
 		
-		// --- create new liablity case ---
-		LiabilityCase liabilityCase = new LiabilityCase();
-		liabilityCase.setRentalAgreementContract(contract);
-		
-		// attach images
-		int imageCount = (Integer) variables.get("imageCount");
-		Collection<ImageAttachment> images = new ArrayList<ImageAttachment>();
-		for(int i = 1; i<=imageCount; i++){
-			ImageAttachment image = new ImageAttachment();
-			image.setFilePath((String) variables.get("image_" + i));
-			images.add(image);
+		// --- add new information
+		boolean claimCovered = (Boolean) variables.get("claimCovered");
+		if(claimCovered == true){
+			liabilityCase.setClaimCovered(true);
+			liabilityCase.setInsuranceSum((Integer) variables.get("insuranceSum"));
+		}else{
+			liabilityCase.setClaimCovered(false);
+			liabilityCase.setRejectionInfo((String) variables.get("rejectionInfo"));
 		}
-		liabilityCase.setImages(images);
+		
 
 		// persist liabilityCase in database
-		liabilityCase = liabilityCaseService.createLiabilityCase(liabilityCase);
+		liabilityCase = liabilityCaseService.merge(liabilityCase);
 
 
 		// ------ store business process variables -------

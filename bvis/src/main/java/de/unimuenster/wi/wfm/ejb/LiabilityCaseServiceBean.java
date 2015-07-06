@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 import de.unimuenster.wi.wfm.persistence.LiabilityCase;
 
 @Stateless
-public class LiabilityCaseServiceBean implements LiabilityCaseService {
+public class LiabilityCaseServiceBean {
 	
 	@PersistenceContext
 	protected EntityManager em;
@@ -36,9 +36,9 @@ public class LiabilityCaseServiceBean implements LiabilityCaseService {
 		return liabilityCase;
 	}
 	
-	public boolean editLiabilityCase(LiabilityCase liabilityCase) {
-		em.merge(liabilityCase);
-		return true;
+	public LiabilityCase merge(LiabilityCase liabilityCase) {
+		liabilityCase = em.merge(liabilityCase);
+		return liabilityCase;
 	}
 }
 

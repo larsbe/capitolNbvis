@@ -2,7 +2,6 @@ package de.unimuenster.wi.wfm.application;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.Map;

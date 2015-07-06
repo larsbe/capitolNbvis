@@ -1,0 +1,10 @@
+{"messageName" : "NewRentalAgreementRequest",
+"businessKey" : "",
+"correlationKeys" : {
+},
+"processVariables" : {
+    "customerName" : {"value" : "David Jauernig", "type": "String"},
+    "email" : {"value" : "david.jauernig@gmail.com", "type": "String"},
+    "blablablab" : {"value" : "blablabla", "type": "String"}
+}
+}

@@ -17,23 +17,24 @@ public class LiabilityCase extends AbstractEntity {
 	protected CaseStatus status;
 	protected boolean eligible;
 	protected String claimDetails;
-	protected Integer carsFairValue;
 	protected Integer insuranceSum;
+	protected boolean claimCovered;
+	protected String rejectionInfo;
 
 	
 	@ManyToOne
-	protected InsuranceContract insuranceContract;
+	protected RentalAgreementContract rentalAgreementContract;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "liabilityCase")
 	protected Collection<ImageAttachment> images = new ArrayList<ImageAttachment>();
 	
 
-	public InsuranceContract getInsuranceContract() {
-		return insuranceContract;
+	public RentalAgreementContract getRentalAgreementContract() {
+		return rentalAgreementContract;
 	}
 	
-	public void setInsuranceContract(InsuranceContract insuranceContract) {
-		this.insuranceContract = insuranceContract;
+	public void setRentalAgreementContract(RentalAgreementContract rentalAgreementContract) {
+		this.rentalAgreementContract = rentalAgreementContract;
 	}
 	
 	public boolean getEligible() {
@@ -42,6 +43,15 @@ public class LiabilityCase extends AbstractEntity {
 	
 	public void setEligible(boolean eligible) {
 		this.eligible = eligible;
+	}
+	
+	// claim covered by capitol
+	public boolean getClaimCovered() {
+		return claimCovered;
+	}
+	
+	public void setClaimCovered(boolean claimCovered) {
+		this.claimCovered = claimCovered;
 	}
 	
 	public CaseStatus getStatus() {
@@ -58,14 +68,6 @@ public class LiabilityCase extends AbstractEntity {
 	
 	public String getClaimDetails(){
 		return claimDetails;
-	}
-	
-	public void setCarsFairValue(Integer carsFairValue){
-		this.carsFairValue = carsFairValue;
-	}
-	
-	public Integer getCarsFairValue(){
-		return carsFairValue;
 	}
 	
 	public void setInsuranceSum(Integer insuranceSum){
@@ -87,5 +89,13 @@ public class LiabilityCase extends AbstractEntity {
 	public String toString() {
 		return "LiabilityCasse: ID=" + this.getId();
 	}
+	
+	public String getRejectionInfo() {
+		return rejectionInfo;
+	}
+	
+	public void setRejectionInfo(String rejectionInfo) {
+		this.rejectionInfo = rejectionInfo;
+	}	
 		
 }

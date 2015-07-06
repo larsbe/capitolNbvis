@@ -6,6 +6,7 @@ import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import de.unimuenster.wi.wfm.persistence.CarData;
 import de.unimuenster.wi.wfm.persistence.Customer;
 import de.unimuenster.wi.wfm.persistence.StandardAgreementType;
 
@@ -34,6 +35,45 @@ public class ApplicationInitializer {
 		c1.setEmail("a_herm14@uni-muenster.de");
 		c1.setAddress("McFit");
 		em.persist(c1);
+		
+		
+		// create some Cars
+		CarData carData;
+		
+		carData = new CarData();
+		carData.setDescription("Audi A4 2.8");
+		carData.setHsn("0588");
+		carData.setTsn("597");
+		carData.setYear("2011");
+		carData.setLicenseNumber("WfM WfM WfM");
+		em.persist(carData);
+		
+		carData = new CarData();
+		carData.setDescription("Audi A8 4.2");
+		carData.setHsn("0588");
+		carData.setTsn("581");
+		carData.setYear("2014");
+		carData.setLicenseNumber("WfM");
+		em.persist(carData);
+		
+		carData = new CarData();
+		carData.setDescription("BMW 325 I Cabrio");
+		carData.setHsn("0005");
+		carData.setTsn("531");
+		carData.setYear("2012");
+		carData.setLicenseNumber("WfM everyday");
+		em.merge(carData);
+		
+		carData.setDescription("BMW 530 D");
+		carData.setHsn("0005");
+		carData.setTsn("761");
+		carData.setYear("2013");
+		carData.setLicenseNumber("WfM-4-Life");
+		em.persist(carData);
+		
+
+		
+		
 
 		
 //		 create StandardAgreementTypes

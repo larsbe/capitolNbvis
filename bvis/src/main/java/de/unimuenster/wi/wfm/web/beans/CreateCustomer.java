@@ -5,13 +5,13 @@ import java.io.Serializable;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.*;
 import javax.inject.Inject;
 
 import org.camunda.bpm.engine.cdi.BusinessProcess;
+import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
-import de.unimuenster.wi.wfm.ejb.CustomerService;
+import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
 import de.unimuenster.wi.wfm.persistence.Customer;
 import de.unimuenster.wi.wfm.web.Misc;
 
@@ -19,16 +19,17 @@ import de.unimuenster.wi.wfm.web.Misc;
 public class CreateCustomer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	// the BusinessProcess to access the process variables
 	@Inject
 	private BusinessProcess businessProcess;
-	
+	@Inject
+	private TaskForm taskForm;
+
 	@EJB
-	private CustomerService customerService;
+	private CustomerServiceBean customerService;
 
 	private Customer customer = new Customer();
-
 
 	public Customer getCustomer() {
 		if (customer == null)
@@ -38,13 +39,18 @@ public class CreateCustomer implements Serializable {
 
 	public void submit() {
 		try {
-			businessProcess.setVariable("individualSolutionRequested",true);
-			customerService.mergeAndCompleteTask(getCustomer());
+			businessProcess.setVariable("individualSolutionRequested", true);
+			customerService.merge(getCustomer());
+
+			// complete user task form
+			taskForm.completeTask();
+
 		} catch (EJBException e) {
-			
 			// add all validation errors
 			Misc.ValidateBean(getCustomer());
+
+		} catch (IOException e) {
+			throw new RuntimeException("Cannot complete task", e);
 		}
-	}	
-	
+	}
 }

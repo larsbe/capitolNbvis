@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,9 +21,6 @@ public class NegotiationCase extends AbstractEntity {
 	protected String changeComments;
 	@NotNull(message="You have to enter a value for the field 'conditionsApproved'" )
 	protected boolean conditionsApproved;
-	@ManyToOne
-	protected RentalAgreementRequest rentalAgreementRequest;
-
 	
 	public Long getIdOfOpposite() {
 		return idOfOpposite;
@@ -38,14 +36,6 @@ public class NegotiationCase extends AbstractEntity {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-	
-	public RentalAgreementRequest getRentalAgreementRequest() {
-		return rentalAgreementRequest;
-	}
-
-	public void setRentalAgreementRequest(RentalAgreementRequest rentalAgreementRequest) {
-		this.rentalAgreementRequest = rentalAgreementRequest;
 	}
 
 	public String getAgreementInfo() {
@@ -64,7 +54,7 @@ public class NegotiationCase extends AbstractEntity {
 		this.changeComments = changeComments;
 	}
 
-	public boolean isConditionsApproved() {
+	public boolean getConditionsApproved() {
 		return conditionsApproved;
 	}
 

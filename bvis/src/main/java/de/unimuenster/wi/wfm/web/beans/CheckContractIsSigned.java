@@ -2,7 +2,6 @@ package de.unimuenster.wi.wfm.web.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -13,13 +12,14 @@ import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
 import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
+import de.unimuenster.wi.wfm.ejb.RentalAgreementContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementContract;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
 import de.unimuenster.wi.wfm.web.Misc;
 
 @ManagedBean
-public class SetUpIndividualSolutionContractContainingInsuranceBenefits implements Serializable {
+public class CheckContractIsSigned implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -31,33 +31,23 @@ public class SetUpIndividualSolutionContractContainingInsuranceBenefits implemen
 	@EJB
 	private CustomerServiceBean customerService;
 	@EJB
-	private RentalAgreementRequestServiceBean rentalAgreementRequestService;
+	private RentalAgreementContractServiceBean rentalAgreementContractService;
 
-	
-	private RentalAgreementRequest rentalAgreementRequest;
-	private long rentalAgreementRequestId;
 	private RentalAgreementContract rentalAgreementContract;
 	
-
-
-	public RentalAgreementRequest getRentalAgreementRequest() {
-		if (rentalAgreementRequest == null){
-			rentalAgreementRequest = rentalAgreementRequestService.getRentalAgreementRequest(getRentalAgreementRequestId());
-		}			
-		return rentalAgreementRequest;
-	}
 	
-	public long getRentalAgreementRequestId() {
-		rentalAgreementRequestId = (Long) businessProcess.getVariable("rentalAgreementRequestId");
-		return rentalAgreementRequestId;
-	}
-
+	
 	public RentalAgreementContract getRentalAgreementContract() {
-		if (rentalAgreementContract == null)
-			rentalAgreementContract = new RentalAgreementContract();
-		rentalAgreementContract.setDate(new Date());
+		if (rentalAgreementContract == null){
+			rentalAgreementContract = rentalAgreementContractService.getRentalAgreementContract(getRentalAgreementContractId());
+		}			
 		return rentalAgreementContract;
 	}
+	
+	public long getRentalAgreementContractId() {
+		return (Long) businessProcess.getVariable("contractNoBVIS");
+	}
+	
 	public void setRentalAgreementContract(RentalAgreementContract rentalAgreementContract) {
 		this.rentalAgreementContract = rentalAgreementContract;
 	}
@@ -67,17 +57,24 @@ public class SetUpIndividualSolutionContractContainingInsuranceBenefits implemen
 	public void submit() {
 		try {
 			
-			getRentalAgreementRequest().setRentalAgreementContract(getRentalAgreementContract());
-						
 			// store entity in database	
-			this.rentalAgreementRequest = rentalAgreementRequestService.merge(getRentalAgreementRequest());
+			this.rentalAgreementContract = rentalAgreementContractService.merge(getRentalAgreementContract());
 			// complete user task form
 			taskForm.completeTask();
 						
+			// store process variables of this process...
+			// store flag "contractStatus"
+			if(rentalAgreementContract.getContractSigned() == true){
+				businessProcess.setVariable( "contractStatus", "contractSigned" );				
+			}else{
+				businessProcess.setVariable( "contractStatus", "cancelled" );
+			}
+			
+			
 			
 		} catch (EJBException e) {
 			// add all validation errors
-			Misc.ValidateBean(getRentalAgreementRequest());
+			Misc.ValidateBean(getRentalAgreementContract());
 			
 		} catch (IOException e){
 			throw new RuntimeException("Cannot complete task", e);

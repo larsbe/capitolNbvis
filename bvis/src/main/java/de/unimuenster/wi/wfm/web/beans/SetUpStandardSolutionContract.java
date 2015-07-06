@@ -12,12 +12,10 @@ import javax.inject.Inject;
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
-import de.unimuenster.wi.wfm.ejb.CustomerService;
-import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestService;
-import de.unimuenster.wi.wfm.ejb.StandardAgreementTypeService;
-import de.unimuenster.wi.wfm.persistence.Customer;
+import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
+import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
+import de.unimuenster.wi.wfm.ejb.StandardAgreementTypeServiceBean;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
-import de.unimuenster.wi.wfm.persistence.RentalAgreementRequestType;
 import de.unimuenster.wi.wfm.persistence.StandardAgreementType;
 import de.unimuenster.wi.wfm.web.Misc;
 
@@ -32,11 +30,11 @@ public class SetUpStandardSolutionContract implements Serializable {
 	private TaskForm taskForm;
 	
 	@EJB
-	private CustomerService customerService;
+	private CustomerServiceBean customerService;
 	@EJB
-	private RentalAgreementRequestService rentalAgreementRequestService;
+	private RentalAgreementRequestServiceBean rentalAgreementRequestService;
 	@EJB
-	private StandardAgreementTypeService standardAgreementTypeService;
+	private StandardAgreementTypeServiceBean standardAgreementTypeService;
 	
 	private RentalAgreementRequest rentalAgreementRequest;
 	private long rentalAgreementRequestId;
