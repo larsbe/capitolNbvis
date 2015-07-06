@@ -1,4 +1,4 @@
-package de.unimuenster.wi.wfm.application;
+package de.unimuenster.wi.wfm.util;
 
 import java.io.File;
 import java.io.IOException;

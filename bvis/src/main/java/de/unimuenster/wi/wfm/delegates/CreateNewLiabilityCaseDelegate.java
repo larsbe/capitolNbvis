@@ -41,18 +41,36 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		LiabilityCase liabilityCase = new LiabilityCase();
 		liabilityCase.setRentalAgreementContract(contract);
 		
+		liabilityCase.setClaimDetails((String) variables.get("claimDetails"));
+		
+		liabilityCase.setLicenseNumber((String) variables.get("licenseNumber"));
+		
+		
+		Double estimateOfCosts = (Double) variables.get("estCosts");
+		if(estimateOfCosts == null){
+			liabilityCase.setEstimateOfCosts(0.0);
+		}else{
+			liabilityCase.setEstimateOfCosts(estimateOfCosts);
+		}
+		
+		
+		// persist liabilityCase in database
+		liabilityCase = liabilityCaseService.createLiabilityCase(liabilityCase);
+		
 		// attach images
 		int imageCount = (Integer) variables.get("imageCount");
 		Collection<ImageAttachment> images = new ArrayList<ImageAttachment>();
 		for(int i = 1; i<=imageCount; i++){
 			ImageAttachment image = new ImageAttachment();
 			image.setFilePath((String) variables.get("image_" + i));
+			image.setLiabilityCase(liabilityCase);
 			images.add(image);
 		}
 		liabilityCase.setImages(images);
+		
+		
 
-		// persist liabilityCase in database
-		liabilityCase = liabilityCaseService.createLiabilityCase(liabilityCase);
+
 
 
 		// ------ store business process variables -------

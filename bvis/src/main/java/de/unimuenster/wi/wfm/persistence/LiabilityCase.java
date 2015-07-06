@@ -17,10 +17,11 @@ public class LiabilityCase extends AbstractEntity {
 	protected CaseStatus status;
 	protected boolean eligible;
 	protected String claimDetails;
-	protected Integer insuranceSum;
+	protected Double insuranceSum;
 	protected boolean claimCovered;
 	protected String rejectionInfo;
 	protected Double estimateOfCosts;
+	protected String licenseNumber;
 
 	
 	@ManyToOne
@@ -71,11 +72,11 @@ public class LiabilityCase extends AbstractEntity {
 		return claimDetails;
 	}
 	
-	public void setInsuranceSum(Integer insuranceSum){
+	public void setInsuranceSum(Double insuranceSum){
 		this.insuranceSum = insuranceSum;
 	}
 	
-	public Integer getInsuranceSum(){
+	public Double getInsuranceSum(){
 		return insuranceSum;
 	}
 	
@@ -88,7 +89,7 @@ public class LiabilityCase extends AbstractEntity {
 	}
 
 	public String toString() {
-		return "LiabilityCasse: ID=" + this.getId();
+		return "LiabilityCase: ID=" + this.getId();
 	}
 	
 	public String getRejectionInfo() {
@@ -105,4 +106,12 @@ public class LiabilityCase extends AbstractEntity {
 	public void setEstimateOfCosts(Double estimateOfCosts) {
 		this.estimateOfCosts = estimateOfCosts;
 	}	
+	
+	public void setLicenseNumber(String licenseNumber){
+		this.licenseNumber = licenseNumber;
+	}
+	
+	public String getLicenseNumber(){
+		return licenseNumber;
+	}
 }

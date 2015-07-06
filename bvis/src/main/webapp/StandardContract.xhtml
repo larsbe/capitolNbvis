@@ -16,7 +16,7 @@
 
     		 	<h3>Info</h3>
     		 	<div class="inputForm">
-				<h:form id="infoForm">
+				<h:form id="infoForm" target="_self">
 					<h:panelGrid columns="2" columnClasses="form-label,form-input">
 													
 
@@ -42,7 +42,7 @@
 			<h3>Solution type</h3>
 
 			<div class="inputForm">
-				<h:form id="inputForm">
+				<h:form id="inputForm" target="_parent">
 					<h:panelGrid columns="2" columnClasses="form-label,form-input">
 						<h:outputLabel value="Contract Type" for="standardSolution_type" />
 						<h:selectOneMenu id="standardSolution_type" value="#{setUpStandardSolutionContract.selectedStandardSolutionType}" onchange="copy();">

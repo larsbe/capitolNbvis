@@ -78,11 +78,11 @@
 		
 			      
 				  
-				  <div class="panel panel-default">
-					  <div class="panel-body">
+				  <div class="panel panel-default" >
+					  <div class="panel-body" id="eligibilityCheck">
 					    	<div class="checkbox">
 							    <label>
-							      <h:selectBooleanCheckbox value="#{checkEligibility.liabilityCase.eligible}"/> Claim is eligible
+							      <h:selectBooleanCheckbox id="eligibilityCheckbox" value="#{checkEligibility.liabilityCase.eligible}"/> Claim is eligible
 							    </label>
 							  </div>
 					  </div>
@@ -99,11 +99,11 @@
 			    	
 			    </h:form>
     		
-    			
     		</ui:define>
  
     	</ui:composition>
 
+	
      
   </h:body>
 </html>

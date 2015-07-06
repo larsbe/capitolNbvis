@@ -66,17 +66,17 @@
           $( "#submitForm" ).click(function( event ) {
             var json = { "messageName" : "NewContractUpload",
               "businessKey" : null,
-              "correlationKeys" : {},
+              "correlationKeys" : {
+                "contractNoBVIS" : {"value" : "", "type": "Long"}
+              },
               "processVariables" : {
                   "customerNoBVIS" : {"value" : "", "type": "Long"},
-                  "contractNoBVIS" : {"value" : "", "type": "Long"},
                   "contract" : {"value" : "", "type": "String"}
               }
             };
 
-
+            json.correlationKeys.contractNoBVIS.value = $('#liabilityContractNo').val();
             json.processVariables.customerNoBVIS.value = $('#liabilityCustomerNo').val();
-            json.processVariables.contractNoBVIS.value = $('#liabilityContractNo').val();
             json.processVariables.contract.value = contractfolder + contractfile;
             
             console.log(json);

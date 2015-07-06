@@ -1,64 +1,40 @@
 package de.unimuenster.wi.wfm.util.rest;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
+import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
+import de.unimuenster.wi.wfm.sharedLib.rest.CapitolREST;
+import de.unimuenster.wi.wfm.sharedLib.rest.RestHelper;
+import de.unimuenster.wi.wfm.util.Constants;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
+public class REST extends RestHelper {
 
-
-public class REST {
-
-	public static final String CAPITOL_CAMUNDA_REST = "http://localhost:8080/engine-rest/engine/default/message";
+	public static void SendIndividualAgreementConditions(RentalAgreementMessage rentalAgreementMsg) {
+		String msg = CapitolREST.NewNegotiationCase(
+				rentalAgreementMsg
+		);
+		System.out.println(msg);
+		SendMessageToCapitol(msg);
+	}
 	
+	public static void SendStandardAgreementConditions(RentalAgreementMessage rentalAgreementMsg) {
+		String msg = CapitolREST.NewStandardRentalAgreement(
+				rentalAgreementMsg
+		);
+		System.out.println(msg);
+		SendMessageToCapitol(msg);
+	}
+	
+	public static void SendRevisedAgreementConditions(long correlationKey, RentalAgreementMessage rentalAgreementMsg, boolean approved) {
+		String msg = CapitolREST.RevisedAgreementConditions(
+				correlationKey,
+				rentalAgreementMsg,
+				approved
+		);
+		System.out.println(msg);
+		SendMessageToCapitol(msg);
+	}
+
 	public static void SendMessageToCapitol(String msg) {
-		SendMessage(CAPITOL_CAMUNDA_REST, msg);
+		RestHelper.SendMessage(Constants.CAMUNDA_REST_CAPITOL, msg);
 	}
 
-	@SuppressWarnings("deprecation")
-	private static void SendMessage(String host, String msg) {
-		try {
-
-			HttpClient httpClient = HttpClientBuilder.create().build();
-			HttpPost postRequest = new HttpPost(host);
-
-			StringEntity input = new StringEntity(msg);
-			input.setContentType("application/json");
-			postRequest.setEntity(input);
-
-			HttpResponse response = httpClient.execute(postRequest);
-
-			// no content
-			if (response.getStatusLine().getStatusCode() == 204) {
-				return;
-			}
-			
-			// if content -> check 201
-			if (response.getStatusLine().getStatusCode() != 201) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ response.getStatusLine().getStatusCode());
-			}
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					(response.getEntity().getContent())));
-
-			String output;
-			System.out.println("Output from Server .... \n");
-			while ((output = br.readLine()) != null) {
-				System.out.println(output);
-			}
-
-			httpClient.getConnectionManager().shutdown();
-
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }

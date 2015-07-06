@@ -19,12 +19,14 @@ import de.unimuenster.wi.wfm.ejb.CarDataServiceBean;
 import de.unimuenster.wi.wfm.ejb.NegotiationCaseServiceBean;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
 import de.unimuenster.wi.wfm.persistence.CarData;
+import de.unimuenster.wi.wfm.persistence.CarPool;
 import de.unimuenster.wi.wfm.persistence.Customer;
 import de.unimuenster.wi.wfm.persistence.NegotiationCase;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
 import de.unimuenster.wi.wfm.web.Misc;
 
 @ManagedBean
+@ViewScoped
 public class NegotiateAgreementConditionsWithCustomer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -46,6 +48,7 @@ public class NegotiateAgreementConditionsWithCustomer implements Serializable {
 	
 	private long rentalAgreementRequestId;
 	private long selectedCarDataId;
+	private CarPool carPool;
 
 	
 	public NegotiationCase getNegotiationCase() {
@@ -73,27 +76,40 @@ public class NegotiateAgreementConditionsWithCustomer implements Serializable {
 	}
 	
 	public long getSelectedCarDataId() {
-		System.out.println(".........getSelectedCarDataId: " + selectedCarDataId);
 		return selectedCarDataId;
 	}
 
 	public void setSelectedCarDataId(long id) {
-		System.out.println(".........setSelectedCarDataId: " + id);
 		selectedCarDataId = id;
 	}
 	
+	public CarPool getCarPool() {
+		if(carPool == null) {
+			carPool = new CarPool();
+		}
+		return carPool;
+	}
+
+	public void addCarPool() {
+		carPool.setCarData(carDataService.getCarData(getSelectedCarDataId()));	
+		carPool.setRentalAgreementRequest(getRentalAgreementRequest());
+		carPool = null;
+	}
 	
 	public void submit() {
 		try {
 			
+			
 			// add selected carData
-			List<CarData> carsData = new ArrayList<CarData>();
-			carsData.add(carDataService.getCarData(getSelectedCarDataId()));
-			getRentalAgreementRequest().setCarsData(carsData);
+//			List<CarData> carsData = new ArrayList<CarData>();
+//			carsData.add(carDataService.getCarData(getSelectedCarDataId()));
+//			getRentalAgreementRequest().setCarsData(carsData);
 			
 			// store entity in database
+			// store negotiation case
 			negotiationCase = negotiationCaseService.merge(getNegotiationCase());
 			
+			// store update rentalAgreementRequest
 			getRentalAgreementRequest().setNegotiationCase(negotiationCase);
 			rentalAgreementRequestService.merge(getRentalAgreementRequest());
 		

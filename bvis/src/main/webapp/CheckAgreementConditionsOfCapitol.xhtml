@@ -42,49 +42,49 @@
 				</h:form>
 				</div>													
 			
+			<!--Maybe show car pool here-->
 			
-			<h3>Negotiation Information</h3>
+			<h3>Insurance Information</h3>
 			
-			<div class="inputForm">
-				<h:form id="infoForm">
-					<h:panelGrid columns="2" columnClasses="form-label,form-input">
-													
-						<h:outputLabel value="Negotiation Case ID" for="rentalAgreementRequest_NegotiationCase_ID" />
-						<h:inputText
-							id="rentalAgreementRequest_NegotiationCase_ID" value="#{checkAgreementConditionsOfCapitol.rentalAgreementRequest.negotiationCase.id}"  
-							disabled="true" />
-
-						<h:outputLabel value="Negotiation Case ID of Capitol" for="rentalAgreementRequest_NegotiationCase_IdOfCapitol" />
-						<h:inputText
-							id="rentalAgreementRequest_NegotiationCase_IdOfCapitol" value="#{checkAgreementConditionsOfCapitol.rentalAgreementRequest.negotiationCase.idOfOpposite}"  
-							disabled="true" />
-							
-						<h:outputLabel value="Insurance Benefits" for="rentalAgreementRequest_NegotiationCase_agreementInfo" />
-						<h:inputTextarea
-							id="rentalAgreementRequest_NegotiationCase_agreementInfo" value="#{checkAgreementConditionsOfCapitol.rentalAgreementRequest.negotiationCase.agreementInfo}"  
-							disabled="true" />	
-							
-					</h:panelGrid>
-				</h:form>
-			</div>	
+			<table class="table">
+			    	<tr>
+			    		<th>Price</th>
+			    		<td>#{checkAgreementConditionsOfCapitol.rentalAgreementMessage.insurancePrice}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Insurance Type</th>
+			    		<td>#{checkAgreementConditionsOfCapitol.rentalAgreementMessage.insuranceType}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Insurance Benefits</th>
+			    		<td></td>
+			    	</tr>
+			    	<tr>
+			    		<th>Individual Benefits</th>
+			    		<td></td>
+			    	</tr>
+			</table>
 			
 			
 			<h3>Approval</h3>
 				
 			<div class="inputForm">
-				<h:form id="submitForm">
+				<h:form id="submitForm" target="_parent">
 
 					<div class="checkbox">
 				    <label>
-				      <h:selectBooleanCheckbox value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.negotiationCase.conditionsApproved}"/> Agree on Conditions
+				      <h:selectBooleanCheckbox value="#{checkAgreementConditionsOfCapitol.rentalAgreementRequest.negotiationCase.conditionsApproved}"/> Agree on Conditions
 				    </label>
 				  </div>
+					<h:outputLabel value="Additional Information" for="negotiateAgreementConditions_reqs" />
+						<h:inputText 
+							id="negotiateAgreementConditions_reqs" value="#{checkAgreementConditionsOfCapitol.rentalAgreementRequest.requirementsOfCustomer}"/>							
 
 
 					<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
 						<f:facet name="footer">
 							<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Update Agreement Conditions"
-										update="@form" action="#{negotiateAgreementConditionsWithCustomer.submit()}" />
+										update="@form" action="#{checkAgreementConditionsOfCapitol.submit()}" />
 						</f:facet>
 					</h:panelGrid>
 		

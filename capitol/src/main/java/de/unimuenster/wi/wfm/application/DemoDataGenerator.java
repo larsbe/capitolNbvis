@@ -104,6 +104,7 @@ public class DemoDataGenerator {
 
 		InsuranceContract ic1 = new InsuranceContract();
 		ic1.setCustomer(c1);
+		ic1.setRentalAgreementIdBVIS(2L);
 		ic1.setAdditionalInfo("BLABLA");
 		InsuranceType type = InsuranceType.PARTIAL;
 		ic1.setInsuranceType(type);

@@ -16,7 +16,7 @@
 
     		 	<h3>Info</h3>
     		 	<div class="inputForm">
-				<h:form id="infoForm">
+				<h:form id="infoForm" target="_self">
 					<h:panelGrid columns="2" columnClasses="form-label,form-input">
 													
 						<h:outputLabel value="Rental Agreement Request ID" for="negotiateAgreementConditions_RequestId" />
@@ -46,23 +46,46 @@
 			<h3>Car Pool</h3>
 			
 			<div class="inputForm">
-				<h:form id="carForm">
-				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
-						<h:outputLabel value="Car" for="rentalAgreementRequest_car" />
-							<h:selectOneMenu id="rentalAgreementRequest_car" value="#{negotiateAgreementConditionsWithCustomer.selectedCarDataId}">
-							  <f:selectItems value="#{negotiateAgreementConditionsWithCustomer.carDatas}" var="cur" itemValue="#{cur.id}" itemLabel="#{cur.name}"/>
-							</h:selectOneMenu>  
-						<h:message for="rentalAgreementRequest_car"/>
-				</h:panelGrid>
-
-
+				<h:form id="carForm" target="_self">
+					<div class="data">
+						<h:dataTable id="orderLines" 
+							value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.carPool}" var="cur"
+							styleClass="data-table" 
+							columnClasses="data-cell,data-cell,data-cell,data-cell"
+							headerClass="data-cell header-cell">
+							<h:column>
+								<f:facet name="header">Name</f:facet>
+								#{cur.carData.name}
+							</h:column>								
+							<h:column>
+								<f:facet name="header">Quantity</f:facet>
+								#{cur.quantity}
+							</h:column>
+						</h:dataTable>
+					</div>
+										
+					<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
+						<h:outputLabel value="Car" for="cars_car" />
+						<h:selectOneMenu id="cars_car" value="#{negotiateAgreementConditionsWithCustomer.selectedCarDataId}">
+						  <f:selectItems value="#{negotiateAgreementConditionsWithCustomer.carDatas}" var="cur" itemValue="#{cur.id}" itemLabel="#{cur.name}"/>
+						</h:selectOneMenu>
+						<h:message for="cars_car"/>	
+						
+						<h:outputLabel value="Quantity" for="cars_quantity" />
+						<h:inputText id="cars_quantity" value="#{negotiateAgreementConditionsWithCustomer.carPool.quantity}"/>
+						<h:message for="cars_quantity"/>
+						
+						<h:commandButton id="action_addToCarPool" value="Add to Car Pool" action="#{negotiateAgreementConditionsWithCustomer.addCarPool()}" />
+					</h:panelGrid>
+					
+			</h:form>
 			<h3>Insurance Requirements</h3>
-
+			<h:form target="_parent">
 
 				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
 						<h:outputLabel value="Customer Requirements" for="negotiateAgreementConditions_reqs" />
 						<h:inputText 
-							id="negotiateAgreementConditions_reqs" value="#{negotiateAgreementConditionsWithCustomer.negotiationCase.agreementInfo}"/>							
+							id="negotiateAgreementConditions_reqs" value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.requirementsOfCustomer}"/>							
 						<h:message for="negotiateAgreementConditions_reqs"/>
 
 				</h:panelGrid>
