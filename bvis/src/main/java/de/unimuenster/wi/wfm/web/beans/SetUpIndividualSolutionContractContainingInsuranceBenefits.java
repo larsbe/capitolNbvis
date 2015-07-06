@@ -13,6 +13,7 @@ import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
 import de.unimuenster.wi.wfm.ejb.CustomerServiceBean;
+import de.unimuenster.wi.wfm.ejb.RentalAgreementContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementContract;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
@@ -32,6 +33,8 @@ public class SetUpIndividualSolutionContractContainingInsuranceBenefits implemen
 	private CustomerServiceBean customerService;
 	@EJB
 	private RentalAgreementRequestServiceBean rentalAgreementRequestService;
+	@EJB
+	private RentalAgreementContractServiceBean rentalAgreementContractService;
 
 	
 	private RentalAgreementRequest rentalAgreementRequest;
@@ -65,14 +68,23 @@ public class SetUpIndividualSolutionContractContainingInsuranceBenefits implemen
 
 	
 	public void submit() {
-		try {
-			
-			getRentalAgreementRequest().setRentalAgreementContract(getRentalAgreementContract());
+		try {		
 						
-			// store entity in database	
+			// store entity in database
+			this.rentalAgreementContract.setCustomer(getRentalAgreementContract().getCustomer());
+			this.rentalAgreementContract = rentalAgreementContractService.merge(getRentalAgreementContract());
+			
+			getRentalAgreementRequest().setRentalAgreementContract(this.rentalAgreementContract);
 			this.rentalAgreementRequest = rentalAgreementRequestService.merge(getRentalAgreementRequest());
+			
+			
 			// complete user task form
 			taskForm.completeTask();
+			
+			// store process variables of this process...
+			// store flag "contractNoBVIS"
+			businessProcess.setVariable( "contractNoBVIS", this.rentalAgreementContract.getId() );		
+			
 						
 			
 		} catch (EJBException e) {

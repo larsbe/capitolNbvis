@@ -12,7 +12,7 @@ public class CarData extends AbstractEntity {
 	
 	private static final long serialVersionUID = 1L;
 
-	protected String description;
+	protected String name;
 	protected String licenseNumber;
 	protected String hsn;
 	protected String tsn;
@@ -22,11 +22,11 @@ public class CarData extends AbstractEntity {
 			CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }, mappedBy = "carsData")
 	protected Collection<RentalAgreementRequest> rentalAgreementRequests;
 	
-	public String getDescription() {
-		return description;
+	public String getName() {
+		return name;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getLicenseNumber() {
 		return licenseNumber;

@@ -7,7 +7,14 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
+
+import javax.inject.Inject;
+
+import org.camunda.bpm.engine.IdentityService;
+import org.camunda.bpm.engine.ProcessEngine;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -24,27 +31,15 @@ import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
 
-
-//LiabilityCaseReport lcr = new LiabilityCaseReport();
-//lcr.setCustomerName("Max Mustermann");
-//lcr.setCaseID("0000009");
-//lcr.setDescription("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.");
-//lcr.setAmtOfLoss("2.000 EUR");
-//lcr.addAttachment("http://capitol.jonasgerlach.de/resources/pdf/image.png");
-//lcr.addAttachment("http://capitol.jonasgerlach.de/resources/pdf/image.png");
-//lcr.addAttachment("http://capitol.jonasgerlach.de/resources/pdf/image.png");
-//lcr.setEligible("yes");
-//lcr.setCarsFairValue("50.000 EUR");
-//lcr.setDeductions("500 EUR");
-//lcr.setPayment("1.500 EUR");
-//lcr.setNameReviser("Bernd Stromberg");
-//
-//String downloadUrl = lcr.generatePDF();
-
+import de.unimuenster.wi.wfm.entitiy.ImageAttachment;
+import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
 
 public class LiabilityCaseReport {
 
 	private String customerName = "";
+	private String customerCompany = "";
+	private String customerAddress = "";
+	private String customerEMail = "";
 	private String caseID = "";
 	private String description = "";
 	private String amtOfLoss = "";
@@ -54,12 +49,13 @@ public class LiabilityCaseReport {
 	private String deductions = "";
 	private String payment = "";
 	private String nameReviser = "";
+	private String date = "";
 	
 	
 	public static String PDF_LIABILITY_CASE_REPORT_URL = "http://capitol.jonasgerlach.de/resources/pdf/LiabilityCaseReport.html";
 	public static String PDF_LIABILITY_CASE_REPORT_CSS_URL = "http://capitol.jonasgerlach.de/resources/pdf/style.css";
 	public static String UPLOAD_DIR_HTTP_URL = "http://capitol.jonasgerlach.de/resources/uploads/";
-
+	
 	public String generatePDF() {
 		File file = GeneratePDF();
 		FTPUpload.uploadFile(file);
@@ -70,9 +66,61 @@ public class LiabilityCaseReport {
 		attachments += "<img alt=\"\" height=\"150\" src=\"" + imgUrl + "\"/>&nbsp;";
 	}
 	
+	public static LiabilityCaseReport CreatePaymentReport(LiabilityCase claim) {
+		LiabilityCaseReport report = new LiabilityCaseReport();
+		report.setCaseID(String.valueOf(claim.getId()));
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		report.setDate(sdf.format(date));
+		report.setCustomerCompany(claim.getInsuranceContract().getCustomer().getCompany());
+		report.setCustomerName(claim.getInsuranceContract().getCustomer().getName());
+		report.setCustomerAddress(claim.getInsuranceContract().getCustomer().getAddress());
+		report.setCustomerEMail(claim.getInsuranceContract().getCustomer().getEmail());
+		report.setAmtOfLoss(claim.getEstimateOfCosts().toString() + " EUR");
+		report.setDescription(claim.getClaimDetails());
+		for(ImageAttachment i : claim.getImages())
+			report.addAttachment(i.getFilePath());
+		report.setEligible("Yes");
+		report.setCarsFairValue(claim.getCarsFairValue().toString());
+		Double deduction = claim.getEstimateOfCosts() - claim.getInsuranceSum();
+		if(deduction < 0)
+			deduction = 0.0;
+		report.setDeductions(deduction.toString());
+		report.setPayment(claim.getInsuranceSum() + " EUR");
+		report.setNameReviser("Bernd Stromberg / CEO");
+		return report;
+	}
+	
+	
+	public static LiabilityCaseReport CreateRejection(LiabilityCase claim) {
+		LiabilityCaseReport report = new LiabilityCaseReport();
+		report.setCaseID(String.valueOf(claim.getId()));
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		report.setDate(sdf.format(date));
+		report.setCustomerCompany(claim.getInsuranceContract().getCustomer().getCompany());
+		report.setCustomerName(claim.getInsuranceContract().getCustomer().getName());
+		report.setCustomerAddress(claim.getInsuranceContract().getCustomer().getAddress());
+		report.setCustomerEMail(claim.getInsuranceContract().getCustomer().getEmail());
+		report.setAmtOfLoss(claim.getEstimateOfCosts().toString() + " EUR");
+		report.setDescription(claim.getClaimDetails());
+		for(ImageAttachment i : claim.getImages())
+			report.addAttachment(i.getFilePath());
+		report.setEligible("No (Rejected)");
+		report.setCarsFairValue("/");
+		report.setDeductions("/");
+		report.setPayment("0.00 EUR");
+		report.setNameReviser("Bernd Stromberg / CEO");
+		return report;
+	}
+	
 	public String replacePlaceholders(String input) {
 		String output = input;
+		output = output.replace("#{DATE}", date);
+		output = output.replace("#{CUSTOMER_COMPANY}", customerCompany);
 		output = output.replace("#{CUSTOMER_NAME}", customerName);
+		output = output.replace("#{CUSTOMER_ADDRESS}", customerAddress);
+		output = output.replace("#{CUSTOMER_EMAIL}", customerEMail);
 		output = output.replace("#{CASE_ID}", caseID);
 		output = output.replace("#{DESCRIPTION}", description);
 		output = output.replace("#{AMOUNT_OF_LOSS}", amtOfLoss);
@@ -225,5 +273,39 @@ public class LiabilityCaseReport {
 	public void setNameReviser(String nameReviser) {
 		this.nameReviser = nameReviser;
 	}
+
+	public String getCustomerCompany() {
+		return customerCompany;
+	}
+
+	public void setCustomerCompany(String customerCompany) {
+		this.customerCompany = customerCompany;
+	}
+
+	public String getCustomerAddress() {
+		return customerAddress;
+	}
+
+	public void setCustomerAddress(String customerAddress) {
+		this.customerAddress = customerAddress;
+	}
+
+	public String getCustomerEMail() {
+		return customerEMail;
+	}
+
+	public void setCustomerEMail(String customerEMail) {
+		this.customerEMail = customerEMail;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
+	
 	
 }

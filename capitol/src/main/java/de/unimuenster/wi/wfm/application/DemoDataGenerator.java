@@ -97,8 +97,10 @@ public class DemoDataGenerator {
 		c1.setCompany("BVIS");
 		c1.setEmail("BVIS@gmail.de");
 		c1.setPhoneNumber("0190123456");
-		c1.setAddress("muenster");
-		customerService.createCustomer(c1);
+
+		c1.setAddress("Muenster");
+		c1 = customerService.createCustomer(c1);
+		System.out.println("Customer: " + c1.getId());
 
 		InsuranceContract ic1 = new InsuranceContract();
 		ic1.setCustomer(c1);
@@ -121,7 +123,8 @@ public class DemoDataGenerator {
 		insuranceBenefitEntitys.add(insuranceBenefitEntity);
 		ic1.setInsuranceBenefitEntity(insuranceBenefitEntitys);
 		ic1.setInsurancePrice(BigDecimal.valueOf(125.23));
-		insuranceContractService.createInsuranceContract(ic1);
+		ic1 = insuranceContractService.createInsuranceContract(ic1);
+		System.out.println("InsuranceContract: " + ic1.getId());
 
 		carData.setInsuranceContract(ic1);
 		carDataService.createCarData(carData);
@@ -129,10 +132,6 @@ public class DemoDataGenerator {
 		insuranceBenefitEntity.setInsuranceContract(ic1);
 		insuranceBenefitEntitySerice
 				.createInsuranceBenefitEntity(insuranceBenefitEntity);
-
-		// only if no demo data is avl.
-		if (isDemoDataAvl())
-			return;
 
 		createUser();
 		createGroups();
@@ -146,12 +145,12 @@ public class DemoDataGenerator {
 	 */
 
 	private void createUser() {
-		identityService.saveUser(initUser("capitol", "Admin", "Capitol",
-				"demo"));
+		identityService
+				.saveUser(initUser("capitol", "Admin", "Capitol", "demo"));
 		identityService.saveUser(initUser("stromberg", "Bernd", "Stromberg",
 				"demo"));
-		identityService.saveUser(initUser("erni", "Berthold (Ernie)",
-				"erni", "demo"));
+		identityService.saveUser(initUser("erni", "Berthold (Ernie)", "erni",
+				"demo"));
 		identityService.saveUser(initUser("ulf", "Ulf", "ulf", "demo"));
 	}
 
@@ -209,10 +208,8 @@ public class DemoDataGenerator {
 		identityService.createMembership("ulf", "capitol");
 
 		identityService.createMembership("stromberg", "Contract_Handler");
-		identityService.createMembership("erni",
-				"First_Level_Case_Handler");
-		identityService
-				.createMembership("ulf", "Second_Level_Case_Handler");
+		identityService.createMembership("erni", "First_Level_Case_Handler");
+		identityService.createMembership("ulf", "Second_Level_Case_Handler");
 	}
 
 	private void createTaskListFilter() {
@@ -243,17 +240,17 @@ public class DemoDataGenerator {
 		authorizationService
 				.saveAuthorization(newLiabilityCaseGroup1FilterRead);
 
-// deactivate 2nd lvl
-//		Authorization newLiabilityCaseGroup2FilterRead = authorizationService
-//				.createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
-//		newLiabilityCaseGroup2FilterRead.setResource(FILTER);
-//		newLiabilityCaseGroup2FilterRead.setResourceId(newLiabilityCasesFilter
-//				.getId());
-//		newLiabilityCaseGroup2FilterRead.addPermission(READ);
-//		newLiabilityCaseGroup2FilterRead
-//				.setGroupId("Second_Level_Case_Handler");
-//		authorizationService
-//				.saveAuthorization(newLiabilityCaseGroup2FilterRead);
+		// deactivate 2nd lvl
+		// Authorization newLiabilityCaseGroup2FilterRead = authorizationService
+		// .createNewAuthorization(Authorization.AUTH_TYPE_GRANT);
+		// newLiabilityCaseGroup2FilterRead.setResource(FILTER);
+		// newLiabilityCaseGroup2FilterRead.setResourceId(newLiabilityCasesFilter
+		// .getId());
+		// newLiabilityCaseGroup2FilterRead.addPermission(READ);
+		// newLiabilityCaseGroup2FilterRead
+		// .setGroupId("Second_Level_Case_Handler");
+		// authorizationService
+		// .saveAuthorization(newLiabilityCaseGroup2FilterRead);
 
 		/* New Insurance Contract */
 		filterProperties.clear();
@@ -307,17 +304,17 @@ public class DemoDataGenerator {
 				.setName("Unassigned Tasks").setProperties(filterProperties)
 				.setOwner("capitol").setQuery(query);
 		filterService.saveFilter(unassignedTasksFilter);
-		
+
 		// all tasks
-				filterProperties.clear();
-				filterProperties.put("description", "All Tasks");
-				filterProperties.put("priority", 10);
-				addVariables(filterProperties);
-				query = taskService.createTaskQuery();
-				Filter allTasksFilter = filterService.newTaskFilter()
-						.setName("All Tasks").setProperties(filterProperties)
-						.setOwner("capitol").setQuery(query);
-				filterService.saveFilter(allTasksFilter);
+		filterProperties.clear();
+		filterProperties.put("description", "All Tasks");
+		filterProperties.put("priority", 10);
+		addVariables(filterProperties);
+		query = taskService.createTaskQuery();
+		Filter allTasksFilter = filterService.newTaskFilter()
+				.setName("All Tasks").setProperties(filterProperties)
+				.setOwner("capitol").setQuery(query);
+		filterService.saveFilter(allTasksFilter);
 
 		// global read authorizations for these filters
 
@@ -334,14 +331,14 @@ public class DemoDataGenerator {
 		globalUnassignedFilterRead.setResourceId(unassignedTasksFilter.getId());
 		globalUnassignedFilterRead.addPermission(READ);
 		authorizationService.saveAuthorization(globalUnassignedFilterRead);
-		
-// only: user "capitol" for debug reasons
-//		Authorization globalAllTasksFilterRead = authorizationService
-//				.createNewAuthorization(Authorization.AUTH_TYPE_GLOBAL);
-//		globalAllTasksFilterRead.setResource(FILTER);
-//		globalAllTasksFilterRead.setResourceId(allTasksFilter.getId());
-//		globalAllTasksFilterRead.addPermission(READ);
-//		authorizationService.saveAuthorization(globalAllTasksFilterRead);
+
+		// only: user "capitol" for debug reasons
+		// Authorization globalAllTasksFilterRead = authorizationService
+		// .createNewAuthorization(Authorization.AUTH_TYPE_GLOBAL);
+		// globalAllTasksFilterRead.setResource(FILTER);
+		// globalAllTasksFilterRead.setResourceId(allTasksFilter.getId());
+		// globalAllTasksFilterRead.addPermission(READ);
+		// authorizationService.saveAuthorization(globalAllTasksFilterRead);
 
 	}
 
@@ -367,8 +364,8 @@ public class DemoDataGenerator {
 	}
 
 	private boolean isDemoDataAvl() {
-		User singleResult = identityService.createUserQuery()
-				.userId("stromberg").singleResult();
+		User singleResult = identityService.createUserQuery().userId("capitol")
+				.singleResult();
 		if (singleResult != null) {
 			return true;
 		}

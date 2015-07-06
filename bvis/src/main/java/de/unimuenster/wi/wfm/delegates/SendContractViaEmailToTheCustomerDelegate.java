@@ -14,45 +14,47 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import de.unimuenster.wi.wfm.application.EMailSender;
 import de.unimuenster.wi.wfm.application.PdfGenerator;
+import de.unimuenster.wi.wfm.ejb.RentalAgreementContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
+import de.unimuenster.wi.wfm.persistence.RentalAgreementContract;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
 
 @Named
 public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 
 	@EJB
-	private RentalAgreementRequestServiceBean rentalAgreementRequestService;
+	private RentalAgreementContractServiceBean rentalAgreementContractService;
 	
 	public void execute(DelegateExecution delegateExecution) throws Exception {
 		System.out.println("SendContractViaEmailToTheCustomerDelegateDelegate");
 
 		// get business process variables
 		Map<String, Object> variables = delegateExecution.getVariables();
-		RentalAgreementRequest rentalAgreementRequest = rentalAgreementRequestService
-				.getRentalAgreementRequest((Long) variables
-						.get("rentalAgreementRequestId"));
+		RentalAgreementContract rentalAgreementContract = rentalAgreementContractService
+				.getRentalAgreementContract((Long) variables
+						.get("contractNoBVIS"));
 
 		// create path for pdf file
-		String pdfPath = "c:/_WfM/Contract_" + rentalAgreementRequest.getId()
+		String pdfPath = "c:/_WfM/Contract_" + rentalAgreementContract.getId()
 				+ ".pdf";
 
 		// create pdf
-		createPDF(rentalAgreementRequest, pdfPath);
+		createPDF(rentalAgreementContract, pdfPath);
 
 		// send pdf via email
-		sendEmail(rentalAgreementRequest, pdfPath);
+		sendEmail(rentalAgreementContract, pdfPath);
 
 	}
 
-	private void createPDF(RentalAgreementRequest rentalAgreement,
+	private void createPDF(RentalAgreementContract rentalAgreementContract,
 			String pdfPath) throws InvalidParameterException, IOException {
 		// set values
 		Map params = new HashMap();
-		params.put("rentalAgreementID", rentalAgreement.getId() + "");
-		params.put("customerName", rentalAgreement.getCustomer().getName());
-		params.put("customerAddress", rentalAgreement.getCustomer().getAddress());
-		params.put("contractDetails", "Muss noch im SendContractViaEmailToTheCustomerDelegateDelegate angegeben werden");
-		params.put("insuranceDetails", "Muss noch im SendContractViaEmailToTheCustomerDelegateDelegate angegeben werden");
+		params.put("rentalAgreementID", rentalAgreementContract.getId() + "");
+		params.put("customerName", rentalAgreementContract.getCustomer().getName());
+		params.put("customerAddress", rentalAgreementContract.getCustomer().getAddress());
+		params.put("contractDetails", rentalAgreementContract.getRentalAgreementContractData());
+		params.put("insuranceDetails", rentalAgreementContract.getInsuranceBenefits());
 
 		// create pdf
 		PdfGenerator pdfGen = new PdfGenerator();
@@ -61,7 +63,7 @@ public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 
 	}
 
-	private void sendEmail(RentalAgreementRequest rentalAgreement,
+	private void sendEmail(RentalAgreementContract rentalAgreementContract,
 			String pdfPath) throws MessagingException {
 
 		String[] attachments = new String[1];
@@ -73,9 +75,12 @@ public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 				.sendEmail(
 						"Rental Agreement",
 						"Dear "
-								+ rentalAgreement.getCustomer().getName()
-								+ ", \r\n\r\n attached you will find the rental agreement. Please send it back to us within the next 2 weeks. \r\n\r\nSincerly BVIS",
-						rentalAgreement.getCustomer().getEmail(), attachments);
+								+ rentalAgreementContract.getCustomer().getName()
+								+ ",  <br> attached you will find the rental agreement contract. Please sign it and send it back to us within the next 2 weeks."
+								+ " <br> You can use our WebApp in order to upload your signed contract. <br> If you click on the following link, you will get to our upload tool:"
+								+ " <br> http://capitol.jonasgerlach.de/customerWebApp/index.php?page=fileupload "
+								+ " <br> Sincerly BVIS",
+								rentalAgreementContract.getCustomer().getEmail(), attachments);
 
 		System.out.println("...EMail sent");
 	}

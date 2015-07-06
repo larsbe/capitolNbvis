@@ -2,7 +2,9 @@ package de.unimuenster.wi.wfm.delegates;
 
 import static org.camunda.spin.Spin.JSON;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -36,13 +38,48 @@ public class CreateNewRentalAgreementRequestDelegate implements JavaDelegate {
 	public void execute(DelegateExecution delegateExecution) throws Exception {
 		System.out.println("CreateNewRentalAgreementRequestDelegateDelegate");
 
-		RentalAgreementMessage rentalAgreementMsg = JSON((String)delegateExecution.getVariable("agreementConditions"))
-				.mapTo(RentalAgreementMessage.class);
+//		RentalAgreementMessage rentalAgreementMsg = JSON((String)delegateExecution.getVariable("agreementConditions"))
+//				.mapTo(RentalAgreementMessage.class);
 				
 		//create and store entities
-		Customer customer = customerService.createObjectFromMessage(rentalAgreementMsg);
-		Collection<CarData> carsData = carDataService.createCarDataFromMessage(rentalAgreementMsg);
-		RentalAgreementRequest req = rentalAgreementRequestService.createObjectFromMessage(rentalAgreementMsg, customer, carsData);
+//		Customer customer = customerService.createObjectFromMessage(rentalAgreementMsg);
+//		Collection<CarData> carsData = carDataService.createCarDataFromMessage(rentalAgreementMsg);
+//		RentalAgreementRequest req = rentalAgreementRequestService.createObjectFromMessage(rentalAgreementMsg, customer, carsData);
+		
+		
+		//create and store entities
+		Customer customer = new Customer();		
+		customer.setAddress((String) businessProcess.getVariable("address"));
+		customer.setCompany((String) businessProcess.getVariable("company"));
+		customer.setEmail((String) businessProcess.getVariable("email"));
+		customer.setName((String) businessProcess.getVariable("name"));
+		customer.setPhoneNumber((String) businessProcess.getVariable("phoneNumber"));
+		customer = customerService.merge(customer);
+		
+		
+		RentalAgreementRequest req = new RentalAgreementRequest(); 
+		req.setCustomer(customer);
+		req.setDate(new Date());
+		
+		String solutionType = (String) businessProcess.getVariable("solutionType");
+				
+		if(solutionType.equals("INDIVIDUAL") || solutionType.equals("individual")){
+			// INDIVIDUAL
+			req.setRentalAgreementRequestType(RentalAgreementRequestType.INDIVIDUAL);
+			req.setRequirementsOfCustomer((String) businessProcess.getVariable("additionalInfo"));
+			
+		}else{
+			// STANDARD
+			req.setRentalAgreementRequestType(RentalAgreementRequestType.STANDARD);
+			
+			CarData carData = carDataService.getCarDataByName((String) businessProcess.getVariable("carType"));
+			if( carData != null){
+				Collection<CarData> carsData = new ArrayList<CarData>();
+				carsData.add(carData);
+				req.setCarsData(carsData);
+			}
+		}
+		req = rentalAgreementRequestService.merge(req);
 		
 
 		// store process variables of this process...
