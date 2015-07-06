@@ -75,11 +75,13 @@ public class CapitolREST {
 	}
 
 	public static String NewLiabilityCase(Long contractNo, String claimDetails,
-			Double estimateOfCosts, String[] imageUrls, Long bvisCaseID) {
+			Double estimateOfCosts, String[] imageUrls, String licenseNumber, Long bvisCaseID) {
 		CamundaMessage msg = new CamundaMessage(
 				Capitol.REST_MSG_NEW_LIABILITY_CASE);
 		msg.addProcessVariables("contractNo", new CamundaMessageVariable(
 				contractNo.toString(), CamundaVariableType.LONG));
+		msg.addProcessVariables("licenseNumber", new CamundaMessageVariable(
+				licenseNumber.toString(), CamundaVariableType.STRING));
 		msg.addProcessVariables("bvisCaseID", new CamundaMessageVariable(
 				bvisCaseID.toString(), CamundaVariableType.LONG));
 		msg.addProcessVariables("estimateOfCosts", new CamundaMessageVariable(
