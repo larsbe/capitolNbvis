@@ -9,6 +9,7 @@ import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 public class CreateEampleJSONs {
 
 	public static void main(String args[]){
+		
 		RentalAgreementMessage message = new RentalAgreementMessage();
 		message.setAdditionalInfo("blaues Auto");
 		
