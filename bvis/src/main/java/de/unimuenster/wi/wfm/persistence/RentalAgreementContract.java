@@ -21,6 +21,8 @@ public class RentalAgreementContract extends AbstractEntity {
 	protected boolean contractSigned;
 	@NotNull(message="You have to enter a value for the field 'Date'" )
 	protected Date date;
+	protected String rentalAgreementContractData;
+	protected String insuranceBenefits;
 	
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "rentalAgreementContract")
@@ -52,6 +54,22 @@ public class RentalAgreementContract extends AbstractEntity {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public String getRentalAgreementContractData() {
+		return rentalAgreementContractData;
+	}
+
+	public void setRentalAgreementContractData(String rentalAgreementContractData) {
+		this.rentalAgreementContractData = rentalAgreementContractData;
+	}
+	
+	public String getInsuranceBenefits() {
+		return insuranceBenefits;
+	}
+
+	public void setInsuranceBenefits(String insuranceBenefits) {
+		this.insuranceBenefits = insuranceBenefits;
 	}
 
 }
