@@ -15,7 +15,6 @@ import de.unimuenster.wi.wfm.entitiy.CaseStatus;
 import de.unimuenster.wi.wfm.entitiy.ImageAttachment;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
 import de.unimuenster.wi.wfm.entitiy.LiabilityCase;
-import de.unimuenster.wi.wfm.sharedLib.data.AgreementConditions;
 
 @Named
 public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
