@@ -50,6 +50,7 @@ public class LiabilityCaseReport {
 	private String payment = "";
 	private String nameReviser = "";
 	private String date = "";
+	private String decisionNote = "";
 	
 	
 	public static String PDF_LIABILITY_CASE_REPORT_URL = "http://capitol.jonasgerlach.de/resources/pdf/LiabilityCaseReport.html";
@@ -88,6 +89,7 @@ public class LiabilityCaseReport {
 		report.setDeductions(deduction.toString());
 		report.setPayment(claim.getInsuranceSum() + " EUR");
 		report.setNameReviser("Bernd Stromberg / CEO");
+		report.setDecisionNote(claim.getDecisionNote());
 		return report;
 	}
 	
@@ -111,6 +113,7 @@ public class LiabilityCaseReport {
 		report.setDeductions("/");
 		report.setPayment("0.00 EUR");
 		report.setNameReviser("Bernd Stromberg / CEO");
+		report.setDecisionNote(claim.getDecisionNote());
 		return report;
 	}
 	
@@ -130,6 +133,7 @@ public class LiabilityCaseReport {
 		output = output.replace("#{DEDUCTIONS}", deductions);
 		output = output.replace("#{PAYMENT}", payment);
 		output = output.replace("#{NAME_REVISER}", nameReviser);
+		output = output.replace("#{DECISION_NOTE}", decisionNote);
 		return output;
 	}
 	
@@ -304,6 +308,14 @@ public class LiabilityCaseReport {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getDecisionNote() {
+		return decisionNote;
+	}
+
+	public void setDecisionNote(String decisionNote) {
+		this.decisionNote = decisionNote;
 	}
 	
 	
