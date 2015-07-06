@@ -3,15 +3,15 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="offerCompany">Customer Number</label>
-              <input class="form-control" id="liabilityCustomerNo" placeholder="Customer #">
+              <label for="offerEmail">Contract Number</label>
+              <input class="form-control" id="liabilityContractNo" placeholder="Contract #">
             </div>
           </div>
 
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="offerEmail">Contract Number</label>
-              <input class="form-control" id="liabilityContractNo" placeholder="Contract #">
+              <label for="offerEmail">License Number</label>
+              <input class="form-control" id="liabilityLicenseNo" placeholder="License #">
             </div>
           </div>
         </div>
@@ -82,11 +82,11 @@
               "businessKey" : null,
               "correlationKeys" : {},
               "processVariables" : {
-                  "customerNoBVIS" : {"value" : "", "type": "Long"},
                   "contractNoBVIS" : {"value" : "", "type": "Long"},
                   "imageCount" : {"value" : "", "type": "Integer"},
                   "claimDetails" : {"value" : "", "type": "String"},
-                  "estCosts" : {"value" : "", "type": "String"}
+                  "estCosts" : {"value" : "", "type": "Double"},
+                  "licenseNumber":{"value" : "", "type": "String"}
               }
             };
 
@@ -96,12 +96,10 @@
 
             });
 
-
-
-            json.processVariables.customerNoBVIS.value = $('#liabilityCustomerNo').val();
             json.processVariables.contractNoBVIS.value = $('#liabilityContractNo').val();
             json.processVariables.claimDetails.value = $('#liabilityClaimDetails').val();
             json.processVariables.estCosts.value = $('#liabilityEstCosts').val();
+            json.processVariables.licenseNumber.value = $('#liabilityLicenseNo').val();
             json.processVariables.imageCount.value = imagearray.length;
             
             console.log(json);

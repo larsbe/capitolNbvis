@@ -44,7 +44,7 @@ public class CamundaMessage {
 
 	public CamundaMessage(String messageName) {
 		this.messageName = messageName;
-		businessKey = "";
+		businessKey = null;
 		correlationKeys = new HashMap<String, CamundaMessageVariable>();
 		processVariables = new HashMap<String, CamundaMessageVariable>();
 		all = false;
@@ -93,7 +93,10 @@ public class CamundaMessage {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();		
 		sb.append("{\"messageName\" : \""+messageName+"\",");
-		sb.append("\"businessKey\" : \""+businessKey+"\",");
+		if(businessKey == null)
+			sb.append("\"businessKey\" : null,");
+		else
+			sb.append("\"businessKey\" : \""+businessKey+"\",");
 		sb.append("\"correlationKeys\" : ");
 		sb.append(ListToJson(correlationKeys));
 		sb.append(",");

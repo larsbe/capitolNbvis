@@ -27,11 +27,11 @@ public class REST extends RestHelper {
 				Long.valueOf(rentalAgreementMsg.getRentalAgreementRequestId()).toString(),
 				rentalAgreementMsg
 		);
-		System.out.println(msg);
-		//SendMessageToBVIS(msg);
+		SendMessageToBVIS(msg);
 	}
 
 	private static void SendMessageToBVIS(String msg) {
+		System.out.println(msg);
 		RestHelper.SendMessage(Constants.BVIS_CAMUNDA_REST, msg);
 	}
 
