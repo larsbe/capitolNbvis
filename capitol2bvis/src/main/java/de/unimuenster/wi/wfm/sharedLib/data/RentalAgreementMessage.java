@@ -22,6 +22,8 @@ public class RentalAgreementMessage {
 	private List<InsuranceBenefit> benefits;
 	private BigDecimal insurancePrice;
 	private boolean approvedByBVIS;
+	private String solutionType;
+	private String carType;
 	
 	public long getRentalAgreementRequestId() {
 		return rentalAgreementRequestId;
@@ -70,6 +72,18 @@ public class RentalAgreementMessage {
 	}
 	public void setApprovedByBVIS(boolean approvedByBVIS) {
 		this.approvedByBVIS = approvedByBVIS;
+	}
+	public String getSolutionType() {
+		return solutionType;
+	}
+	public void setSolutionType(String solutionType) {
+		this.solutionType = solutionType;
+	}
+	public String getCarType() {
+		return carType;
+	}
+	public void setCarType(String carType) {
+		this.carType = carType;
 	}
 	
 	
