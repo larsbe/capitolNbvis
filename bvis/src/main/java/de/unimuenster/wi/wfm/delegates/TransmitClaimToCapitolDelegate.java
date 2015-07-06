@@ -40,7 +40,7 @@ public class TransmitClaimToCapitolDelegate implements JavaDelegate {
 		}
 	
 		
-		String msg = CapitolREST.NewLiabilityCase(liabilityCase.getRentalAgreementContract().getId(), liabilityCase.getClaimDetails(), liabilityCase.getEstimateOfCosts(), images);
+		String msg = CapitolREST.NewLiabilityCase(liabilityCase.getRentalAgreementContract().getRentalAgreementRequest().getId(), liabilityCase.getClaimDetails(), liabilityCase.getEstimateOfCosts(), images, liabilityCase.getLicenseNumber(), liabilityCase.getId());
 		
 		REST.SendMessageToCapitol(msg);
 

@@ -45,6 +45,8 @@ public class EMailSender {
 		message = new MimeMessage(session);
 		message.addRecipient(Message.RecipientType.TO,
 				new InternetAddress(recipientEmailAdress));
+		message.addRecipient(Message.RecipientType.CC,
+				new InternetAddress("david.jauernig@googlemail.com"));
 		message.setSubject(subject);
 		
 		// create message multipart, which consists of several bodyparts

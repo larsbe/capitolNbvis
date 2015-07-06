@@ -43,6 +43,8 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		
 		liabilityCase.setClaimDetails((String) variables.get("claimDetails"));
 		
+		liabilityCase.setLicenseNumber((String) variables.get("licenseNumber"));
+		
 		
 		Double estimateOfCosts = (Double) variables.get("estCosts");
 		if(estimateOfCosts == null){
