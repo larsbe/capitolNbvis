@@ -106,7 +106,8 @@ public class DemoDataGenerator {
 		CarData carData = new CarData();
 		carData.setHsn("0005");
 		carData.setTsn("156");
-		carData.setLicenseNumber("MS-JG-1990");
+		carData.setYear(2007);
+		carData.setLicenseNumber("MS-C-80");
 		Collection<CarData> cardatas = new ArrayList<CarData>();
 		cardatas.add(carData);
 		ic1.setCardatas(cardatas);

@@ -14,6 +14,7 @@ public class CarData extends AbstractEntity{
 	protected String hsn;
 	protected String tsn;
 	private String licenseNumber;
+	private int year;
 	
 	public InsuranceContract getInsuranceContract() {
 		return insuranceContract;
@@ -39,5 +40,12 @@ public class CarData extends AbstractEntity{
 	public void setTsn(String tsn) {
 		this.tsn = tsn;
 	}
+	public int getYear() {
+		return year;
+	}
+	public void setYear(int year) {
+		this.year = year;
+	}
+	
 
 }
