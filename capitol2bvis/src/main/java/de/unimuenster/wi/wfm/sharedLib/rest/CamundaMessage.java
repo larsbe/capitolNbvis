@@ -44,7 +44,7 @@ public class CamundaMessage {
 
 	public CamundaMessage(String messageName) {
 		this.messageName = messageName;
-		businessKey = "";
+		businessKey = null;
 		correlationKeys = new HashMap<String, CamundaMessageVariable>();
 		processVariables = new HashMap<String, CamundaMessageVariable>();
 		all = false;
