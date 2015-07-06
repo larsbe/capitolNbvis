@@ -93,7 +93,10 @@ public class CamundaMessage {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();		
 		sb.append("{\"messageName\" : \""+messageName+"\",");
-		sb.append("\"businessKey\" : \""+businessKey+"\",");
+		if(businessKey == null)
+			sb.append("\"businessKey\" : null,");
+		else
+			sb.append("\"businessKey\" : \""+businessKey+"\",");
 		sb.append("\"correlationKeys\" : ");
 		sb.append(ListToJson(correlationKeys));
 		sb.append(",");
