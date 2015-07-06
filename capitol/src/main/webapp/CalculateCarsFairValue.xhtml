@@ -10,44 +10,8 @@
 	<ui:composition template="template.xhtml">
  
     	<ui:define name="content">
-    	
-    	<!-- Modal -->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				  <div class="modal-dialog" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-				        <h4 class="modal-title" id="myModalLabel">Customer Details</h4>
-				      </div>
-				      <div class="modal-body">
-
-				        <table class="table">
-					    	<tr>
-					    		<th>Company</th>
-					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.company}</td>
-					    	</tr>
-					    	<tr>
-					    		<th>Contact Person</th>
-					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}</td>
-					    	</tr>
-					    	<tr>
-					    		<th>E-Mail</th>
-					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.email}</td>
-					    	</tr>
-					    	<tr>
-					    		<th>Phone Number</th>
-					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.phoneNumber}</td>
-					    	</tr>
-					    	<tr>
-					    		<th>Address</th>
-					    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.address}</td>
-					    	</tr>
-					    
-					    </table>
-				      </div>
-				    </div>
-				  </div>
-				</div>
+    		<ui:include src="/CustomerDetails.xhtml" />
+			<ui:include src="/ContractDetails.xhtml" />
     		
     		<h1>Calculate Car's Fair Value</h1>
     		<h3>Liability Case Info</h3>
@@ -58,7 +22,11 @@
 			    	</tr>
 			    	<tr>
 			    		<th>Contract ID</th>
-			    		<td>#{checkEligibility.liabilityCase.insuranceContract.id}</td>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.id}
+			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModalContract">
+							  Details
+							</button>
+			    		</td>
 			    	</tr>
 			    	<tr>
 			    		<th>Customer</th>

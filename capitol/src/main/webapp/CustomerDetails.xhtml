@@ -1,0 +1,44 @@
+<ui:composition 
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+    
+    <!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Customer Details</h4>
+		      </div>
+		      <div class="modal-body">
+
+		        <table class="table">
+			    	<tr>
+			    		<th>Company</th>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.company}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Contact Person</th>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.name}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>E-Mail</th>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.email}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Phone Number</th>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.phoneNumber}</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Address</th>
+			    		<td>#{checkEligibility.liabilityCase.insuranceContract.customer.address}</td>
+			    	</tr>
+			    
+			    </table>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+</ui:composition>

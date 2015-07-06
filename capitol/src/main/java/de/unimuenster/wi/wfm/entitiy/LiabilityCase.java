@@ -20,7 +20,7 @@ public class LiabilityCase extends AbstractEntity {
 	protected Integer carsFairValue;
 	protected Integer insuranceSum;
 	protected Double estimateOfCosts;
-
+	protected String licenseNumber;
 	
 	@ManyToOne
 	protected InsuranceContract insuranceContract;
@@ -95,6 +95,14 @@ public class LiabilityCase extends AbstractEntity {
 
 	public void setEstimateOfCosts(Double estimateOfCosts) {
 		this.estimateOfCosts = estimateOfCosts;
+	}
+
+	public String getLicenseNumber() {
+		return licenseNumber;
+	}
+
+	public void setLicenseNumber(String licenseNumber) {
+		this.licenseNumber = licenseNumber;
 	}
 	
 	
