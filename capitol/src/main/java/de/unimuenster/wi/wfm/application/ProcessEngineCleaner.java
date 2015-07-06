@@ -46,8 +46,8 @@ public class ProcessEngineCleaner {
 	private void cleanUsers() {
 		identityService.deleteUser("capitol");
 		identityService.deleteUser("stromberg");
-		identityService.deleteUser("heisterkamp");
-		identityService.deleteUser("steinke");
+		identityService.deleteUser("erni");
+		identityService.deleteUser("ulf");
 	}
 
 	private void cleanGroups() {
@@ -61,14 +61,14 @@ public class ProcessEngineCleaner {
 		identityService.deleteMembership("capitol", Groups.CAMUNDA_ADMIN);
 
 		identityService.deleteMembership("stromberg", "capitol");
-		identityService.deleteMembership("heisterkamp", "capitol");
-		identityService.deleteMembership("steinke", "capitol");
+		identityService.deleteMembership("erni", "capitol");
+		identityService.deleteMembership("ulf", "capitol");
 
 		identityService.deleteMembership("stromberg", "Contract_Handler");
-		identityService.deleteMembership("heisterkamp",
+		identityService.deleteMembership("erni",
 				"First_Level_Case_Handler");
 		identityService
-				.deleteMembership("steinke", "Second_Level_Case_Handler");
+				.deleteMembership("ulf", "Second_Level_Case_Handler");
 	}
 	
 	private void cleanAuth() {

@@ -149,9 +149,9 @@ public class DemoDataGenerator {
 				"demo"));
 		identityService.saveUser(initUser("stromberg", "Bernd", "Stromberg",
 				"demo"));
-		identityService.saveUser(initUser("heisterkamp", "Berthold (Ernie)",
-				"Heisterkamp", "demo"));
-		identityService.saveUser(initUser("steinke", "Ulf", "Steinke", "demo"));
+		identityService.saveUser(initUser("erni", "Berthold (Ernie)",
+				"erni", "demo"));
+		identityService.saveUser(initUser("ulf", "Ulf", "ulf", "demo"));
 	}
 
 	private void createGroups() {
@@ -204,14 +204,14 @@ public class DemoDataGenerator {
 		identityService.createMembership("capitol", Groups.CAMUNDA_ADMIN);
 
 		identityService.createMembership("stromberg", "capitol");
-		identityService.createMembership("heisterkamp", "capitol");
-		identityService.createMembership("steinke", "capitol");
+		identityService.createMembership("erni", "capitol");
+		identityService.createMembership("ulf", "capitol");
 
 		identityService.createMembership("stromberg", "Contract_Handler");
-		identityService.createMembership("heisterkamp",
+		identityService.createMembership("erni",
 				"First_Level_Case_Handler");
 		identityService
-				.createMembership("steinke", "Second_Level_Case_Handler");
+				.createMembership("ulf", "Second_Level_Case_Handler");
 	}
 
 	private void createTaskListFilter() {
