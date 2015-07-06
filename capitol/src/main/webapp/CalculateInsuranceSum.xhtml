@@ -40,7 +40,7 @@
 			    		<th>Insurance Type</th>
 			    		<td>#{checkEligibility.liabilityCase.insuranceContract.insuranceType.toString()}
 			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModalContract">
-							  Insurance Details
+							  Contract Details
 							</button>
 			    		</td>
 			    	</tr>
@@ -71,21 +71,22 @@
     		<h:form class="form-horizontal" target="_parent">
 
 	    		<div class="form-group">
-					    <h:outputLabel class="col-sm-3 control-label" for="insuranceSum" value="Insurance Sum" />
+					    <h:outputLabel class="col-sm-3 control-label" for="carValue" value="Fair Value" />
 					    <div class="input-group col-sm-4">
 					      <div class="input-group-addon">€</div>
-					      <h:inputText class="form-control" id="insuranceSum" p:placeholder="Amount" value="#{calculateInsuranceSum.liabilityCase.insuranceSum}" />
-					      <div class="input-group-addon">.00</div>
-					    </div>
-					    
-					    <div class="form-group">
-					    <h:outputLabel class="col-sm-3 control-label" for="note" value="Note" />
-					    <div class="input-group col-sm-4">
-					      <h:inputTextarea class="form-control" id="note" value="#{calculateInsuranceSum.liabilityCase.decisionNote}" />
-					    </div>
+					      <h:inputText class="form-control" id="carValue" p:placeholder="Amount" value="#{calculateCarsFairValue.liabilityCase.carsFairValue}" />
 					    </div>
 
 				</div>
+					    
+					    <div class="form-group">
+					    <h:outputLabel for="note" value="Note" />
+					    
+					      <h:inputTextarea class="form-control" id="note" value="#{calculateInsuranceSum.liabilityCase.decisionNote}" />
+					    
+					    </div>
+
+				
 
 				<h:commandButton id="submit_button" class="btn btn-primary pull-right" value="Save changes" action="#{calculateInsuranceSum.submitForm()}" />
 			</h:form>
