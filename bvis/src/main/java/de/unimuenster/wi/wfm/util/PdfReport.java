@@ -21,6 +21,7 @@ import com.itextpdf.tool.xml.css.StyleAttrCSSResolver;
 import com.itextpdf.tool.xml.html.Tags;
 import com.itextpdf.tool.xml.parser.XMLParser;
 import com.itextpdf.tool.xml.pipeline.css.CSSResolver;
+import com.itextpdf.tool.xml.pipeline.css.CssResolverPipeline;
 import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
@@ -51,11 +52,11 @@ public class PdfReport {
 		}
 		return content;
 	}
-	
+
 	public static String UPLOAD_DIR_HTTP_URL = "http://capitol.jonasgerlach.de/resources/uploads/";
 	public static String PDF_REPORT_URL = "http://capitol.jonasgerlach.de/resources/pdf/bvisTemplate.html";
 	public static String PDF_REPORT_CSS_URL = "http://capitol.jonasgerlach.de/resources/pdf/bvisStyle.css";
-	
+
 	public static String generatePDF(String templateHTML, String outputPath,
 			Map<String, String> params) {
 		File file = GeneratePDF(templateHTML, outputPath, params);
@@ -84,12 +85,20 @@ public class PdfReport {
 			HtmlPipelineContext htmlContext = new HtmlPipelineContext(null);
 			htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
 
-			// HTML2PDF
+			// CSS
 			CSSResolver cssResolver = new StyleAttrCSSResolver();
 			InputStream csspathtest = new ByteArrayInputStream(GetWebContent(
 					PDF_REPORT_CSS_URL).getBytes());
 			CssFile cssfiletest = XMLWorkerHelper.getCSS(csspathtest);
 			cssResolver.addCss(cssfiletest);
+
+			// HTML2PDF
+			Pipeline<?> pipeline = new CssResolverPipeline(cssResolver,
+					new HtmlPipeline(htmlContext, new PdfWriterPipeline(
+							document, writer)));
+			XMLWorker worker = new XMLWorker(pipeline, true);
+			XMLParser p = new XMLParser(worker);
+			p.parse(is);// new FileInputStream("results/demo2/walden.html"));
 
 			// OUTPUT
 			// OUTPUT
