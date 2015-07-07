@@ -46,8 +46,8 @@ public class SetupContractDelegate implements JavaDelegate {
 		try {		
 			
 			// store entity in database
-			this.rentalAgreementContract.setCustomer(getRentalAgreementContract().getCustomer());
-			this.rentalAgreementContract.setRentalAgreementRequest(getRentalAgreementRequest());
+			getRentalAgreementContract().setCustomer(getRentalAgreementContract().getCustomer());
+			getRentalAgreementContract().setRentalAgreementRequest(getRentalAgreementRequest());
 			this.rentalAgreementContract = rentalAgreementContractService.merge(getRentalAgreementContract());
 			
 			getRentalAgreementRequest().setRentalAgreementContract(this.rentalAgreementContract);
@@ -59,7 +59,7 @@ public class SetupContractDelegate implements JavaDelegate {
 			
 			// store process variables of this process...
 			// store flag "contractNoBVIS"
-			businessProcess.setVariable( "contractNoBVIS", this.rentalAgreementContract.getId() );		
+			businessProcess.setVariable( "contractNoBVIS", getRentalAgreementContract().getId() );		
 			
 						
 			
