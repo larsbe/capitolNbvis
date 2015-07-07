@@ -1,14 +1,17 @@
       <div>
         
         <div class="row">
+          
+          <!--
           <div class="col-sm-6">
             <div class="form-group">
               <label for="offerCompany">Customer Number</label>
               <input class="form-control" id="liabilityCustomerNo" placeholder="Customer #">
             </div>
           </div>
+          -->
 
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="form-group">
               <label for="offerEmail">Contract Number</label>
               <input class="form-control" id="liabilityContractNo" placeholder="Contract #">
@@ -70,13 +73,13 @@
                 "contractNoBVIS" : {"value" : "", "type": "Long"}
               },
               "processVariables" : {
-                  "customerNoBVIS" : {"value" : "", "type": "Long"},
+                  //"customerNoBVIS" : {"value" : "", "type": "Long"},
                   "contract" : {"value" : "", "type": "String"}
               }
             };
 
             json.correlationKeys.contractNoBVIS.value = $('#liabilityContractNo').val();
-            json.processVariables.customerNoBVIS.value = $('#liabilityCustomerNo').val();
+            //json.processVariables.customerNoBVIS.value = $('#liabilityCustomerNo').val();
             json.processVariables.contract.value = contractfolder + contractfile;
             
             console.log(json);
