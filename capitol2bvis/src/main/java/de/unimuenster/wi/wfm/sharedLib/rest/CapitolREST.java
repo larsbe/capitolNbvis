@@ -38,7 +38,7 @@ public class CapitolREST {
 				new CamundaMessageVariable(
 						correlationKey_rentalAgreementRequestIdBVIS.toString(),
 						CamundaVariableType.LONG));
-		msg.addProcessVariables("signed",
+		msg.addProcessVariables("contractSigned",
 				new CamundaMessageVariable(signed.toString(),
 						CamundaVariableType.BOOLEAN));
 		return msg.toString();
