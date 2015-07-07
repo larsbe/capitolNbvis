@@ -57,7 +57,7 @@
       <bpmn2:endEvent id="EndEvent_1" name="agreed on &#xD;&#xA;insurance conditions">
         <bpmn2:incoming>SequenceFlow_16</bpmn2:incoming>
       </bpmn2:endEvent>
-      <bpmn2:userTask id="Task_4" camunda:candidateGroups="AgreementConditionsImprover" camunda:formKey="embedded:app:forms/CheckAgreementConditionsOfCapitol.html" name="check agreement conditions ">
+      <bpmn2:userTask id="Task_4" camunda:candidateGroups="Contract_Handler" camunda:formKey="embedded:app:forms/CheckAgreementConditionsOfCapitol.html" name="check agreement conditions ">
         <bpmn2:incoming>SequenceFlow_23</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_13</bpmn2:outgoing>
         <bpmn2:dataInputAssociation id="DataInputAssociation_3">
@@ -99,7 +99,7 @@
       <bpmn2:outgoing>SequenceFlow_42</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_60</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
-    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="Negotiator" camunda:formKey="embedded:app:forms/NegotiateAgreementConditionsWithCustomer.html" name="negotiate agreement conditions with customer (via telephone or face2face)">
+    <bpmn2:userTask id="UserTask_1" camunda:candidateGroups="Contract_Handler" camunda:formKey="embedded:app:forms/NegotiateAgreementConditionsWithCustomer.html" name="negotiate agreement conditions with customer (via telephone or face2face)">
       <bpmn2:incoming>SequenceFlow_42</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_59</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_43</bpmn2:outgoing>
@@ -184,7 +184,7 @@
     <bpmn2:sequenceFlow id="SequenceFlow_9" name="no" sourceRef="ExclusiveGateway_4" targetRef="ExclusiveGateway_8">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!isCustomerOnSite}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:userTask id="UserTask_5" camunda:formKey="embedded:app:forms/CheckContractIsSigned.html" name="check if contract is signed or cancelled">
+    <bpmn2:userTask id="UserTask_5" camunda:formKey="embedded:app:forms/CheckContractIsSigned.html" camunda:candidateGroups="Contract_Handler" name="check if contract is signed or cancelled">
       <bpmn2:incoming>SequenceFlow_25</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_20</bpmn2:outgoing>
     </bpmn2:userTask>

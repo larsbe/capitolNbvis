@@ -2,7 +2,7 @@ package de.unimuenster.wi.wfm.util;
 
 public class Constants {
 
-	public static String BVIS_CAMUNDA_REST = "http://192.168.178.74:8080/engine-rest/engine/default/message";
+	public static String BVIS_CAMUNDA_REST = "http://10.67.11.57:8080/engine-rest/engine/default/message";
 	
 	public static String COMPANY_NAME = "Capitol for People Inc.";
 	public static String IMG_METADATA_LIABILITYCLAIM_ABBR = "CASE";
