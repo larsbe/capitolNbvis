@@ -31,9 +31,7 @@ public class PdfGenerator {
 	public void doConversion(String templateHTML, String outputPath,
 			Map<String, String> params) throws FileNotFoundException {
 
-		String content = new Scanner(new File(templateHTML)).useDelimiter("\\Z").next();
-
-		PdfReport.GeneratePDF(content, outputPath, params);
+		PdfReport.GeneratePDF(templateHTML, outputPath, params);
 
 		// // input
 		// java.io.InputStreamReader isr = new java.io.InputStreamReader( new
