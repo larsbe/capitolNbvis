@@ -25,18 +25,18 @@ import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
 import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
 
-
 public class PdfReport {
 
-	
-	private static String replacePlaceholders(String input, Map<String, String> params) {
+	private static String replacePlaceholders(String input,
+			Map<String, String> params) {
 		String output = input;
-		for(Entry<String, String> entry : params.entrySet()) {
-			output = output.replace("$["+entry.getKey()+"]", entry.getValue());
+		for (Entry<String, String> entry : params.entrySet()) {
+			output = output.replace("$[" + entry.getKey() + "]",
+					entry.getValue());
 		}
 		return output;
 	}
-	
+
 	private static String GetWebContent(String url) {
 		String content = null;
 		URLConnection connection = null;
@@ -52,16 +52,25 @@ public class PdfReport {
 		return content;
 	}
 	
+	public static String UPLOAD_DIR_HTTP_URL = "http://capitol.jonasgerlach.de/resources/uploads/";
 	public static String PDF_REPORT_URL = "http://capitol.jonasgerlach.de/resources/pdf/bvisTemplate.html";
 	public static String PDF_REPORT_CSS_URL = "http://capitol.jonasgerlach.de/resources/pdf/bvisStyle.css";
-
 	
-	public static File GeneratePDF(String templateHTML, String outputPath, Map<String, String> params) {
-		
+	public static String generatePDF(String templateHTML, String outputPath,
+			Map<String, String> params) {
+		File file = GeneratePDF(templateHTML, outputPath, params);
+		FTPUpload.uploadFile(file);
+		return UPLOAD_DIR_HTTP_URL + file.getName();
+	}
+
+	public static File GeneratePDF(String templateHTML, String outputPath,
+			Map<String, String> params) {
+
 		try {
-			
+
 			// INPUT
-		    String htmlstring = replacePlaceholders(GetWebContent(PDF_REPORT_URL), params);
+			String htmlstring = replacePlaceholders(
+					GetWebContent(PDF_REPORT_URL), params);
 			InputStream is = new ByteArrayInputStream(htmlstring.getBytes());
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -77,23 +86,23 @@ public class PdfReport {
 
 			// HTML2PDF
 			CSSResolver cssResolver = new StyleAttrCSSResolver();
-			InputStream csspathtest = new ByteArrayInputStream(GetWebContent(PDF_REPORT_CSS_URL).getBytes());
+			InputStream csspathtest = new ByteArrayInputStream(GetWebContent(
+					PDF_REPORT_CSS_URL).getBytes());
 			CssFile cssfiletest = XMLWorkerHelper.getCSS(csspathtest);
 			cssResolver.addCss(cssfiletest);
 
 			// OUTPUT
+			// OUTPUT
 			document.close();
-			File tmpFile = new File(outputPath);
-			FileOutputStream fos = new FileOutputStream(tmpFile); 
+			File tmpFile = File.createTempFile("BvisReport", ".pdf");
+			FileOutputStream fos = new FileOutputStream(tmpFile);
 			baos.writeTo(fos);
 			return tmpFile;
-			
+
 		} catch (Exception e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	
-	
+
 }

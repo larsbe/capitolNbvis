@@ -19,6 +19,7 @@ import de.unimuenster.wi.wfm.persistence.RentalAgreementContract;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
 import de.unimuenster.wi.wfm.util.EMailSender;
 import de.unimuenster.wi.wfm.util.PdfGenerator;
+import de.unimuenster.wi.wfm.util.PdfReport;
 
 @Named
 public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
@@ -40,14 +41,13 @@ public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 				+ ".pdf";
 
 		// create pdf
-		createPDF(rentalAgreementContract, pdfPath);
 
 		// send pdf via email
-		sendEmail(rentalAgreementContract, pdfPath);
+		sendEmail(rentalAgreementContract, createPDF(rentalAgreementContract, pdfPath));
 
 	}
 
-	private void createPDF(RentalAgreementContract rentalAgreementContract,
+	private String createPDF(RentalAgreementContract rentalAgreementContract,
 			String pdfPath) throws InvalidParameterException, IOException {
 		// set values
 		Map params = new HashMap();
@@ -72,10 +72,8 @@ public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 		//params.put("insuranceDetails", rentalAgreementContract.getInsuranceBenefits());
 
 		// create pdf
-		PdfGenerator pdfGen = new PdfGenerator();
-		pdfGen.doConversion("pdfTemplates/TemplateContract.htm", pdfPath,
-				params);
-
+		String pdfUrl = PdfReport.generatePDF("", "", params);
+		return pdfUrl;
 	}
 
 	private void sendEmail(RentalAgreementContract rentalAgreementContract,
@@ -94,8 +92,9 @@ public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 								+ ",  <br> attached you will find the rental agreement contract. Please sign it and send it back to us within the next 2 weeks."
 								+ " <br> You can use our WebApp in order to upload your signed contract. <br> If you click on the following link, you will get to our upload tool:"
 								+ " <br> http://capitol.jonasgerlach.de/customerWebApp/index.php?page=fileupload "
+								+ " <br> Download your PDF: " + pdfPath
 								+ " <br> Sincerly BVIS",
-								rentalAgreementContract.getCustomer().getEmail(), attachments);
+								rentalAgreementContract.getCustomer().getEmail(), null);
 
 		System.out.println("...EMail sent");
 	}
