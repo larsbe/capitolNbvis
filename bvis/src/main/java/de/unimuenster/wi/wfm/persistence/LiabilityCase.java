@@ -27,7 +27,7 @@ public class LiabilityCase extends AbstractEntity {
 	@ManyToOne
 	protected RentalAgreementContract rentalAgreementContract;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "liabilityCase")
+	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "liabilityCase")
 	protected Collection<ImageAttachment> images = new ArrayList<ImageAttachment>();
 	
 

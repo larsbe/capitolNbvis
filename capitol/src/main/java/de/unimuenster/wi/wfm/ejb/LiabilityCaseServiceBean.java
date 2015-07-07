@@ -40,6 +40,7 @@ public class LiabilityCaseServiceBean {
 	
 	public LiabilityCase getLiabilityCase(long id) {
 		LiabilityCase liabilityCase = em.find(LiabilityCase.class, id);
+		liabilityCase.getImages().size();
 		if(liabilityCase == null)
 			throw new IllegalArgumentException(String.format("LiabilityCase with ID %s not found", id));
 		return liabilityCase;

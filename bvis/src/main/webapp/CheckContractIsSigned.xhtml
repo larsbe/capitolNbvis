@@ -49,9 +49,7 @@
 				<h:form id="viewForm">
 					<h:panelGrid columns="2" columnClasses="form-label,form-input">
 						<h:outputLabel value="View Contract" for="view_Contract" />
-						<h:inputText
-							id="view_Contract" value="#{checkContractIsSigned.rentalAgreementContract.urlToSignedContract}" 
-							disabled="true" />
+						<a href="#{checkContractIsSigned.rentalAgreementContract.urlToSignedContract}" target="_blank">Open PDF in new Window</a>
 					</h:panelGrid>
 				</h:form>
 				</div>		
