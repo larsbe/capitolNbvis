@@ -44,7 +44,13 @@ public class CreateNewLiabilityCaseDelegate implements JavaDelegate {
 		LiabilityCase claim = new LiabilityCase();
 		claim.setStatus(CaseStatus.NEW);
 		claim.setInsuranceContract(contract);
-		claim.setBvisCaseID((Long) variables.get("bvisCaseID"));
+		
+		// BVIS Case ID (Correlation Key) 
+		Long bvisCaseID = (Long) variables.get("bvisCaseID");
+		if(bvisCaseID == null)
+			claim.setBvisCaseID(0L);
+		else
+			claim.setBvisCaseID(bvisCaseID);
 		
 		
 		claim.setClaimDetails((String) variables.get("claimDetails"));
