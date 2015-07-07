@@ -19,7 +19,7 @@ public class InsuranceContract extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Column(unique=true)
+	//@Column(unique=true)
 	private long rentalAgreementIdBVIS;
 	
 	@ManyToOne

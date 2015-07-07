@@ -32,6 +32,9 @@ public class UpdateContractStatusDelegate implements JavaDelegate {
 		boolean approvedByBVIS = Boolean.parseBoolean(delegateExecution.getVariable("conditionsApproved").toString());
 		//update contract status
 		InsuranceContract contract = insuranceContractService.getInsuranceContract(contractId);
+		contract.setRentalAgreementIdBVIS(rentalAgreementMsg.getRentalAgreementRequestId());
+		
+		
 		if (!approvedByBVIS) {
 			contract.setStatus(InsuranceStatus.REVISED);
 			insuranceContractService.mergeInsuranceContract(contract);

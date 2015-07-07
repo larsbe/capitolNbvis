@@ -34,7 +34,9 @@ public class InsuranceContractServiceBean {
 	}
 	
 	public InsuranceContract createInsuranceContractFromMessage(RentalAgreementMessage rentalAgreementMsg, Customer customer) {
-		InsuranceContract insuranceContract = new InsuranceContract();
+		InsuranceContract insuranceContract = getInsuranceContractByBVISid(rentalAgreementMsg.getRentalAgreementRequestId());
+		if(insuranceContract == null)
+			insuranceContract = new InsuranceContract();
 		insuranceContract.setRentalAgreementIdBVIS(rentalAgreementMsg.getRentalAgreementRequestId());
 		insuranceContract.setCustomer(customer);
 		insuranceContract.setInsuranceType(rentalAgreementMsg.getInsuranceType());
@@ -72,13 +74,14 @@ public class InsuranceContractServiceBean {
 			//force load of associations
 			return getInsuranceContract(item.getId());
 		} else {
-			throw new IllegalStateException("No contract with BVISid found " + id);
+			return null;
 		}
 	}
 	
 	public InsuranceContract mergeInsuranceContract(InsuranceContract insuranceContract) {
 		// Merge detached order entity with current persisted state
 		em.merge(insuranceContract);
+		em.flush();
 		return getInsuranceContract(insuranceContract.getId());
 	}
 	
