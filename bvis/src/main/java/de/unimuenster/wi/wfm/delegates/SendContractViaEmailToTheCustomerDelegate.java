@@ -69,7 +69,7 @@ public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 		}
 		params.put("contractDetails", sbContractDetails.toString());
 		
-		params.put("insuranceDetails", rentalAgreementContract.getInsuranceBenefits());
+		//params.put("insuranceDetails", rentalAgreementContract.getInsuranceBenefits());
 
 		// create pdf
 		PdfGenerator pdfGen = new PdfGenerator();
