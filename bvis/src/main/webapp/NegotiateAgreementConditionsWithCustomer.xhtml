@@ -79,14 +79,12 @@
 					</h:panelGrid>
 					
 			</h:form>
-			<h3>Insurance Requirements</h3>
+			<h3>Additional Information</h3>
 			<h:form target="_parent">
 
-				<h:panelGrid columns="3" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
-						<h:outputLabel value="Customer Requirements" for="negotiateAgreementConditions_reqs" />
+				<h:panelGrid columns="1" columnClasses="form-label,form-input,form-message error" footerClass="form-footer">
 						<h:outputText 
 							id="negotiateAgreementConditions_reqs" value="#{negotiateAgreementConditionsWithCustomer.rentalAgreementRequest.requirementsOfCustomer}"/>							
-						<h:message for="negotiateAgreementConditions_reqs"/>
 
 				</h:panelGrid>
 
