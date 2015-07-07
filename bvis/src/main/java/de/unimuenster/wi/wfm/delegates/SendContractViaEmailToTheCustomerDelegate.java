@@ -54,6 +54,8 @@ public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 		params.put("rentalAgreementID", rentalAgreementContract.getId() + "");
 		params.put("customerName", rentalAgreementContract.getCustomer().getName());
 		params.put("customerAddress", rentalAgreementContract.getCustomer().getAddress());
+		params.put("customerCompany", rentalAgreementContract.getCustomer().getCompany());
+		params.put("customerEmail", rentalAgreementContract.getCustomer().getEmail());
 		
 		/* Contract Details */
 		StringBuilder sbContractDetails = new StringBuilder();
@@ -68,8 +70,7 @@ public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 			sbContractDetails.append("<br/>");
 		}
 		params.put("contractDetails", sbContractDetails.toString());
-		
-		//params.put("insuranceDetails", rentalAgreementContract.getInsuranceBenefits());
+		params.put("insuranceDetails", rentalAgreementContract.getInsuranceBenefits());
 
 		// create pdf
 		String pdfUrl = PdfReport.generatePDF("", "", params);
