@@ -27,63 +27,61 @@ public class SetupContractDelegate implements JavaDelegate {
 	private BusinessProcess businessProcess;
 	@Inject
 	private TaskForm taskForm;
-	
+
 	@EJB
 	private CustomerServiceBean customerService;
 	@EJB
 	private RentalAgreementRequestServiceBean rentalAgreementRequestService;
 	@EJB
 	private RentalAgreementContractServiceBean rentalAgreementContractService;
-	
+
 	private RentalAgreementRequest rentalAgreementRequest;
 	private long rentalAgreementRequestId;
 	private RentalAgreementContract rentalAgreementContract;
-	
-	
+
 	@Override
 	public void execute(DelegateExecution arg0) throws Exception {
-		
-		try {		
-			
+
+		try {
+
 			// store entity in database
-			getRentalAgreementContract().setCustomer(getRentalAgreementContract().getCustomer());
-			getRentalAgreementContract().setRentalAgreementRequest(getRentalAgreementRequest());
-			this.rentalAgreementContract = rentalAgreementContractService.merge(getRentalAgreementContract());
-			
-			getRentalAgreementRequest().setRentalAgreementContract(this.rentalAgreementContract);
-			this.rentalAgreementRequest = rentalAgreementRequestService.merge(getRentalAgreementRequest());
-			
-			
-			// complete user task form
-			taskForm.completeTask();
-			
+			getRentalAgreementContract().setCustomer(
+					getRentalAgreementContract().getCustomer());
+			getRentalAgreementContract().setRentalAgreementRequest(
+					getRentalAgreementRequest());
+			this.rentalAgreementContract = rentalAgreementContractService
+					.merge(getRentalAgreementContract());
+
+			getRentalAgreementRequest().setRentalAgreementContract(
+					this.rentalAgreementContract);
+			this.rentalAgreementRequest = rentalAgreementRequestService
+					.merge(getRentalAgreementRequest());
+
 			// store process variables of this process...
 			// store flag "contractNoBVIS"
-			businessProcess.setVariable( "contractNoBVIS", getRentalAgreementContract().getId() );		
-			
-						
-			
+			businessProcess.setVariable("contractNoBVIS",
+					getRentalAgreementContract().getId());
+
+
 		} catch (EJBException e) {
 			// add all validation errors
 			Misc.ValidateBean(getRentalAgreementRequest());
-			
-		} catch (IOException e){
-			throw new RuntimeException("Cannot complete task", e);
+
 		}
-		
-		
+
 	}
-	
-	
+
 	public RentalAgreementRequest getRentalAgreementRequest() {
-		if (rentalAgreementRequest == null){
-			rentalAgreementRequest = rentalAgreementRequestService.getRentalAgreementRequest(getRentalAgreementRequestId());
-		}			
+		if (rentalAgreementRequest == null) {
+			rentalAgreementRequest = rentalAgreementRequestService
+					.getRentalAgreementRequest(getRentalAgreementRequestId());
+		}
 		return rentalAgreementRequest;
 	}
-	
+
 	public long getRentalAgreementRequestId() {
-		rentalAgreementRequestId = (Long) businessProcess.getVariable("rentalAgreementRequestId");
+		rentalAgreementRequestId = (Long) businessProcess
+				.getVariable("rentalAgreementRequestId");
 		return rentalAgreementRequestId;
 	}
 
@@ -93,10 +91,10 @@ public class SetupContractDelegate implements JavaDelegate {
 		rentalAgreementContract.setDate(new Date());
 		return rentalAgreementContract;
 	}
-	public void setRentalAgreementContract(RentalAgreementContract rentalAgreementContract) {
+
+	public void setRentalAgreementContract(
+			RentalAgreementContract rentalAgreementContract) {
 		this.rentalAgreementContract = rentalAgreementContract;
 	}
-	
-
 
 }
