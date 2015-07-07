@@ -67,19 +67,19 @@
           <div class="radio">
             <label>
               <input type="radio" name="offerInsurance" id="offerInsuranceA" value="A" checked>
-              Insurance Package A
+              Insurance Package Gold
             </label>
           </div>
           <div class="radio">
             <label>
               <input type="radio" name="offerInsurance" id="offerInsuranceB" value="B">
-              Insurance Package B
+              Insurance Package Platin
             </label>
           </div>
           <div class="radio">
             <label>
               <input type="radio" name="offerInsurance" id="offerInsuranceC" value="C">
-              Insurance Package C
+              Insurance Package Black
             </label>
           </div>
         </div>

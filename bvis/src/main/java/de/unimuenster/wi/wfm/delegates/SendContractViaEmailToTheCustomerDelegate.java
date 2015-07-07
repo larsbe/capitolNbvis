@@ -14,6 +14,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import de.unimuenster.wi.wfm.ejb.RentalAgreementContractServiceBean;
 import de.unimuenster.wi.wfm.ejb.RentalAgreementRequestServiceBean;
+import de.unimuenster.wi.wfm.persistence.CarPool;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementContract;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
 import de.unimuenster.wi.wfm.util.EMailSender;
@@ -53,7 +54,21 @@ public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 		params.put("rentalAgreementID", rentalAgreementContract.getId() + "");
 		params.put("customerName", rentalAgreementContract.getCustomer().getName());
 		params.put("customerAddress", rentalAgreementContract.getCustomer().getAddress());
-		params.put("contractDetails", rentalAgreementContract.getRentalAgreementContractData());
+		
+		/* Contract Details */
+		StringBuilder sbContractDetails = new StringBuilder();
+		sbContractDetails.append(rentalAgreementContract.getRentalAgreementContractData());
+		sbContractDetails.append("<br/>");
+		sbContractDetails.append("<br/>");
+		sbContractDetails.append("Cars: ");
+		sbContractDetails.append("<br/>");
+		for(CarPool c : rentalAgreementContract.getRentalAgreementRequest().getCarPool()) {
+			sbContractDetails.append("- " + c.getCarData().getName());
+			sbContractDetails.append(" ("+c.getCarData().getLicenseNumber()+")");
+			sbContractDetails.append("<br/>");
+		}
+		params.put("contractDetails", sbContractDetails.toString());
+		
 		params.put("insuranceDetails", rentalAgreementContract.getInsuranceBenefits());
 
 		// create pdf
