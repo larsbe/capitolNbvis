@@ -22,9 +22,9 @@ public class RentalAgreementContract extends AbstractEntity {
 	protected boolean contractSigned;
 	@NotNull(message="You have to enter a value for the field 'Date'" )
 	protected Date date;
-	protected String rentalAgreementContractData;
-	protected String insuranceBenefits;
-	protected String urlToSignedContract;
+	protected String rentalAgreementContractData = "";
+	protected String insuranceBenefits = "";
+	protected String urlToSignedContract = "";
 	
 	@OneToOne
 	protected RentalAgreementRequest rentalAgreementRequest;
