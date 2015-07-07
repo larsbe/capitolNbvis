@@ -49,7 +49,7 @@ public class InformCustomerAboutInsuranceDecisionDelegate implements JavaDelegat
 		// add URL
 		String url = (String) variables.get("reportUrl");
 		if( url != null ){
-			content += "<a href=\"" + url + "\" target=\"_blank\">Download Report</a>";
+			content += "<br/><a href=\"" + url + "\" target=\"_blank\">Download Report</a>";
 		}
 		
 		String footer = "<br><br>Sincerly BVIS";
