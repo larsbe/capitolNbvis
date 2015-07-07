@@ -25,8 +25,6 @@ public class SetupContractDelegate implements JavaDelegate {
 
 	@Inject
 	private BusinessProcess businessProcess;
-	@Inject
-	private TaskForm taskForm;
 
 	@EJB
 	private CustomerServiceBean customerService;
@@ -41,14 +39,14 @@ public class SetupContractDelegate implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution arg0) throws Exception {
-
+		System.out.println("SetupContractDelegate");
+		
 		try {
 
+			
 			// store entity in database
-			getRentalAgreementContract().setCustomer(
-					getRentalAgreementContract().getCustomer());
-			getRentalAgreementContract().setRentalAgreementRequest(
-					getRentalAgreementRequest());
+			getRentalAgreementContract().setCustomer(getRentalAgreementRequest().getCustomer());
+			getRentalAgreementContract().setRentalAgreementRequest(getRentalAgreementRequest());
 			this.rentalAgreementContract = rentalAgreementContractService
 					.merge(getRentalAgreementContract());
 
@@ -86,9 +84,11 @@ public class SetupContractDelegate implements JavaDelegate {
 	}
 
 	public RentalAgreementContract getRentalAgreementContract() {
-		if (rentalAgreementContract == null)
+		if (rentalAgreementContract == null){
 			rentalAgreementContract = new RentalAgreementContract();
 		rentalAgreementContract.setDate(new Date());
+		}
+		
 		return rentalAgreementContract;
 	}
 
