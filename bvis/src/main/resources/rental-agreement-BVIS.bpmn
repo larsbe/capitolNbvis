@@ -289,13 +289,6 @@ For standard contract:
           <dc:Bounds height="6.0" width="6.0" x="1823.0" y="792.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_14" bpmnElement="SequenceFlow_14" sourceElement="_BPMNShape_SubProcess_3" targetElement="_BPMNShape_SubProcess_3">
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="1235.0" y="300.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_15" bpmnElement="SequenceFlow_15" sourceElement="_BPMNShape_ExclusiveGateway_5" targetElement="_BPMNShape_Task_9">
         <di:waypoint xsi:type="dc:Point" x="1855.0" y="792.0"/>
         <di:waypoint xsi:type="dc:Point" x="1905.0" y="793.0"/>
@@ -308,13 +301,6 @@ For standard contract:
         <di:waypoint xsi:type="dc:Point" x="2073.0" y="793.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="2218.0" y="946.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_17" bpmnElement="SequenceFlow_17" sourceElement="_BPMNShape_SubProcess_3" targetElement="_BPMNShape_SubProcess_3">
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="1235.0" y="300.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_18" bpmnElement="SequenceFlow_18" sourceElement="_BPMNShape_ExclusiveGateway_5" targetElement="_BPMNShape_SendTask_3">
@@ -349,34 +335,6 @@ For standard contract:
           <dc:Bounds height="22.0" width="89.0" x="2271.0" y="919.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_21" bpmnElement="SequenceFlow_21" sourceElement="_BPMNShape_SubProcess_3" targetElement="_BPMNShape_SubProcess_3">
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="1265.0" y="330.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_22" bpmnElement="SequenceFlow_22" sourceElement="_BPMNShape_SubProcess_3" targetElement="_BPMNShape_SubProcess_3">
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="1265.0" y="330.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_27" bpmnElement="SequenceFlow_27" sourceElement="_BPMNShape_SubProcess_3" targetElement="_BPMNShape_SubProcess_3">
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="1265.0" y="330.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_28" bpmnElement="SequenceFlow_28" sourceElement="_BPMNShape_SubProcess_3" targetElement="_BPMNShape_SubProcess_3">
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1593.0" y="778.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="1265.0" y="330.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_Participant_5" bpmnElement="Participant_1" isHorizontal="true">
         <dc:Bounds height="445.0" width="3304.0" x="72.0" y="1212.0"/>
       </bpmndi:BPMNShape>
