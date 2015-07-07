@@ -72,6 +72,7 @@ public class SetUpIndividualSolutionContractContainingInsuranceBenefits implemen
 						
 			// store entity in database
 			this.rentalAgreementContract.setCustomer(getRentalAgreementContract().getCustomer());
+			this.rentalAgreementContract.setRentalAgreementRequest(getRentalAgreementRequest());
 			this.rentalAgreementContract = rentalAgreementContractService.merge(getRentalAgreementContract());
 			
 			getRentalAgreementRequest().setRentalAgreementContract(this.rentalAgreementContract);

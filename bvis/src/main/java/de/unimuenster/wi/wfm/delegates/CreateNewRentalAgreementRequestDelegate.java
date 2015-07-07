@@ -72,6 +72,7 @@ public class CreateNewRentalAgreementRequestDelegate implements JavaDelegate {
 		}else{
 			// STANDARD
 			req.setRentalAgreementRequestType(RentalAgreementRequestType.STANDARD);
+			req = rentalAgreementRequestService.merge(req);
 			
 			CarData carData = carDataService.getCarDataByName((String) businessProcess.getVariable("carType"));
 			if( carData != null){
@@ -79,6 +80,7 @@ public class CreateNewRentalAgreementRequestDelegate implements JavaDelegate {
 				CarPool carPool_line = new CarPool();
 				carPool_line.setCarData(carData);
 				carPool_line.setQuantity(1);
+				carPool_line.setRentalAgreementRequest(req);
 				carPool.add(carPool_line);
 				req.setCarPool(carPool);
 			}

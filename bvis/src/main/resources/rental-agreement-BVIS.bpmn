@@ -215,7 +215,7 @@
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">${!isCustomerOnSite}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:userTask id="UserTask_5" camunda:formKey="embedded:app:forms/CheckContractIsSigned.html" name="check if contract is signed or cancelled">
-      <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_25</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_20</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_20" name="" sourceRef="UserTask_5" targetRef="ExclusiveGateway_6"/>
@@ -230,7 +230,7 @@
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
     </bpmn2:receiveTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="ReceiveTask_2" targetRef="UserTask_5"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="ReceiveTask_2" targetRef="ServiceTask_5"/>
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="signed or cancelled" sourceRef="ExclusiveGateway_6" targetRef="SendTask_3">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[${contractStatus=="contractSigned" || contractStatus=="cancelled"}]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
@@ -240,6 +240,11 @@
       <bpmn2:outgoing>SequenceFlow_24</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_24" name="" sourceRef="ServiceTask_4" targetRef="SendTask_3"/>
+    <bpmn2:serviceTask id="ServiceTask_5" camunda:delegateExpression="${storePdfContractDataDelegate}" name="store pdf contract data">
+      <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_25</bpmn2:outgoing>
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_25" name="" sourceRef="ServiceTask_5" targetRef="UserTask_5"/>
     <bpmn2:textAnnotation id="TextAnnotation_1">
       <bpmn2:text><![CDATA[Parameters:
 - contractSigned (boolean, required)
@@ -560,19 +565,19 @@ For standard contract:
         <di:waypoint xsi:type="dc:Point" x="2293.0" y="951.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_ExclusiveGateway_9" bpmnElement="ExclusiveGateway_6" isMarkerVisible="true">
-        <dc:Bounds height="50.0" width="50.0" x="3021.0" y="744.0"/>
+        <dc:Bounds height="50.0" width="50.0" x="3048.0" y="744.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="3046.0" y="799.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="3073.0" y="799.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_59" bpmnElement="SequenceFlow_59" sourceElement="_BPMNShape_ExclusiveGateway_9" targetElement="_BPMNShape_UserTask_7">
-        <di:waypoint xsi:type="dc:Point" x="3046.0" y="794.0"/>
-        <di:waypoint xsi:type="dc:Point" x="3046.0" y="1051.0"/>
+        <di:waypoint xsi:type="dc:Point" x="3073.0" y="794.0"/>
+        <di:waypoint xsi:type="dc:Point" x="3073.0" y="1051.0"/>
         <di:waypoint xsi:type="dc:Point" x="1537.0" y="1051.0"/>
         <di:waypoint xsi:type="dc:Point" x="807.0" y="1051.0"/>
         <di:waypoint xsi:type="dc:Point" x="807.0" y="821.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="133.0" x="3048.0" y="864.0"/>
+          <dc:Bounds height="22.0" width="133.0" x="3075.0" y="864.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_60" bpmnElement="SequenceFlow_60" sourceElement="_BPMNShape_ExclusiveGateway_8" targetElement="_BPMNShape_UserTask_10">
@@ -681,9 +686,9 @@ For standard contract:
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_UserTask_9" targetElement="_BPMNShape_ExclusiveGateway_9">
         <di:waypoint xsi:type="dc:Point" x="2725.0" y="991.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2999.0" y="991.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2999.0" y="769.0"/>
-        <di:waypoint xsi:type="dc:Point" x="3021.0" y="769.0"/>
+        <di:waypoint xsi:type="dc:Point" x="3023.0" y="991.0"/>
+        <di:waypoint xsi:type="dc:Point" x="3023.0" y="769.0"/>
+        <di:waypoint xsi:type="dc:Point" x="3048.0" y="769.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="2834.0" y="991.0"/>
         </bpmndi:BPMNLabel>
@@ -729,19 +734,19 @@ For standard contract:
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_UserTask_15" bpmnElement="UserTask_5">
-        <dc:Bounds height="80.0" width="100.0" x="2805.0" y="730.0"/>
+        <dc:Bounds height="80.0" width="100.0" x="2904.0" y="730.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_20" bpmnElement="SequenceFlow_20" sourceElement="_BPMNShape_UserTask_15" targetElement="_BPMNShape_ExclusiveGateway_9">
-        <di:waypoint xsi:type="dc:Point" x="2905.0" y="770.0"/>
-        <di:waypoint xsi:type="dc:Point" x="3021.0" y="769.0"/>
+        <di:waypoint xsi:type="dc:Point" x="3004.0" y="770.0"/>
+        <di:waypoint xsi:type="dc:Point" x="3048.0" y="769.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="2924.0" y="770.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="3023.0" y="770.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_2" bpmnElement="BoundaryEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="2856.0" y="712.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="2955.0" y="712.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="83.0" x="2892.0" y="708.0"/>
+          <dc:Bounds height="22.0" width="83.0" x="2991.0" y="708.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_ServiceTask_3" targetElement="_BPMNShape_ReceiveTask_7">
@@ -754,9 +759,12 @@ For standard contract:
       <bpmndi:BPMNShape id="_BPMNShape_ReceiveTask_7" bpmnElement="ReceiveTask_2">
         <dc:Bounds height="80.0" width="100.0" x="2664.0" y="730.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="_BPMNShape_ReceiveTask_7" targetElement="_BPMNShape_UserTask_15">
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="_BPMNShape_ReceiveTask_7" targetElement="_BPMNShape_ServiceTask_13">
         <di:waypoint xsi:type="dc:Point" x="2764.0" y="770.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2805.0" y="770.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2784.0" y="770.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="2771.0" y="770.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_MessageFlow_6" bpmnElement="MessageFlow_6" sourceElement="_BPMNShape_Participant_5" targetElement="_BPMNShape_ReceiveTask_7">
         <di:waypoint xsi:type="dc:Point" x="2625.0" y="1212.0"/>
@@ -768,18 +776,21 @@ For standard contract:
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_11" sourceElement="_BPMNShape_ExclusiveGateway_9" targetElement="_BPMNShape_SendTask_4">
-        <di:waypoint xsi:type="dc:Point" x="3071.0" y="769.0"/>
+        <di:waypoint xsi:type="dc:Point" x="3098.0" y="769.0"/>
         <di:waypoint xsi:type="dc:Point" x="3238.0" y="769.0"/>
         <di:waypoint xsi:type="dc:Point" x="3238.0" y="776.0"/>
         <di:waypoint xsi:type="dc:Point" x="3405.0" y="776.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="22.0" width="118.0" x="3203.0" y="776.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_19" bpmnElement="SequenceFlow_19" sourceElement="_BPMNShape_BoundaryEvent_2" targetElement="_BPMNShape_ServiceTask_12">
-        <di:waypoint xsi:type="dc:Point" x="2874.0" y="712.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2874.0" y="672.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2973.0" y="712.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2973.0" y="672.0"/>
         <di:waypoint xsi:type="dc:Point" x="3010.0" y="672.0"/>
         <di:waypoint xsi:type="dc:Point" x="3144.0" y="673.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="2986.0" y="672.0"/>
+          <dc:Bounds height="6.0" width="6.0" x="3085.0" y="673.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_11" bpmnElement="ServiceTask_3">
@@ -800,6 +811,16 @@ For standard contract:
         <di:waypoint xsi:type="dc:Point" x="3324.0" y="673.0"/>
         <di:waypoint xsi:type="dc:Point" x="3324.0" y="776.0"/>
         <di:waypoint xsi:type="dc:Point" x="3405.0" y="776.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_13" bpmnElement="ServiceTask_5">
+        <dc:Bounds height="80.0" width="100.0" x="2784.0" y="730.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_25" bpmnElement="SequenceFlow_25" sourceElement="_BPMNShape_ServiceTask_13" targetElement="_BPMNShape_UserTask_15">
+        <di:waypoint xsi:type="dc:Point" x="2884.0" y="770.0"/>
+        <di:waypoint xsi:type="dc:Point" x="2904.0" y="770.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="2891.0" y="770.0"/>
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -73,8 +73,7 @@ public class CheckContractIsSigned implements Serializable {
 			
 			
 		} catch (EJBException e) {
-			// add all validation errors
-			Misc.ValidateBean(getRentalAgreementContract());
+			e.printStackTrace();
 			
 		} catch (IOException e){
 			throw new RuntimeException("Cannot complete task", e);

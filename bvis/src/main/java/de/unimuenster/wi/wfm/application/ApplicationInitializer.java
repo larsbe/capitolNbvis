@@ -1,16 +1,24 @@
 package de.unimuenster.wi.wfm.application;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.camunda.bpm.engine.cdi.BusinessProcess;
+
 import de.unimuenster.wi.wfm.persistence.CarData;
+import de.unimuenster.wi.wfm.persistence.CarPool;
 import de.unimuenster.wi.wfm.persistence.Customer;
 import de.unimuenster.wi.wfm.persistence.RentalAgreementContract;
+import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
+import de.unimuenster.wi.wfm.persistence.RentalAgreementRequestType;
 import de.unimuenster.wi.wfm.persistence.StandardAgreementType;
 
 @Startup
@@ -20,6 +28,8 @@ public class ApplicationInitializer {
 	@PersistenceContext
 	EntityManager em;
 	
+	@Inject
+	private BusinessProcess businessProcess;
 
 
 	@PostConstruct
@@ -33,11 +43,12 @@ public class ApplicationInitializer {
 		c1.setAddress("Gruppenarbeitsraum");
 		em.persist(c1);
 
-		c1 = new Customer();
-		c1.setName("Andi Hermann");
-		c1.setEmail("a_herm14@uni-muenster.de");
-		c1.setAddress("McFit");
-		em.persist(c1);
+		Customer c2 = new Customer();
+		c2 = new Customer();
+		c2.setName("Andi Hermann");
+		c2.setEmail("a_herm14@uni-muenster.de");
+		c2.setAddress("McFit");
+		em.persist(c2);
 		
 		
 		// create some Cars
@@ -48,7 +59,7 @@ public class ApplicationInitializer {
 		carData61.setTsn("597");
 		carData61.setYear("2011");
 		carData61.setLicenseNumber("WfM WfM WfM");
-		em.persist(carData61);
+		carData61 = em.merge(carData61);
 		
 		CarData carData62 = new CarData();
 		carData62.setName("Audi A8 4.2");
@@ -56,7 +67,7 @@ public class ApplicationInitializer {
 		carData62.setTsn("581");
 		carData62.setYear("2014");
 		carData62.setLicenseNumber("WfM");
-		em.persist(carData62);
+		carData62 = em.merge(carData62);
 		
 		CarData carData63 = new CarData();
 		carData63.setName("BMW 325 I Cabrio");
@@ -64,7 +75,7 @@ public class ApplicationInitializer {
 		carData63.setTsn("531");
 		carData63.setYear("2012");
 		carData63.setLicenseNumber("WfM everyday");
-		em.persist(carData63);
+		carData63 = em.merge(carData63);
 		
 		CarData carData64 = new CarData();
 		carData64.setName("BMW 530 D");
@@ -72,7 +83,7 @@ public class ApplicationInitializer {
 		carData64.setTsn("761");
 		carData64.setYear("2013");
 		carData64.setLicenseNumber("WfM-4-Life");
-		em.persist(carData64);
+		carData64 = em.merge(carData64);
 		
 		CarData carData65 = new CarData();
 		carData65.setName("Audi S3 CABRIO 2.0 TFSI");
@@ -80,7 +91,7 @@ public class ApplicationInitializer {
 		carData65.setTsn("BAS");
 		carData65.setYear("2013");
 		carData65.setLicenseNumber("MS-WFM-1337");
-		em.persist(carData65);
+		carData65 = em.merge(carData65);
 		
 		CarData carData6 = new CarData();
 		carData6.setName("Nissan MICRA 1.2");
@@ -88,15 +99,41 @@ public class ApplicationInitializer {
 		carData6.setTsn("ACJ");
 		carData6.setYear("2013");
 		carData6.setLicenseNumber("WfM-4-Ever");
-		em.persist(carData6);
+		carData6 = em.merge(carData6);
 		
 
+		RentalAgreementRequest req = new RentalAgreementRequest();
+		req.setRentalAgreementRequestType(RentalAgreementRequestType.INDIVIDUAL);
+		req.setCustomer(c2);
+		req.setDate(new Date());
+		req.setRequirementsOfCustomer("Ich habe tolle Anforderungen");
+		req = em.merge(req);
+		
+		Collection<CarPool> carPool = new ArrayList<CarPool>();
+		CarPool carPool_Item = new CarPool();
+		carPool_Item.setCarData(carData61);
+		carPool_Item.setQuantity(3);
+		carPool_Item.setRentalAgreementRequest(req);
+		carPool.add(carPool_Item);
+		
+		carPool_Item.setCarData(carData65);
+		carPool_Item.setQuantity(7);
+		carPool_Item.setRentalAgreementRequest(req);
+		carPool.add(carPool_Item);
+		
+		req.setCarPool(carPool);
+		req = em.merge(req);
 		
 		RentalAgreementContract contract = new RentalAgreementContract();
 		contract.setCustomer(c1);
 		contract.setDate(new Date());
-		em.persist(contract);
+		contract.setRentalAgreementRequest(req);
+		contract = em.merge(contract);
 		
+
+		
+		// ------ store business process variables -------
+		businessProcess.setVariable("contractNoBVIS", contract.getId());
 
 		
 //		 create StandardAgreementTypes

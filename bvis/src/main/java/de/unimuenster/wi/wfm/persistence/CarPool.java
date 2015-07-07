@@ -14,7 +14,7 @@ public class CarPool extends AbstractEntity {
 	protected CarData carData;
 
 	@ManyToOne
-	@NotNull(message = "You have to enter at least one car")
+	@NotNull(message = "You have to enter a RentalAgreementRequest")
 	protected RentalAgreementRequest rentalAgreementRequest;
 
 	public RentalAgreementRequest getRentalAgreementRequest() {
