@@ -159,7 +159,6 @@
     </bpmn2:sequenceFlow>
     <bpmn2:sendTask id="SendTask_3" camunda:delegateExpression="${informCapitolAboutContractStatusDelegate}" name="inform Capitol about contract status">
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
-      <bpmn2:incoming>SequenceFlow_24</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_67</bpmn2:outgoing>
     </bpmn2:sendTask>
     <bpmn2:endEvent id="EndEvent_3">
@@ -208,12 +207,6 @@
       <bpmn2:outgoing>SequenceFlow_20</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:sequenceFlow id="SequenceFlow_20" name="" sourceRef="UserTask_5" targetRef="ExclusiveGateway_6"/>
-    <bpmn2:boundaryEvent id="BoundaryEvent_1" name="after 2 weeks" attachedToRef="UserTask_5">
-      <bpmn2:outgoing>SequenceFlow_19</bpmn2:outgoing>
-      <bpmn2:timerEventDefinition id="TimerEventDefinition_2">
-        <bpmn2:timeDuration xsi:type="bpmn2:tFormalExpression">30S</bpmn2:timeDuration>
-      </bpmn2:timerEventDefinition>
-    </bpmn2:boundaryEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_2" name="" sourceRef="ServiceTask_2" targetRef="ReceiveTask_2"/>
     <bpmn2:receiveTask id="ReceiveTask_2" name="Receive signed &#xD;&#xA;contract" messageRef="Message_3">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
@@ -223,12 +216,6 @@
     <bpmn2:sequenceFlow id="SequenceFlow_11" name="signed or cancelled" sourceRef="ExclusiveGateway_6" targetRef="SendTask_3">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression"><![CDATA[${contractStatus=="contractSigned" || contractStatus=="cancelled"}]]></bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
-    <bpmn2:sequenceFlow id="SequenceFlow_19" name="" sourceRef="BoundaryEvent_1" targetRef="ServiceTask_4"/>
-    <bpmn2:serviceTask id="ServiceTask_4" camunda:delegateExpression="${cancelContractDelegate}" name="cancel Contract">
-      <bpmn2:incoming>SequenceFlow_19</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_24</bpmn2:outgoing>
-    </bpmn2:serviceTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_24" name="" sourceRef="ServiceTask_4" targetRef="SendTask_3"/>
     <bpmn2:serviceTask id="ServiceTask_5" camunda:delegateExpression="${storePdfContractDataDelegate}" name="store pdf contract data">
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_25</bpmn2:outgoing>
@@ -707,12 +694,6 @@ For standard contract:
           <dc:Bounds height="6.0" width="6.0" x="3023.0" y="770.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_BoundaryEvent_2" bpmnElement="BoundaryEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="2955.0" y="712.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="83.0" x="2991.0" y="708.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="_BPMNShape_ServiceTask_3" targetElement="_BPMNShape_ReceiveTask_7">
         <di:waypoint xsi:type="dc:Point" x="2626.0" y="770.0"/>
         <di:waypoint xsi:type="dc:Point" x="2664.0" y="770.0"/>
@@ -748,15 +729,6 @@ For standard contract:
           <dc:Bounds height="22.0" width="118.0" x="3203.0" y="776.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_19" bpmnElement="SequenceFlow_19" sourceElement="_BPMNShape_BoundaryEvent_2" targetElement="_BPMNShape_ServiceTask_12">
-        <di:waypoint xsi:type="dc:Point" x="2973.0" y="712.0"/>
-        <di:waypoint xsi:type="dc:Point" x="2973.0" y="672.0"/>
-        <di:waypoint xsi:type="dc:Point" x="3010.0" y="672.0"/>
-        <di:waypoint xsi:type="dc:Point" x="3144.0" y="673.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="6.0" width="6.0" x="3085.0" y="673.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_11" bpmnElement="ServiceTask_3">
         <dc:Bounds height="80.0" width="100.0" x="1548.0" y="752.0"/>
       </bpmndi:BPMNShape>
@@ -766,15 +738,6 @@ For standard contract:
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="1661.0" y="792.0"/>
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_12" bpmnElement="ServiceTask_4">
-        <dc:Bounds height="80.0" width="100.0" x="3144.0" y="633.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_24" bpmnElement="SequenceFlow_24" sourceElement="_BPMNShape_ServiceTask_12" targetElement="_BPMNShape_SendTask_4">
-        <di:waypoint xsi:type="dc:Point" x="3244.0" y="673.0"/>
-        <di:waypoint xsi:type="dc:Point" x="3324.0" y="673.0"/>
-        <di:waypoint xsi:type="dc:Point" x="3324.0" y="776.0"/>
-        <di:waypoint xsi:type="dc:Point" x="3405.0" y="776.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_13" bpmnElement="ServiceTask_5">
         <dc:Bounds height="80.0" width="100.0" x="2784.0" y="730.0"/>
