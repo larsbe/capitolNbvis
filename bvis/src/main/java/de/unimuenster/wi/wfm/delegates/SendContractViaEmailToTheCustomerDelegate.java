@@ -92,9 +92,9 @@ public class SendContractViaEmailToTheCustomerDelegate implements JavaDelegate {
 								+ rentalAgreementContract.getCustomer().getName()
 								+ ",  <br> attached you will find the rental agreement contract. Please sign it and send it back to us within the next 2 weeks."
 								+ " <br> You can use our WebApp in order to upload your signed contract. <br> If you click on the following link, you will get to our upload tool:"
-								+ " <br> http://capitol.jonasgerlach.de/customerWebApp/index.php?page=fileupload "
-								+ " <br> Download your PDF: " + pdfPath
-								+ " <br> Sincerly BVIS",
+								+ " <br> <a href=\"http://capitol.jonasgerlach.de/customerWebApp/index.php?page=fileupload\" target=\"_blank\">Open Upload Tool</a>"
+								+ " <br> <a href=\"" + pdfPath + "\" target=\"_blank\">Download your PDF</a>" 
+								+ " <br> Sincerly,<br/> BVIS",
 								rentalAgreementContract.getCustomer().getEmail(), null);
 
 		System.out.println("...EMail sent");

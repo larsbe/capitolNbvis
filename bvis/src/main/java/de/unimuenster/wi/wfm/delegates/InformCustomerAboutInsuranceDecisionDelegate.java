@@ -43,13 +43,13 @@ public class InformCustomerAboutInsuranceDecisionDelegate implements JavaDelegat
 		}else{
 			// claim not covered
 			content	= "We are sorry to tell you that your claim is not covered. <br>"
-					+ "The reason is: " + liabilityCase.getRejectionInfo();
+					+ "The reason is: " + liabilityCase.getRejectionInfo() + "<br/><br/>";
 		}
 		
 		// add URL
 		String url = (String) variables.get("reportUrl");
 		if( url != null ){
-			content += url;
+			content += "<a href=\"" + url + "\" target=\"_blank\">Download Report</a>";
 		}
 		
 		String footer = "<br><br>Sincerly BVIS";
