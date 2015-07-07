@@ -57,11 +57,23 @@
 			    	</tr>
 			    	<tr>
 			    		<th>Insurance Benefits</th>
-			    		<td></td>
+			    		<td>
+			    			<ui:repeat value="#{checkAgreementConditionsOfCapitol.rentalAgreementMessage.benefits}" var="cur">
+			    				<li>
+			    					#{cur.toString()}
+			    				</li>
+			    			</ui:repeat>
+			    		</td>
 			    	</tr>
 			    	<tr>
 			    		<th>Individual Benefits</th>
-			    		<td></td>
+			    		<td>
+			    			<ui:repeat value="#{checkAgreementConditionsOfCapitol.rentalAgreementMessage.individualBenefits}" var="cur">
+			    				<li>
+			    					#{cur}
+			    				</li>
+			    			</ui:repeat>
+			    		</td>
 			    	</tr>
 			</table>
 			
@@ -77,7 +89,7 @@
 				    </label>
 				  </div>
 					<h:outputLabel value="Additional Information" for="negotiateAgreementConditions_reqs" />
-						<h:inputText 
+						<h:inputTextarea class="form-control" 
 							id="negotiateAgreementConditions_reqs" value="#{checkAgreementConditionsOfCapitol.rentalAgreementRequest.requirementsOfCustomer}"/>							
 
 
