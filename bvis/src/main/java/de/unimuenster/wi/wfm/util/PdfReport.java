@@ -5,7 +5,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Map.Entry;
 
 import com.itextpdf.text.Document;
@@ -30,12 +33,30 @@ public class PdfReport {
 		return output;
 	}
 	
+	private static String GetWebContent(String url) {
+		String content = null;
+		URLConnection connection = null;
+		try {
+			connection = new URL(url).openConnection();
+			Scanner scanner = new Scanner(connection.getInputStream());
+			scanner.useDelimiter("\\Z");
+			content = scanner.next();
+			scanner.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return content;
+	}
+	
+	public static String PDF_REPORT_URL = "http://capitol.jonasgerlach.de/resources/pdf/bvisTemplate.html";
+
+	
 	public static File GeneratePDF(String templateHTML, String outputPath, Map<String, String> params) {
 		
 		try {
 			
 			// INPUT
-		    String htmlstring = replacePlaceholders(templateHTML, params);
+		    String htmlstring = replacePlaceholders(GetWebContent(PDF_REPORT_URL), params);
 			InputStream is = new ByteArrayInputStream(htmlstring.getBytes());
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
