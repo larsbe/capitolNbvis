@@ -50,14 +50,14 @@
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="offerCarType" id="offerCarType2" value="Audi S3 CABRIO 2.0 TFSI">
-              Audi S3 Cabrio
+              <input type="radio" name="offerCarType" id="offerCarType2" value="Audi A3 2.0 TDI">
+              Audi A4 2.0 TDI
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="offerCarType" id="offerCarType3" value="Nissan MICRA 1.2">
-              Nissan micra
+              <input type="radio" name="offerCarType" id="offerCarType3" value="Opel Corsa-C 1.0">
+              Opel Corsa-C 1.0
             </label>
           </div>
         </div>

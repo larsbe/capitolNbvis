@@ -86,18 +86,18 @@ public class ApplicationInitializer {
 		carData64 = em.merge(carData64);
 		
 		CarData carData65 = new CarData();
-		carData65.setName("Audi S3 CABRIO 2.0 TFSI");
+		carData65.setName("Audi A3 2.0 TDI");
 		carData65.setHsn("0588");
-		carData65.setTsn("BAS");
-		carData65.setYear("2013");
+		carData65.setTsn("ADU");
+		carData65.setYear("2014");
 		carData65.setLicenseNumber("MS-JB-64");
 		carData65 = em.merge(carData65);
 		
 		CarData carData6 = new CarData();
-		carData6.setName("Nissan MICRA 1.2");
-		carData6.setHsn("1329");
-		carData6.setTsn("ACJ");
-		carData6.setYear("2013");
+		carData6.setName("Opel Corsa-C 1.0");
+		carData6.setHsn("0035");
+		carData6.setTsn("394");
+		carData6.setYear("2003");
 		carData6.setLicenseNumber("MS-WI-90");
 		carData6 = em.merge(carData6);
 		
