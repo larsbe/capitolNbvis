@@ -7,8 +7,10 @@ import java.io.Serializable;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.enterprise.context.ConversationScoped;
 import javax.faces.bean.*;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
@@ -18,7 +20,8 @@ import de.unimuenster.wi.wfm.persistence.RentalAgreementRequest;
 import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
 import de.unimuenster.wi.wfm.web.Misc;
 
-@ManagedBean
+@Named
+@ConversationScoped
 public class CheckAgreementConditionsOfCapitol implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -51,8 +54,7 @@ public class CheckAgreementConditionsOfCapitol implements Serializable {
 
 	public RentalAgreementMessage getRentalAgreementMessage() {
 		if (rentalAgreementMessage == null) {
-			JSON((String)businessProcess.getVariable("agreementConditions"))
-				.mapTo(RentalAgreementMessage.class);
+			rentalAgreementMessage=JSON((String)businessProcess.getVariable("agreementConditions")).mapTo(RentalAgreementMessage.class);
 		}
 		return rentalAgreementMessage;
 	}

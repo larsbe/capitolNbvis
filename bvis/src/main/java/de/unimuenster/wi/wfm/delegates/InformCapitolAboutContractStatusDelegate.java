@@ -34,6 +34,8 @@ public class InformCapitolAboutContractStatusDelegate implements JavaDelegate {
 		
 		String msg = CapitolREST.ContractStatus(rentalAgreementContract.getRentalAgreementRequest().getId(), rentalAgreementContract.getContractSigned());
 		
+		System.out.println("JSON Message: " + msg);
+		
 		REST.SendMessageToCapitol(msg);
 		
 	}
