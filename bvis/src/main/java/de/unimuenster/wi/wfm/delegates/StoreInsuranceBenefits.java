@@ -32,12 +32,12 @@ public class StoreInsuranceBenefits implements JavaDelegate {
 	public void execute(DelegateExecution delegateExecution) throws Exception {
 		System.out.println("StoreInsuranceBenefits");
 
-		RentalAgreementMessage rentalAgreementMsg = JSON((String)delegateExecution.getVariable("processVariables"))
-				.mapTo(RentalAgreementMessage.class);
-				
-		
-		// retrieve Request from DB
-		rentalAgreementMsg.getRentalAgreementRequestId();
+//		RentalAgreementMessage rentalAgreementMsg = JSON((String)delegateExecution.getVariable("agreementConditions"))
+//				.mapTo(RentalAgreementMessage.class);
+//				
+//		
+//		// retrieve Request from DB
+//		rentalAgreementMsg.getRentalAgreementRequestId();
 		
 		
 		// create and store entities

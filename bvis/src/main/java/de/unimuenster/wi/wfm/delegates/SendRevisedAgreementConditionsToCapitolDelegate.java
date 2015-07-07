@@ -5,6 +5,7 @@ import static org.camunda.spin.Spin.JSON;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
@@ -17,6 +18,9 @@ import de.unimuenster.wi.wfm.util.rest.REST;
 public class SendRevisedAgreementConditionsToCapitolDelegate implements JavaDelegate {
 
 	@Inject
+	private BusinessProcess businessProcess;
+	
+	@Inject
 	RentalAgreementRequestServiceBean rentalAgreementRequestService;
 	
 	public void execute(DelegateExecution delegateExecution) throws Exception {
@@ -25,8 +29,9 @@ public class SendRevisedAgreementConditionsToCapitolDelegate implements JavaDele
 		RentalAgreementMessage rentalAgreementMsg = JSON((String)delegateExecution.getVariable("agreementConditions"))
 				.mapTo(RentalAgreementMessage.class);
 		
-		RentalAgreementRequest rentalAgreementRequest = rentalAgreementRequestService.getRentalAgreementRequest((Long) delegateExecution.getVariable("rentalAgreementRequestId"));
-		boolean conditionsApproved = rentalAgreementRequest.getNegotiationCase().getConditionsApproved();
+		Long requestId = (Long) businessProcess.getVariable("rentalAgreementRequestIdBVIS");
+		RentalAgreementRequest rentalAgreementRequest = rentalAgreementRequestService.getRentalAgreementRequest(requestId);
+		boolean conditionsApproved = (Boolean) delegateExecution.getVariable("insuranceConditionsApproved");
 		
 		rentalAgreementMsg.setAdditionalInfo(rentalAgreementRequest.getRequirementsOfCustomer());
 		

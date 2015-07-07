@@ -62,6 +62,8 @@ public class SendAgreementConditionsToCapitolDelegate implements JavaDelegate {
 		rentalAgreementMsg.setAdditionalInfo(rentalAgreementRequest.getRequirementsOfCustomer());
 		
 		if (rentalAgreementRequest.getRentalAgreementRequestType() == RentalAgreementRequestType.INDIVIDUAL) {
+			//set correlation key for response
+			businessProcess.setVariable("rentalAgreementRequestIdBVIS", rentalAgreementRequest.getId());
 			//send individual agreement conditions to capitol
 			REST.SendIndividualAgreementConditions(rentalAgreementMsg);
 		} else {

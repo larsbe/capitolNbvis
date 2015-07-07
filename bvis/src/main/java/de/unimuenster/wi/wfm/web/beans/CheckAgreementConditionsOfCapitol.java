@@ -59,17 +59,15 @@ public class CheckAgreementConditionsOfCapitol implements Serializable {
 	
 	public void submit() {
 		try {
-						
+			// store process variables of this process...
+			// store flag "insuranceConditionsApproved"
+			businessProcess.setVariable("insuranceConditionsApproved", rentalAgreementRequest.getNegotiationCase().getConditionsApproved());
+			
 			// store entity in database	
 			this.rentalAgreementRequest = rentalAgreementRequestService.merge(getRentalAgreementRequest());
 			
 			// complete user task form
 			taskForm.completeTask();
-			
-			// store process variables of this process...
-			// store flag "insuranceConditionsApproved"
-			businessProcess.setVariable( "insuranceConditionsApproved", getRentalAgreementRequest().getNegotiationCase().getConditionsApproved() );
-			
 			
 		} catch (EJBException e) {
 			// add all validation errors

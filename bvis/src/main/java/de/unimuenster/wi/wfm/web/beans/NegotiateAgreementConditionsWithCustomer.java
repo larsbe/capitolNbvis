@@ -122,12 +122,6 @@ public class NegotiateAgreementConditionsWithCustomer implements Serializable {
 			// store flag "insuranceConditionsApproved"
 			businessProcess.setVariable( "insuranceConditionsApproved", getRentalAgreementRequest().getNegotiationCase().getConditionsApproved());
 			
-		} catch (EJBException e) {
-			e.printStackTrace();
-			// add all validation errors
-			Misc.ValidateBean(getRentalAgreementRequest());
-			Misc.ValidateBean(getRentalAgreementRequest().getNegotiationCase());
-			
 		} catch (IOException e){
 			throw new RuntimeException("Cannot complete task", e);
 		}

@@ -16,7 +16,6 @@ public class NegotiationCase extends AbstractEntity {
 	protected long idOfOpposite;	
 	@NotNull(message="You have to enter a value for the field 'Date'" )
 	protected Date date;	
-	@NotNull(message="You have to enter a value for the field 'agreementInformation'" )
 	protected String agreementInfo;
 	protected String changeComments;
 	@NotNull(message="You have to enter a value for the field 'conditionsApproved'" )
