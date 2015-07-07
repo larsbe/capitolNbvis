@@ -1,4 +1,78 @@
-<p><b>Car Rental Contract</b></p>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Report</title>
+    <link rel="stylesheet" href="http://capitol.jonasgerlach.de/resources/pdf/bvisStyle.css" />
+  </head>
+  <body>
+    <div id="page">
+      <div id="header">
+        <img alt="" height="60" src="http://capitol.jonasgerlach.de/resources/pdf/bvis_logo.jpg"/>
+      </div>
+      <div id="address">
+        <p class="u">CCar Rental Contract</p>
+        <p>
+        #{CUSTOMER_COMPANY}<br/>
+        #{CUSTOMER_NAME}<br/>
+        #{CUSTOMER_ADDRESS}<br/>
+        #{CUSTOMER_EMAIL}
+        </p>
+      </div>
+      <div id="content">
+        <p><strong>Date: #{DATE}</strong></p>
+        <h1>Report: Liability Case ID #{CASE_ID}</h1>
+        
+        <h2>Description</h2>
+        <p>
+          #{DESCRIPTION}
+        </p>
+
+        <p>
+          <strong>Expected amount of loss:</strong>
+          #{AMOUNT_OF_LOSS}
+        </p>
+
+        <h2>Attachments</h2>
+        <p class="attachment">
+          #{ATTACHMENTS}
+        </p>
+
+        <h2>Decision</h2>
+
+        <p>
+          <strong>Note:</strong>
+          #{DECISION_NOTE}
+        </p>
+
+        <p>
+          <strong>Claim is eligible:</strong>
+          #{ELIGIBLE}
+        </p>
+
+        <p>
+          <strong>Car's fair value:</strong>
+          #{CARS_FAIR_VALUE}
+        </p>
+
+        <p>
+          <strong>Deductions:</strong>
+          #{DEDUCTIONS}
+        </p>
+
+        <p class="total">
+          <strong>Payment:</strong>
+          #{PAYMENT}
+        </p>
+
+        <div class="footer">
+          <p>Best regards,</p>
+          <img alt="" height="100" src="http://capitol.jonasgerlach.de/resources/pdf/signature.jpg"/>
+          <p>#{NAME_REVISER}</p>
+        </div>
+      </div>
+    </div>
+    <p><b>Car Rental Contract</b></p>
 
 <p><b>Rental Agreement Number: </b>$[rentalAgreementID]</p>
 
@@ -27,3 +101,5 @@
 <p>Customer:</p>
 
 <p>Signature ___________________________</p>
+  </body>
+</html>
