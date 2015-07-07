@@ -15,7 +15,7 @@
       <bpmn2:outgoing>SequenceFlow_19</bpmn2:outgoing>
       <bpmn2:messageEventDefinition id="_MessageEventDefinition_8" messageRef="Message_1"/>
     </bpmn2:startEvent>
-    <bpmn2:userTask id="Task_1" camunda:candidateGroups="Claim handler" camunda:formKey="embedded:app:forms/CheckClaimIsEligible.html" name="check the claim's eligibility">
+    <bpmn2:userTask id="Task_1" camunda:candidateGroups="Claim handler" camunda:formKey="embedded:app:forms/CheckClaimIsEligible.html" camunda:candidateUsers="ClaimHandler" name="check the claim's eligibility">
       <bpmn2:incoming>SequenceFlow_14</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
       <bpmn2:dataInputAssociation id="DataInputAssociation_1">
