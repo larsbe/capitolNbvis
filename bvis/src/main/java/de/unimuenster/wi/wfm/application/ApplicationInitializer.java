@@ -54,11 +54,11 @@ public class ApplicationInitializer {
 		// create some Cars
 		
 		CarData carData61 = new CarData();
-		carData61.setName("Audi A4 2.8");
-		carData61.setHsn("0588");
-		carData61.setTsn("597");
-		carData61.setYear("2011");
-		carData61.setLicenseNumber("WfM WfM WfM");
+		carData61.setName("BMW 645 CI CABRIO");
+		carData61.setHsn("0005");
+		carData61.setTsn("156");
+		carData61.setYear("2005");
+		carData61.setLicenseNumber("MS-WF-1337");
 		carData61 = em.merge(carData61);
 		
 		CarData carData62 = new CarData();
@@ -66,7 +66,7 @@ public class ApplicationInitializer {
 		carData62.setHsn("0588");
 		carData62.setTsn("581");
 		carData62.setYear("2014");
-		carData62.setLicenseNumber("WfM");
+		carData62.setLicenseNumber("ST-AR-2015");
 		carData62 = em.merge(carData62);
 		
 		CarData carData63 = new CarData();
@@ -74,7 +74,7 @@ public class ApplicationInitializer {
 		carData63.setHsn("0005");
 		carData63.setTsn("531");
 		carData63.setYear("2012");
-		carData63.setLicenseNumber("WfM everyday");
+		carData63.setLicenseNumber("SE-XY-69");
 		carData63 = em.merge(carData63);
 		
 		CarData carData64 = new CarData();
@@ -82,7 +82,7 @@ public class ApplicationInitializer {
 		carData64.setHsn("0005");
 		carData64.setTsn("761");
 		carData64.setYear("2013");
-		carData64.setLicenseNumber("WfM-4-Life");
+		carData64.setLicenseNumber("FRI-TZ-99");
 		carData64 = em.merge(carData64);
 		
 		CarData carData65 = new CarData();
@@ -90,7 +90,7 @@ public class ApplicationInitializer {
 		carData65.setHsn("0588");
 		carData65.setTsn("BAS");
 		carData65.setYear("2013");
-		carData65.setLicenseNumber("MS-WFM-1337");
+		carData65.setLicenseNumber("MS-JB-64");
 		carData65 = em.merge(carData65);
 		
 		CarData carData6 = new CarData();
@@ -98,7 +98,7 @@ public class ApplicationInitializer {
 		carData6.setHsn("1329");
 		carData6.setTsn("ACJ");
 		carData6.setYear("2013");
-		carData6.setLicenseNumber("WfM-4-Ever");
+		carData6.setLicenseNumber("MS-WI-90");
 		carData6 = em.merge(carData6);
 		
 
