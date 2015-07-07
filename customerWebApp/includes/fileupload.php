@@ -67,7 +67,7 @@
 
 
           $( "#submitForm" ).click(function( event ) {
-            var json = { "messageName" : "RentalAgreementContract",
+            var json = { "messageName" : "RentralAgreementContract",
               "businessKey" : null,
               "correlationKeys" : {
                 "contractNoBVIS" : {"value" : "", "type": "Long"}

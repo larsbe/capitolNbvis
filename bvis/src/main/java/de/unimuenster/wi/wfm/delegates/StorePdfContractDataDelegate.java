@@ -29,7 +29,7 @@ public class StorePdfContractDataDelegate implements JavaDelegate {
 
 
 		// ------ store business process variables -------
-		businessProcess.setVariable("contractStatus}", "cancelled");
+		businessProcess.setVariable("contractStatus", "cancelled");
 		
 		// get business process variables
 		Map<String, Object> variables = delegateExecution.getVariables();
