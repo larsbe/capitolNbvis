@@ -100,17 +100,13 @@
       </bpmn2:serviceTask>
       <bpmn2:sequenceFlow id="SequenceFlow_23" name="" sourceRef="ServiceTask_3" targetRef="Task_4"/>
     </bpmn2:subProcess>
-    <bpmn2:sequenceFlow id="SequenceFlow_14" name="" sourceRef="SubProcess_1" targetRef="SubProcess_1"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_17" name="" sourceRef="SubProcess_1" targetRef="SubProcess_1"/>
+
     <bpmn2:dataObject id="DataObject_3" name="Data Object 3"/>
     <bpmn2:dataObject id="DataObject_4" name="Data Object 4"/>
     <bpmn2:dataObject id="DataObject_5" name="Data Object 5"/>
     <bpmn2:dataObject id="DataObject_7" name="Data Object 7"/>
     <bpmn2:dataObject id="DataObject_8" name="Data Object 8"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_21" name="" sourceRef="SubProcess_1" targetRef="SubProcess_1"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_22" name="" sourceRef="SubProcess_1" targetRef="SubProcess_1"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_27" name="" sourceRef="SubProcess_1" targetRef="SubProcess_1"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_28" name="" sourceRef="SubProcess_1" targetRef="SubProcess_1"/>
+
     <bpmn2:exclusiveGateway id="ExclusiveGateway_5" name="requested &#xD;&#xA;solution type">
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
