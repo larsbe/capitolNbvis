@@ -1,0 +1,62 @@
+<ui:composition 
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+	  
+	  
+	  <!-- Modal -->
+				<div class="modal fade" id="myModalContract" tabindex="-1" role="dialog" aria-labelledby="myModalLabelContract">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+				        <h4 class="modal-title" id="myModalLabelContract">Contract Details</h4>
+				      </div>
+				      <div class="modal-body">
+
+				        <table class="table">
+					    	<tr>
+					    		<th>Insurance Type</th>
+					    		<td>#{addInsuranceBenefits.contract.insuranceType.toString()}</td>
+					    	</tr>
+					    	<tr>
+					    		<th>Insurance Price</th>
+					    		<td>#{addInsuranceBenefits.contract.insurancePrice} &#8364;</td>
+					    	</tr>
+					    	<tr>
+					    		<th>Insurance Status</th>
+					    		<td>#{addInsuranceBenefits.contract.status}</td>
+					    	</tr>
+					    	<tr>
+					    		<th>Additional Info</th>
+					    		<td>#{addInsuranceBenefits.contract.additionalInfo}</td>
+					    	</tr>
+					    	<tr>
+			    		<th>Standard Insurance Benefits</th>
+			    		<td>
+			    			<ui:repeat value="#{addInsuranceBenefits.contract.getInsuranceBenefitEntity()}" var="cur">
+						        <li>
+						            <h:outputText value="#{cur.insuranceBenefit.toString()}"></h:outputText>
+						        </li>
+						    </ui:repeat>
+			    		</td>
+			    	</tr>
+			    	<tr>
+			    		<th>Individual Insurance Benefits</th>
+			    		<td>
+			    			<ui:repeat value="#{addInsuranceBenefits.contract.getIndividualInsuranceBenefitEntity()}" var="cur">
+						        <li>
+						            <h:outputText value="#{cur.name}"></h:outputText>
+						        </li>
+						    </ui:repeat>
+			    		</td>
+			    	</tr>
+					    </table>
+					    
+				      </div>
+				    </div>
+				  </div>
+				</div>
+	  
+	  </ui:composition>

@@ -37,7 +37,7 @@ public class PersistClaimInfoInDatabase implements JavaDelegate {
 		boolean claimCovered = (Boolean) variables.get("claimCovered");
 		if(claimCovered == true){
 			liabilityCase.setClaimCovered(true);
-			liabilityCase.setInsuranceSum((Integer) variables.get("insuranceSum"));
+			liabilityCase.setInsuranceSum((Double) variables.get("insuranceSum"));
 		}else{
 			liabilityCase.setClaimCovered(false);
 			liabilityCase.setRejectionInfo((String) variables.get("rejectionInfo"));

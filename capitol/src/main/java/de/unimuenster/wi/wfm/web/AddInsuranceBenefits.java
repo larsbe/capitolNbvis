@@ -17,8 +17,10 @@ import javax.inject.Named;
 import org.camunda.bpm.engine.cdi.BusinessProcess;
 import org.camunda.bpm.engine.cdi.jsf.TaskForm;
 
+import de.unimuenster.wi.wfm.ejb.CarDataServiceBean;
 import de.unimuenster.wi.wfm.ejb.InsuranceContractServiceBean;
 import de.unimuenster.wi.wfm.entitiy.CarData;
+import de.unimuenster.wi.wfm.entitiy.CarInformation;
 import de.unimuenster.wi.wfm.entitiy.IndividualInsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceBenefitEntity;
 import de.unimuenster.wi.wfm.entitiy.InsuranceContract;
@@ -26,6 +28,7 @@ import de.unimuenster.wi.wfm.entitiy.InsuranceStatus;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceBenefit;
 import de.unimuenster.wi.wfm.sharedLib.data.InsuranceType;
 import de.unimuenster.wi.wfm.sharedLib.data.RentalAgreementMessage;
+import de.unimuenster.wi.wfm.util.CarInformationService;
 import de.unimuenster.wi.wfm.util.InsurancePriceCalculator;
 
 @Named
@@ -44,6 +47,9 @@ public class AddInsuranceBenefits implements Serializable {
 
 	@EJB
 	private InsuranceContractServiceBean insuranceContractService;
+	
+	@EJB
+	private CarDataServiceBean carDataService;
 	private InsuranceContract contract;
 	private long contractId;
 	
@@ -186,6 +192,10 @@ public class AddInsuranceBenefits implements Serializable {
 		} else {
 			return "New negotiation case arrived";
 		}
+	}
+	
+	public CarInformation getCarInformation(CarData carInformation) {
+		return CarInformationService.GetCarInformation(carInformation.getHsn(), carInformation.getTsn(), String.valueOf(carInformation.getYear()));
 	}
 
 }

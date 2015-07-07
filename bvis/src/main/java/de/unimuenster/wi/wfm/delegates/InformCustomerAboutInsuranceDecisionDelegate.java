@@ -33,20 +33,26 @@ public class InformCustomerAboutInsuranceDecisionDelegate implements JavaDelegat
 		
 		// build email text		
 		String salutation = "Dear "+ liabilityCase.getRentalAgreementContract().getCustomer().getName()
-				+ ", \r\n\r\n";
+				+ ", <br><br>";
 		
 		String content;		
 		if(liabilityCase.getClaimCovered() == true){
 			// claim covered
-			content	= "We are happy to tell you that your claim is covered. \r\n"
-					+ "The covered amount is: " + liabilityCase.getInsuranceSum() + "€.";
+			content	= "We are happy to tell you that your claim is covered. <br>"
+					+ "The covered amount is: " + liabilityCase.getInsuranceSum() + " EUR.";
 		}else{
 			// claim not covered
-			content	= "We are sorry to tell you that your claim is not covered. \r\n"
+			content	= "We are sorry to tell you that your claim is not covered. <br>"
 					+ "The reason is: " + liabilityCase.getRejectionInfo();
 		}
 		
-		String footer = "Sincerly BVIS";
+		// add URL
+		String url = (String) variables.get("reportUrl");
+		if( url != null ){
+			content += url;
+		}
+		
+		String footer = "<br><br>Sincerly BVIS";
 		
 		String emailContent = salutation + content + footer;
 		

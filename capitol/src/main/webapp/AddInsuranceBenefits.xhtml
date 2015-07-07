@@ -8,30 +8,107 @@
 
 	<ui:composition template="template.xhtml">
  		<ui:define name="content">
+ 		<ui:include src="/CustomerDetailsForRentalAgreement.xhtml" />
+				<ui:include src="/ContractDetailsForRentalAgreement.xhtml" />
+				
 			<h1>#{addInsuranceBenefits.header}</h1>
-			<h3>Customer</h3>
+			<h3>Contract Info</h3>
 			<table class="table">
 			    	<tr>
-			    		<th>Name</th>
-			    		<td>#{addInsuranceBenefits.contract.customer.name}</td>
+			    		<th>Customer Name</th>
+			    		<td>#{addInsuranceBenefits.contract.customer.name}
+			    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModal">
+							   Customer Details
+							</button>
+			    		</td>
 			    	</tr>
-			    	<tr>
-			    		<th>Address</th>
-			    		<td>#{addInsuranceBenefits.contract.customer.address}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Company</th>
-			    		<td>#{addInsuranceBenefits.contract.customer.company}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>Email</th>
-			    		<td>#{addInsuranceBenefits.contract.customer.email}</td>
-			    	</tr>
-			    	<tr>
-			    		<th>PhoneNumber</th>
-			    		<td>#{addInsuranceBenefits.contract.customer.phoneNumber}</td>
-			    	</tr>
-			</table>
+			 </table>
+			 <h3>Cars</h3>
+	    	 <ui:repeat value="#{addInsuranceBenefits.contract.cardatas}" var="cur">
+    			<table class="table">
+			        <tr>
+		    		<th>Car License Number</th>
+		    		<td>#{cur.licenseNumber}
+		    		<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModalCar">
+							   Car Details
+							</button>
+		    		</td>
+		    		</tr>
+		    	</table>
+			    	<div class="modal fade" id="myModalCar" tabindex="-1" role="dialog" aria-labelledby="myModalLabelCar">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+				        <h4 class="modal-title" id="myModalLabelCar">Car Details</h4>
+				      </div>
+				      <div class="modal-body">
+						<table class="table">
+					    	<tr>
+					    		<th>Car Model</th>
+					    		<td>
+					    			<h:outputText value="#{addInsuranceBenefits.getCarInformation(cur).name}"></h:outputText>
+								</td>
+					    	</tr>
+					    	<tr>
+					    		<th>Engine Power</th>
+					    		<td>
+					    			<h:outputText value="#{addInsuranceBenefits.getCarInformation(cur).enginePower}"></h:outputText>
+								</td>
+					    	</tr>
+					    	<tr>
+					    		<th>Engine Size</th>
+					    		<td>
+					    			<h:outputText value="#{addInsuranceBenefits.getCarInformation(cur).engineSize}"></h:outputText>
+					    		</td>
+					    	</tr>
+					    	<tr>
+					    		<th>Fuel Type</th>
+					    		<td>
+					    			<h:outputText value="#{addInsuranceBenefits.getCarInformation(cur).fuelType}"></h:outputText>
+					    		</td>
+					    	</tr>
+					    	<tr>
+					    		<th>Picture</th>
+					    		<td>
+					    			<img src="#{addInsuranceBenefits.getCarInformation(cur).imageUrl}" class="img-responsive" alt="Car Image" />
+					    		</td>
+					    	</tr>
+					    	
+					    	 </table>
+						<div class="form-group">
+						    <h:outputLabel class="col-sm-3 control-label" for="carClassKH" value="General Liability 10-25" />
+						    <div class="input-group col-sm-4">
+						      <h:inputText class="form-control" id="carClassKH" value="#{addInsuranceBenefits.getCarInformation(cur).classKH}" />
+						    </div>
+						    <div class="progress">
+							  <div class="progress-bar" role="progressbar" aria-valuenow="#{addInsuranceBenefits.getCarInformation(cur).classKH}" aria-valuemin="0" aria-valuemax="100" style="width: #{addInsuranceBenefits.getCarInformation(cur).classKH * 4}%;"></div>
+							</div>
+						</div>
+						<div class="form-group">
+						    <h:outputLabel class="col-sm-3 control-label" for="carClassTK" value="Partial Cover (TK) 10-33" />
+						    <div class="input-group col-sm-4">
+						      <h:inputText class="form-control" id="carClassTK" value="#{addInsuranceBenefits.getCarInformation(cur).classTK}" />
+						    </div>
+						    <div class="progress">
+							  <div class="progress-bar" role="progressbar" aria-valuenow="#{addInsuranceBenefits.getCarInformation(cur).classTK}" aria-valuemin="0" aria-valuemax="100" style="width: #{addInsuranceBenefits.getCarInformation(cur).classTK * 3}%;"></div>
+							</div>
+						</div>
+						<div class="form-group">
+						    <h:outputLabel class="col-sm-3 control-label" for="carClassVK" value="Fully Comprehensive (VK) 10-34" />
+						    <div class="input-group col-sm-4">
+						      <h:inputText class="form-control" id="carClassVK" value="#{addInsuranceBenefits.getCarInformation(cur).classVK}" />
+						    </div>
+						    <div class="progress">
+							  <div class="progress-bar" role="progressbar" aria-valuenow="#{addInsuranceBenefits.getCarInformation(cur).classVK}" aria-valuemin="0" aria-valuemax="100" style="width: #{addInsuranceBenefits.getCarInformation(cur).classVK * 3}%;"></div>
+							</div>
+						</div>
+					 </div>
+				    </div>
+				  </div>
+				</div>	
+			</ui:repeat>
+			
 			
 			<h:form class="form-horizontal" target="_self">
 			<h3>Details</h3>
